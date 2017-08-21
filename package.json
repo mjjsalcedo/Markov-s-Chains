@@ -2,6 +2,7 @@
   "name": "test",
   "version": "0.1.0",
   "private": true,
+  "proxy": "http://localhost:9001"
   "dependencies": {
     "body-parser": "^1.17.2",
     "express": "^4.15.4",
