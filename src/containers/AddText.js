@@ -42,6 +42,7 @@ class AddText extends React.Component {
 
 
 const mapStateToProps = (state) => {
+  console.log('here', state)
   return {
     texts: state
   };

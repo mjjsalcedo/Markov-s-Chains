@@ -10,16 +10,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 let db = require('../../models');
 
-/*app.get('/api/text', (req, res)=> {
-  res.json({
-    "in-queue": [
-    {
-      "_text": "Make Better Styles"
-      }
-  ]
-})
-})*/
-
 app.use('/api', apiRoutes);
 app.use('*', (req, res) => {
   res.sendFile('./public/index.html', { root: __dirname });

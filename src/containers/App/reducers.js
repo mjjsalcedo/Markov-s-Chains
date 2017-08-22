@@ -1,7 +1,5 @@
 import { GET_TEXT, ADD_TEXT, EDIT_TEXT, DELETE_TEXT } from './actions';
 
-let id = 0;
-
 const textReducers = (state = [], action) => {
   switch (action.type) {
     case GET_TEXT:
@@ -18,14 +16,21 @@ const textReducers = (state = [], action) => {
 }
 
 function getText(state, action){
-  return action.payload
+  var transform = action.payload.map(question=> {
+    return {
+      id: question.id +'gt',
+      text: question.text
+    };
+  })
+  console.log('boop',transform)
+  return transform
 }
 
 function addText(state, action) {
   console.log('hello',action.payload)
   return [
     ...state,
-      action.payload
+      ...action.payload
   ];
 }
 

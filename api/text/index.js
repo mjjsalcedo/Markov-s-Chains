@@ -21,12 +21,13 @@ router.get('/', (req,res)=>{
 
 router.post('/', (req,res)=>{
   let submittedInfo = req.body;
-  console.log('post body', submittedInfo);
+  console.log('post body', submittedInfo.text);
   Questions.findOne({where: {text: submittedInfo.text}})
   .then((foundQuestion)=> {
     console.log('after found', foundQuestion);
     Responses.findAll({where: {question_id: foundQuestion.id}})
     .then((newResponse)=>{
+      console.log('newresponse', newResponse);
       res.json(newResponse);
     });
   });

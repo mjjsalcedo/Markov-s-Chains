@@ -18,10 +18,15 @@ export const getText = () => {
 }
 
 export const addText = (text) => {
-  console.log('text', text);
-  console.log('text', text.text);
   return ( dispatch ) => {
-    fetch('/api/texts', {method: "POST", body: text.text})
+    fetch('/api/texts', {
+      method: "POST",
+      headers: {
+        'Accept': 'application/json, text/plain, ',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(text)
+    })
     .then(texts => texts.json())
     .then(texts => {
       dispatch({
