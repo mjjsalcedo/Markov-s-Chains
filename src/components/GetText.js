@@ -1,20 +1,13 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { getText } from '../containers/App/actions'
 import Text from './Text'
 
 class GetText extends React.Component {
 
-  fetchTasks(url) {
-     fetch(url)
-       .then(tasks => tasks.json())
-       .then(tasks => {
-         console.log('response',tasks);
-         return tasks.json;
-       });
-   }
-   componentDidMount(){
-     this.fetchTasks('/api/text');
-   }
+  componentDidMount(){
+    this.props.submitText({ ...this.state});
+  }
 
   render() {
     return (
@@ -28,6 +21,7 @@ class GetText extends React.Component {
 }
 
 const mapStateToProps = (state) => {
+  console.log('map', state.payload)
   return {
     texts: state
   };
@@ -35,6 +29,9 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
+submitText: (text) => {
+      dispatch(getText(text));
+    }
   }
 }
 
@@ -44,3 +41,4 @@ GetText = connect(
 )(GetText)
 
 export default GetText
+

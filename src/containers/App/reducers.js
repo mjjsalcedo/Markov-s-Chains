@@ -18,6 +18,7 @@ const textReducers = (state = [], action) => {
 }
 
 function getText(state, action){
+  console.log('hello',action.payload)
   return action.payload
 }
 
