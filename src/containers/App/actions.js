@@ -5,12 +5,10 @@ export const DELETE_TEXT = 'DELETE_TEXT'
 
 
 export const getText = () => {
-  console.log('hello')
   return ( dispatch ) => {
     fetch('/api/texts')
     .then(texts => texts.json())
     .then(texts => {
-      console.log('boop');
       dispatch({
         type: GET_TEXT,
         payload: texts
@@ -20,12 +18,14 @@ export const getText = () => {
 }
 
 export const addText = (text) => {
+  console.log('text', text);
+  console.log('text', text.text);
   return ( dispatch ) => {
-    fetch('/api/texts')
+    fetch('/api/texts', {method: "POST", body: text.text})
     .then(texts => texts.json())
     .then(texts => {
       dispatch({
-        type: GET_TEXT,
+        type: ADD_TEXT,
         payload: texts
       })
     })

@@ -19,37 +19,20 @@ router.get('/', (req,res)=>{
   });
 });
 
-/*router.get('/:id', (req,res)=>{
-  let topicId = parseInt(req.params.id);
-  Topics.findById(topicId,
-    {include: [{model: Messages, include :[{model: Users, attributes:['name']}],attributes:['body', 'createdAt']}]}
-    )
-  .then( topic => {
-    let selectedPost = {
-      id: topic.id,
-      name: topic.name,
-      users: topic.users,
-      messages: topic.messages
-    };
-    res.json(selectedPost);
-  });
-});
-
 router.post('/', (req,res)=>{
   let submittedInfo = req.body;
-  Users.findOne({where: {name: submittedInfo.created_by}})
-  .then((foundUser)=> {
-    console.log('foundUser', foundUser.id);
-    Topics.create({
-      name: submittedInfo.name,
-      created_by: foundUser.id
-    }).then((newUser)=>{
-      res.json(newUser);
+  console.log('post body', submittedInfo);
+  Questions.findOne({where: {text: submittedInfo.text}})
+  .then((foundQuestion)=> {
+    console.log('after found', foundQuestion);
+    Responses.findAll({where: {question_id: foundQuestion.id}})
+    .then((newResponse)=>{
+      res.json(newResponse);
     });
   });
 });
 
-router.put('/:name', (req,res)=>{
+/*router.put('/:name', (req,res)=>{
   Users.create({
     username: req.body.username,
     password:req.body.password
@@ -64,6 +47,6 @@ router.put('/:name', (req,res)=>{
     });
   });
 });
-*/
 
+*/
 module.exports = router;

@@ -18,22 +18,14 @@ const textReducers = (state = [], action) => {
 }
 
 function getText(state, action){
-  console.log('hello',action.payload)
   return action.payload
 }
 
 function addText(state, action) {
-  id = ++id;
+  console.log('hello',action.payload)
   return [
     ...state,
-    {
-      id: id,
-      title: action.title,
-      priority: action.priority,
-      status: action.status,
-      createdBy: action.createdBy,
-      assignedTo: action.assignedTo
-    }
+      action.payload
   ];
 }
 

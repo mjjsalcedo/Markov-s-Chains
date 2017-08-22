@@ -5,8 +5,8 @@ const bodyParser = require('body-parser');
 const apiRoutes = require('../../api');
 
 app.use(express.static('public'));
-app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 let db = require('../../models');
 

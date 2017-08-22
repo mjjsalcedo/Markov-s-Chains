@@ -13,6 +13,7 @@ class AddText extends React.Component {
 
   textInput(e) {
     this.setState({ text: e.target.value });
+    console.log('e', e.target.value)
   }
 
   handleSubmit(e) {
@@ -40,8 +41,10 @@ class AddText extends React.Component {
 }
 
 
-const mapStateToProps = () => {
-  return {};
+const mapStateToProps = (state) => {
+  return {
+    texts: state
+  };
 }
 
 const mapDispatchToProps = (dispatch) => {

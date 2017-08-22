@@ -21,7 +21,6 @@ class GetText extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  console.log('map', state.payload)
   return {
     texts: state
   };
