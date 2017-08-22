@@ -1,8 +1,8 @@
 const express = require('express');
 const app = express();
-const PORT = process.env.PORT || 9001;
+const PORT = process.env.PORT || 3001;
 
-app.get('/api/test', (req, res)=> {
+app.get('/api/text', (req, res)=> {
   res.json({
     "in-queue": [
     {

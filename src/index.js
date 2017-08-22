@@ -1,8 +1,31 @@
+import './containers/App/App.css';
 import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import registerServiceWorker from './registerServiceWorker';
+import { render } from 'react-dom';
+import App from './containers/App/App.js';
 
-ReactDOM.render(<App />, document.getElementById('root'));
-registerServiceWorker();
+import { Provider } from 'react-redux';
+
+import textReducers from './containers/App/reducers';
+import { createStore, applyMiddleware } from 'redux';
+import ReduxThunk from 'redux-thunk';
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+
+const store = createStore(
+  textReducers,
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
+  applyMiddleware(ReduxThunk)
+);
+
+render(
+  <Provider store={store}>
+  <Router>
+        <div>
+        <div>
+          <Link to="/">Home</Link>
+        </div>
+          <Route exact path="/" component={App} />
+        </div>
+    </Router>
+  </Provider>,
+  document.getElementById('root')
+)
