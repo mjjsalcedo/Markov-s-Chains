@@ -7,12 +7,12 @@ class AddText extends React.Component {
     super(props);
 
     this.state = {
-      text: ''
+      word: ''
     }
   }
 
   textInput(e) {
-    this.setState({ text: e.target.value });
+    this.setState({ word: e.target.value });
     console.log('e', e.target.value)
   }
 
@@ -20,7 +20,7 @@ class AddText extends React.Component {
     e.preventDefault();
     this.props.submitText({ ...this.state});
     this.setState({
-      text: ''
+      word: ''
     });
 
   }
@@ -42,16 +42,15 @@ class AddText extends React.Component {
 
 
 const mapStateToProps = (state) => {
-  console.log('here', state)
   return {
-    texts: state
+    words: state
   };
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    submitText: (text) => {
-      dispatch(addText(text));
+    submitText: (word) => {
+      dispatch(addText(word));
     }
   }
 }

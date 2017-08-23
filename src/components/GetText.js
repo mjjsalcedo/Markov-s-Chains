@@ -5,10 +5,10 @@ import Text from './Text'
 
 class GetText extends React.Component {
 
-  componentDidMount(){
+ /* componentDidMount(){
     this.props.submitText({ ...this.state});
   }
-
+*/
   render() {
     return (
       <div>

@@ -1,10 +1,10 @@
 import React from 'react'
 
-const Text = ({ id, text }) => (
+const Text = ({ word }) => (
 
   <div>
   <li >
-    {text}
+    {word}
   </li>
   </div>
 )

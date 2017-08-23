@@ -27,11 +27,11 @@ export const addText = (text) => {
       },
       body: JSON.stringify(text)
     })
-    .then(texts => texts.json())
-    .then(texts => {
+    .then(words => words.json())
+    .then(words => {
       dispatch({
         type: ADD_TEXT,
-        payload: texts
+        payload: words
       })
     })
   }

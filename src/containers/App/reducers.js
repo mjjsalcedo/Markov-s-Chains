@@ -22,12 +22,10 @@ function getText(state, action){
       text: question.text
     };
   })
-  console.log('boop',transform)
   return transform
 }
 
 function addText(state, action) {
-  console.log('hello',action.payload)
   return [
     ...state,
       ...action.payload

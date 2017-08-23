@@ -1,16 +1,9 @@
 module.exports = function(sequelize, DataTypes) {
-  var Questions = sequelize.define("questions", {
-    text: { type: DataTypes.STRING, allowNull: false, unique: true }
+  var Ngrams = sequelize.define("ngrams", {
+    word: { type: DataTypes.STRING(90), notEmpty: true, allowNull: false},
+    weight: { type: DataTypes.INTEGER, notEmpty: true, allowNull: false},
+    trigger: { type: DataTypes.STRING(90), notEmpty: true, allowNull: false}
   });
 
-  Questions.associate = function(models) {
-    Questions.hasMany(models.responses,  {
-      foreignKey: {
-        name: 'question_id',
-        allowNull: false
-      }
-    });
-  };
-
-  return Questions;
+  return Ngrams;
 };
