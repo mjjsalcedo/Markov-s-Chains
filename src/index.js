@@ -2,6 +2,7 @@ import './css/scss/styles.css';
 import React from 'react';
 import { render } from 'react-dom';
 import App from './containers/App/App.js';
+import LandingPage from './containers/landingPage/index.js'
 
 import { Provider } from 'react-redux';
 import { userConnect } from './actions'
@@ -22,7 +23,7 @@ render(
   <Provider store={store}>
   <Router>
         <div>
-          <App />
+          <Route exact path="/" component={LandingPage}/>
         </div>
     </Router>
   </Provider>,
