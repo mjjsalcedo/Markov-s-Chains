@@ -1,4 +1,4 @@
-import { GET_TEXT, ADD_TEXT, EDIT_TEXT, DELETE_TEXT, OP_PING } from './actions';
+import { GET_TEXT, ADD_TEXT, EDIT_TEXT, DELETE_TEXT, MESSAGE_SEND, USER_CONNECT } from './actions';
 
 const textReducers = (state = [], action) => {
   switch (action.type) {
@@ -10,8 +10,10 @@ const textReducers = (state = [], action) => {
       return editText(state, action);
     case DELETE_TEXT:
       return deleteText(state, action);
-    case OP_PING:
-      console.log(action.TIME);
+    case MESSAGE_SEND:
+      console.log(action.payload);
+    case USER_CONNECT:
+      console.log(action.payload);
     default:
       return state;
   }
