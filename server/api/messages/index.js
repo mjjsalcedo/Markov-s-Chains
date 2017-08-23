@@ -1,9 +1,9 @@
 /*jshint esversion: 6 */
-
 const express = require('express');
 const router = express.Router();
 let db = require('../../models');
 let Ngrams = db.ngrams;
+
 /*
 router.get('/', (req,res)=>{
   Questions.findAll()
@@ -18,12 +18,12 @@ router.get('/', (req,res)=>{
   });
 });*/
 
-router.post('/', (req,res)=>{
+/*router.post('/', (req,res)=>{
   Ngrams.findAll()
     .then((newResponse)=>{
       res.json(newResponse);
     });
-});
+});*/
 
 /*router.put('/:name', (req,res)=>{
   Users.create({

@@ -1,17 +1,17 @@
 import React from 'react'
-import AddText from '../AddText.js'
-import GetText from '../../components/GetText.js'
-
+import CellPhoneContainer from '../cellPhoneContainer'
+import GraphicsContainer from '../graphicsContainer'
+import StoryContainer from '../storyContainer'
+import InventoryContainer from '../inventoryContainer'
 
 const App = () => (
-  <div>
-      <div className="add">
-        <AddText />
-      </div>
-<div className="get">
-        <GetText />
-      </div>
+  <div className="mainContainer">
+  <CellPhoneContainer/>
+  <GraphicsContainer/>
+  <InventoryContainer/>
+  <StoryContainer/>
   </div>
 )
 
 export default App
+
