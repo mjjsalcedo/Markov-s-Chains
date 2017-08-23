@@ -1,8 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-let textRoutes = require('./text');
-
-router.use('/texts', textRoutes);
+const messageRoutes = require('./messages');
+router.use('/messages', messageRoutes);
 
 module.exports = router;
