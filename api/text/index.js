@@ -3,9 +3,8 @@
 const express = require('express');
 const router = express.Router();
 let db = require('../../models');
-let Questions = db.questions;
-let Responses = db.responses;
-
+let Ngrams = db.ngrams;
+/*
 router.get('/', (req,res)=>{
   Questions.findAll()
   .then( questions => {
@@ -17,20 +16,13 @@ router.get('/', (req,res)=>{
     });
     res.json(allQuestions);
   });
-});
+});*/
 
 router.post('/', (req,res)=>{
-  let submittedInfo = req.body;
-  console.log('post body', submittedInfo.text);
-  Questions.findOne({where: {text: submittedInfo.text}})
-  .then((foundQuestion)=> {
-    console.log('after found', foundQuestion);
-    Responses.findAll({where: {question_id: foundQuestion.id}})
+  Ngrams.findAll()
     .then((newResponse)=>{
-      console.log('newresponse', newResponse);
       res.json(newResponse);
     });
-  });
 });
 
 /*router.put('/:name', (req,res)=>{

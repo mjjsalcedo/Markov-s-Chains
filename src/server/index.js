@@ -16,6 +16,6 @@ app.use('*', (req, res) => {
 });
 
 app.listen(PORT, ()=> {
-  db.sequelize.sync(/*{force:true}*/);
+  db.sequelize.sync({force:true});
   console.log(`listening on ${PORT}`);
 })
