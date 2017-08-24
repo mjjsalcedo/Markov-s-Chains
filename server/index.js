@@ -11,25 +11,51 @@ const http = require('http');
 const server = http.createServer(app);
 const wss = new WebSocket.Server({ server });
 
+const users = [];
+
+wss.on('connection', function connection(ws, req) {
+  console.log("connected");
+  users.push(ws);
+
+  ws.on('message', function incoming(message) {
+    const payload = JSON.parse(message);
+    // console.log('received: %s', payload);
+
+    switch (payload.OP) {
+      case 'CHAT': // broadcast
+        users.forEach(user => {
+          user.send(
+            JSON.stringify({
+              OP: 'CHAT',
+              message: payload.message.message,
+              username: payload.username
+            })
+          );
+        });
+        break;
+      case 'CONNECTED':
+        console.log('a user has connected');
+        break;
+    }
+  });
+
+  ws.send(
+    JSON.stringify({
+      OP: 'SUCCESSFUL_CONNECTION'
+    })
+  );
+});
+
 app.use(express.static('public'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-wss.on('connection', (ws, req) => {
-  ws.on('message', (message) => {
-    console.log(message);
-  });
-
-  setInterval( () => {
-    ws.send(JSON.stringify({OP:'ping', TIME:new Date()}));
-  }, 2000);
-});
 
 /*let db = require('../models');
 
 app.use('/api', apiRoutes);*/
 
-server.listen(PORT, ()=> {
+server.listen(PORT,'0.0.0.0', ()=> {
 /*  db.sequelize.sync({force:true});*/
   console.log(`listening on ${PORT}`);
 });
