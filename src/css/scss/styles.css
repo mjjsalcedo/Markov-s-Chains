@@ -15,13 +15,18 @@
 
 .chatInput {
   grid-row: 6/7;
-  word-wrap: break-word;
   height: 84%;
   width: 98%;
   resize: none; }
 
+.messageBox {
+  display: grid;
+  word-wrap: break-word;
+  grid-template-columns: repeat(auto-fill, 200px);
+  grid-row: 1/6; }
+
 .sendButton {
-  margin-top: -10px;
+  margin-top: -12px;
   grid-row: 7/7; }
 
 .cellPhoneContainer {
@@ -30,13 +35,14 @@
   grid-row: 1/6;
   border: 1px solid black; }
 
-.chatMessagesBox {
-  display: grid;
-  grid-column: 1/4;
-  grid-row: 1/4;
-  border: 1px solid black;
-  height: 420px; }
-
+/*   .chatMessagesBox {
+    display: grid;
+    grid-column: 1/4;
+    grid-row: 1/4;
+    border: 1px solid black;
+    height: 420px;
+  }
+ */
 .chatKeysBox {
   display: grid;
   grid-column: 2;

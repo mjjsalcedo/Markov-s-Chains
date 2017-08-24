@@ -27,7 +27,7 @@ wss.on('connection', function connection(ws, req) {
           user.send(
             JSON.stringify({
               OP: 'CHAT',
-              message: payload.message,
+              message: payload.message.message,
               username: payload.username
             })
           );

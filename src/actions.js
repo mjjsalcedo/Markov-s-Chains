@@ -15,14 +15,16 @@ export const userConnect = () => {
       dispatch({ type: USER_CONNECT, success: true, payload: 'user has connected' })
     })
     socket.addEventListener('message', (message) => {
-      console.log("eventlistener", message);
+      dispatch({ type: MESSAGE_RECEIVED, success: true, payload: message.data})
     })
   }
 }
 
 export const messageSend = ( message ) => {
   return ( dispatch ) => {
-    socket.send(JSON.stringify(message));
+    socket.send(JSON.stringify({
+      OP: 'CHAT',
+      message}));
       dispatch({ type: MESSAGE_SEND, success: true, payload: message });
   }
 }

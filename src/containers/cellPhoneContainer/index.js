@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { messageSend } from '../../actions';
+import { messageSend, messageReceived } from '../../actions';
 
 class CellPhoneContainer extends Component {
   constructor(props) {
@@ -23,14 +23,22 @@ class CellPhoneContainer extends Component {
   }
   render() {
     return (
-      <div className="cellPhoneContainer">
-        <textarea className="chatInput" placeholder="message your friends" value={ this.state.message } onChange={ this.messageInput.bind(this) }></textarea>
-        <button type="submit" className="sendButton" onClick={ this.messageSend.bind(this) }>Send Message</button>
+    <div className="cellPhoneContainer">
+       <div className="messageBox">
+        {this.props.messages.messages.map(message => (
+          <p className="message">{message}</p>
+          ))}
       </div>
+      <textarea className="chatInput" placeholder="message your friends" value={ this.state.message } onChange={ this.messageInput.bind(this) }>
+      </textarea>
+      <button type="submit" className="sendButton" onClick={ this.messageSend.bind(this) }>Send Message
+      </button>
+    </div>
       )
   }
 }
 const mapStateToProps = (state) => {
+  console.log("THIS IS THE FUCKING STATE",state)
   return {
     messages: state
   }

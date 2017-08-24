@@ -1,25 +1,41 @@
-import { GET_TEXT, ADD_TEXT, EDIT_TEXT, DELETE_TEXT, MESSAGE_SEND, USER_CONNECT } from './actions';
+import { GET_TEXT, ADD_TEXT, EDIT_TEXT, DELETE_TEXT, MESSAGE_SEND, USER_CONNECT, MESSAGE_RECEIVED } from './actions';
 
-const textReducers = (state = [], action) => {
+let initialState = { messages:[] };
+
+const textReducers = (state = initialState, action) => {
   switch (action.type) {
-    case GET_TEXT:
+/*    case GET_TEXT:
       return getText(state, action);
     case ADD_TEXT:
       return addText(state, action);
     case EDIT_TEXT:
       return editText(state, action);
     case DELETE_TEXT:
-      return deleteText(state, action);
+      return deleteText(state, action);*/
     case MESSAGE_SEND:
-      console.log(action);
+      console.log("SEND reducer", action.payload);
+      return state;
     case USER_CONNECT:
-      console.log(action.payload);
+      console.log("CONNECT reducer", action);
+      return state;
+    case MESSAGE_RECEIVED:
+      return messageReceived(state, action);
+     // return state;
     default:
       return state;
   }
 }
 
-function getText(state, action){
+function messageReceived(state, action) {
+  let messagePayload = JSON.parse(action.payload);
+  return {
+    messages: [
+    ...state.messages,
+    messagePayload.message
+    ]
+  }
+}
+/*function getText(state, action){
   var transform = action.payload.map(question=> {
     return {
       id: question.id +'gt',
@@ -58,6 +74,6 @@ function deleteText(state, action) {
   return state.filter(text=> {
     return text.id !== action.text
   })
-}
+}*/
 
 export default textReducers
