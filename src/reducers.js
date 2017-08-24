@@ -11,7 +11,7 @@ const textReducers = (state = [], action) => {
     case DELETE_TEXT:
       return deleteText(state, action);
     case MESSAGE_SEND:
-      console.log(action.payload);
+      console.log(action);
     case USER_CONNECT:
       console.log(action.payload);
     default:

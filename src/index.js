@@ -18,7 +18,6 @@ const store = createStore(
 );
 
 
-
 render(
   <Provider store={store}>
   <Router>
@@ -30,3 +29,4 @@ render(
   </Provider>,
   document.getElementById('root')
 )
+

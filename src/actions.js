@@ -7,8 +7,49 @@ export const DELETE_TEXT = 'DELETE_TEXT'
 export const MESSAGE_SEND = 'MESSAGE_SEND'
 export const USER_CONNECT = "USER_CONNECT"
 export const USER_DISCONNECT = "USER_DISCONNECT"
+export const MESSAGE_RECEIVED = "MESSAGE_RECEIVED"
 
-export const getText = () => {
+export const userConnect = () => {
+  return ( dispatch ) => {
+    socket.addEventListener('open', () => {
+      dispatch({ type: USER_CONNECT, success: true, payload: 'user has connected' })
+    })
+    socket.addEventListener('message', (message) => {
+      console.log("eventlistener", message);
+    })
+  }
+}
+
+export const messageSend = ( message ) => {
+  return ( dispatch ) => {
+    socket.send(JSON.stringify(message));
+      dispatch({ type: MESSAGE_SEND, success: true, payload: message });
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*export const getText = () => {
   return ( dispatch ) => {
     fetch('/api/texts')
     .then(texts => texts.json())
@@ -40,15 +81,7 @@ export const addText = (text) => {
     })
   }
 }
-
-export const userConnect = () => {
-  return ( dispatch ) => {
-    socket.addEventListener('open', () => {
-      dispatch({ type: USER_CONNECT, success: true, payload: 'user has connected' })
-    })
-  }
-}
-
+*/
 
 
 
