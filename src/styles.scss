@@ -6,13 +6,14 @@
 //   graphicsContainer
 //   inventoryContainer
 //   storyContainer
-  // @font-face {
-  //   font-family: OregonTrail;
-  //   src: url('./assets/OregonTrail.ttf') format('truetype'),
-  //   url('./assets/OregonTrail.woff') format('woff');
-  //   font-weight: bold;
-  // }
-
+  @font-face {
+    font-family: OregonTrail;
+    src: url('./assets/OregonTrail.ttf') format('truetype');
+    font-weight: bold;
+  }
+body{
+  font-family: OregonTrail;
+}
 //parents are maincontainer
 //phone container parent of messagebox, chatinput, and sendbutton
 //messagebox is a parent to messages
@@ -48,6 +49,7 @@
     height: 45%;
     border-radius: 10px;
     border: 5px solid pink;
+    background: url(./assets/welp-medium.png) -30px 150px no-repeat;
   }
   .inventoryContainer{
     box-sizing: border-box;
