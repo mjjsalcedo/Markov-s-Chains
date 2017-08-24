@@ -20,9 +20,9 @@ wss.on('connection', (ws, req) => {
     console.log(message);
   });
 
-  setInterval( () => {
-    ws.send(JSON.stringify({OP:'ping', TIME:new Date()}));
-  }, 2000);
+  // setInterval( () => {
+  //   ws.send(JSON.stringify({OP:'ping', TIME:new Date()}));
+  // }, 2000);
 });
 
 /*let db = require('../models');

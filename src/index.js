@@ -1,4 +1,4 @@
-import './css/scss/styles.css';
+import './styles.css';
 import React from 'react';
 import { render } from 'react-dom';
 import App from './containers/App/App.js';
@@ -22,7 +22,7 @@ ws.addEventListener('open', (e) => {
   ws.send(JSON.stringify({OP:'connected'}));
 })
 ws.addEventListener('message', (e) => {
-  console.log('ws from server', e.data);
+  // console.log('ws from server', e.data);
   store.dispatch({
     type: OP_PING,
     TIME: JSON.parse(e.data).TIME
