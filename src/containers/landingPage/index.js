@@ -15,12 +15,9 @@ class LandingPage extends Component {
   }
   render(){
     return(
-      <Router>
       <div className="landingPage">This is the landing page
       <Link to="/playerOneGame">Player One</Link>
-      <Route path="/playerOneGame" component={App}/>
       </div>
-      </Router>
       )
   }
 }

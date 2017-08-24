@@ -24,6 +24,7 @@ render(
   <Router>
         <div>
           <Route exact path="/" component={LandingPage}/>
+          <Route path="/playerOneGame" component={App}/>
         </div>
     </Router>
   </Provider>,
