@@ -10,7 +10,7 @@ class InventoryContainer extends Component {
   }
 render(){
   return(
-      <div className="inventoryContainer">Your inventory goes here</div>
+      <div className="inventoryContainer"></div>
     )
 }
 }
