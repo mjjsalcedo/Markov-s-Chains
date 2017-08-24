@@ -1,11 +1,57 @@
+const socket = new WebSocket('ws://10.0.1.149:3001');
+
 export const GET_TEXT = 'GET_TEXT'
 export const ADD_TEXT = 'ADD_TEXT'
 export const EDIT_TEXT = 'EDIT_TEXT'
 export const DELETE_TEXT = 'DELETE_TEXT'
-export const OP_PING = 'OP_PING'
+export const MESSAGE_SEND = 'MESSAGE_SEND'
+export const USER_CONNECT = "USER_CONNECT"
+export const USER_DISCONNECT = "USER_DISCONNECT"
+export const MESSAGE_RECEIVED = "MESSAGE_RECEIVED"
+
+export const userConnect = () => {
+  return ( dispatch ) => {
+    socket.addEventListener('open', () => {
+      dispatch({ type: USER_CONNECT, success: true, payload: 'user has connected' })
+    })
+    socket.addEventListener('message', (message) => {
+      dispatch({ type: MESSAGE_RECEIVED, success: true, payload: message.data})
+    })
+  }
+}
+
+export const messageSend = ( message ) => {
+  return ( dispatch ) => {
+    socket.send(JSON.stringify({
+      OP: 'CHAT',
+      message}));
+      dispatch({ type: MESSAGE_SEND, success: true, payload: message });
+  }
+}
 
 
-export const getText = () => {
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*export const getText = () => {
   return ( dispatch ) => {
     fetch('/api/texts')
     .then(texts => texts.json())
@@ -37,6 +83,11 @@ export const addText = (text) => {
     })
   }
 }
+*/
+
+
+
+
 
 /*export function editCard(card) {
   return { type: EDIT_CARD,
