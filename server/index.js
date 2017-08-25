@@ -14,6 +14,8 @@ const wss = new WebSocket.Server({ server });
 const users = [];
 
 let messageChain = { trigger: [], response: []};
+let messageCache = [];
+let modifiedMessage = '';
 
 wss.on('connection', function connection(ws, req) {
   console.log("connected");
@@ -33,14 +35,23 @@ wss.on('connection', function connection(ws, req) {
       break;
       case (messageChain.trigger.length > 0 && messageChain.trigger[0].username != payloadUsername):
       messageChain.response.push(payload.message);
+      modifiedMessage = payload.message.message
+      .replace(/[.,\/#!$%\^*\*;:{}=\-_`~()]/g,"")
+      .replace(/\s{2,}/g,"").toLowerCase();
+      messageCache.push(modifiedMessage);
       break;
       case (messageChain.trigger[0].username === payloadUsername && messageChain.response.length  === 0):
       messageChain.trigger.push(payload.message);
       break;
       case (messageChain.trigger[0].username === payloadUsername):
       //break up message chain then query DB
+      let cache = messageCache.join(' # ').split(' ');
       messageChain.trigger = messageChain.response;
       messageChain.response = [payload.message];
+      modifiedMessage = payload.message.message
+      .replace(/[.,\/#!$%\^*\*;:{}=\-_`~()]/g,"")
+      .replace(/\s{2,}/g,"").toLowerCase();
+      messageCache = [modifiedMessage];
       break;
     }
 
