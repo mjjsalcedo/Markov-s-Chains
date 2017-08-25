@@ -6,18 +6,21 @@ class CellPhoneContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      message: ""
-    };
+      message: '',
+      username: ''
+    }
   }
-  componentWillMount() {}
-  componentDidMount() {}
-  messageSend(e) {
-    e.preventDefault();
-    this.props.messageSend(this.state);
-    this.setState({ message: ""});
+
+  messageSend(e){
+    e.preventDefault()
+    this.props.messageSend(this.state)
+    this.setState({ message: '' })
   }
-  messageInput(e) {
-    this.setState({ message: e.target.value });
+  messageInput(e){
+    this.setState({ message: e.target.value })
+  }
+  usernameInput(e){
+    this.setState({username: e.target.value})
   }
   render() {
     return (
@@ -31,25 +34,19 @@ class CellPhoneContainer extends Component {
             )}
           </div>
         </div>
-        <textarea
-          className="chatInput"
-          placeholder="message your friends"
-          value={this.state.message}
-          onChange={this.messageInput.bind(this)}
-        />
-        <button
-          type="submit"
-          className="sendButton"
-          onClick={this.messageSend.bind(this)}
-        >
-          Send Message
-        </button>
       </div>
-    );
+      <form onSubmit={ this.messageSend.bind(this) }>
+      <input type="text" value={this.state.username} onChange={this.usernameInput.bind(this)} />
+      <textarea className="chatInput" placeholder="message your friends" value={ this.state.message } onChange={ this.messageInput.bind(this) }>
+      </textarea>
+      <button type="submit" className="sendButton">Send Message
+      </button>
+      </form>
+    </div>
+      )
   }
 }
-const mapStateToProps = state => {
-  console.log("test", state);
+const mapStateToProps = (state) => {
   return {
     messages: state
   };
@@ -68,3 +65,4 @@ CellPhoneContainer = connect(mapStateToProps, mapDispatchToProps)(
 );
 
 export default CellPhoneContainer;
+
