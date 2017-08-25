@@ -4,9 +4,6 @@ import store from '../../store.js'
 
 class SelectPlayer extends Component {
 
-  constructor(props) {
-    super(props);
-  }
   render() {
     var currentUsers = store.getState()
     var result = currentUsers.messages.filter(users=>{
