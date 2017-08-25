@@ -1,4 +1,4 @@
-import './css/scss/styles.css';
+import './styles.css';
 import React from 'react';
 import { render } from 'react-dom';
 import App from './containers/App/App.js';
@@ -16,7 +16,6 @@ const store = createStore(
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
   applyMiddleware(ReduxThunk)
 );
-
 
 render(
   <Provider store={store}>
