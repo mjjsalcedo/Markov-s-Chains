@@ -1,6 +1,6 @@
 import { GET_TEXT, ADD_TEXT, EDIT_TEXT, DELETE_TEXT, MESSAGE_SEND, USER_CONNECT, MESSAGE_RECEIVED, SUCCESSFUL_CONNECTION, CREATE_USERNAME } from './actions';
 
-let initialState = { messages:[] };
+let initialState = { userData:[] };
 
 const textReducers = (state = initialState, action) => {
   switch (action.type) {
@@ -32,21 +32,17 @@ function messageReceived(state, action) {
 
   let messagePayload = JSON.parse(action.payload);
   if(messagePayload.OP === SUCCESSFUL_CONNECTION){
-    console.log('boop')
     localStorage.setItem("id", messagePayload.userId)
-  console.log('meh', localStorage);
+
     return {
-    messages: [
-    ...state.messages, {
-      id: localStorage.id,
-      username: localStorage.username
-    }
+    userData: [
+    ...state.userData
     ]
   }
   }else {
   return {
-    messages: [
-    ...state.messages,
+    userData: [
+    ...state.userData,
     messagePayload.message
     ]
   }
@@ -55,11 +51,10 @@ function messageReceived(state, action) {
 
 
 function createUsername(state, action) {
-console.log('createuser', action)
   localStorage.setItem("username", action.payload.username)
   return {
-    messages: [
-    ...state.messages,
+    userData: [
+    ...state.userData,
     {id: localStorage.id,
     username: localStorage.username}]
   }

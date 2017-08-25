@@ -34,7 +34,7 @@ export const messageSend = ( message ) => {
 
 export const createUsername = (username) => {
   return ( dispatch ) => {
-    dispatch({ type: CREATE_USERNAME, payload: username })
+    dispatch({ type: CREATE_USERNAME, success: true, payload: username })
   }
 }
 

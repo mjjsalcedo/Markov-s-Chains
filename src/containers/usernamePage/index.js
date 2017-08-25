@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { createUsername } from '../../actions';
-import { BrowserRouter as Router, Route, Link, Redirect, BrowserRouter } from 'react-router-dom';
+import { createUsername, userConnect } from '../../actions';
 
 class UserLogin extends Component {
   constructor(props) {
@@ -11,24 +10,26 @@ class UserLogin extends Component {
     }
   }
 
-  createUsername(e){
+  handleCreateUsername(e){
     e.preventDefault()
     this.props.createUsername(this.state)
     this.setState({ username: '' })
-    this.props.history.push('/select')
+    this.props.history.push('/userlist')
   }
   usernameInput(e){
     this.setState({ username: e.target.value })
   }
 
+  componenetDidMount(){
+    userConnect();
+  }
 
   render() {
     return (
       <div className="username">
-      <textarea className="chatInput" placeholder="input your username" value={ this.state.username } onChange={ this.usernameInput.bind(this) }>
-      </textarea>
-      <button type="submit" className="sendButton" onClick={ this.createUsername.bind(this)}>Submit
-
+      <input className="chatInput" placeholder="input your username" value={ this.state.username } onChange={ this.usernameInput.bind(this) }>
+      </input>
+      <button type="submit" className="sendButton" onClick={ this.handleCreateUsername.bind(this)}>Submit
       </button>
       </div>
       )
@@ -36,11 +37,7 @@ class UserLogin extends Component {
 }
 
 const mapStateToProps = (state) => {
-  console.log('test', state)
-  return {
-    messages: state
-  }
-
+  return {}
 }
 
 const mapDispatchToProps = (dispatch) => {

@@ -6,8 +6,6 @@ import store from '../../store';
 class UsernamePrompt extends Component {
   constructor(props) {
     super(props);
-    console.log('mppppppppp',store.getState())
-    console.log('boop',props);
     this.state = {
       username: ''
     }
@@ -38,7 +36,6 @@ class UsernamePrompt extends Component {
   }
 }
 const mapStateToProps = (state) => {
-  console.log('test', state)
   return {
     messages: state
   }

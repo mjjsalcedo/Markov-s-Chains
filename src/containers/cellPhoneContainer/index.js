@@ -9,10 +9,7 @@ class CellPhoneContainer extends Component {
       message: ''
     }
   }
-  componentWillMount() {
-  }
-  componentDidMount() {
-  }
+
   messageSend(e){
     e.preventDefault()
     this.props.messageSend(this.state)
@@ -38,7 +35,6 @@ class CellPhoneContainer extends Component {
   }
 }
 const mapStateToProps = (state) => {
-  console.log('test', state)
   return {
     messages: state
   }
