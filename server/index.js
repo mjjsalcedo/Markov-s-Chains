@@ -15,28 +15,62 @@ const users = [];
 
 wss.on('connection', function connection(ws, req) {
   console.log("connected");
-  let userId = ws._ultron.id
+  let userId = ws._ultron.id;
   users.push(ws);
 
   ws.on('message', function incoming(message) {
-    const payload = JSON.parse(message);
-    // console.log('received: %s', payload);
 
+    let payload = JSON.parse(message);
+    let payloadMessage = payload.message.message;
+    let payloadUsername = payload.message.username;
+
+    switch(true){
+      case (messageChain.trigger.length === 0):
+      messageChain.trigger.push(payload.message);
+      break;
+      case (messageChain.trigger.length > 0 && messageChain.trigger[0].username != payloadUsername):
+      messageChain.response.push(payload.message);
+      modifiedMessage = payload.message.message
+      .replace(/[.,\/#!$%\^*\*;:{}=\-_`~()]/g,"")
+      .replace(/\s{2,}/g,"").toLowerCase();
+      messageCache.push(modifiedMessage);
+      break;
+      case (messageChain.trigger[0].username === payloadUsername && messageChain.response.length  === 0):
+      messageChain.trigger.push(payload.message);
+      break;
+      case (messageChain.trigger[0].username === payloadUsername):
+      //break up message chain then query DB
+      let cache = messageCache.join(' # ').split(' ');
+      cache.reduce((trigger, response) => {
+        let trigRes = [trigger, response];
+        tuples.push(trigRes);
+        console.log(tuples);
+        return response;
+      });
+      messageChain.trigger = messageChain.response;
+      messageChain.response = [payload.message];
+      modifiedMessage = payload.message.message
+      .replace(/[.,\/#!$%\^*\*;:{}=\-_`~()]/g,"")
+      .replace(/\s{2,}/g,"").toLowerCase();
+      messageCache = [modifiedMessage];
+      couplet = [];
+      break;
+    }
     switch (payload.OP) {
       case 'CHAT': // broadcast
-        users.forEach(user => {
-          user.send(
-            JSON.stringify({
-              OP: 'CHAT',
-              message: payload.message.message,
-              username: payload.username
-            })
+      users.forEach(user => {
+        user.send(
+          JSON.stringify({
+            OP: 'CHAT',
+            message: payload.message.message,
+            username: payload.username
+          })
           );
-        });
-        break;
+      });
+      break;
       case 'CONNECTED':
-        console.log('a user has connected');
-        break;
+      console.log('a user has connected');
+      break;
     }
   });
 
@@ -45,7 +79,7 @@ wss.on('connection', function connection(ws, req) {
       OP: 'SUCCESSFUL_CONNECTION',
       userId
     })
-  );
+    );
 });
 
 app.use(express.static('public'));
@@ -57,6 +91,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/api', apiRoutes);*/
 
 server.listen(PORT,'0.0.0.0', ()=> {
-/*  db.sequelize.sync({force:true});*/
+  /*  db.sequelize.sync({force:true});*/
   console.log(`listening on ${PORT}`);
 });
