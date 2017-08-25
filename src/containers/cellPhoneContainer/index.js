@@ -19,24 +19,19 @@ class CellPhoneContainer extends Component {
   messageInput(e){
     this.setState({ message: e.target.value })
   }
-  usernameInput(e){
-    this.setState({username: e.target.value})
-  }
   render() {
     return (
       <div className="cellPhoneBorder">
         <div className="cellPhoneContainer">
           <div className="messageBox">
-            {this.props.messages.messages.map(message =>
+            {this.props.messages.map(message =>
               <pre className="message">
                 {message}
               </pre>
             )}
-          </div>
         </div>
       </div>
       <form onSubmit={ this.messageSend.bind(this) }>
-      <input type="text" value={this.state.username} onChange={this.usernameInput.bind(this)} />
       <textarea className="chatInput" placeholder="message your friends" value={ this.state.message } onChange={ this.messageInput.bind(this) }>
       </textarea>
       <button type="submit" className="sendButton">Send Message
@@ -48,7 +43,7 @@ class CellPhoneContainer extends Component {
 }
 const mapStateToProps = (state) => {
   return {
-    messages: state
+    messages: state.userData
   };
 };
 

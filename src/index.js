@@ -23,6 +23,7 @@ render(
         <div>
           <Route exact path="/" component={UserLogin}/>
           <Route path="/userlist" component={UserList}/>
+          <Route path="/playerOne" component={App}/>
         </div>
     </Router>
   </Provider>,
