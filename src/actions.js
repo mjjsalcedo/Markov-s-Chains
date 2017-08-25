@@ -14,6 +14,7 @@ export const CREATE_USERNAME = "CREATE_USERNAME"
 export const userConnect = () => {
   return ( dispatch ) => {
     socket.addEventListener('open', () => {
+      console.log('boop');
       dispatch({ type: USER_CONNECT, success: true, payload: 'user has connected' })
     })
     socket.addEventListener('message', (message) => {

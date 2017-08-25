@@ -1,4 +1,4 @@
-import { GET_TEXT, ADD_TEXT, EDIT_TEXT, DELETE_TEXT, MESSAGE_SEND, USER_CONNECT, MESSAGE_RECEIVED, SUCCESSFUL_CONNECTION, CREATE_USERNAME } from './actions';
+import { /*GET_TEXT, ADD_TEXT, EDIT_TEXT, DELETE_TEXT,*/ MESSAGE_SEND, USER_CONNECT, MESSAGE_RECEIVED, SUCCESSFUL_CONNECTION, CREATE_USERNAME } from './actions';
 
 let initialState = { userData:[] };
 
@@ -28,6 +28,7 @@ const textReducers = (state = initialState, action) => {
 }
 
 function messageReceived(state, action) {
+  console.log('boop');
 
   let messagePayload = JSON.parse(action.payload);
   if(messagePayload.OP === SUCCESSFUL_CONNECTION){

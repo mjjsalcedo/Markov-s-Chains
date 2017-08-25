@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { messageSend, messageReceived } from "../../actions";
+import { messageSend } from "../../actions";
 
 class CellPhoneContainer extends Component {
   constructor(props) {

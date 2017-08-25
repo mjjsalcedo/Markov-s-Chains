@@ -22,9 +22,7 @@ wss.on('connection', function connection(ws, req) {
   console.log("connected");
   let userId = ws._ultron.id
   users.push(ws);
-  for (let i = 0; i< users.length; i++){
-    console.log("id",users[i]._ultron.id);
-  }
+
   ws.on('message', function incoming(message) {
 
     let payload = JSON.parse(message);

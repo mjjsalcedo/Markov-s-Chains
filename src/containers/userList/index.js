@@ -2,16 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 class UserList extends Component {
-  constructor(props) {
-    super(props);
-  }
-  componentDidMount() {
-  }
-  componentWillMount() {
-  }
 
   render() {
-    console.log(this.props)
+
     return (
     <div className="userlistContainer">
 

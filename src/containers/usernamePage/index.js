@@ -20,8 +20,8 @@ class UserLogin extends Component {
     this.setState({ username: e.target.value })
   }
 
-  componenetDidMount(){
-    userConnect();
+  componentDidMount(){
+    this.props.userConnect();
   }
 
   render() {
@@ -44,6 +44,9 @@ const mapDispatchToProps = (dispatch) => {
   return {
     createUsername: (username) => {
       dispatch(createUsername(username))
+    } ,
+    userConnect: () => {
+      dispatch(userConnect())
     }
   }
 }
