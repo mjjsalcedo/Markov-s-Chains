@@ -51,8 +51,8 @@ body{
   .cellPhoneContainer{
     display: flex;
     flex-direction: column;
-    box-sizing: border-box;
     justify-content: center;
+    box-sizing: border-box;
     width: 35%;
   }
 
@@ -92,7 +92,7 @@ body{
     flex-direction: column;
     overflow: auto;
     margin-left: 59.46%;
-    margin-top: 57%;
+    margin-top: 54%;
     height: 403px;
     width: 174%;
     // border: 1px solid red;
@@ -109,15 +109,14 @@ body{
 
   .chatInput{
     // border:1px solid blue;
-    height: 5.25%;
-    margin-left: 2.7%;
+    height: 33px;
+    width: 71.5%;
+    margin-left: 24.7%;
     margin-bottom: 7%;
-    width: 59.8%;
-    align-self: center ;
     resize: none;
   }
 
   .sendButton{
     height: 3.5%;
-    align-self: center;
+    margin-left: 42%;
   }
