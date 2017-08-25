@@ -1,60 +1,70 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { messageSend, messageReceived } from '../../actions';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { messageSend, messageReceived } from "../../actions";
 
 class CellPhoneContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      message: ''
-    }
+      message: ""
+    };
   }
-  componentWillMount() {
+  componentWillMount() {}
+  componentDidMount() {}
+  messageSend(e) {
+    e.preventDefault();
+    this.props.messageSend(this.state);
+    this.setState({ message: ""});
   }
-  componentDidMount() {
-  }
-  messageSend(e){
-    e.preventDefault()
-    this.props.messageSend(this.state)
-    this.setState({ message: '' })
-  }
-  messageInput(e){
-    this.setState({ message: e.target.value })
+  messageInput(e) {
+    this.setState({ message: e.target.value });
   }
   render() {
     return (
-    <div className="cellPhoneContainer">
-       <div className="messageBox">
-        {this.props.messages.messages.map(message => (
-          <p className="message">{message}</p>
-          ))}
+      <div className="cellPhoneBorder">
+        <div className="cellPhoneContainer">
+          <div className="messageBox">
+            {this.props.messages.messages.map(message =>
+              <pre className="message">
+                {message}
+              </pre>
+            )}
+          </div>
+        </div>
+        <textarea
+          className="chatInput"
+          placeholder="message your friends"
+          value={this.state.message}
+          onChange={this.messageInput.bind(this)}
+        />
+        <button
+          type="submit"
+          className="sendButton"
+          onClick={this.messageSend.bind(this)}
+        >
+          Send Message
+        </button>
       </div>
-      <textarea className="chatInput" placeholder="message your friends" value={ this.state.message } onChange={ this.messageInput.bind(this) }>
-      </textarea>
-      <button type="submit" className="sendButton" onClick={ this.messageSend.bind(this) }>Send Message
-      </button>
-    </div>
-      )
+    );
   }
 }
-const mapStateToProps = (state) => {
-  console.log('test', state)
+const mapStateToProps = state => {
+  console.log("test", state);
   return {
     messages: state
-  }
-}
+  };
+};
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = dispatch => {
   return {
-    messageSend: (message) => {
-      dispatch(messageSend(message))
+    messageSend: message => {
+      dispatch(messageSend(message));
     }
-  }
-}
+  };
+};
 
-CellPhoneContainer = connect(
-  mapStateToProps,
-  mapDispatchToProps
-  )(CellPhoneContainer)
+CellPhoneContainer = connect(mapStateToProps, mapDispatchToProps)(
+  CellPhoneContainer
+);
 
 export default CellPhoneContainer;
