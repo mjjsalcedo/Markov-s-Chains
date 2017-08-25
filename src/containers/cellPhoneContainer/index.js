@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { messageSend, messageReceived } from '../../actions';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { messageSend, messageReceived } from "../../actions";
 
 class CellPhoneContainer extends Component {
   constructor(props) {
@@ -24,11 +24,16 @@ class CellPhoneContainer extends Component {
   }
   render() {
     return (
-    <div className="cellPhoneContainer">
-       <div className="messageBox">
-        {this.props.messages.messages.map(message => (
-          <p className="message">{message}</p>
-          ))}
+      <div className="cellPhoneBorder">
+        <div className="cellPhoneContainer">
+          <div className="messageBox">
+            {this.props.messages.messages.map(message =>
+              <pre className="message">
+                {message}
+              </pre>
+            )}
+          </div>
+        </div>
       </div>
       <form onSubmit={ this.messageSend.bind(this) }>
       <input type="text" value={this.state.username} onChange={this.usernameInput.bind(this)} />
@@ -44,21 +49,20 @@ class CellPhoneContainer extends Component {
 const mapStateToProps = (state) => {
   return {
     messages: state
-  }
-}
+  };
+};
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = dispatch => {
   return {
-    messageSend: (message) => {
-      dispatch(messageSend(message))
+    messageSend: message => {
+      dispatch(messageSend(message));
     }
-  }
-}
+  };
+};
 
-CellPhoneContainer = connect(
-  mapStateToProps,
-  mapDispatchToProps
-  )(CellPhoneContainer)
+CellPhoneContainer = connect(mapStateToProps, mapDispatchToProps)(
+  CellPhoneContainer
+);
 
 export default CellPhoneContainer;
 

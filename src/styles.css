@@ -19,18 +19,28 @@ body {
   flex-direction: column;
   width: 65%; }
 
+.cellPhoneBorder {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  box-sizing: border-box;
+  max-width: 100%;
+  max-height: 100%;
+  width: 40%;
+  background: url(./assets/phone.png) 55% 35% no-repeat; }
+
 .cellPhoneContainer {
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
-  border-radius: 10px;
-  border: 3px solid blue;
+  justify-content: center;
   width: 35%; }
 
 .graphicsContainer {
   box-sizing: border-box;
   padding: 5px;
-  height: 45%;
+  height: 150%;
   border-radius: 10px;
   border: 5px solid pink;
   background: url(./assets/welp-medium.png) -30px 150px no-repeat; }
@@ -43,6 +53,7 @@ body {
   border-style: solid;
   border-width: 5px;
   border-color: #008000 #228b22;
+  position: relative;
   background: url(./assets/key.png) 0 no-repeat, url(./assets/spider.png) 40px no-repeat, url(./assets/mariel.png) 90px no-repeat; }
 
 .storyContainer {
@@ -53,12 +64,32 @@ body {
   border: 5px solid red; }
 
 .messageBox {
-  height: 65%;
-  overflow: auto; }
+  display: flex;
+  justify-content: flex-start;
+  align-content: center;
+  flex-direction: column;
+  overflow: auto;
+  margin-left: 59.46%;
+  margin-top: 57%;
+  height: 403px;
+  width: 174%; }
 
 .message {
-  word-wrap: break-word; }
+  word-wrap: break-word;
+  width: 100px;
+  padding: 2px;
+  font-size: 12px;
+  white-space: pre-wrap;
+  border: 5px solid green; }
 
 .chatInput {
-  height: 35%;
+  height: 5.25%;
+  margin-left: 2.7%;
+  margin-bottom: 7%;
+  width: 59.8%;
+  align-self: center;
   resize: none; }
+
+.sendButton {
+  height: 3.5%;
+  align-self: center; }
