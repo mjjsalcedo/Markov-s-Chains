@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { createUsername } from '../../actions';
+import { BrowserRouter as Router, Route, Link, Redirect, BrowserRouter } from 'react-router-dom';
 
 class UserLogin extends Component {
   constructor(props) {
@@ -14,16 +15,20 @@ class UserLogin extends Component {
     e.preventDefault()
     this.props.createUsername(this.state)
     this.setState({ username: '' })
+    this.props.history.push('/select')
   }
   usernameInput(e){
     this.setState({ username: e.target.value })
   }
+
+
   render() {
     return (
       <div className="username">
       <textarea className="chatInput" placeholder="input your username" value={ this.state.username } onChange={ this.usernameInput.bind(this) }>
       </textarea>
-      <button type="submit" className="sendButton" onClick={ this.createUsername.bind(this) }>Submit
+      <button type="submit" className="sendButton" onClick={ this.createUsername.bind(this)}>Submit
+
       </button>
       </div>
       )
@@ -35,6 +40,7 @@ const mapStateToProps = (state) => {
   return {
     messages: state
   }
+
 }
 
 const mapDispatchToProps = (dispatch) => {
