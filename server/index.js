@@ -13,29 +13,52 @@ const wss = new WebSocket.Server({ server });
 
 const users = [];
 
+let messageChain = { trigger: [], response: []};
+
 wss.on('connection', function connection(ws, req) {
   console.log("connected");
   users.push(ws);
-
+  for (let i = 0; i< users.length; i++){
+    console.log("id",users[i]._ultron.id);
+  }
   ws.on('message', function incoming(message) {
-    const payload = JSON.parse(message);
-    // console.log('received: %s', payload);
+
+    let payload = JSON.parse(message);
+    let payloadMessage = payload.message.message;
+    let payloadUsername = payload.message.username;
+
+    switch(true){
+      case (messageChain.trigger.length === 0):
+      messageChain.trigger.push(payload.message);
+      break;
+      case (messageChain.trigger.length > 0 && messageChain.trigger[0].username != payloadUsername):
+      messageChain.response.push(payload.message);
+      break;
+      case (messageChain.trigger[0].username === payloadUsername && messageChain.response.length  === 0):
+      messageChain.trigger.push(payload.message);
+      break;
+      case (messageChain.trigger[0].username === payloadUsername):
+      //break up message chain then query DB
+      messageChain.trigger = messageChain.response;
+      messageChain.response = [payload.message];
+      break;
+    }
 
     switch (payload.OP) {
-      case 'CHAT': // broadcast
-        users.forEach(user => {
-          user.send(
-            JSON.stringify({
-              OP: 'CHAT',
-              message: payload.message.message,
-              username: payload.username
-            })
+      case 'CHAT':
+      users.forEach(user => {
+        user.send(
+          JSON.stringify({
+            OP: 'CHAT',
+            message: payloadMessage,
+            username: payloadUsername
+          })
           );
-        });
-        break;
+      });
+      break;
       case 'CONNECTED':
-        console.log('a user has connected');
-        break;
+      console.log('a user has connected');
+      break;
     }
   });
 
@@ -43,7 +66,7 @@ wss.on('connection', function connection(ws, req) {
     JSON.stringify({
       OP: 'SUCCESSFUL_CONNECTION'
     })
-  );
+    );
 });
 
 app.use(express.static('public'));
@@ -55,6 +78,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/api', apiRoutes);*/
 
 server.listen(PORT,'0.0.0.0', ()=> {
-/*  db.sequelize.sync({force:true});*/
+  /*  db.sequelize.sync({force:true});*/
   console.log(`listening on ${PORT}`);
 });

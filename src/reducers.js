@@ -20,7 +20,6 @@ const textReducers = (state = initialState, action) => {
       return state;
     case MESSAGE_RECEIVED:
       return messageReceived(state, action);
-     // return state;
     default:
       return state;
   }
