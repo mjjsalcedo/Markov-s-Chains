@@ -15,6 +15,7 @@ const users = [];
 
 wss.on('connection', function connection(ws, req) {
   console.log("connected");
+  let userId = ws._ultron.id
   users.push(ws);
 
   ws.on('message', function incoming(message) {
@@ -41,7 +42,8 @@ wss.on('connection', function connection(ws, req) {
 
   ws.send(
     JSON.stringify({
-      OP: 'SUCCESSFUL_CONNECTION'
+      OP: 'SUCCESSFUL_CONNECTION',
+      userId
     })
   );
 });
