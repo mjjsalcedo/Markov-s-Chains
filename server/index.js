@@ -12,6 +12,9 @@ const server = http.createServer(app);
 const wss = new WebSocket.Server({ server });
 
 const users = [];
+const rooms = new Map();
+//rooms.set(new_room_id, new Room(new_room_id)) //when you accept an invite set the new room
+
 
 let messageChain = { trigger: [], response: []};
 let messageCache = [];
@@ -20,7 +23,8 @@ let tuples = [];
 
 wss.on('connection', function connection(ws, req) {
   console.log("connected");
-  let userId = ws._ultron.id
+  let userId = ws._ultron.id;
+  ws.userId = userId;
   users.push(ws);
 
   ws.on('message', function incoming(message) {
@@ -78,6 +82,33 @@ wss.on('connection', function connection(ws, req) {
       break;
       case 'CONNECTED':
       console.log('a user has connected');
+      break;
+      case 'SEND_INVITE':
+      users.filter(user => {
+        return user.userId === payload.userId;
+      }).forEach((user) =>{
+        console.log('inviting', user.userId)
+        user.send(
+          JSON.stringify({
+            OP:'RECEIVE_INVITE',
+            senderName: payloadUsername,
+            senderId: payloadId
+          }))
+      });
+      break;
+      case 'ACCEPT_INVITE':
+          //create user and send to room
+          var player2 = ws;
+          var player1 = users.find((user)=>{
+            return user.userId === payload.senderId;
+          });
+          var room = new Room(player1, player2);
+          rooms.set(room.id, room)
+        console.log('accept invite', payload.senderName)
+      break;
+      case 'DECLINE_INVITE':
+          //send to sender invite declined
+        console.log('decline invite', payload.senderName)
       break;
     }
   });

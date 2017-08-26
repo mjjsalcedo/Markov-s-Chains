@@ -50,6 +50,7 @@ function messageReceived(state, action) {
 
 function createUsername(state, action) {
   localStorage.setItem("username", action.payload.username)
+  console.log('state', state);
   return {
     userData: [
     ...state.userData,
