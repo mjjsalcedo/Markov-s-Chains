@@ -37,6 +37,22 @@ body {
   box-sizing: border-box;
   width: 35%; }
 
+@keyframes bounce {
+  0% {
+    left: 0px;
+    top: 0px; }
+  25% {
+    left: 0px;
+    top: 2px;
+    background: url(./assets/key2.png) 0 no-repeat, url(./assets/spider2.png) 40px no-repeat, url(./assets/mariel2.png) 90px no-repeat; }
+  50% {
+    left: 0px;
+    top: 5px;
+    background: url(./assets/key.png) 0 no-repeat, url(./assets/spider2.png) 40px no-repeat, url(./assets/mariel.png) 90px no-repeat; }
+  100% {
+    top: 0px;
+    background: url(./assets/key.png) 0 no-repeat, url(./assets/spider.png) 40px no-repeat, url(./assets/mariel.png) 90px no-repeat; } }
+
 .graphicsContainerBorder {
   max-height: 100%;
   max-width: 100%;
@@ -69,6 +85,7 @@ body {
   border-radius: 15px;
   height: 40px;
   position: relative;
+  animation: bounce 0.8s ease-in-out 0.8s infinite alternate;
   background: url(./assets/key.png) 0 no-repeat, url(./assets/spider.png) 40px no-repeat, url(./assets/mariel.png) 90px no-repeat; }
 
 .storyContainerBorder {

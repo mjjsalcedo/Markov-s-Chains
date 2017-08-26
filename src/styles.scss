@@ -6,12 +6,12 @@
 //   graphicsContainer
 //   inventoryContainer
 //   storyContainer
-  @font-face {
-    font-family: OregonTrail;
-    src: url('./assets/OregonTrail.ttf') format('truetype');
-    font-weight: bold;
-  }
-body{
+@font-face {
+  font-family: OregonTrail;
+  src: url('./assets/OregonTrail.ttf') format('truetype');
+  font-weight: bold;
+}
+body {
   font-family: OregonTrail;
 }
 //parents are maincontainer
@@ -19,131 +19,157 @@ body{
 //messagebox is a parent to messages
 //inventory container will be a parent of divs for items
 
-  .mainContainer{
-    display: flex;
-    height: 600px;
-    width: 900px;
-    margin:0 auto;
-    box-sizing: border-box;
-    border-radius: 10px;
-  }
+.mainContainer {
+  display: flex;
+  height: 600px;
+  width: 900px;
+  margin: 0 auto;
+  box-sizing: border-box;
+  border-radius: 10px;
+}
 
-  .visualContainer{
-    display:flex;
-    flex-direction: column;
-    width: 65%;
-  }
+.visualContainer {
+  display: flex;
+  flex-direction: column;
+  width: 65%;
+}
 
-  .cellPhoneBorder {
-    display:flex;
-    flex-direction: column;
-    align-items: flex-start;
+.cellPhoneBorder {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 
-    justify-content: center;
-    box-sizing: border-box;
-    max-width: 100%;
-    max-height: 100%;
-    width: 40%;
-    background: url(./assets/phone.png) 55% 35% no-repeat;
+  justify-content: center;
+  box-sizing: border-box;
+  max-width: 100%;
+  max-height: 100%;
+  width: 40%;
+  background: url(./assets/phone.png) 55% 35% no-repeat;
+}
 
+.cellPhoneContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  box-sizing: border-box;
+  width: 35%;
+}
+@keyframes bounce {
+  0% {
+    left: 0px;
+    top: 0px;
   }
-
-  .cellPhoneContainer{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    box-sizing: border-box;
-    width: 35%;
+  25% {
+    left: 0px;
+    top: 2px;
+    background: url(./assets/key2.png) 0 no-repeat,
+      url(./assets/spider2.png) 40px no-repeat,
+      url(./assets/mariel2.png) 90px no-repeat;
   }
-  .graphicsContainerBorder{
-    max-height:100%;
-    max-width: 100%;
-    border: 10px solid transparent;
-    border-image-source: url(./assets/border.png);
-    border-image-slice: 20 22;
-    border-image-repeat:stretch;
-  }
-  .graphicsContainer{
-    box-sizing: border-box;
-    padding: 5px;
-    height: 300px;
-    // border: 5px solid pink;
-    background: url(./assets/welp-medium.png) -30px 150px no-repeat;
-    border: 10px solid transparent;
-    border-image-source: url(./assets/border.png);
-    border-image-slice: 20 22;
-    border-image-repeat:stretch;
-  }
-  .inventoryContainerBorder{
-    max-height:100%;
-    max-width: 100%;
-    border: 10px solid transparent;
-    border-image-source: url(./assets/border.png);
-    border-image-slice: 20 22;
-    border-image-repeat:round;
-  }
-  .inventoryContainer{
-    box-sizing: border-box;
-    padding: 10px 0 0 10px;
-    border-radius: 15px;
-    height: 40px;
-    position: relative;
+  50% {
+    left: 0px;
+    top: 5px;
     background: url(./assets/key.png) 0 no-repeat,
+      url(./assets/spider2.png) 40px no-repeat,
+      url(./assets/mariel.png) 90px no-repeat;
+  }
+  100% {
+    top:0px;
+    background: url(./assets/key.png) 0 no-repeat,
+      url(./assets/spider.png) 40px no-repeat,
+      url(./assets/mariel.png) 90px no-repeat;
+  }
+}
+.graphicsContainerBorder {
+  max-height: 100%;
+  max-width: 100%;
+  border: 10px solid transparent;
+  border-image-source: url(./assets/border.png);
+  border-image-slice: 20 22;
+  border-image-repeat: stretch;
+}
+.graphicsContainer {
+  box-sizing: border-box;
+  padding: 5px;
+  height: 300px;
+  // border: 5px solid pink;
+  background: url(./assets/welp-medium.png) -30px 150px no-repeat;
+  border: 10px solid transparent;
+  border-image-source: url(./assets/border.png);
+  border-image-slice: 20 22;
+  border-image-repeat: stretch;
+}
+.inventoryContainerBorder {
+  max-height: 100%;
+  max-width: 100%;
+  border: 10px solid transparent;
+  border-image-source: url(./assets/border.png);
+  border-image-slice: 20 22;
+  border-image-repeat: round;
+}
+.inventoryContainer {
+  box-sizing: border-box;
+  padding: 10px 0 0 10px;
+  border-radius: 15px;
+  height: 40px;
+  position: relative;
+  animation: bounce 0.8s ease-in-out 0.8s infinite alternate;
+  background: url(./assets/key.png) 0 no-repeat,
     url(./assets/spider.png) 40px no-repeat,
     url(./assets/mariel.png) 90px no-repeat;
-  }
-  .storyContainerBorder{
-    max-height:100%;
-    max-width: 100%;
-    border: 10px solid transparent;
-    border-image-source: url(./assets/border.png);
-    border-image-slice: 20 22;
-    border-image-repeat:round;
-  }
-  .storyContainer{
-    box-sizing: border-box;
-    height: 200px;
-    padding: 10px;
-    border-radius: 10px;
-    border: 10px solid transparent;
-    border-image-source: url(./assets/border.png);
-    border-image-slice: 20 22;
-    border-image-repeat:round;
-    // border: 5px solid red;
-  }
+}
+.storyContainerBorder {
+  max-height: 100%;
+  max-width: 100%;
+  border: 10px solid transparent;
+  border-image-source: url(./assets/border.png);
+  border-image-slice: 20 22;
+  border-image-repeat: round;
+}
+.storyContainer {
+  box-sizing: border-box;
+  height: 200px;
+  padding: 10px;
+  border-radius: 10px;
+  border: 10px solid transparent;
+  border-image-source: url(./assets/border.png);
+  border-image-slice: 20 22;
+  border-image-repeat: round;
+  // border: 5px solid red;
+}
 
-  .messageBox{
-    display:flex;
-    justify-content: flex-start;
-    align-content: center;
-    flex-direction: column;
-    overflow: auto;
-    margin-left: 59.46%;
-    margin-top: 54%;
-    height: 403px;
-    width: 174%;
-    // border: 1px solid red;
-  }
+.messageBox {
+  display: flex;
+  justify-content: flex-start;
+  align-content: center;
+  flex-direction: column;
+  overflow: auto;
+  margin-left: 59.46%;
+  margin-top: 54%;
+  height: 403px;
+  width: 174%;
+  // border: 1px solid red;
+}
 
-  .message{
+.message {
   word-wrap: break-word;
   width: 100px;
   padding: 2px;
   font-size: 12px;
   white-space: pre-wrap;
   border: 5px solid green;
-  }
+}
 
-  .chatInput{
-    // border:1px solid blue;
-    height: 33px;
-    width: 71.5%;
-    margin-left: 24.7%;
-    margin-bottom: 7%;
-    resize: none;
-  }
+.chatInput {
+  // border:1px solid blue;
+  height: 33px;
+  width: 71.5%;
+  margin-left: 24.7%;
+  margin-bottom: 7%;
+  resize: none;
+}
 
-  .sendButton{
-    height: 3.5%;
-    margin-left: 42%;
-  }
+.sendButton {
+  height: 3.5%;
+  margin-left: 42%;
+}
