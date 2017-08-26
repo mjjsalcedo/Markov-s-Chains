@@ -3,6 +3,8 @@ const express = require('express');
 const app = express();
 const PORT = process.env.PORT || 3001;
 const bodyParser = require('body-parser');
+let db = require('../models');
+let ngrams = db.Ngrams;
 /*const apiRoutes = require('./api');*/
 
 const WebSocket = require('ws');
@@ -20,7 +22,7 @@ let tuples = [];
 
 wss.on('connection', function connection(ws, req) {
   console.log("connected");
-  let userId = ws._ultron.id
+  let userId = ws._ultron.id;
   users.push(ws);
 
   ws.on('message', function incoming(message) {
@@ -37,7 +39,7 @@ wss.on('connection', function connection(ws, req) {
       case (messageChain.trigger.length > 0 && messageChain.trigger[0].username != payloadUsername):
       messageChain.response.push(payload.message);
       modifiedMessage = payload.message.message
-      .replace(/[.,\/#!$%\^*\*;:{}=\-_`~()]/g,"")
+      .replace(/[.,\/#!$%@\^*\*;:{}=\-_`~()]/g,"")
       .replace(/\s{2,}/g,"").toLowerCase();
       messageCache.push(modifiedMessage);
       break;
@@ -46,6 +48,7 @@ wss.on('connection', function connection(ws, req) {
       break;
       case (messageChain.trigger[0].username === payloadUsername):
       //break up message chain then query DB
+      console.log(messageCache);
       let cache = messageCache.join(' # ').split(' ');
       cache.reduce((trigger, response) => {
         let trigRes = [trigger, response];
@@ -59,7 +62,7 @@ wss.on('connection', function connection(ws, req) {
       .replace(/[.,\/#!$%\^*\*;:{}=\-_`~()]/g,"")
       .replace(/\s{2,}/g,"").toLowerCase();
       messageCache = [modifiedMessage];
-      couplet = [];
+      tuples = [];
       break;
     }
 
@@ -94,11 +97,10 @@ app.use(express.static('public'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-/*let db = require('../models');
-
+/*
 app.use('/api', apiRoutes);*/
 
 server.listen(PORT,'0.0.0.0', ()=> {
-  /*  db.sequelize.sync({force:true});*/
+    db.sequelize.sync();
   console.log(`listening on ${PORT}`);
 });
