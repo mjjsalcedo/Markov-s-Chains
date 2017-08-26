@@ -20,7 +20,7 @@ let tuples = [];
 
 wss.on('connection', function connection(ws, req) {
   console.log("connected");
-  let userId = ws._ultron.id
+  let userId = ws._ultron.id;
   users.push(ws);
 
   ws.on('message', function incoming(message) {
@@ -28,7 +28,7 @@ wss.on('connection', function connection(ws, req) {
     let payload = JSON.parse(message);
     let payloadMessage = payload.message.message;
     let payloadUsername = payload.message.username;
-    console.log(localStorage);
+
     switch(true){
       case (messageChain.trigger.length === 0):
       messageChain.trigger.push(payload.message);
@@ -69,7 +69,8 @@ wss.on('connection', function connection(ws, req) {
           JSON.stringify({
             OP: 'CHAT',
             message: payloadMessage,
-            username: payloadUsername
+            username: payloadUsername,
+            id: payloadId
           })
           );
       });
