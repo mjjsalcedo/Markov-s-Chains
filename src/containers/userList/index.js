@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+
 
 class UserList extends Component {
 
@@ -14,6 +16,7 @@ class UserList extends Component {
     <h2> Current Users </h2>
        <div className="userlist">
 
+    <Link to='/playerOne'> PLAYER ONE</Link>
           <p className="users"></p>
         </div>
     </div>
