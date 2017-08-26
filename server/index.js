@@ -28,7 +28,7 @@ wss.on('connection', function connection(ws, req) {
     let payload = JSON.parse(message);
     let payloadMessage = payload.message.message;
     let payloadUsername = payload.message.username;
-
+    console.log(localStorage);
     switch(true){
       case (messageChain.trigger.length === 0):
       messageChain.trigger.push(payload.message);
