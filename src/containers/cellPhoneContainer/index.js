@@ -26,7 +26,7 @@ class CellPhoneContainer extends Component {
           <div className="messageBox">
             {this.props.messages.map(message =>
               <pre className="message">
-                {message}
+                {message.message}
               </pre>
             )}
         </div>
