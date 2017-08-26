@@ -28,22 +28,20 @@ const textReducers = (state = initialState, action) => {
 }
 
 function messageReceived(state, action) {
-  console.log('boop');
 
   let messagePayload = JSON.parse(action.payload);
+
+  console.log('payloadbkjnkjnkj', messagePayload);
   if(messagePayload.OP === SUCCESSFUL_CONNECTION){
     localStorage.setItem("id", messagePayload.userId)
-
-    return {
-    userData: [
-    ...state.userData
-    ]
-  }
   }else {
   return {
     userData: [
     ...state.userData,
-    messagePayload.message
+    { id: messagePayload.id,
+      username: messagePayload.username,
+      message: messagePayload.message
+    }
     ]
   }
 }
