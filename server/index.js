@@ -28,6 +28,7 @@ wss.on('connection', function connection(ws, req) {
     let payload = JSON.parse(message);
     let payloadMessage = payload.message.message;
     let payloadUsername = payload.message.username;
+    let payloadId = payload.message.id;
 
     switch(true){
       case (messageChain.trigger.length === 0):
@@ -69,7 +70,8 @@ wss.on('connection', function connection(ws, req) {
           JSON.stringify({
             OP: 'CHAT',
             message: payloadMessage,
-            username: payloadUsername
+            username: payloadUsername,
+            id: payloadId
           })
           );
       });

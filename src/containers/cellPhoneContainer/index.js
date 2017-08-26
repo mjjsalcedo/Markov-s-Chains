@@ -7,7 +7,8 @@ class CellPhoneContainer extends Component {
     super(props);
     this.state = {
       message: '',
-      username: ''
+      username: localStorage.getItem("username"),
+      id: localStorage.getItem("id")
     }
   }
 
@@ -42,6 +43,7 @@ class CellPhoneContainer extends Component {
   }
 }
 const mapStateToProps = (state) => {
+  console.log('cellmessage', state)
   return {
     messages: state.userData
   };
