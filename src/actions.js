@@ -17,7 +17,6 @@ export const userConnect = () => {
       dispatch({ type: USER_CONNECT, success: true, payload: 'user has connected' })
     })
     socket.addEventListener('message', (message) => {
-      console.log('message', message)
       dispatch({ type: MESSAGE_RECEIVED, success: true, payload: message.data})
     })
   }

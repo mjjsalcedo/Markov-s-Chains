@@ -1,17 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+
 
 class UserList extends Component {
-  constructor(props) {
-    super(props);
-  }
-  componentDidMount() {
-  }
-  componentWillMount() {
-  }
 
   render() {
-    console.log(this.props)
+
     return (
     <div className="userlistContainer">
 
@@ -21,6 +16,7 @@ class UserList extends Component {
     <h2> Current Users </h2>
        <div className="userlist">
 
+    <Link to='/playerOne'> PLAYER ONE</Link>
           <p className="users"></p>
         </div>
     </div>

@@ -1,12 +1,14 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { messageSend, messageReceived } from '../../actions';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { messageSend } from "../../actions";
 
 class CellPhoneContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      message: ''
+      message: '',
+      username: localStorage.getItem("username"),
+      id: localStorage.getItem("id")
     }
   }
 
@@ -20,37 +22,44 @@ class CellPhoneContainer extends Component {
   }
   render() {
     return (
-    <div className="cellPhoneContainer">
-       <div className="messageBox">
-        {this.props.messages.messages.map(message => (
-          <p className="message">{message}</p>
-          ))}
+      <div className="cellPhoneBorder">
+        <div className="cellPhoneContainer">
+          <div className="messageBox">
+            {this.props.messages.map(message =>
+              <pre className="message">
+                {message.message}
+              </pre>
+            )}
+        </div>
       </div>
+      <form onSubmit={ this.messageSend.bind(this) }>
       <textarea className="chatInput" placeholder="message your friends" value={ this.state.message } onChange={ this.messageInput.bind(this) }>
       </textarea>
-      <button type="submit" className="sendButton" onClick={ this.messageSend.bind(this) }>Send Message
+      <button type="submit" className="sendButton">Send Message
       </button>
+      </form>
     </div>
       )
   }
 }
 const mapStateToProps = (state) => {
+  console.log('cellmessage', state)
   return {
-    messages: state
-  }
-}
+    messages: state.userData
+  };
+};
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = dispatch => {
   return {
-    messageSend: (message) => {
-      dispatch(messageSend(message))
+    messageSend: message => {
+      dispatch(messageSend(message));
     }
-  }
-}
+  };
+};
 
-CellPhoneContainer = connect(
-  mapStateToProps,
-  mapDispatchToProps
-  )(CellPhoneContainer)
+CellPhoneContainer = connect(mapStateToProps, mapDispatchToProps)(
+  CellPhoneContainer
+);
 
 export default CellPhoneContainer;
+

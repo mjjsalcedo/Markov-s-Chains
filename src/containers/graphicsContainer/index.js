@@ -4,8 +4,10 @@ class GraphicsContainer extends Component {
 
 render(){
   return(
-    <div className="graphicsContainer">Graphics go here</div>
-    )
+    <div className="graphicsContainerBorder">
+      <div className="graphicsContainer">Graphics go here</div>
+    </div>
+  )
 }
 }
 export default GraphicsContainer;

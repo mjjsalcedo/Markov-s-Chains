@@ -3,11 +3,10 @@ import React from 'react';
 import { render } from 'react-dom';
 import App from './containers/App/App.js';
 import { Provider } from 'react-redux';
-import { userConnect } from './actions'
 import textReducers from './reducers';
 import { createStore, applyMiddleware } from 'redux';
 import ReduxThunk from 'redux-thunk';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route} from 'react-router-dom';
 import UserLogin from './containers/usernamePage/index.js';
 import UserList from './containers/userList/index.js';
 
@@ -23,6 +22,7 @@ render(
         <div>
           <Route exact path="/" component={UserLogin}/>
           <Route path="/userlist" component={UserList}/>
+          <Route path="/playerOne" component={App}/>
         </div>
     </Router>
   </Provider>,

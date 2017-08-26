@@ -13,6 +13,11 @@ const wss = new WebSocket.Server({ server });
 
 const users = [];
 
+let messageChain = { trigger: [], response: []};
+let messageCache = [];
+let modifiedMessage = '';
+let tuples = [];
+
 wss.on('connection', function connection(ws, req) {
   console.log("connected");
   let userId = ws._ultron.id;
@@ -57,13 +62,14 @@ wss.on('connection', function connection(ws, req) {
       break;
     }
     switch (payload.OP) {
-      case 'CHAT': // broadcast
+      case 'CHAT':
       users.forEach(user => {
         user.send(
           JSON.stringify({
             OP: 'CHAT',
-            message: payload.message.message,
-            username: payload.username
+            message: payloadMessage,
+            username: payloadUsername,
+            id: payloadId
           })
           );
       });
