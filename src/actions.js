@@ -17,6 +17,7 @@ export const CHAT = "CHAT"
 export const CREATED_USER = "CREATED_USER"
 export const CONNECTED = "CONNECTED"
 export const BROADCAST_USERNAME = "BROADCAST_USERNAME"
+export const RECEIVE_INVITE = "RECEIVE_INVITE"
 
 
 export const userConnect = () => {
@@ -46,8 +47,6 @@ export const broadcastUsers = ( username ) => {
     socket.send(JSON.stringify({
       OP: BROADCAST_USERNAME,
       username}));
-      dispatch({ type: CREATED_USER, success: true, payload: username}
-      );
   }
 }
 
@@ -61,15 +60,35 @@ export const messageSend = ( message ) => {
 }
 
 export const sendInvite = ( invite ) => {
+  console.log( 'made it to invite', invite);
   return ( dispatch ) => {
     socket.send(JSON.stringify({
       OP: SEND_INVITE,
       invite}));
-      dispatch({ type: MESSAGE_SEND, success: true, payload: invite });
   }
 }
 
+export const acceptInvite = (invitesFrom) => dispatch => {
 
+  socket.send(
+    JSON.stringify({
+      OP: ACCEPT_INVITE,
+      username : invitesFrom
+    })
+  );
+
+};
+
+export const declineInvite = (invitesFrom) => dispatch => {
+
+  socket.send(
+    JSON.stringify({
+      OP: DECLINE_INVITE,
+      username : invitesFrom
+    })
+  );
+
+};
 
 
 

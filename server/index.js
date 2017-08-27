@@ -29,6 +29,20 @@ wss.on('connection', function connection(ws, req) {
   ws.userId = userId;
 
   users.push(ws);
+  ws.username = null;
+
+   ws.on('close', function (){
+    users.splice( users.indexOf(ws), 1 );
+    // also broadcast to all other users
+    users.forEach(user => {
+      user.send(
+        JSON.stringify({
+          OP: 'USER_DISCONNECTED', // all users not in room
+          username: ws.username // could be undefined
+        })
+      );
+    });
+  });
 
   ws.on('message', function incoming(message) {
 
@@ -83,6 +97,7 @@ wss.on('connection', function connection(ws, req) {
       break;
       case 'CONNECTED':
       console.log('payload.message.username', payload.message.username)
+      ws.username = payload.message.username;
       users.forEach(user => {
         user.send(
           JSON.stringify({
@@ -93,43 +108,82 @@ wss.on('connection', function connection(ws, req) {
       console.log('a user has connected');
       break;
       case 'BROADCAST_USERNAME':
-      console.log('payload.message.username', payload.message.username)
+      console.log('payload.message.username', payload.message)
+
       users.forEach(user => {
         user.send(
           JSON.stringify({
             OP: 'CREATED_USER',
-            username: payload.message.username
+            username: payload.message.username,
+            id: payload.message.id
           }))
       })
       console.log('a user has connected');
       break;
       case 'SEND_INVITE':
-      users.filter(user => {
-        return user.userId === payload.userId;
-      }).forEach((user) =>{
-        console.log('inviting', user.userId)
-        user.send(
-          JSON.stringify({
-            OP:'RECEIVE_INVITE',
-            senderName: payload.message.username,
-            senderId: payload.message.id
-          }))
-      });
-      break;
+      console.log('made it to invite')
+
+      const invitedUser = users.find( user => user.username === payload.invite.username );
+        if( invitedUser !== null ){
+          // send an OP to that user
+          invitedUser.send(
+            JSON.stringify({
+              OP: 'RECEIVE_INVITE',
+              sender: ws.username
+            })
+          );
+        } else {
+          ws.send(
+            JSON.stringify({
+              OP: 'ERROR',
+              message: 'username is not found or has disconnected'
+            })
+          );
+        }
+        break;
       case 'ACCEPT_INVITE':
           //create user and send to room
-          var player2 = ws;
-          var player1 = users.find((user)=>{
-            return user.userId === payload.senderId;
-          });
-          var room = new Room(player1, player2);
-          rooms.set(room.id, room)
-        console.log('accept invite', payload.senderName)
-      break;
+          const sender = users.find( user => user.username === payload.username );
+        if( sender !== null ){
+          // create the room,
+          //   put both players in it
+          //   remove from lobby
+          const newRoom = new Room(sender, ws);
+          // track the room in the map
+          rooms.set(newRoom.id, newRoom);
+
+          // remove both players from lobby
+          users = users.filter( user => user.username !== ws.username && user.username !== sender.username );
+
+        } else {
+          ws.send(
+            JSON.stringify({
+              OP: 'ERROR',
+              message: 'sender is not found or has disconnected'
+            })
+          );
+        }
+
+        break;
       case 'DECLINE_INVITE':
-          //send to sender invite declined
-        console.log('decline invite', payload.senderName)
-      break;
+        const declinedSender = users.find( user => user.username = payload.username );
+        if( declinedSender !== null ){
+          declinedSender.send(
+            JSON.stringify({
+              OP: 'INVITE_DECLINED',
+              username: ws.username
+            })
+          );
+
+        } else {
+          ws.send(
+            JSON.stringify({
+              OP: 'ERROR',
+              message: 'sender is not found or has disconnected'
+            })
+          );
+        }
+        break;
     }
   });
 

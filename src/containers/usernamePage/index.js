@@ -6,7 +6,8 @@ class UserLogin extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: ''
+      username: '',
+      id: localStorage.getItem("id")
     }
   }
 

@@ -1,7 +1,45 @@
-export default class Room {
-  constructor(player1, player2) {
-    this.id = Math.round(Math.random()*1000); //make this better in the future
-    this.player1 = player1; //a socket to send to each player in room
-    this.player2 = player2;
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+// import { inviteUser, acceptInvite, declineInvite } from '../actions';
+
+class RoomContainer extends Component {
+  constructor(props){
+    super(props);
+
+    this.state = {
+
+    };
+
+  }
+  render() {
+    return (
+      <div>
+        <p>Player1: {this.props.player1}</p>
+        <p>Player2: {this.props.player2}</p>
+        <div>
+          ... make chat room ...
+        </div>
+      </div>
+    );
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    player1: state.player1,
+    player2: state.player2
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+
+  }
+}
+
+const Room = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(RoomContainer);
+
+export default Room;
