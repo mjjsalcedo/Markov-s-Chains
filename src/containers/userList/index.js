@@ -43,7 +43,9 @@ class UserList extends Component {
   }
 
   render() {
-
+if(this.props.goToRoom){
+      this.props.history.push('/room');
+    }
     return (
       <div className="userlistContainer">
       {this.props.username.filter(userData => {
@@ -75,7 +77,7 @@ class UserList extends Component {
 }
 
 const mapStateToProps = (state) => {
-  console.log('testselect', state.userData)
+  console.log('testselect', state)
   return {
     username: state.userData,
     invitesFrom : state.invitesFrom,

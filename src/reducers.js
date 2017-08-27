@@ -1,4 +1,4 @@
-import { /*GET_TEXT, ADD_TEXT, EDIT_TEXT, DELETE_TEXT,*/ MESSAGE_SEND, USER_CONNECT, MESSAGE_RECEIVED, SUCCESSFUL_CONNECTION, CREATE_USERNAME, SEND_INVITE, ACCEPT_INVITE, DECLINE_INVITE, CHAT, CREATED_USER, RECEIVE_INVITE} from './actions';
+import { /*GET_TEXT, ADD_TEXT, EDIT_TEXT, DELETE_TEXT,*/ MESSAGE_SEND, USER_CONNECT, MESSAGE_RECEIVED, SUCCESSFUL_CONNECTION, CREATE_USERNAME, SEND_INVITE, ACCEPT_INVITE, DECLINE_INVITE, CHAT, CREATED_USER, RECEIVE_INVITE, ENTER_ROOM} from './actions';
 
 let initialState = { userData:[],invitesFrom : null, // set when someone invites you to game
   goToRoom : false, // idk about this, need a better way to send users to /room route
@@ -39,19 +39,23 @@ function messageReceived(state, action) {
     case SUCCESSFUL_CONNECTION:
     return localStorage.setItem("id", messagePayload.userId)
     case RECEIVE_INVITE:
-        console.log('reached send invite')
-        console.log(state, action)
+
         return {
           userData: [
           ...state.userData
           ],  invitesFrom: messagePayload.sender
         }
       break;
-    case ACCEPT_INVITE:
-        console.log('reached accept invite')
-      break;
-    case DECLINE_INVITE:
-        console.log('reached decline invite')
+    case ENTER_ROOM:
+    console.log('reached room')
+        return {
+          userData: [
+          ...state.userData
+          ],
+        player1 : messagePayload.player1,
+        player2 : messagePayload.player2,
+        goToRoom : true
+        }
       break;
     case CREATED_USER:
         console.log('reached created user', state, 'messagepayload', messagePayload)

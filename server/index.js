@@ -3,6 +3,7 @@ const express = require('express');
 const app = express();
 const PORT = process.env.PORT || 3001;
 const bodyParser = require('body-parser');
+const Room = require('../src/Room');
 let db = require('../models');
 let ngrams = db.Ngrams;
 /*const apiRoutes = require('./api');*/
@@ -85,14 +86,16 @@ wss.on('connection', function connection(ws, req) {
       break;
     }
       users.forEach(user => {
+        console.log(users)
         user.send(
           JSON.stringify({
             OP: 'CHAT',
-            message: payload.message.message,
-            username: payload.message.username,
+            message: payload.message,
+            username: payload.username,
             id: payload.message.id
           })
           );
+          console.log('boop');
       });
       break;
       case 'CONNECTED':
@@ -145,9 +148,12 @@ wss.on('connection', function connection(ws, req) {
           //create user and send to room
           const sender = users.find( user => user.username === payload.username );
         if( sender !== null ){
+          console.log('made it to accept');
           // create the room,
           //   put both players in it
           //   remove from lobby
+          console.log('sender', sender)
+          console.log('ws', ws)
           const newRoom = new Room(sender, ws);
           // track the room in the map
           rooms.set(newRoom.id, newRoom);
