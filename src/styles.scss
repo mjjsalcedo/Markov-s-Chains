@@ -11,6 +11,40 @@
   src: url('./assets/OregonTrail.ttf') format('truetype');
   font-weight: bold;
 }
+
+@keyframes bounce {
+  0% {
+    left: 0px;
+    top: 0px;
+  }
+  25% {
+    left: 0px;
+    top: 2px;
+    background: url(./assets/key.png) 0 no-repeat,
+      url(./assets/spider2.png) 40px no-repeat,
+      url(./assets/voodoo.png) 90px no-repeat,
+      url(./assets/wand.png) 110px no-repeat,
+      url(./assets/whip-small.png) 160px no-repeat;
+  }
+  50% {
+    left: 0px;
+    top: 5px;
+    background: url(./assets/key.png) 0 no-repeat,
+      url(./assets/spider2.png) 40px no-repeat,
+      url(./assets/voodoo.png) 90px no-repeat,
+      url(./assets/wand.png) 110px no-repeat,
+      url(./assets/whip-small.png) 160px no-repeat;
+  }
+  100% {
+    top: 0px;
+    background: url(./assets/key.png) 0 no-repeat,
+      url(./assets/spider.png) 40px no-repeat,
+      url(./assets/voodoo.png) 90px no-repeat,
+      url(./assets/wand.png) 110px no-repeat,
+      url(./assets/whip-small.png) 160px no-repeat;
+  }
+}
+
 body {
   font-family: OregonTrail;
 }
@@ -35,16 +69,21 @@ body {
 }
 
 .cellPhoneBorder {
+  display: -ms-flexbox;
   display: flex;
+  -ms-flex-direction: column;
   flex-direction: column;
+  -ms-flex-align: start;
   align-items: flex-start;
-
+  padding-left: 8.2%;
+  padding-right: 7.7%;
   justify-content: center;
+  -webkit-box-sizing: border-box;
   box-sizing: border-box;
   max-width: 100%;
   max-height: 100%;
   width: 40%;
-  background: url(./assets/phone.png) 55% 35% no-repeat;
+  background: url(/static/media/phone.22165b66.png) 55% 35% no-repeat;
 }
 
 .cellPhoneContainer {
@@ -54,32 +93,7 @@ body {
   box-sizing: border-box;
   width: 35%;
 }
-@keyframes bounce {
-  0% {
-    left: 0px;
-    top: 0px;
-  }
-  25% {
-    left: 0px;
-    top: 2px;
-    background: url(./assets/key2.png) 0 no-repeat,
-      url(./assets/spider2.png) 40px no-repeat,
-      url(./assets/mariel2.png) 90px no-repeat;
-  }
-  50% {
-    left: 0px;
-    top: 5px;
-    background: url(./assets/key.png) 0 no-repeat,
-      url(./assets/spider2.png) 40px no-repeat,
-      url(./assets/mariel.png) 90px no-repeat;
-  }
-  100% {
-    top:0px;
-    background: url(./assets/key.png) 0 no-repeat,
-      url(./assets/spider.png) 40px no-repeat,
-      url(./assets/mariel.png) 90px no-repeat;
-  }
-}
+
 .graphicsContainerBorder {
   max-height: 100%;
   max-width: 100%;
@@ -89,15 +103,74 @@ body {
   border-image-repeat: stretch;
 }
 .graphicsContainer {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
   box-sizing: border-box;
   padding: 5px;
   height: 300px;
   // border: 5px solid pink;
-  background: url(./assets/welp-medium.png) -30px 150px no-repeat;
+
+  // url(./assets/voodoo-big.png) 400px 110px no-repeat,
+  // url(./assets/whip-big.png) 15px 120px no-repeat;
   border: 10px solid transparent;
   border-image-source: url(./assets/border.png);
   border-image-slice: 20 22;
   border-image-repeat: stretch;
+}
+.mariel {
+  height: 33%;
+  width: 10%;
+  border: 5px solid red;
+  background: url(./assets/mariel-medium.png) -30px no-repeat;
+}
+.mariel:hover {
+  background: url(./assets/mariel-hover.png) -30px no-repeat;
+}
+.whip {
+  height: 31%;
+  width: 15%;
+  border: 5px solid black;
+  background: url(./assets/whip-big.png) -10px no-repeat;
+}
+.whip:hover {
+  background: url(./assets/whip-hover.png) -10px no-repeat;
+}
+.key {
+  height: 11%;
+  width: 5%;
+  border: 5px solid green;
+  background: url(./assets/key.png) -5px no-repeat;
+}
+.key:hover {
+  background: url(./assets/key-hover.png) -5px no-repeat;
+}
+.spider {
+  height: 15%;
+  width: 10%;
+  border: 5px solid yellow;
+  background: url(./assets/spider.png) no-repeat;
+}
+.spider:hover {
+  background: url(./assets/spider-hover.png) no-repeat;
+}
+.voodoo {
+  height: 18%;
+  width: 10%;
+  border: 5px solid pink;
+  background: url(./assets/voodoo-big.png) 5px -3px no-repeat;
+}
+.voodoo:hover {
+  background: url(./assets/voodoo-hover.png) no-repeat;
+}
+.wand {
+  height: 13%;
+  width: 7%;
+  border: 5px solid blue;
+  background: url(./assets/wand-big.png) -15px no-repeat;
+}
+.wand:hover {
+  background: url(./assets/wand-hover.png) -15px no-repeat;
 }
 .inventoryContainerBorder {
   max-height: 100%;
@@ -116,7 +189,9 @@ body {
   animation: bounce 0.8s ease-in-out 0.8s infinite alternate;
   background: url(./assets/key.png) 0 no-repeat,
     url(./assets/spider.png) 40px no-repeat,
-    url(./assets/mariel.png) 90px no-repeat;
+    url(./assets/voodoo.png) 90px no-repeat,
+    url(./assets/wand.png) 110px no-repeat,
+    url(./assets/whip-small.png) 160px no-repeat;
 }
 .storyContainerBorder {
   max-height: 100%;
@@ -144,10 +219,11 @@ body {
   align-content: center;
   flex-direction: column;
   overflow: auto;
-  margin-left: 59.46%;
-  margin-top: 54%;
+  // margin-left: 59.46%;
+  margin-top: 99.7%;
   height: 403px;
-  width: 174%;
+  width: 290%;
+  // margin-bottom: 5.5px;
   // border: 1px solid red;
 }
 
@@ -157,19 +233,25 @@ body {
   padding: 2px;
   font-size: 12px;
   white-space: pre-wrap;
-  border: 5px solid green;
+  border: 5px solid red;
+}
+
+.cellPhoneform {
+  width: 100%;
 }
 
 .chatInput {
   // border:1px solid blue;
   height: 33px;
-  width: 71.5%;
-  margin-left: 24.7%;
-  margin-bottom: 7%;
+  width: 99.7%; //71.5
+  // margin-left: 24.7%;
+  // margin-bottom: 7%;
   resize: none;
 }
 
 .sendButton {
   height: 3.5%;
-  margin-left: 42%;
+  width: 60%;
+  margin-left: 20%;
+  margin-top: 12%;
 }
