@@ -1,29 +1,48 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { sendInvite, broadcastUsers } from '../../actions';
 import { Link } from 'react-router-dom';
 
 
 class UserList extends Component {
+
   constructor(props) {
     super(props);
-    console.log('moo',this.props)
+    this.state = {
+      player: ''
+    }
   }
+
+  componentWillMount() {
+    this.props.broadcastUsers();
+  }
+
+  selectUser(e){
+    console.log('playerinfo', e.target.value)
+    e.preventDefault()
+    this.setState({ player: e.target.value})
+    this.props.sendInvite(this.state)
+    this.setState({ player: '' })
+    console.log(this.state);
+  }
+
   render() {
 
     return (
-    <div className="userlistContainer">
+      <div className="userlistContainer">
+      {this.props.username.filter(userData => {
+        return userData.username === localStorage.getItem("username")}).map(username => {
+          return <span value="cat" onClick={this.selectUser.bind(this)}>{username.username}</span> })}
 
-    {this.props.username.filter(userData => {
-      if(userData.username !== localStorage.username)
-      return <span>{userData.username}</span> })}
-
-    <h2> Current Users </h2>
-       <div className="userlist">
-
-    <Link to='/playerOne'> PLAYER ONE</Link>
-          <p className="users"></p>
-        </div>
-    </div>
+      <h2> Current Users </h2>
+      <div className="userlist">
+      {this.props.username.filter(userData => {
+        return userData.username !== localStorage.getItem("username")}).map(username => {
+          return <span value="cat" onClick={this.selectUser.bind(this)}>{username.username}</span> })}
+      <Link to='/playerOne'> PLAYER ONE</Link>
+      <p className="users"></p>
+      </div>
+      </div>
       )
   }
 }
@@ -36,8 +55,15 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => {
-  return {}
+  return {
+    sendInvite: (player) => {
+      dispatch(sendInvite(player))
+    },
+    broadcastUsers: (player) =>{
+
+    }
   }
+}
 
 
 UserList = connect(
@@ -45,4 +71,4 @@ UserList = connect(
   mapDispatchToProps
   )(UserList)
 
-export default UserList;
+  export default UserList;

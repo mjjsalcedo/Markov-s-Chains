@@ -33,25 +33,25 @@ wss.on('connection', function connection(ws, req) {
   ws.on('message', function incoming(message) {
 
     let payload = JSON.parse(message);
-    let payloadMessage = payload.message.message;
-    let payloadUsername = payload.message.username;
-    let payloadId = payload.message.id;
+    console.log('before payload',payload)
 
-    switch(true){
+    switch (payload.OP) {
+      case 'CHAT':
+      switch(true){
       case (messageChain.trigger.length === 0):
       messageChain.trigger.push(payload.message);
       break;
-      case (messageChain.trigger.length > 0 && messageChain.trigger[0].username != payloadUsername):
+      case (messageChain.trigger.length > 0 && messageChain.trigger[0].username != payload.message.username):
       messageChain.response.push(payload.message);
       modifiedMessage = payload.message.message
       .replace(/[.,\/#!$%@\^*\*;:{}=\-_`~()]/g,"")
       .replace(/\s{2,}/g,"").toLowerCase();
       messageCache.push(modifiedMessage);
       break;
-      case (messageChain.trigger[0].username === payloadUsername && messageChain.response.length  === 0):
+      case (messageChain.trigger[0].username === payload.message.username && messageChain.response.length  === 0):
       messageChain.trigger.push(payload.message);
       break;
-      case (messageChain.trigger[0].username === payloadUsername):
+      case (messageChain.trigger[0].username === payload.message.username):
       //break up message chain then query DB
       console.log(messageCache);
       let cache = messageCache.join(' # ').split(' ');
@@ -70,21 +70,37 @@ wss.on('connection', function connection(ws, req) {
       tuples = [];
       break;
     }
-
-    switch (payload.OP) {
-      case 'CHAT':
       users.forEach(user => {
         user.send(
           JSON.stringify({
             OP: 'CHAT',
-            message: payloadMessage,
-            username: payloadUsername,
-            id: payloadId
+            message: payload.message.message,
+            username: payload.message.username,
+            id: payload.message.id
           })
           );
       });
       break;
       case 'CONNECTED':
+      console.log('payload.message.username', payload.message.username)
+      users.forEach(user => {
+        user.send(
+          JSON.stringify({
+            OP: 'CREATED_USER',
+            username: payload.message.username
+          }))
+      })
+      console.log('a user has connected');
+      break;
+      case 'BROADCAST_USERNAME':
+      console.log('payload.message.username', payload.message.username)
+      users.forEach(user => {
+        user.send(
+          JSON.stringify({
+            OP: 'CREATED_USER',
+            username: payload.message.username
+          }))
+      })
       console.log('a user has connected');
       break;
       case 'SEND_INVITE':
@@ -95,8 +111,8 @@ wss.on('connection', function connection(ws, req) {
         user.send(
           JSON.stringify({
             OP:'RECEIVE_INVITE',
-            senderName: payloadUsername,
-            senderId: payloadId
+            senderName: payload.message.username,
+            senderId: payload.message.id
           }))
       });
       break;

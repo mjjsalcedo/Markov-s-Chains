@@ -62,4 +62,3 @@ CellPhoneContainer = connect(mapStateToProps, mapDispatchToProps)(
 );
 
 export default CellPhoneContainer;
-
