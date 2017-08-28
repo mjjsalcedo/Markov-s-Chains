@@ -8,13 +8,13 @@
     top: 0px; }
   25% {
     top: 1px;
-    background: url(./assets/key.png) 0 no-repeat, url(./assets/spider2.png) 40px no-repeat, url(./assets/voodoo.png) 90px no-repeat, url(./assets/wand.png) 110px no-repeat, url(./assets/whip-small.png) 160px no-repeat; }
+    background: url(./assets/key.png) 1% no-repeat, url(./assets/spider.png) 7% no-repeat, url(./assets/voodoo.png) 16% no-repeat, url(./assets/wand.png) 21% no-repeat, url(./assets/whip-small.png) 28% no-repeat, url(./assets/painting-small.png) 35% no-repeat, url(./assets/ian-small.png) 42% no-repeat, url(./assets/sword-small.png) 51% no-repeat, url(./assets/mariel-small.png) 60% no-repeat, url(./assets/torch-small.png) 65% no-repeat, url(./assets/torch-slant-small.png) 72% 100% no-repeat, url(./assets/bat-small.png) 76% no-repeat, url(./assets/rat-small.png) 81% no-repeat; }
   50% {
     top: 5px;
-    background: url(./assets/key.png) 0 no-repeat, url(./assets/spider2.png) 40px no-repeat, url(./assets/voodoo.png) 90px no-repeat, url(./assets/wand.png) 110px no-repeat, url(./assets/whip-small.png) 160px no-repeat; }
+    background: url(./assets/key.png) 1% no-repeat, url(./assets/spider.png) 7% no-repeat, url(./assets/voodoo.png) 16% no-repeat, url(./assets/wand.png) 21% no-repeat, url(./assets/whip-small.png) 28% no-repeat, url(./assets/painting-small.png) 35% no-repeat, url(./assets/ian-small.png) 42% no-repeat, url(./assets/sword-small.png) 51% no-repeat, url(./assets/mariel-small.png) 60% no-repeat, url(./assets/torch-small.png) 65% no-repeat, url(./assets/torch-slant-small.png) 72% 100% no-repeat, url(./assets/bat-small.png) 76% no-repeat, url(./assets/rat-small.png) 81% no-repeat; }
   100% {
     top: 0px;
-    background: url(./assets/key.png) 0 no-repeat, url(./assets/spider.png) 40px no-repeat, url(./assets/voodoo.png) 90px no-repeat, url(./assets/wand.png) 110px no-repeat, url(./assets/whip-small.png) 160px no-repeat; } }
+    background: url(./assets/key.png) 1% no-repeat, url(./assets/spider.png) 7% no-repeat, url(./assets/voodoo.png) 16% no-repeat, url(./assets/wand.png) 21% no-repeat, url(./assets/whip-small.png) 28% no-repeat, url(./assets/painting-small.png) 35% no-repeat, url(./assets/ian-small.png) 42% no-repeat, url(./assets/sword-small.png) 51% no-repeat, url(./assets/mariel-small.png) 60% no-repeat, url(./assets/torch-small.png) 65% no-repeat, url(./assets/torch-slant-small.png) 72% 100% no-repeat, url(./assets/bat-small.png) 76% no-repeat, url(./assets/rat-small.png) 81% no-repeat; } }
 
 @font-face {
   font-family: OregonTrail;
@@ -53,7 +53,7 @@ body {
   max-width: 100%;
   max-height: 100%;
   width: 40%;
-  background: url(/static/media/phone.22165b66.png) 55% 35% no-repeat; }
+  background: url(./assets/phone.png) 55% 35% no-repeat; }
 
 .cellPhoneContainer {
   display: -ms-flexbox;
@@ -245,7 +245,8 @@ body {
   border-radius: 15px;
   height: 40px;
   position: relative;
-  background: url(./assets/key.png) 1% no-repeat, url(./assets/spider.png) 7% no-repeat, url(./assets/voodoo.png) 16% no-repeat, url(./assets/wand.png) 21% no-repeat, url(./assets/whip-small.png) 28% no-repeat, url(./assets/painting-small.png) 35% no-repeat, url(./assets/ian-small.png) 42% no-repeat, url(./assets/sword-small.png) 51% no-repeat, url(./assets/mariel-small.png) 60% no-repeat, url(./assets/torch-small.png) 65% no-repeat, url(./assets/torch-slant-small.png) 72% 100% no-repeat, url(./assets/bat-small.png) 76% no-repeat, url(./assets/rat-small.png) 81% no-repeat; }
+  animation: bounce 0.8s ease-in-out 0.8s infinite alternate;
+  background: url(./assets/key.png) 1% no-repeat, url(./assets/spider.png) 7% no-repeat, url(./assets/voodoo.png) 16% no-repeat, url(./assets/wand.png) 21% no-repeat, url(./assets/whip-small.png) 28% no-repeat, url(./assets/painting-small.png) 35% no-repeat, url(./assets/ian-small.png) 42% 20% no-repeat, url(./assets/sword-small.png) 51% no-repeat, url(./assets/mariel-small.png) 60% no-repeat, url(./assets/torch-small.png) 65% no-repeat, url(./assets/torch-slant-small.png) 72% 100% no-repeat, url(./assets/bat-small.png) 76% no-repeat, url(./assets/rat-small.png) 81% no-repeat; }
 
 .storyContainerBorder {
   max-height: 100%;

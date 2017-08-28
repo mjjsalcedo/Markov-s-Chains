@@ -19,27 +19,51 @@
   }
   25% {
     top: 1px;
-    background: url(./assets/key.png) 0 no-repeat,
-      url(./assets/spider2.png) 40px no-repeat,
-      url(./assets/voodoo.png) 90px no-repeat,
-      url(./assets/wand.png) 110px no-repeat,
-      url(./assets/whip-small.png) 160px no-repeat;
+    background: url(./assets/key.png) 1% no-repeat,
+    url(./assets/spider.png) 7% no-repeat,
+    url(./assets/voodoo.png) 16% no-repeat,
+    url(./assets/wand.png) 21% no-repeat,
+    url(./assets/whip-small.png) 28% no-repeat,
+    url(./assets/painting-small.png) 35% no-repeat,
+    url(./assets/ian-small.png) 42% no-repeat,
+    url(./assets/sword-small.png) 51% no-repeat,
+    url(./assets/mariel-small.png) 60% no-repeat,
+    url(./assets/torch-small.png) 65% no-repeat,
+    url(./assets/torch-slant-small.png) 72% 100% no-repeat,
+    url(./assets/bat-small.png) 76% no-repeat,
+    url(./assets/rat-small.png) 81% no-repeat;
   }
   50% {
     top: 5px;
-    background: url(./assets/key.png) 0 no-repeat,
-      url(./assets/spider2.png) 40px no-repeat,
-      url(./assets/voodoo.png) 90px no-repeat,
-      url(./assets/wand.png) 110px no-repeat,
-      url(./assets/whip-small.png) 160px no-repeat;
+    background: url(./assets/key.png) 1% no-repeat,
+    url(./assets/spider.png) 7% no-repeat,
+    url(./assets/voodoo.png) 16% no-repeat,
+    url(./assets/wand.png) 21% no-repeat,
+    url(./assets/whip-small.png) 28% no-repeat,
+    url(./assets/painting-small.png) 35% no-repeat,
+    url(./assets/ian-small.png) 42% no-repeat,
+    url(./assets/sword-small.png) 51% no-repeat,
+    url(./assets/mariel-small.png) 60% no-repeat,
+    url(./assets/torch-small.png) 65% no-repeat,
+    url(./assets/torch-slant-small.png) 72% 100% no-repeat,
+    url(./assets/bat-small.png) 76% no-repeat,
+    url(./assets/rat-small.png) 81% no-repeat;
   }
   100% {
     top: 0px;
-    background: url(./assets/key.png) 0 no-repeat,
-      url(./assets/spider.png) 40px no-repeat,
-      url(./assets/voodoo.png) 90px no-repeat,
-      url(./assets/wand.png) 110px no-repeat,
-      url(./assets/whip-small.png) 160px no-repeat;
+    background: url(./assets/key.png) 1% no-repeat,
+    url(./assets/spider.png) 7% no-repeat,
+    url(./assets/voodoo.png) 16% no-repeat,
+    url(./assets/wand.png) 21% no-repeat,
+    url(./assets/whip-small.png) 28% no-repeat,
+    url(./assets/painting-small.png) 35% no-repeat,
+    url(./assets/ian-small.png) 42% no-repeat,
+    url(./assets/sword-small.png) 51% no-repeat,
+    url(./assets/mariel-small.png) 60% no-repeat,
+    url(./assets/torch-small.png) 65% no-repeat,
+    url(./assets/torch-slant-small.png) 72% 100% no-repeat,
+    url(./assets/bat-small.png) 76% no-repeat,
+    url(./assets/rat-small.png) 81% no-repeat;
   }
 }
 
@@ -88,7 +112,7 @@ body {
   max-width: 100%;
   max-height: 100%;
   width: 40%;
-  background: url(/static/media/phone.22165b66.png) 55% 35% no-repeat;
+  background: url(./assets/phone.png) 55% 35% no-repeat;
 }
 
 .cellPhoneContainer {
@@ -134,10 +158,6 @@ body {
 .mariel:hover {
   transform: translateZ(0) scale(1);
   transition: all 200ms ease-in;
-
-  // height: 35%;
-  // width: 10%;
-  // background: url(./assets/mariel-hover.png) -30px no-repeat;
 }
 .whip {
   height: 31%;
@@ -149,9 +169,6 @@ body {
 .whip:hover {
   transform: scale(1);
   transition: all 200ms ease-in;
-  // height: 35%;
-  // width: 18%;
-  // background: url(./assets/whip-hover.png) -10px no-repeat;
 }
 .key {
   height: 11%;
@@ -163,7 +180,6 @@ body {
 .key:hover {
   transform: scale(1);
   transition: all 200ms ease-in;
-  // background: url(./assets/key-hover.png) -5px no-repeat;
 }
 .spider {
   height: 15%;
@@ -176,7 +192,6 @@ body {
   background: url(./assets/spider2.png) no-repeat;
   transform: scale(1);
   transition: all 200ms ease-in;
-  // background: url(./assets/spider-hover.png) no-repeat;
 }
 .voodoo {
   height: 18%;
@@ -188,9 +203,6 @@ body {
 .voodoo:hover {
   transform: scale(1);
   transition: all 200ms ease-in;
-  // height: 22%;
-  // width: 13%;
-  // background: url(./assets/voodoo-hover.png) no-repeat;
 }
 .wand {
   height: 13%;
@@ -202,9 +214,6 @@ body {
 .wand:hover {
   transform: scale(1);
   transition: all 200ms ease-in;
-  // height: 15%;
-  // width:9%;
-  // background: url(./assets/wand-hover.png) -15px no-repeat;
 }
 .painting {
   height: 27%;
@@ -216,9 +225,6 @@ body {
 .painting:hover {
   transform: scale(1);
   transition: all 200ms ease-in;
-  // height: 30%;
-  // width: 15%;
-  // background: url(./assets/painting-hover.png) no-repeat;
 }
 .ian {
   height: 55%;
@@ -230,9 +236,6 @@ body {
 .ian:hover {
   transform: scale(1);
   transition: all 200ms ease-in;
-  // height: 40%;
-  // width: 9%;
-  // background: url(./assets/ian-hover.png) -35px no-repeat;
 }
 .torch-slant {
   height: 18%;
@@ -304,14 +307,14 @@ body {
   border-radius: 15px;
   height: 40px;
   position: relative;
-  // animation: bounce 0.8s ease-in-out 0.8s infinite alternate;
+  animation: bounce 0.8s ease-in-out 0.8s infinite alternate;
   background: url(./assets/key.png) 1% no-repeat,
     url(./assets/spider.png) 7% no-repeat,
     url(./assets/voodoo.png) 16% no-repeat,
     url(./assets/wand.png) 21% no-repeat,
     url(./assets/whip-small.png) 28% no-repeat,
     url(./assets/painting-small.png) 35% no-repeat,
-    url(./assets/ian-small.png) 42% no-repeat,
+    url(./assets/ian-small.png) 42% 20% no-repeat,
     url(./assets/sword-small.png) 51% no-repeat,
     url(./assets/mariel-small.png) 60% no-repeat,
     url(./assets/torch-small.png) 65% no-repeat,
