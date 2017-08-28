@@ -8,6 +8,7 @@ export const USER_DISCONNECT = "USER_DISCONNECT"*/
 export const MESSAGE_SEND = 'MESSAGE_SEND'
 export const USER_CONNECT = "USER_CONNECT"
 export const SUCCESSFUL_CONNECTION = "SUCCESSFUL_CONNECTION"
+export const USER_DISCONNECTED = "USER_DISCONNECTED"
 export const CREATE_USERNAME = "CREATE_USERNAME"
 export const MESSAGE_RECEIVED = "MESSAGE_RECEIVED"
 export const SEND_INVITE = "SEND_INVITE"
@@ -17,6 +18,9 @@ export const CHAT = "CHAT"
 export const CREATED_USER = "CREATED_USER"
 export const CONNECTED = "CONNECTED"
 export const BROADCAST_USERNAME = "BROADCAST_USERNAME"
+export const RECEIVE_INVITE = "RECEIVE_INVITE"
+export const ENTER_ROOM = "ENTER_ROOM"
+export const BROADCAST_MESSAGE = "BROADCAST_MESSAGE"
 
 
 export const userConnect = () => {
@@ -25,13 +29,13 @@ export const userConnect = () => {
       dispatch({ type: USER_CONNECT, success: true, payload: 'user has connected' })
     })
     socket.addEventListener('message', (message) => {
+      console.log('fhuiadhfndifha', message.data)
       dispatch({ type: MESSAGE_RECEIVED, success: true, payload: message.data})
     })
   }
 }
 
 export const createUsername = (username) => {
-  console.log('username', username)
   return ( dispatch ) => {
     socket.send(JSON.stringify({
       OP: CONNECTED,
@@ -46,8 +50,6 @@ export const broadcastUsers = ( username ) => {
     socket.send(JSON.stringify({
       OP: BROADCAST_USERNAME,
       username}));
-      dispatch({ type: CREATED_USER, success: true, payload: username}
-      );
   }
 }
 
@@ -56,7 +58,6 @@ export const messageSend = ( message ) => {
     socket.send(JSON.stringify({
       OP: CHAT,
       message}));
-      dispatch({ type: MESSAGE_SEND, success: true, payload: message });
   }
 }
 
@@ -65,11 +66,28 @@ export const sendInvite = ( invite ) => {
     socket.send(JSON.stringify({
       OP: SEND_INVITE,
       invite}));
-      dispatch({ type: MESSAGE_SEND, success: true, payload: invite });
   }
 }
 
+export const acceptInvite = (invitesFrom) => dispatch => {
+  socket.send(
+    JSON.stringify({
+      OP: ACCEPT_INVITE,
+      username : invitesFrom
+    })
+  );
 
+};
+
+export const declineInvite = (invitesFrom) => dispatch => {
+  socket.send(
+    JSON.stringify({
+      OP: DECLINE_INVITE,
+      username : invitesFrom
+    })
+  );
+
+};
 
 
 

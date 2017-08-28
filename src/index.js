@@ -9,6 +9,7 @@ import ReduxThunk from 'redux-thunk';
 import { BrowserRouter as Router, Route} from 'react-router-dom';
 import UserLogin from './containers/usernamePage/index.js';
 import UserList from './containers/userList/index.js';
+import Room from './containers/roomContainer/index.js';
 
 const store = createStore(
   textReducers,
@@ -23,6 +24,7 @@ render(
           <Route exact path="/" component={UserLogin}/>
           <Route path="/userlist" component={UserList}/>
           <Route path="/playerOne" component={App}/>
+          <Route path="/room" component={Room}/>
         </div>
     </Router>
   </Provider>,

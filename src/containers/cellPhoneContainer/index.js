@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { messageSend } from "../../actions";
+import { messageSend, broadcastMessage } from "../../actions";
 
 class CellPhoneContainer extends Component {
   constructor(props) {
@@ -8,7 +8,8 @@ class CellPhoneContainer extends Component {
     this.state = {
       message: '',
       username: localStorage.getItem("username"),
-      id: localStorage.getItem("id")
+      id: localStorage.getItem("id"),
+      roomId: localStorage.getItem("roomId")
     }
   }
 
@@ -20,12 +21,19 @@ class CellPhoneContainer extends Component {
   messageInput(e){
     this.setState({ message: e.target.value })
   }
+
+  componentWillMount() {
+    this.props.broadcastMessage();
+  }
+
   render() {
     return (
       <div className="cellPhoneBorder">
         <div className="cellPhoneContainer">
           <div className="messageBox">
-            {this.props.messages.map(message =>
+            {this.props.messages.filter(message => {
+              return message.message !== undefined
+            }).map(message =>
               <pre className="message">
                 {message.message}
               </pre>
@@ -51,6 +59,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = dispatch => {
   return {
+    broadcastMessage: (message) =>{
+    },
     messageSend: message => {
       dispatch(messageSend(message));
     }
