@@ -27,9 +27,9 @@ class UserLogin extends Component {
   render() {
     return (
       <div className="username">
-      <input className="chatInput" placeholder="input your username" value={ this.state.username } onChange={ this.usernameInput.bind(this) }>
+      <input className="userChatInput" placeholder="input your username" value={ this.state.username } onChange={ this.usernameInput.bind(this) }>
       </input>
-      <button type="submit" className="sendButton" onClick={ this.handleCreateUsername.bind(this)}>Submit
+      <button type="submit" className="usernSendButton" onClick={ this.handleCreateUsername.bind(this)}>Submit
       </button>
       </div>
       )

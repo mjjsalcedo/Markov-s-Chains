@@ -32,7 +32,7 @@ class CellPhoneContainer extends Component {
             )}
         </div>
       </div>
-      <form onSubmit={ this.messageSend.bind(this) }>
+      <form className="cellPhoneForm" onSubmit={ this.messageSend.bind(this) }>
       <textarea className="chatInput" placeholder="message your friends" value={ this.state.message } onChange={ this.messageInput.bind(this) }>
       </textarea>
       <button type="submit" className="sendButton">Send Message
