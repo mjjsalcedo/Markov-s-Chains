@@ -1,4 +1,3 @@
-/*jshint esversion: 6 */
 const express = require('express');
 const router = express.Router();
 let db = require('../../models');
@@ -40,6 +39,5 @@ router.get('/', (req,res)=>{
     });
   });
 });
-
 */
 module.exports = router;

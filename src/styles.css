@@ -16,6 +16,11 @@
     top: 0px;
     background: url(./assets/key.png) 0 no-repeat, url(./assets/spider.png) 40px no-repeat, url(./assets/voodoo.png) 90px no-repeat, url(./assets/wand.png) 110px no-repeat, url(./assets/whip-small.png) 160px no-repeat; } }
 
+@font-face {
+  font-family: OregonTrail;
+  src: url("./assets/OregonTrail.ttf") format("truetype");
+  font-weight: bold; }
+
 body {
   font-family: OregonTrail; }
 
