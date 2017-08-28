@@ -1,12 +1,13 @@
-import { /*GET_TEXT, ADD_TEXT, EDIT_TEXT, DELETE_TEXT,*/ MESSAGE_SEND, USER_CONNECT, MESSAGE_RECEIVED, SUCCESSFUL_CONNECTION, USER_DISCONNECTED, CREATE_USERNAME, DECLINE_INVITE, CHAT, CREATED_USER, RECEIVE_INVITE, ENTER_ROOM} from './actions';
+import { /*GET_TEXT, ADD_TEXT, EDIT_TEXT, DELETE_TEXT,*/ MESSAGE_SEND, USER_CONNECT, MESSAGE_RECEIVED, SUCCESSFUL_CONNECTION, USER_DISCONNECTED, CREATE_USERNAME, DECLINE_INVITE, CHAT, CREATED_USER, RECEIVE_INVITE, ENTER_ROOM, BROADCAST_MESSAGE} from './actions';
 
 let initialState = { userData:[],invitesFrom : null, // set when someone invites you to game
   goToRoom : false, // idk about this, need a better way to send users to /room route
   player1 : null,
-  player2 : null, };
+  player2 : null,
+  roomId: null };
 
-const textReducers = (state = initialState, action) => {
-  switch (action.type) {
+  const textReducers = (state = initialState, action) => {
+    switch (action.type) {
 /*    case GET_TEXT:
       return getText(state, action);
     case ADD_TEXT:
@@ -20,10 +21,10 @@ const textReducers = (state = initialState, action) => {
     return {
       userData: [
       ...state.userData,
-        { id: action.payload.id,
-          username: action.payload.username,
-          message: action.payload.message
-        }
+      { id: action.payload.id,
+        username: action.payload.username,
+        message: action.payload.message
+      }
       ]
     }
     case USER_CONNECT:
@@ -39,57 +40,64 @@ const textReducers = (state = initialState, action) => {
 }
 
 function messageReceived(state, action) {
-
   let messagePayload = JSON.parse(action.payload);
-  console.log('payloadbkjnkjnkj', messagePayload);
+  console.log('messagePayload reducer', messagePayload)
   switch (messagePayload.OP) {
 
     case SUCCESSFUL_CONNECTION:
     return localStorage.setItem("id", messagePayload.userId)
+    case BROADCAST_MESSAGE:
+    console.log('moamfds');
+    return {
+      userData: [
+      ...state.userData,
+      {
+        message: messagePayload.message
+      }
+      ]
+    }
     case RECEIVE_INVITE:
 
-        return {
-          userData: [
-          ...state.userData
-          ],  invitesFrom: messagePayload.sender
-        }
-      break;
+    return {
+      userData: [
+      ...state.userData
+      ],  invitesFrom: messagePayload.sender
+    }
+    break;
     case ENTER_ROOM:
-    console.log('reached room')
-    console.log(messagePayload)
+    console.log('users entering room' ,messagePayload)
+
     if(messagePayload.player1 === localStorage.getItem("username")){
       localStorage.setItem("player", "player1")
     } else {
       localStorage.setItem("player", "player2")
     }
-        return {
-          userData: [
-          ...state.userData
-          ],
-        player1 : messagePayload.player1,
-        player2 : messagePayload.player2,
-        goToRoom : true
-        }
-      break;
+    localStorage.setItem("roomId", messagePayload.roomId)
+
+    return {
+      userData: [
+      ...state.userData
+      ],
+      player1 : messagePayload.player1,
+      player2 : messagePayload.player2,
+      roomId : messagePayload.roomId,
+      goToRoom : true
+    }
+    break;
     case CREATED_USER:
-        console.log('reached created user', state, 'messagepayload', messagePayload)
-         return {
-          userData: [
-          ...state.userData,
-          { username:messagePayload.username}
-          ]
-        }
-      break;
-    case CHAT:
     return {
       userData: [
       ...state.userData,
-        { id: messagePayload.id,
-          username: messagePayload.username,
-          message: messagePayload.message
-        }
+      { username:messagePayload.username}
       ]
     }
+    break;
+    case CHAT:
+    return {
+      ...state
+      }
+
+
     case USER_DISCONNECTED:
     console.log("User Disconnected", action.payload);
     break;
@@ -105,8 +113,8 @@ function createUsername(state, action) {
   return {
     userData: [
     ...state.userData]
-    }
   }
+}
 /*function getText(state, action){
   var transform = action.payload.map(question=> {
     return {

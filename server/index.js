@@ -87,17 +87,11 @@ wss.on('connection', function connection(ws, req) {
       tuples = [];
       break;
     }
-      users.forEach(user => {
-        console.log(users)
-        user.send(
-          JSON.stringify({
-            OP: 'CHAT',
-            message: payload.message,
-            username: payload.username,
-            id: payload.message.id
-          })
-          );
-      });
+      console.log('before', rooms)
+      let room = rooms.get(parseInt(payload.message.roomId));
+      console.log('room', room)
+      room.broadcast('BROADCAST_MESSAGE', {message: payload.message.message});
+
       break;
       case 'CONNECTED':
       ws.username = payload.message.username;

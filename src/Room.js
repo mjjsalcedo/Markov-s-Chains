@@ -10,7 +10,8 @@ module.exports = class Room{
     this.broadcast( 'ENTER_ROOM',
       {
         player1: this.player1.username,
-        player2: this.player2.username
+        player2: this.player2.username,
+        roomId: this.id
       }
     );
 
