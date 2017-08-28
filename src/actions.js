@@ -8,6 +8,7 @@ export const USER_DISCONNECT = "USER_DISCONNECT"*/
 export const MESSAGE_SEND = 'MESSAGE_SEND'
 export const USER_CONNECT = "USER_CONNECT"
 export const SUCCESSFUL_CONNECTION = "SUCCESSFUL_CONNECTION"
+export const USER_DISCONNECTED = "USER_DISCONNECTED"
 export const CREATE_USERNAME = "CREATE_USERNAME"
 export const MESSAGE_RECEIVED = "MESSAGE_RECEIVED"
 export const SEND_INVITE = "SEND_INVITE"
@@ -54,7 +55,6 @@ export const broadcastUsers = ( username ) => {
 
 export const messageSend = ( message ) => {
   return ( dispatch ) => {
-    console.log(message)
     socket.send(JSON.stringify({
       OP: CHAT,
       message}));

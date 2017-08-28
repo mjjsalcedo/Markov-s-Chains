@@ -21,7 +21,7 @@ class CellPhoneContainer extends Component {
     this.setState({ message: e.target.value })
   }
   render() {
-    console.log(this.props)
+    console.log('props', this.props)
     return (
       <div className="cellPhoneBorder">
         <div className="cellPhoneContainer">

@@ -1,4 +1,4 @@
-import { /*GET_TEXT, ADD_TEXT, EDIT_TEXT, DELETE_TEXT,*/ MESSAGE_SEND, USER_CONNECT, MESSAGE_RECEIVED, SUCCESSFUL_CONNECTION, CREATE_USERNAME, SEND_INVITE, ACCEPT_INVITE, DECLINE_INVITE, CHAT, CREATED_USER, RECEIVE_INVITE, ENTER_ROOM} from './actions';
+import { /*GET_TEXT, ADD_TEXT, EDIT_TEXT, DELETE_TEXT,*/ MESSAGE_SEND, USER_CONNECT, MESSAGE_RECEIVED, SUCCESSFUL_CONNECTION, USER_DISCONNECTED, CREATE_USERNAME, DECLINE_INVITE, CHAT, CREATED_USER, RECEIVE_INVITE, ENTER_ROOM} from './actions';
 
 let initialState = { userData:[],invitesFrom : null, // set when someone invites you to game
   goToRoom : false, // idk about this, need a better way to send users to /room route
@@ -17,7 +17,15 @@ const textReducers = (state = initialState, action) => {
     return deleteText(state, action);*/
     case MESSAGE_SEND:
     console.log("SEND reducer", action.payload);
-    return state;
+    return {
+      userData: [
+      ...state.userData,
+        { id: action.payload.id,
+          username: action.payload.username,
+          message: action.payload.message
+        }
+      ]
+    }
     case USER_CONNECT:
     console.log("CONNECT reducer", action);
     return state;
@@ -48,6 +56,12 @@ function messageReceived(state, action) {
       break;
     case ENTER_ROOM:
     console.log('reached room')
+    console.log(messagePayload)
+    if(messagePayload.player1 === localStorage.getItem("username")){
+      localStorage.setItem("player", "player1")
+    } else {
+      localStorage.setItem("player", "player2")
+    }
         return {
           userData: [
           ...state.userData
@@ -76,6 +90,9 @@ function messageReceived(state, action) {
         }
       ]
     }
+    case USER_DISCONNECTED:
+    console.log("User Disconnected", action.payload);
+    break;
     default:
     return state;
   }

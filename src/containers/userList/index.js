@@ -50,11 +50,14 @@ if(this.props.goToRoom){
       <div className="userlistContainer">
       {this.props.username.filter(userData => {
         return userData.username === localStorage.getItem("username")}).map(username => {
-          return <span onClick={this.selectUser(username)}
-                    className={ this.state.selectedUser === username ? 'player' : '' }>{username.username}</span> })}
+          return <span>{username.username}</span> })}
 
       <h2> Current Users </h2>
-      <div className="userlist">
+       <div className="userlist">
+      {this.props.username.filter(userData => {
+        return userData.username !== localStorage.getItem("username")}).map(username => {
+          return <span onClick={this.selectUser(username)}>{username.username}</span> })}
+      </div>
 
       <button onClick={this.sendInvite} type="button">Invite to Game</button>
 
@@ -70,7 +73,6 @@ if(this.props.goToRoom){
             : null
           }
       <Link to='/playerOne'> PLAYER ONE</Link>
-      </div>
       </div>
       )
   }
