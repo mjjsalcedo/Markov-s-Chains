@@ -18,6 +18,7 @@ class GraphicsContainer extends Component {
           </div>
           <div className='whip'>
           </div>
+<<<<<<< HEAD
           <div className='painting'>
           </div>
           <div className='ian'>
@@ -32,6 +33,8 @@ class GraphicsContainer extends Component {
           </div>
           <div className='rat'>
           </div>
+=======
+>>>>>>> bdecb7fb90d44cb16d9ef911c3d208b79b0db893
         </div>
       </div>
     )
