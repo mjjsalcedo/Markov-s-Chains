@@ -31,7 +31,9 @@ class CellPhoneContainer extends Component {
       <div className="cellPhoneBorder">
         <div className="cellPhoneContainer">
           <div className="messageBox">
-            {this.props.messages.map(message =>
+            {this.props.messages.filter(message => {
+              return message.message !== undefined
+            }).map(message =>
               <pre className="message">
                 {message.message}
               </pre>
