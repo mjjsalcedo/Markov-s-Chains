@@ -24,7 +24,7 @@ render(
           <Route exact path="/" component={UserLogin}/>
           <Route path="/userlist" component={UserList}/>
           <Route path="/playerOne" component={App}/>
-          <Route path="/room/:id" component={Room}/>
+          <Route path="/room" component={Room}/>
         </div>
     </Router>
   </Provider>,
