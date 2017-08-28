@@ -4,8 +4,9 @@ const app = express();
 const PORT = process.env.PORT || 3001;
 const bodyParser = require('body-parser');
 let db = require('../models');
-let ngrams = db.Ngrams;
+let Ngrams = db.ngrams;
 /*const apiRoutes = require('./api');*/
+
 
 const WebSocket = require('ws');
 const http = require('http');
@@ -20,6 +21,7 @@ const rooms = new Map();
 
 let messageChain = { trigger: [], response: []};
 let messageCache = [];
+let triggerCache = [];
 let modifiedMessage = '';
 let tuples = [];
 
@@ -33,43 +35,77 @@ wss.on('connection', function connection(ws, req) {
   ws.on('message', function incoming(message) {
 
     let payload = JSON.parse(message);
-    console.log('before payload',payload)
+    console.log('before payload',payload);
 
     switch (payload.OP) {
       case 'CHAT':
       switch(true){
-      case (messageChain.trigger.length === 0):
-      messageChain.trigger.push(payload.message);
-      break;
-      case (messageChain.trigger.length > 0 && messageChain.trigger[0].username != payload.message.username):
-      messageChain.response.push(payload.message);
-      modifiedMessage = payload.message.message
-      .replace(/[.,\/#!$%@\^*\*;:{}=\-_`~()]/g,"")
-      .replace(/\s{2,}/g,"").toLowerCase();
-      messageCache.push(modifiedMessage);
-      break;
-      case (messageChain.trigger[0].username === payload.message.username && messageChain.response.length  === 0):
-      messageChain.trigger.push(payload.message);
-      break;
-      case (messageChain.trigger[0].username === payload.message.username):
-      //break up message chain then query DB
-      console.log(messageCache);
-      let cache = messageCache.join(' # ').split(' ');
-      cache.reduce((trigger, response) => {
-        let trigRes = [trigger, response];
-        tuples.push(trigRes);
-        console.log(tuples);
-        return response;
-      });
-      messageChain.trigger = messageChain.response;
-      messageChain.response = [payload.message];
-      modifiedMessage = payload.message.message
-      .replace(/[.,\/#!$%\^*\*;:{}=\-_`~()]/g,"")
-      .replace(/\s{2,}/g,"").toLowerCase();
-      messageCache = [modifiedMessage];
-      tuples = [];
-      break;
-    }
+        case (messageChain.trigger.length === 0):
+        messageChain.trigger.push(payload.message);
+        triggerCache.push(payload.message.message);
+        break;
+
+        case (messageChain.trigger.length > 0 && messageChain.trigger[0].username != payload.message.username):
+        messageChain.response.push(payload.message);
+        modifiedMessage = payload.message.message
+        .replace(/[.,\/#!$%@\^*\*;:{}=\-_`~()]/g,"")
+        .replace(/\s{2,}/g,"").toLowerCase();
+        messageCache.push(modifiedMessage);
+
+        break;
+
+        case (messageChain.trigger[0].username === payload.message.username && messageChain.response.length  === 0):
+        messageChain.trigger.push(payload.message);
+        triggerCache.push(payload.message.message);
+        break;
+
+        case (messageChain.trigger[0].username === payload.message.username):
+        let joinedTriggers = triggerCache.join(' ');
+        let cache = messageCache.join(' # ').split(' ');
+        cache.push('#');
+        return Ngrams.findOne({ where: { trigger: joinedTriggers, context: joinedTriggers}}).then(firstRow =>{
+          if (firstRow) {
+            cache.map(word => {
+              console.log(word);
+              return Ngrams.findOne({ where: { context: joinedTriggers, word: word} }).then(row => {
+                row.update ( {
+                  weight: Ngrams.sequelize.literal('weight + 1')
+                });
+              });
+            });
+          }else if (!firstRow) {
+            return Ngrams.create( {
+              word: cache[0],
+              weight: 1,
+              trigger: joinedTriggers,
+              context: joinedTriggers
+            }).then(newRows => {
+              cache.reduce((trigger, response) => {
+                Ngrams.create({
+                  word: response,
+                  weight: 1,
+                  trigger: trigger,
+                  context: joinedTriggers
+                });
+                return response;
+              });
+            });
+          }
+        }).then(resetValues => {
+          console.log(messageChain.response);
+          messageChain.trigger = messageChain.response;
+          messageChain.response = [payload.message];
+          modifiedMessage = payload.message.message
+          .replace(/[.,\/#!$%\^*\*;:{}=\-_`~()]/g,"")
+          .replace(/\s{2,}/g,"").toLowerCase();
+          messageCache = [modifiedMessage];
+          triggerCache = messageChain.response.map(triggers => {
+            return triggers.message;
+          });
+          console.log(triggerCache);
+          tuples = [];
+        });
+      }
       users.forEach(user => {
         user.send(
           JSON.stringify({
@@ -124,21 +160,21 @@ wss.on('connection', function connection(ws, req) {
           });
           var room = new Room(player1, player2);
           rooms.set(room.id, room)
-        console.log('accept invite', payload.senderName)
-      break;
-      case 'DECLINE_INVITE':
+          console.log('accept invite', payload.senderName)
+          break;
+          case 'DECLINE_INVITE':
           //send to sender invite declined
-        console.log('decline invite', payload.senderName)
-      break;
-    }
-  });
+          console.log('decline invite', payload.senderName)
+          break;
+        }
+      });
 
-  ws.send(
-    JSON.stringify({
-      OP: 'SUCCESSFUL_CONNECTION',
-      userId
-    })
-    );
+ws.send(
+  JSON.stringify({
+    OP: 'SUCCESSFUL_CONNECTION',
+    userId
+  })
+  );
 });
 
 app.use(express.static('public'));
@@ -149,6 +185,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/api', apiRoutes);*/
 
 server.listen(PORT,'0.0.0.0', ()=> {
-    db.sequelize.sync();
+  db.sequelize.sync();
   console.log(`listening on ${PORT}`);
 });
