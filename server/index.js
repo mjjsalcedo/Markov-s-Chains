@@ -23,8 +23,8 @@ const rooms = new Map();
 let messageChain = { trigger: [], response: []};
 let messageCache = [];
 let triggerCache = [];
+let modifiedTrigger = '';
 let modifiedMessage = '';
-let tuples = [];
 
 wss.on('connection', function connection(ws, req) {
   console.log("connected");
@@ -35,8 +35,8 @@ wss.on('connection', function connection(ws, req) {
   ws.username = null;
   users.push(ws);
 
-   ws.on('close', function (){
-    console.log(`${ws.username} has disconnected`)
+  ws.on('close', function (){
+    console.log(`${ws.username} has disconnected`);
     users.splice( users.indexOf(ws), 1 );
     // also broadcast to all other users
     users.forEach(user => {
@@ -45,35 +45,38 @@ wss.on('connection', function connection(ws, req) {
           OP: 'USER_DISCONNECTED', // all users not in room
           username: ws.username // could be undefined
         })
-      );
+        );
     });
   });
 
   ws.on('message', function incoming(message) {
-
     let payload = JSON.parse(message);
-    console.log('before payload',payload);
-
     switch (payload.OP) {
       case 'CHAT':
+      let room = rooms.get(parseInt(payload.message.roomId));
       switch(true){
         case (messageChain.trigger.length === 0):
         messageChain.trigger.push(payload.message);
-        triggerCache.push(payload.message.message);
+        modifiedTrigger = payload.message.message
+        .replace(/[.,\/#!$%@\^*\*;:{}=\-_`'~()]/g,"")
+        .replace(/\s{2,}/g,"").toLowerCase();
+        triggerCache.push(modifiedTrigger);
         break;
 
         case (messageChain.trigger.length > 0 && messageChain.trigger[0].username != payload.message.username):
         messageChain.response.push(payload.message);
         modifiedMessage = payload.message.message
-        .replace(/[.,\/#!$%@\^*\*;:{}=\-_`~()]/g,"")
+        .replace(/[.,\/#!$%@\^*\*;:{}=\-_`'~()]/g,"")
         .replace(/\s{2,}/g,"").toLowerCase();
         messageCache.push(modifiedMessage);
-
         break;
 
         case (messageChain.trigger[0].username === payload.message.username && messageChain.response.length  === 0):
         messageChain.trigger.push(payload.message);
-        triggerCache.push(payload.message.message);
+        modifiedTrigger = payload.message.message
+        .replace(/[.,\/#!$%@\^*\*;:{}=\-_`'~()]/g,"")
+        .replace(/\s{2,}/g,"").toLowerCase();
+        triggerCache.push(modifiedTrigger);
         break;
 
         case (messageChain.trigger[0].username === payload.message.username):
@@ -85,9 +88,18 @@ wss.on('connection', function connection(ws, req) {
             cache.map(word => {
               console.log(word);
               return Ngrams.findOne({ where: { context: joinedTriggers, word: word} }).then(row => {
-                row.update ( {
-                  weight: Ngrams.sequelize.literal('weight + 1')
-                });
+                if (row) {
+                  row.update ( {
+                    weight: Ngrams.sequelize.literal('weight + 1')
+                  });
+                }else if (!row) {
+                  return Ngrams.create( {
+                    word: word,
+                    weight: 1,
+                    trigger: joinedTriggers,
+                    context: joinedTriggers
+                  });
+                }
               });
             });
           }else if (!firstRow) {
@@ -109,26 +121,17 @@ wss.on('connection', function connection(ws, req) {
             });
           }
         }).then(resetValues => {
-          console.log(messageChain.response);
           messageChain.trigger = messageChain.response;
           messageChain.response = [payload.message];
           modifiedMessage = payload.message.message
-          .replace(/[.,\/#!$%\^*\*;:{}=\-_`~()]/g,"")
+          .replace(/[.,\/#!$@%\^*\*;:{}=\-_`'~()]/g,"")
           .replace(/\s{2,}/g,"").toLowerCase();
           messageCache = [modifiedMessage];
-          triggerCache = messageChain.response.map(triggers => {
-            return triggers.message;
-          });
-          console.log(triggerCache);
-          tuples = [];
+          triggerCache = [modifiedMessage];
+          room.broadcast('BROADCAST_MESSAGE', {message: payload.message.message});
         });
       }
-      console.log('before', rooms)
-      let room = rooms.get(parseInt(payload.message.roomId));
-      console.log('room', room)
       room.broadcast('BROADCAST_MESSAGE', {message: payload.message.message});
-
-
       break;
       case 'CONNECTED':
       ws.username = payload.message.username;
@@ -137,8 +140,8 @@ wss.on('connection', function connection(ws, req) {
           JSON.stringify({
             OP: 'CREATED_USER',
             username: payload.message.username
-          }))
-      })
+          }));
+      });
       break;
       case 'BROADCAST_USERNAME':
       users.forEach(user => {
@@ -147,37 +150,34 @@ wss.on('connection', function connection(ws, req) {
             OP: 'CREATED_USER',
             username: payload.message.username,
             id: payload.message.id
-          }))
-      })
+          }));
+      });
       break;
       case 'SEND_INVITE':
-      console.log('made it to invite')
-
       const invitedUser = users.find( user => user.username === payload.invite.username );
-        if( invitedUser !== undefined ){
-          invitedUser.send(
-            JSON.stringify({
-              OP: 'RECEIVE_INVITE',
-              sender: ws.username
-            })
+      if( invitedUser !== undefined ){
+        invitedUser.send(
+          JSON.stringify({
+            OP: 'RECEIVE_INVITE',
+            sender: ws.username
+          })
           );
-        } else {
-          ws.send(
-            JSON.stringify({
-              OP: 'ERROR',
-              message: 'username is not found or has disconnected'
-            })
+      } else {
+        ws.send(
+          JSON.stringify({
+            OP: 'ERROR',
+            message: 'username is not found or has disconnected'
+          })
           );
-        }
-        break;
+      }
+      break;
       case 'ACCEPT_INVITE':
-          const sender = users.find( user => user.username === payload.username );
-          var verifySender = users.filter( user =>
-            { return user.username === payload.username }).map(user =>{
-              return {username: user.username
-            }});
+      const sender = users.find( user => user.username === payload.username );
+      var verifySender = users.filter( user =>
+        { return user.username === payload.username; }).map(user =>{
+          return {username: user.username
+          };});
         if( verifySender !== null ){
-          console.log('made it to accept');
           // create the room,
           //   put both players in it
           //   remove from lobby
@@ -193,10 +193,10 @@ wss.on('connection', function connection(ws, req) {
               OP: 'ERROR',
               message: 'sender is not found or has disconnected'
             })
-          );
+            );
         }
         break;
-      case 'DECLINE_INVITE':
+        case 'DECLINE_INVITE':
         const declinedSender = users.find( user => user.username = payload.username );
         if( declinedSender !== null ){
           declinedSender.send(
@@ -204,7 +204,7 @@ wss.on('connection', function connection(ws, req) {
               OP: 'INVITE_DECLINED',
               username: ws.username
             })
-          );
+            );
 
         } else {
           ws.send(
@@ -212,18 +212,18 @@ wss.on('connection', function connection(ws, req) {
               OP: 'ERROR',
               message: 'sender is not found or has disconnected'
             })
-          );
+            );
         }
         break;
-    }
-  });
+      }
+    });
 
-  ws.send(
-    JSON.stringify({
-      OP: 'SUCCESSFUL_CONNECTION',
-      userId
-    })
-    );
+ws.send(
+  JSON.stringify({
+    OP: 'SUCCESSFUL_CONNECTION',
+    userId
+  })
+  );
 });
 
 
