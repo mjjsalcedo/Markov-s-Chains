@@ -6,7 +6,8 @@ class UserLogin extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: ''
+      username: '',
+      id: localStorage.getItem("id")
     }
   }
 
@@ -26,10 +27,10 @@ class UserLogin extends Component {
 
   render() {
     return (
-      <div className="username">
-      <input className="chatInput" placeholder="input your username" value={ this.state.username } onChange={ this.usernameInput.bind(this) }>
+      <div className="usernameFormContainer">
+      <input className="userChatInput" placeholder="input your username" value={ this.state.username } onChange={ this.usernameInput.bind(this) }>
       </input>
-      <button type="submit" className="sendButton" onClick={ this.handleCreateUsername.bind(this)}>Submit
+      <button type="submit" className="userSendButton" onClick={ this.handleCreateUsername.bind(this)}>Submit
       </button>
       </div>
       )

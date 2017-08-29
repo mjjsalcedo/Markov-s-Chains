@@ -1,9 +1,13 @@
-import { /*GET_TEXT, ADD_TEXT, EDIT_TEXT, DELETE_TEXT,*/ MESSAGE_SEND, USER_CONNECT, MESSAGE_RECEIVED, SUCCESSFUL_CONNECTION, CREATE_USERNAME, SEND_INVITE, ACCEPT_INVITE, DECLINE_INVITE, CHAT, CREATED_USER, BROADCAST_USERNAME } from './actions';
+import { /*GET_TEXT, ADD_TEXT, EDIT_TEXT, DELETE_TEXT,*/ MESSAGE_SEND, USER_CONNECT, MESSAGE_RECEIVED, SUCCESSFUL_CONNECTION, USER_DISCONNECTED, CREATE_USERNAME, DECLINE_INVITE, CHAT, CREATED_USER, RECEIVE_INVITE, ENTER_ROOM, BROADCAST_MESSAGE} from './actions';
 
-let initialState = { userData:[] };
+let initialState = { userData:[],invitesFrom : null, // set when someone invites you to game
+  goToRoom : false, // idk about this, need a better way to send users to /room route
+  player1 : null,
+  player2 : null,
+  roomId: null };
 
-const textReducers = (state = initialState, action) => {
-  switch (action.type) {
+  const textReducers = (state = initialState, action) => {
+    switch (action.type) {
 /*    case GET_TEXT:
       return getText(state, action);
     case ADD_TEXT:
@@ -14,7 +18,15 @@ const textReducers = (state = initialState, action) => {
     return deleteText(state, action);*/
     case MESSAGE_SEND:
     console.log("SEND reducer", action.payload);
-    return state;
+    return {
+      userData: [
+      ...state.userData,
+      { id: action.payload.id,
+        username: action.payload.username,
+        message: action.payload.message
+      }
+      ]
+    }
     case USER_CONNECT:
     console.log("CONNECT reducer", action);
     return state;
@@ -28,41 +40,67 @@ const textReducers = (state = initialState, action) => {
 }
 
 function messageReceived(state, action) {
-
   let messagePayload = JSON.parse(action.payload);
-  console.log('payloadbkjnkjnkj', messagePayload);
+  console.log('messagePayload reducer', messagePayload)
   switch (messagePayload.OP) {
 
     case SUCCESSFUL_CONNECTION:
     return localStorage.setItem("id", messagePayload.userId)
-    case SEND_INVITE:
-        console.log('reached send invite')
-      break;
-    case ACCEPT_INVITE:
-        console.log('reached accept invite')
-      break;
-    case DECLINE_INVITE:
-        console.log('reached decline invite')
-      break;
-    case CREATED_USER:
-        console.log('reached created user', state, 'messagepayload', messagePayload)
-        return {
-          userData: [
-          ...state.userData,
-          { username:messagePayload.username}
-          ]
-        }
-      break;
-    case CHAT:
+    case BROADCAST_MESSAGE:
+    console.log('moamfds');
     return {
       userData: [
       ...state.userData,
-        { id: messagePayload.id,
-          username: messagePayload.username,
-          message: messagePayload.message
-        }
+      {
+        message: messagePayload.message
+      }
       ]
     }
+    case RECEIVE_INVITE:
+
+    return {
+      userData: [
+      ...state.userData
+      ],  invitesFrom: messagePayload.sender
+    }
+    break;
+    case ENTER_ROOM:
+    console.log('users entering room' ,messagePayload)
+
+    if(messagePayload.player1 === localStorage.getItem("username")){
+      localStorage.setItem("player", "player1")
+    } else {
+      localStorage.setItem("player", "player2")
+    }
+    localStorage.setItem("roomId", messagePayload.roomId)
+
+    return {
+      userData: [
+      ...state.userData
+      ],
+      player1 : messagePayload.player1,
+      player2 : messagePayload.player2,
+      roomId : messagePayload.roomId,
+      goToRoom : true
+    }
+    break;
+    case CREATED_USER:
+    return {
+      userData: [
+      ...state.userData,
+      { username:messagePayload.username}
+      ]
+    }
+    break;
+    case CHAT:
+    return {
+      ...state
+      }
+
+
+    case USER_DISCONNECTED:
+    console.log("User Disconnected", action.payload);
+    break;
     default:
     return state;
   }
@@ -75,8 +113,8 @@ function createUsername(state, action) {
   return {
     userData: [
     ...state.userData]
-    }
   }
+}
 /*function getText(state, action){
   var transform = action.payload.map(question=> {
     return {
