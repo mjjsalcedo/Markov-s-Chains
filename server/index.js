@@ -36,7 +36,7 @@ wss.on('connection', function connection(ws, req) {
   users.push(ws);
 
   ws.on('close', function (){
-    console.log(`${ws.username} has disconnected`)
+    console.log(`${ws.username} has disconnected`);
     users.splice( users.indexOf(ws), 1 );
     // also broadcast to all other users
     users.forEach(user => {
@@ -53,6 +53,7 @@ wss.on('connection', function connection(ws, req) {
     let payload = JSON.parse(message);
     switch (payload.OP) {
       case 'CHAT':
+      let room = rooms.get(parseInt(payload.message.roomId));
       switch(true){
         case (messageChain.trigger.length === 0):
         messageChain.trigger.push(payload.message);
@@ -68,7 +69,6 @@ wss.on('connection', function connection(ws, req) {
         .replace(/[.,\/#!$%@\^*\*;:{}=\-_`'~()]/g,"")
         .replace(/\s{2,}/g,"").toLowerCase();
         messageCache.push(modifiedMessage);
-
         break;
 
         case (messageChain.trigger[0].username === payload.message.username && messageChain.response.length  === 0):
@@ -127,13 +127,10 @@ wss.on('connection', function connection(ws, req) {
           .replace(/[.,\/#!$@%\^*\*;:{}=\-_`'~()]/g,"")
           .replace(/\s{2,}/g,"").toLowerCase();
           messageCache = [modifiedMessage];
-          console.log(modifiedMessage);
-          console.log(messageChain.response);
           triggerCache = [modifiedMessage];
+          room.broadcast('BROADCAST_MESSAGE', {message: payload.message.message});
         });
       }
-
-      let room = rooms.get(parseInt(payload.message.roomId));
       room.broadcast('BROADCAST_MESSAGE', {message: payload.message.message});
       break;
       case 'CONNECTED':
@@ -153,8 +150,8 @@ wss.on('connection', function connection(ws, req) {
             OP: 'CREATED_USER',
             username: payload.message.username,
             id: payload.message.id
-          }))
-      })
+          }));
+      });
       break;
       case 'SEND_INVITE':
       const invitedUser = users.find( user => user.username === payload.invite.username );
