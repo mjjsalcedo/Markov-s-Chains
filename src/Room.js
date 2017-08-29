@@ -20,6 +20,7 @@ module.exports = class Room{
   // send a message to both players
   broadcast( OP, payload ){
     [ this.player1, this.player2 ].forEach( player => {
+      console.log("OP", OP)
           console.log('THIS IS THE FUCKING GOD DAMN PAYLOAD!!!',payload);
       player.send(
         JSON.stringify(Object.assign({ OP }, payload))

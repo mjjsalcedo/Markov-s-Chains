@@ -1,6 +1,22 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { gameResults } from '../../actions';
+import { Link } from 'react-router-dom';
+
 
 class GraphicsContainer extends Component {
+
+constructor(props) {
+    super(props);
+
+
+    this.selectedItem = this.selectedItem.bind(this);
+
+  }
+
+  selectedItem(e){
+    this.props.gameResults( {status: e.target.getAttribute('value'), roomId: localStorage.getItem("roomId")} );
+    }
 
 render(){
   return(
@@ -10,7 +26,7 @@ render(){
       <div className="graphicsContainer"> Player 1
           <div className="key" value="good">
           </div>
-          <div className="spider" value="good">
+          <div className="spider" value="good" onClick={this.selectedItem}>
           </div>
           <div className='voodoo' value="bad">
           </div>
@@ -69,11 +85,30 @@ render(){
         </div>
             : null
           }
-
-
     </div>
   )
 }
 }
+
+const mapStateToProps = (state) => {
+  console.log('graphicsContainer', state)
+  return {
+    status: state.userData
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    broadcastMessage: (status) =>{
+    },
+    gameResults: status => {
+      dispatch(gameResults(status));
+    }
+  };
+};
+
+GraphicsContainer = connect(mapStateToProps, mapDispatchToProps)(
+  GraphicsContainer
+);
 
 export default GraphicsContainer;

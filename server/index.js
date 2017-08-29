@@ -51,6 +51,7 @@ wss.on('connection', function connection(ws, req) {
 
   ws.on('message', function incoming(message) {
     let payload = JSON.parse(message);
+    console.log('payload', payload)
     switch (payload.OP) {
       case 'CHAT':
       let room = rooms.get(parseInt(payload.message.roomId));
@@ -153,6 +154,11 @@ wss.on('connection', function connection(ws, req) {
           }));
       });
       break;
+      case 'GAME_RESULTS':
+      console.log('server reached');
+        let roomGraphic = rooms.get(parseInt(payload.status.roomId));
+        roomGraphic.broadcast('BROADCAST_STATUS', {status: payload.status.status});
+        break;
       case 'SEND_INVITE':
       const invitedUser = users.find( user => user.username === payload.invite.username );
       if( invitedUser !== undefined ){
@@ -205,7 +211,6 @@ wss.on('connection', function connection(ws, req) {
               username: ws.username
             })
             );
-
         } else {
           ws.send(
             JSON.stringify({
@@ -235,6 +240,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/api', apiRoutes);*/
 
 server.listen(PORT,'0.0.0.0', ()=> {
-  db.sequelize.sync();
+  /*db.sequelize.sync();*/
   console.log(`listening on ${PORT}`);
 });

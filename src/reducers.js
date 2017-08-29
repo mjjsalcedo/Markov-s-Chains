@@ -1,10 +1,11 @@
-import { /*GET_TEXT, ADD_TEXT, EDIT_TEXT, DELETE_TEXT,*/ MESSAGE_SEND, USER_CONNECT, MESSAGE_RECEIVED, SUCCESSFUL_CONNECTION, USER_DISCONNECTED, CREATE_USERNAME, DECLINE_INVITE, CHAT, CREATED_USER, RECEIVE_INVITE, ENTER_ROOM, BROADCAST_MESSAGE} from './actions';
+import { /*GET_TEXT, ADD_TEXT, EDIT_TEXT, DELETE_TEXT,*/ MESSAGE_SEND, USER_CONNECT, MESSAGE_RECEIVED, SUCCESSFUL_CONNECTION, USER_DISCONNECTED, CREATE_USERNAME, DECLINE_INVITE, CHAT, CREATED_USER, RECEIVE_INVITE, ENTER_ROOM, BROADCAST_MESSAGE, BROADCAST_STATUS} from './actions';
 
 let initialState = { userData:[],invitesFrom : null, // set when someone invites you to game
   goToRoom : false, // idk about this, need a better way to send users to /room route
   player1 : null,
   player2 : null,
-  roomId: null };
+  roomId: null,
+  gameResults: [] };
 
   const textReducers = (state = initialState, action) => {
     switch (action.type) {
@@ -47,7 +48,6 @@ function messageReceived(state, action) {
     case SUCCESSFUL_CONNECTION:
     return localStorage.setItem("id", messagePayload.userId)
     case BROADCAST_MESSAGE:
-    console.log('moamfds');
     return {
       userData: [
       ...state.userData,
@@ -56,16 +56,20 @@ function messageReceived(state, action) {
       }
       ]
     }
+    case BROADCAST_STATUS:
+    return {
+      userData: [ ...state.userData],
+      gameResults: [
+      {status: messagePayload.status}
+      ]
+    }
     case RECEIVE_INVITE:
-
     return {
       userData: [
       ...state.userData
       ],  invitesFrom: messagePayload.sender
     }
-    break;
     case ENTER_ROOM:
-    console.log('users entering room' ,messagePayload)
 
     if(messagePayload.player1 === localStorage.getItem("username")){
       localStorage.setItem("player", "player1")
@@ -83,7 +87,6 @@ function messageReceived(state, action) {
       roomId : messagePayload.roomId,
       goToRoom : true
     }
-    break;
     case CREATED_USER:
     return {
       userData: [
@@ -91,16 +94,10 @@ function messageReceived(state, action) {
       { username:messagePayload.username}
       ]
     }
-    break;
     case CHAT:
     return {
       ...state
       }
-
-
-    case USER_DISCONNECTED:
-    console.log("User Disconnected", action.payload);
-    break;
     default:
     return state;
   }
