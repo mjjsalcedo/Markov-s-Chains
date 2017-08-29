@@ -129,11 +129,13 @@ wss.on('connection', function connection(ws, req) {
           .replace(/\s{2,}/g,"").toLowerCase();
           messageCache = [modifiedMessage];
           triggerCache = [modifiedMessage];
+
           room.broadcast('BROADCAST_MESSAGE', {message: payload.message.message});
         });
       }
       room.broadcast('BROADCAST_MESSAGE', {message: payload.message.message});
       break;
+
       case 'CONNECTED':
       ws.username = payload.message.username;
       users.forEach(user => {
@@ -144,6 +146,7 @@ wss.on('connection', function connection(ws, req) {
           }));
       });
       break;
+
       case 'BROADCAST_USERNAME':
       users.forEach(user => {
         user.send(
@@ -154,11 +157,18 @@ wss.on('connection', function connection(ws, req) {
           }));
       });
       break;
+
+
+/*const newState = Object.assign({}, ...state, userData:[..state.userData,{id:action.payload.id, username:action.payload.username, message:action.payload.message}])
+
+    return Object.assign({}, ...state, gameResults:[messagePayload.score]);*/
+
       case 'GAME_RESULTS':
-      console.log('server reached');
-        let roomGraphic = rooms.get(parseInt(payload.status.roomId));
-        roomGraphic.broadcast('BROADCAST_STATUS', {status: payload.status.status});
+      console.log(payload);
+        let roomGraphic = rooms.get(parseInt(payload.score.roomId));
+        roomGraphic.broadcast('BROADCAST_SCORE', {score: payload.score.score});
         break;
+
       case 'SEND_INVITE':
       const invitedUser = users.find( user => user.username === payload.invite.username );
       if( invitedUser !== undefined ){

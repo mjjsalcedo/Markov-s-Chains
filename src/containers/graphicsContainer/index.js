@@ -15,10 +15,28 @@ constructor(props) {
   }
 
   selectedItem(e){
-    this.props.gameResults( {status: e.target.getAttribute('value'), roomId: localStorage.getItem("roomId")} );
+    this.props.gameResults( {score: e.target.getAttribute('value'), roomId: localStorage.getItem("roomId")} );
     }
 
 render(){
+  let test = this.props.score.reduce((status, score)=>{
+    if(score in status){
+      status[score]++;
+    }
+    else {
+      status[score] = 1
+    }
+    return status;
+  }, {});
+  console.log('graphic props', this.props.score)
+  console.log('graphic props test', test)
+
+  if(test.bad >= 3){
+    console.log('you lose!')
+  }
+  if(test.good >= 3) {
+    console.log('you win!')
+   }
   return(
   <div className="graphicsContainerBorder">
   {
@@ -30,7 +48,7 @@ render(){
           </div>
           <div className='voodoo' value="bad">
           </div>
-          <div className='wand' value="bad">
+          <div className='wand' value="bad" onClick={this.selectedItem}>
           </div>
           <div className='mariel' value="bad">
           </div>
@@ -93,16 +111,16 @@ render(){
 const mapStateToProps = (state) => {
   console.log('graphicsContainer', state)
   return {
-    status: state.userData
+    score: state.gameResults
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    broadcastMessage: (status) =>{
+    broadcastMessage: (score) =>{
     },
-    gameResults: status => {
-      dispatch(gameResults(status));
+    gameResults: score => {
+      dispatch(gameResults(score));
     }
   };
 };

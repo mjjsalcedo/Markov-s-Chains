@@ -1,11 +1,11 @@
-import { /*GET_TEXT, ADD_TEXT, EDIT_TEXT, DELETE_TEXT,*/ MESSAGE_SEND, USER_CONNECT, MESSAGE_RECEIVED, SUCCESSFUL_CONNECTION, USER_DISCONNECTED, CREATE_USERNAME, DECLINE_INVITE, CHAT, CREATED_USER, RECEIVE_INVITE, ENTER_ROOM, BROADCAST_MESSAGE, BROADCAST_STATUS} from './actions';
+import { /*GET_TEXT, ADD_TEXT, EDIT_TEXT, DELETE_TEXT,*/ MESSAGE_SEND, USER_CONNECT, MESSAGE_RECEIVED, SUCCESSFUL_CONNECTION, USER_DISCONNECTED, CREATE_USERNAME, DECLINE_INVITE, CHAT, CREATED_USER, RECEIVE_INVITE, ENTER_ROOM, BROADCAST_MESSAGE, BROADCAST_SCORE} from './actions';
 
-let initialState = { userData:[],invitesFrom : null, // set when someone invites you to game
+let initialState = { userData:[], invitesFrom : null, // set when someone invites you to game
   goToRoom : false, // idk about this, need a better way to send users to /room route
   player1 : null,
   player2 : null,
   roomId: null,
-  gameResults: [] };
+  gameResults:[] };
 
   const textReducers = (state = initialState, action) => {
     switch (action.type) {
@@ -56,12 +56,11 @@ function messageReceived(state, action) {
       }
       ]
     }
-    case BROADCAST_STATUS:
+    case BROADCAST_SCORE:
     return {
-      userData: [ ...state.userData],
-      gameResults: [
-      {status: messagePayload.status}
-      ]
+      userData: [ ...state.userData ],
+      gameResults: [ ...state.gameResults,
+      messagePayload.score ]
     }
     case RECEIVE_INVITE:
     return {
@@ -85,19 +84,20 @@ function messageReceived(state, action) {
       player1 : messagePayload.player1,
       player2 : messagePayload.player2,
       roomId : messagePayload.roomId,
-      goToRoom : true
+      goToRoom : true,
+      gameResults:[]
     }
     case CREATED_USER:
     return {
       userData: [
       ...state.userData,
-      { username:messagePayload.username}
+      { username:messagePayload.username }
       ]
     }
     case CHAT:
     return {
       ...state
-      }
+    }
     default:
     return state;
   }
@@ -137,7 +137,7 @@ function editText(state, action) {
       id: textEdits.id,
       title: textEdits.title,
       priority: textEdits.priority,
-      status: textEdits.status,
+      score: textEdits.score,
       createdBy: textEdits.createdBy,
       assignedTo: textEdits.assignedTo
     }]

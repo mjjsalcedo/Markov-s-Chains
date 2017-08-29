@@ -21,7 +21,7 @@ export const BROADCAST_USERNAME = "BROADCAST_USERNAME"
 export const RECEIVE_INVITE = "RECEIVE_INVITE"
 export const ENTER_ROOM = "ENTER_ROOM"
 export const BROADCAST_MESSAGE = "BROADCAST_MESSAGE"
-export const BROADCAST_STATUS = "BROADCAST_STATUS"
+export const BROADCAST_SCORE = "BROADCAST_SCORE"
 export const GAME_RESULTS = "GAME_RESULTS"
 
 
@@ -96,7 +96,7 @@ export const gameResults = (results) => dispatch => {
   socket.send(
     JSON.stringify({
       OP: GAME_RESULTS,
-      status : results
+      score : results
     })
   );
 
