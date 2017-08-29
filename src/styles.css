@@ -85,29 +85,39 @@ body {
   border-image-source: url(./assets/border.png);
   border-image-slice: 20 22;
   border-image-repeat: stretch;
-  background: url(./assets/background.png) no-repeat; }
+  background: url(./assets/background.png) no-repeat;
+  background-size: 515px 280px; }
 
 .mariel {
+  position: relative;
+  top: 55%;
+  left: 30%;
   height: 47%;
   width: 11%;
   background: url(./assets/mariel-medium.png) -50px no-repeat;
-  transform: scale(0.9); }
+  transform: scale(0.9) scaleX(-1); }
 
 .mariel:hover {
-  transform: translateZ(0) scale(1);
+  transform: scale(1) scaleX(-1);
   transition: all 200ms ease-in; }
 
 .whip {
+  position: relative;
+  top: 60%;
+  left: 8%;
   height: 31%;
   width: 15%;
   background: url(./assets/whip-big.png) -10px no-repeat;
-  transform: scale(0.9); }
+  transform: scale(0.9) scaleX(-1); }
 
 .whip:hover {
-  transform: scale(1);
+  transform: scale(1) scaleX(-1);
   transition: all 200ms ease-in; }
 
 .key {
+  position: relative;
+  top: 48%;
+  left: 53%;
   height: 11%;
   width: 5%;
   background: url(./assets/key.png) -5px no-repeat;
@@ -118,6 +128,9 @@ body {
   transition: all 200ms ease-in; }
 
 .spider {
+  position: relative;
+  top: 64%;
+  right: 12%;
   height: 15%;
   width: 10%;
   background: url(./assets/spider.png) no-repeat;
@@ -129,6 +142,9 @@ body {
   transition: all 200ms ease-in; }
 
 .voodoo {
+  position: relative;
+  top: 43%;
+  left: 50%;
   height: 18%;
   width: 10%;
   background: url(./assets/voodoo-big.png) 5px -3px no-repeat;
@@ -139,6 +155,9 @@ body {
   transition: all 200ms ease-in; }
 
 .wand {
+  position: relative;
+  top: 66%;
+  right: 42%;
   height: 13%;
   width: 7%;
   background: url(./assets/wand-big.png) -15px no-repeat;
@@ -149,6 +168,9 @@ body {
   transition: all 200ms ease-in; }
 
 .painting {
+  position: relative;
+  top: 5%;
+  left: -22%;
   height: 27%;
   width: 13%;
   background: url(./assets/painting.png) no-repeat;
@@ -169,16 +191,21 @@ body {
   transition: all 200ms ease-in; }
 
 .torch-slant {
+  position: relative;
+  top: -30%;
+  left: 53%;
   height: 18%;
   width: 7%;
   background: url(./assets/torch-slant.png) -10px -16px no-repeat;
-  transform: scale(0.9); }
+  transform: scale(0.9) scaleX(-1); }
 
 .torch-slant:hover {
-  transform: scale(1);
+  transform: scale(1) scaleX(-1);
   transition: all 200ms ease-in; }
 
 .rat {
+  position: relative;
+  top: 30%;
   height: 17%;
   width: 7%;
   background: url(./assets/rat-small.png) no-repeat;
@@ -189,6 +216,9 @@ body {
   transition: all 200ms ease-in; }
 
 .torch {
+  position: relative;
+  top: -25%;
+  right: 31%;
   height: 22%;
   width: 8%;
   background: url(./assets/torch.png) -10px -7px no-repeat;
@@ -200,6 +230,8 @@ body {
   transition: all 200ms ease-in; }
 
 .bat {
+  position: relative;
+  top: -20%;
   height: 12%;
   width: 10%;
   background: url(./assets/bat.png) no-repeat;
@@ -210,6 +242,9 @@ body {
   transition: all 200ms ease-in; }
 
 .sword {
+  position: relative;
+  top: -40%;
+  right: -12.5%;
   height: 10%;
   width: 20%;
   background: url(./assets/sword.png) no-repeat;
@@ -231,7 +266,7 @@ body {
   box-sizing: border-box;
   padding: 10px 0 0 10px;
   border-radius: 15px;
-  height: 40px;
+  height: 42px;
   position: relative;
   animation: bounce 0.8s ease-in-out 0.8s infinite alternate;
   background: url(./assets/key.png) 1% no-repeat, url(./assets/spider.png) 7% no-repeat, url(./assets/voodoo.png) 16% no-repeat, url(./assets/wand.png) 21% no-repeat, url(./assets/whip-small.png) 28% no-repeat, url(./assets/painting-small.png) 35% no-repeat, url(./assets/ian-small.png) 42% 20% no-repeat, url(./assets/sword-small.png) 51% no-repeat, url(./assets/mariel-small.png) 60% no-repeat, url(./assets/torch-small.png) 65% no-repeat, url(./assets/torch-slant-small.png) 72% 100% no-repeat, url(./assets/bat-small.png) 76% no-repeat, url(./assets/rat-small.png) 81% no-repeat; }
@@ -252,8 +287,7 @@ body {
   border: 10px solid transparent;
   border-image-source: url(./assets/border.png);
   border-image-slice: 20 22;
-  border-image-repeat: round;
-  border: 5px solid red; }
+  border-image-repeat: round; }
 
 .messageBox {
   display: -ms-flexbox;

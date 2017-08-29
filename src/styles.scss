@@ -139,30 +139,40 @@ body {
   border-image-slice: 20 22;
   border-image-repeat: stretch;
   background: url(./assets/background.png) no-repeat;
+  background-size: 515px 280px;
 }
 .mariel {
+  position:relative;
+  top: 55%;
+  left: 30%;
   height: 47%;
   width: 11%;
   // border: 5px solid red;
   background: url(./assets/mariel-medium.png) -50px no-repeat;
-  transform: scale(0.9);
+  transform: scale(0.9) scaleX(-1);
 }
 .mariel:hover {
-  transform: translateZ(0) scale(1);
+  transform:scale(1) scaleX(-1);
   transition: all 200ms ease-in;
 }
 .whip {
+  position: relative;
+  top: 60%;
+  left: 8%;
   height: 31%;
   width: 15%;
   // border: 5px solid black;
   background: url(./assets/whip-big.png) -10px no-repeat;
-  transform: scale(0.9);
+  transform: scale(0.9) scaleX(-1);
 }
 .whip:hover {
-  transform: scale(1);
+  transform: scale(1) scaleX(-1);
   transition: all 200ms ease-in;
 }
 .key {
+  position: relative;
+  top: 48%;
+  left: 53%;
   height: 11%;
   width: 5%;
   // border: 5px solid green;
@@ -174,6 +184,9 @@ body {
   transition: all 200ms ease-in;
 }
 .spider {
+  position: relative;
+  top: 64%;
+  right: 12%;
   height: 15%;
   width: 10%;
   // border: 5px solid yellow;
@@ -186,6 +199,9 @@ body {
   transition: all 200ms ease-in;
 }
 .voodoo {
+  position: relative;
+  top: 43%;
+  left: 50%;
   height: 18%;
   width: 10%;
   // border: 5px solid pink;
@@ -197,6 +213,9 @@ body {
   transition: all 200ms ease-in;
 }
 .wand {
+  position: relative;
+  top: 66%;
+  right: 42%;
   height: 13%;
   width: 7%;
   // border: 5px solid blue;
@@ -208,6 +227,9 @@ body {
   transition: all 200ms ease-in;
 }
 .painting {
+  position: relative;
+  top: 5%;
+  left: -22%;
   height: 27%;
   width: 13%;
   // border: 5px solid cyan;
@@ -230,17 +252,22 @@ body {
   transition: all 200ms ease-in;
 }
 .torch-slant {
+  position: relative;
+  top: -30%;
+  left: 53%;
   height: 18%;
   width: 7%;
   // border: 5px solid orange;
   background: url(./assets/torch-slant.png) -10px -16px no-repeat;
-  transform: scale(0.9);
+  transform: scale(0.9) scaleX(-1);
 }
 .torch-slant:hover {
-  transform: scale(1);
+  transform: scale(1) scaleX(-1);
   transition: all 200ms ease-in;
 }
 .rat {
+  position: relative;
+  top: 30%;
   height: 17%;
   width: 7%;
   // border: 5px solid purple;
@@ -252,6 +279,9 @@ body {
   transition: all 200ms ease-in;
 }
 .torch {
+  position: relative;
+  top: -25%;
+  right: 31%;
   height: 22%;
   width: 8%;
   // border: 5px solid gray;
@@ -264,6 +294,8 @@ body {
   transition: all 200ms ease-in;
 }
 .bat {
+  position: relative;
+  top: -20%;
   height: 12%;
   width: 10%;
   // border: 5px solid silver;
@@ -275,6 +307,9 @@ body {
   transition: all 200ms ease-in;
 }
 .sword {
+  position: relative;
+  top: -40%;
+  right: -12.5%;
   height: 10%;
   width: 20%;
   // border: 5px solid gold;
@@ -297,7 +332,7 @@ body {
   box-sizing: border-box;
   padding: 10px 0 0 10px;
   border-radius: 15px;
-  height: 40px;
+  height: 42px;
   position: relative;
   animation: bounce 0.8s ease-in-out 0.8s infinite alternate;
   background: url(./assets/key.png) 1% no-repeat,
@@ -331,7 +366,7 @@ body {
   border-image-source: url(./assets/border.png);
   border-image-slice: 20 22;
   border-image-repeat: round;
-  border: 5px solid red;
+  // border: 5px solid red;
 }
 .messageBox {
   display: -ms-flexbox;
