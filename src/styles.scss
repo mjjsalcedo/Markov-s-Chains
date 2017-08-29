@@ -430,7 +430,6 @@ body {
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
   width: 57%;
-  border: 5px solid red;
 }
 .usernameFormContainer {
   position: relative;
@@ -442,13 +441,10 @@ body {
   -ms-flex-direction: column;
   flex-direction: column;
   -ms-flex-pack: center;
-  // justify-content: center;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
-  border: 5px solid cyan;
   height: 73%;
   width: 100%;
-  // border: 5px solid red;
 }
 .userTitle {
   position: relative;
@@ -459,7 +455,6 @@ body {
   position: relative;
   top: -13%;
   left: 10%;
-  // border: 1px solid gray;
   height: 20%;
   width: 13%;
   transform: scale(0.8);
@@ -469,7 +464,6 @@ body {
   position: relative;
   top: -37%;
   left: 30%;
-  // border: 1px solid pink;
   height: 23%;
   width: 14%;
   background: url(./assets/ian.png) 50% no-repeat;
@@ -478,15 +472,13 @@ body {
   position: relative;
   height: 5%;
   top: -45%;
-  left: 20.3%;
-  width: 57.2%;
+  left: 21.5%;
+  width: 55.8%;
   text-align: center;
-  // border: 1px solid blue;
 }
 .userSendButton {
   position: relative;
   top: -43%;
   left: 36%;
   width: 25%;
-  // border: 1px solid green;
 }

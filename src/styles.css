@@ -349,8 +349,7 @@ body {
   justify-content: center;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
-  width: 57%;
-  border: 5px solid red; }
+  width: 57%; }
 
 .usernameFormContainer {
   position: relative;
@@ -364,7 +363,6 @@ body {
   -ms-flex-pack: center;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
-  border: 5px solid cyan;
   height: 73%;
   width: 100%; }
 
@@ -394,8 +392,8 @@ body {
   position: relative;
   height: 5%;
   top: -45%;
-  left: 20.3%;
-  width: 57.2%;
+  left: 21.5%;
+  width: 55.8%;
   text-align: center; }
 
 .userSendButton {
