@@ -23,6 +23,7 @@ const rooms = new Map();
 let messageChain = { trigger: [], response: []};
 let messageCache = [];
 let triggerCache = [];
+let modifiedTrigger = '';
 let modifiedMessage = '';
 
 wss.on('connection', function connection(ws, req) {
@@ -55,13 +56,16 @@ wss.on('connection', function connection(ws, req) {
       switch(true){
         case (messageChain.trigger.length === 0):
         messageChain.trigger.push(payload.message);
-        triggerCache.push(payload.message.message);
+        modifiedTrigger = payload.message.message
+        .replace(/[.,\/#!$%@\^*\*;:{}=\-_`'~()]/g,"")
+        .replace(/\s{2,}/g,"").toLowerCase();
+        triggerCache.push(modifiedTrigger);
         break;
 
         case (messageChain.trigger.length > 0 && messageChain.trigger[0].username != payload.message.username):
         messageChain.response.push(payload.message);
         modifiedMessage = payload.message.message
-        .replace(/[.,\/#!$%@\^*\*;:{}=\-_`~()]/g,"")
+        .replace(/[.,\/#!$%@\^*\*;:{}=\-_`'~()]/g,"")
         .replace(/\s{2,}/g,"").toLowerCase();
         messageCache.push(modifiedMessage);
 
@@ -69,7 +73,10 @@ wss.on('connection', function connection(ws, req) {
 
         case (messageChain.trigger[0].username === payload.message.username && messageChain.response.length  === 0):
         messageChain.trigger.push(payload.message);
-        triggerCache.push(payload.message.message);
+        modifiedTrigger = payload.message.message
+        .replace(/[.,\/#!$%@\^*\*;:{}=\-_`'~()]/g,"")
+        .replace(/\s{2,}/g,"").toLowerCase();
+        triggerCache.push(modifiedTrigger);
         break;
 
         case (messageChain.trigger[0].username === payload.message.username):
@@ -87,7 +94,7 @@ wss.on('connection', function connection(ws, req) {
                   });
                 }else if (!row) {
                   return Ngrams.create( {
-                    word: cache[0],
+                    word: word,
                     weight: 1,
                     trigger: joinedTriggers,
                     context: joinedTriggers
@@ -117,18 +124,17 @@ wss.on('connection', function connection(ws, req) {
           messageChain.trigger = messageChain.response;
           messageChain.response = [payload.message];
           modifiedMessage = payload.message.message
-          .replace(/[.,\/#!$%\^*\*;:{}=\-_`~()]/g,"")
+          .replace(/[.,\/#!$@%\^*\*;:{}=\-_`'~()]/g,"")
           .replace(/\s{2,}/g,"").toLowerCase();
           messageCache = [modifiedMessage];
-          triggerCache = messageChain.response.map(triggers => {
-            return triggers.message;
-          });
+          console.log(modifiedMessage);
+          console.log(messageChain.response);
+          triggerCache = [modifiedMessage];
         });
       }
+
       let room = rooms.get(parseInt(payload.message.roomId));
       room.broadcast('BROADCAST_MESSAGE', {message: payload.message.message});
-
-
       break;
       case 'CONNECTED':
       ws.username = payload.message.username;
@@ -137,8 +143,8 @@ wss.on('connection', function connection(ws, req) {
           JSON.stringify({
             OP: 'CREATED_USER',
             username: payload.message.username
-          }))
-      })
+          }));
+      });
       break;
       case 'BROADCAST_USERNAME':
       users.forEach(user => {
@@ -171,9 +177,9 @@ wss.on('connection', function connection(ws, req) {
       case 'ACCEPT_INVITE':
       const sender = users.find( user => user.username === payload.username );
       var verifySender = users.filter( user =>
-        { return user.username === payload.username }).map(user =>{
+        { return user.username === payload.username; }).map(user =>{
           return {username: user.username
-          }});
+          };});
         if( verifySender !== null ){
           // create the room,
           //   put both players in it
