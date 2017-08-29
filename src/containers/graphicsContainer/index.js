@@ -8,31 +8,31 @@ render(){
   {
     ( localStorage.getItem("player") === "player1" ) ?
       <div className="graphicsContainer"> Player 1
-          <div className="key">
+          <div className="key" value="good">
           </div>
-          <div className="spider">
+          <div className="spider" value="good">
           </div>
-          <div className='voodoo'>
+          <div className='voodoo' value="bad">
           </div>
-          <div className='wand'>
+          <div className='wand' value="bad">
           </div>
-          <div className='mariel'>
+          <div className='mariel' value="bad">
           </div>
-          <div className='whip'>
+          <div className='whip' value="good">
           </div>
-          <div className='painting'>
+          <div className='painting' value="bad">
           </div>
-          <div className='ian'>
+          <div className='ian' value="bad">
           </div>
-          <div className='sword'>
+          <div className='sword' value="bad">
           </div>
-          <div className='torch'>
+          <div className='torch' value="bad">
           </div>
-          <div className='torch-slant'>
+          <div className='torch-slant' value="bad">
           </div>
-          <div className='bat'>
+          <div className='bat' value="bad">
           </div>
-          <div className='rat'>
+          <div className='rat' value="bad">
           </div>
         </div>
             : null
