@@ -138,11 +138,12 @@ body {
   border-image-source: url(./assets/border.png);
   border-image-slice: 20 22;
   border-image-repeat: stretch;
+  background: url(./assets/background.png) no-repeat;
 }
 .mariel {
   height: 47%;
   width: 11%;
-  border: 5px solid red;
+  // border: 5px solid red;
   background: url(./assets/mariel-medium.png) -50px no-repeat;
   transform: scale(0.9);
 }
@@ -153,7 +154,7 @@ body {
 .whip {
   height: 31%;
   width: 15%;
-  border: 5px solid black;
+  // border: 5px solid black;
   background: url(./assets/whip-big.png) -10px no-repeat;
   transform: scale(0.9);
 }
@@ -164,7 +165,7 @@ body {
 .key {
   height: 11%;
   width: 5%;
-  border: 5px solid green;
+  // border: 5px solid green;
   background: url(./assets/key.png) -5px no-repeat;
   transform: scale(0.9);
 }
@@ -175,7 +176,7 @@ body {
 .spider {
   height: 15%;
   width: 10%;
-  border: 5px solid yellow;
+  // border: 5px solid yellow;
   background: url(./assets/spider.png) no-repeat;
   transform: scale(0.9);
 }
@@ -187,7 +188,7 @@ body {
 .voodoo {
   height: 18%;
   width: 10%;
-  border: 5px solid pink;
+  // border: 5px solid pink;
   background: url(./assets/voodoo-big.png) 5px -3px no-repeat;
   transform: scale(0.9);
 }
@@ -198,7 +199,7 @@ body {
 .wand {
   height: 13%;
   width: 7%;
-  border: 5px solid blue;
+  // border: 5px solid blue;
   background: url(./assets/wand-big.png) -15px no-repeat;
   transform: scale(0.9);
 }
@@ -209,7 +210,7 @@ body {
 .painting {
   height: 27%;
   width: 13%;
-  border: 5px solid cyan;
+  // border: 5px solid cyan;
   background: url(./assets/painting.png) no-repeat;
   transform: scale(0.9);
 }
@@ -220,7 +221,7 @@ body {
 .ian {
   height: 55%;
   width: 12%;
-  border: 5px solid magenta;
+  // border: 5px solid magenta;
   background: url(./assets/ian.png) -50px no-repeat;
   transform: scale(0.9);
 }
@@ -231,7 +232,7 @@ body {
 .torch-slant {
   height: 18%;
   width: 7%;
-  border: 5px solid orange;
+  // border: 5px solid orange;
   background: url(./assets/torch-slant.png) -10px -16px no-repeat;
   transform: scale(0.9);
 }
@@ -242,7 +243,7 @@ body {
 .rat {
   height: 17%;
   width: 7%;
-  border: 5px solid purple;
+  // border: 5px solid purple;
   background: url(./assets/rat-small.png) no-repeat;
   transform: scale(0.9);
 }
@@ -253,7 +254,7 @@ body {
 .torch {
   height: 22%;
   width: 8%;
-  border: 5px solid gray;
+  // border: 5px solid gray;
   background: url(./assets/torch.png) -10px -7px no-repeat;
   transform: scale(0.9);
 }
@@ -265,7 +266,7 @@ body {
 .bat {
   height: 12%;
   width: 10%;
-  border: 5px solid silver;
+  // border: 5px solid silver;
   background: url(./assets/bat.png) no-repeat;
   transform: scale(0.9);
 }
@@ -276,7 +277,7 @@ body {
 .sword {
   height: 10%;
   width: 20%;
-  border: 5px solid gold;
+  // border: 5px solid gold;
   background: url(./assets/sword.png) no-repeat;
   transform: scale(0.9);
 }
