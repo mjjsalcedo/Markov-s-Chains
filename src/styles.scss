@@ -18,57 +18,57 @@
   25% {
     top: 1px;
     background: url(./assets/key.png) 1% no-repeat,
-    url(./assets/spider.png) 7% no-repeat,
-    url(./assets/voodoo.png) 16% no-repeat,
-    url(./assets/wand.png) 21% no-repeat,
-    url(./assets/whip-small.png) 28% no-repeat,
-    url(./assets/painting-small.png) 35% no-repeat,
-    url(./assets/ian-small.png) 42% no-repeat,
-    url(./assets/sword-small.png) 51% no-repeat,
-    url(./assets/mariel-small.png) 60% no-repeat,
-    url(./assets/torch-small.png) 65% no-repeat,
-    url(./assets/torch-slant-small.png) 72% 100% no-repeat,
-    url(./assets/bat-small.png) 76% no-repeat,
-    url(./assets/rat-small.png) 81% no-repeat;
+      url(./assets/spider.png) 7% no-repeat,
+      url(./assets/voodoo.png) 16% no-repeat,
+      url(./assets/wand.png) 21% no-repeat,
+      url(./assets/whip-small.png) 28% no-repeat,
+      url(./assets/painting-small.png) 35% no-repeat,
+      url(./assets/ian-small.png) 42% no-repeat,
+      url(./assets/sword-small.png) 51% no-repeat,
+      url(./assets/mariel-small.png) 60% no-repeat,
+      url(./assets/torch-small.png) 65% no-repeat,
+      url(./assets/torch-slant-small.png) 72% 100% no-repeat,
+      url(./assets/bat-small.png) 76% no-repeat,
+      url(./assets/rat-small.png) 81% no-repeat;
   }
   50% {
     top: 5px;
     background: url(./assets/key.png) 1% no-repeat,
-    url(./assets/spider.png) 7% no-repeat,
-    url(./assets/voodoo.png) 16% no-repeat,
-    url(./assets/wand.png) 21% no-repeat,
-    url(./assets/whip-small.png) 28% no-repeat,
-    url(./assets/painting-small.png) 35% no-repeat,
-    url(./assets/ian-small.png) 42% no-repeat,
-    url(./assets/sword-small.png) 51% no-repeat,
-    url(./assets/mariel-small.png) 60% no-repeat,
-    url(./assets/torch-small.png) 65% no-repeat,
-    url(./assets/torch-slant-small.png) 72% 100% no-repeat,
-    url(./assets/bat-small.png) 76% no-repeat,
-    url(./assets/rat-small.png) 81% no-repeat;
+      url(./assets/spider.png) 7% no-repeat,
+      url(./assets/voodoo.png) 16% no-repeat,
+      url(./assets/wand.png) 21% no-repeat,
+      url(./assets/whip-small.png) 28% no-repeat,
+      url(./assets/painting-small.png) 35% no-repeat,
+      url(./assets/ian-small.png) 42% no-repeat,
+      url(./assets/sword-small.png) 51% no-repeat,
+      url(./assets/mariel-small.png) 60% no-repeat,
+      url(./assets/torch-small.png) 65% no-repeat,
+      url(./assets/torch-slant-small.png) 72% 100% no-repeat,
+      url(./assets/bat-small.png) 76% no-repeat,
+      url(./assets/rat-small.png) 81% no-repeat;
   }
   100% {
     top: 0px;
     background: url(./assets/key.png) 1% no-repeat,
-    url(./assets/spider.png) 7% no-repeat,
-    url(./assets/voodoo.png) 16% no-repeat,
-    url(./assets/wand.png) 21% no-repeat,
-    url(./assets/whip-small.png) 28% no-repeat,
-    url(./assets/painting-small.png) 35% no-repeat,
-    url(./assets/ian-small.png) 42% no-repeat,
-    url(./assets/sword-small.png) 51% no-repeat,
-    url(./assets/mariel-small.png) 60% no-repeat,
-    url(./assets/torch-small.png) 65% no-repeat,
-    url(./assets/torch-slant-small.png) 72% 100% no-repeat,
-    url(./assets/bat-small.png) 76% no-repeat,
-    url(./assets/rat-small.png) 81% no-repeat;
+      url(./assets/spider.png) 7% no-repeat,
+      url(./assets/voodoo.png) 16% no-repeat,
+      url(./assets/wand.png) 21% no-repeat,
+      url(./assets/whip-small.png) 28% no-repeat,
+      url(./assets/painting-small.png) 35% no-repeat,
+      url(./assets/ian-small.png) 42% no-repeat,
+      url(./assets/sword-small.png) 51% no-repeat,
+      url(./assets/mariel-small.png) 60% no-repeat,
+      url(./assets/torch-small.png) 65% no-repeat,
+      url(./assets/torch-slant-small.png) 72% 100% no-repeat,
+      url(./assets/bat-small.png) 76% no-repeat,
+      url(./assets/rat-small.png) 81% no-repeat;
   }
 }
 @font-face {
-    font-family: OregonTrail;
-    src: url('./assets/OregonTrail.ttf') format('truetype');
-    font-weight: bold;
-  }
+  font-family: OregonTrail;
+  src: url('./assets/OregonTrail.ttf') format('truetype');
+  font-weight: bold;
+}
 body {
   font-family: OregonTrail;
 }
@@ -142,7 +142,7 @@ body {
   background-size: 515px 280px;
 }
 .mariel {
-  position:relative;
+  position: relative;
   top: 55%;
   left: 30%;
   height: 47%;
@@ -152,7 +152,7 @@ body {
   transform: scale(0.9) scaleX(-1);
 }
 .mariel:hover {
-  transform:scale(1) scaleX(-1);
+  transform: scale(1) scaleX(-1);
   transition: all 200ms ease-in;
 }
 .whip {
@@ -337,8 +337,7 @@ body {
   animation: bounce 0.8s ease-in-out 0.8s infinite alternate;
   background: url(./assets/key.png) 1% no-repeat,
     url(./assets/spider.png) 7% no-repeat,
-    url(./assets/voodoo.png) 16% no-repeat,
-    url(./assets/wand.png) 21% no-repeat,
+    url(./assets/voodoo.png) 16% no-repeat, url(./assets/wand.png) 21% no-repeat,
     url(./assets/whip-small.png) 28% no-repeat,
     url(./assets/painting-small.png) 35% no-repeat,
     url(./assets/ian-small.png) 42% 20% no-repeat,
@@ -406,4 +405,88 @@ body {
   width: 60%;
   margin-left: 20%;
   margin-top: 12%;
+}
+
+//username page
+.usernameMainContainer {
+  display: flex;
+  justify-content: center;
+  height: 900px;
+  width: 900px;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+.usernameFormBorder {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -ms-flex-align: start;
+  align-items: flex-start;
+  padding-left: 8.2%;
+  padding-right: 7.7%;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  width: 57%;
+  border: 5px solid red;
+}
+.usernameFormContainer {
+  position: relative;
+  top: 3%;
+  align-self:center;
+  background: url(./assets/phone.png) 57% 2% no-repeat;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -ms-flex-pack: center;
+  // justify-content: center;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  border: 5px solid cyan;
+  height: 73%;
+  width: 100%;
+  // border: 5px solid red;
+}
+.userTitle {
+  position: relative;
+  top: -6%;
+  align-self: center;
+}
+.userMariel {
+  position: relative;
+  top: -13%;
+  left: 10%;
+  // border: 1px solid gray;
+  height: 20%;
+  width: 13%;
+  transform: scale(0.8);
+  background: url(./assets/mariel-medium.png) 50% no-repeat;
+}
+.userIan {
+  position: relative;
+  top: -37%;
+  left: 30%;
+  // border: 1px solid pink;
+  height: 23%;
+  width: 14%;
+  background: url(./assets/ian.png) 50% no-repeat;
+}
+.userChatInput {
+  position: relative;
+  height: 5%;
+  top: -45%;
+  left: 20.3%;
+  width: 57.2%;
+  text-align: center;
+  // border: 1px solid blue;
+}
+.userSendButton {
+  position: relative;
+  top: -43%;
+  left: 36%;
+  width: 25%;
+  // border: 1px solid green;
 }
