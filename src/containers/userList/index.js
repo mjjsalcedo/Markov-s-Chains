@@ -47,31 +47,33 @@ if(this.props.goToRoom){
       this.props.history.push('/room');
     }
     return (
-      <div className="userlistContainer">
+      <div className='userListMainContainer'>
+      <div className='userListBorder'>
+      <div className="userListContainer">
       {this.props.username.filter(userData => {
         return userData.username === localStorage.getItem("username")}).map(username => {
-          return <span>{username.username}</span> })}
-
-      <h2> Current Users </h2>
-       <div className="userlist">
+          return <span className='currentUser'>Welcome {username.username}</span> })}
+       <div className="userList">Friends:
       {this.props.username.filter(userData => {
         return userData.username !== localStorage.getItem("username")}).map(username => {
-          return <span onClick={this.selectUser(username)}>{username.username}</span> })}
+          return <span className='listOfUsers' onClick={this.selectUser(username)}>{username.username}</span> })}
       </div>
 
-      <button onClick={this.sendInvite} type="button">Invite to Game</button>
+      <button className='inviteUser' onClick={this.sendInvite} type="button">Invite to Game</button>
 
       {
             ( this.props.invitesFrom !== undefined ) ?
-              <div>
-                <p>
+              <div className='inviteForm'>
+                <p className='inviteText'>
                   You were invited to play a game with { this.props.invitesFrom }
                 </p>
-                <button onClick={this.onClickAccept} type="button">Accept</button>
-                <button onClick={this.onClickDecline} type="button">DECLINE</button>
+                <button className='acceptUser' onClick={this.onClickAccept} type="button">Accept</button>
+                <button className='declineUser' onClick={this.onClickDecline} type="button">Decline</button>
               </div>
             : null
           }
+      </div>
+      </div>
       </div>
       )
   }

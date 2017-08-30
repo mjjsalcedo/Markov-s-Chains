@@ -6,20 +6,20 @@ class CellPhoneContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      message: '',
+      message: "",
       username: localStorage.getItem("username"),
       id: localStorage.getItem("id"),
       roomId: localStorage.getItem("roomId")
-    }
+    };
   }
 
-  messageSend(e){
-    e.preventDefault()
-    this.props.messageSend(this.state)
-    this.setState({ message: '' })
+  messageSend(e) {
+    e.preventDefault();
+    this.props.messageSend(this.state);
+    this.setState({ message: "" });
   }
-  messageInput(e){
-    this.setState({ message: e.target.value })
+  messageInput(e) {
+    this.setState({ message: e.target.value });
   }
 
   componentWillMount() {
@@ -31,26 +31,35 @@ class CellPhoneContainer extends Component {
       <div className="cellPhoneBorder">
         <div className="cellPhoneContainer">
           <div className="messageBox">
-            {this.props.messages.filter(message => {
-              return message.message !== undefined
-            }).map(message =>
-              <pre className="message">
-                {message.message}
-              </pre>
-            )}
+            {this.props.messages
+              .filter(message => {
+                return message.message !== undefined;
+              })
+              .map(message =>
+                <pre className="message">
+                  {message.message}
+                </pre>
+              )}
+          </div>
         </div>
+        <form className="cellPhoneForm" onSubmit={this.messageSend.bind(this)}>
+          <textarea
+            className="chatInput"
+            placeholder="message your friends"
+            value={this.state.message}
+            onChange={this.messageInput.bind(this)}
+          />
+          <button type="submit" className="sendButton">
+            Send Message
+          </button>
+        </form>
       </div>
-      <form className="cellPhoneForm" onSubmit={ this.messageSend.bind(this) }>
-      <textarea className="chatInput" placeholder="message your friends" value={ this.state.message } onChange={ this.messageInput.bind(this) }>
-      </textarea>
-      <button type="submit" className="sendButton">Send Message
-      </button>
-      </form>
-    </div>
-      )
+    );
   }
 }
+
 const mapStateToProps = (state) => {
+
   return {
     messages: state.userData
   };
@@ -58,8 +67,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    broadcastMessage: (message) =>{
-    },
+    broadcastMessage: message => {},
     messageSend: message => {
       dispatch(messageSend(message));
     }
