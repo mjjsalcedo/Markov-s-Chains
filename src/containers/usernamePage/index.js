@@ -27,11 +27,23 @@ class UserLogin extends Component {
 
   render() {
     return (
+      <div className='usernameMainContainer'>
+      <div className='usernameFormBorder'>
+      <h1 className='userTitle'> MIRKOV </h1>
       <div className="usernameFormContainer">
+      <div className='userMariel'>
+        </div>
+        <div className='userIan'>
+        </div>
+        <div className='userReyn'>
+        Reyn
+        </div>
+      </div>
       <input className="userChatInput" placeholder="input your username" value={ this.state.username } onChange={ this.usernameInput.bind(this) }>
       </input>
       <button type="submit" className="userSendButton" onClick={ this.handleCreateUsername.bind(this)}>Submit
       </button>
+      </div>
       </div>
       )
   }

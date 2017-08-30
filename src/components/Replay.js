@@ -1,9 +1,6 @@
 import React from 'react'
-import { connect } from 'react-redux'
-import { getText } from '../containers/App/actions'
-import Text from './Text'
 
-class GetText extends React.Component {
+class Replay extends React.Component {
 
  /* componentDidMount(){
     this.props.submitText({ ...this.state});
@@ -21,9 +18,7 @@ class GetText extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  return {
-    texts: state
-  };
+  return {};
 }
 
 const mapDispatchToProps = (dispatch) => {
@@ -34,10 +29,9 @@ submitText: (text) => {
   }
 }
 
-GetText = connect(
+Replay = connect(
   mapStateToProps,
   mapDispatchToProps
-)(GetText)
+)(Replay)
 
-export default GetText
-
+export default Replay
