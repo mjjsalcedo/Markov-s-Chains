@@ -527,6 +527,9 @@ body {
   width: 100%;
 }
 .currentUser {
+  display:flex;
+  flex-wrap: wrap;
+  overflow: auto;
   position: relative;
   height: 10%;
   width: 57%;
@@ -534,41 +537,66 @@ body {
   left: 21.2%;
   padding: 5px 0 0 7px;
   box-sizing: border-box;
-  border: 1px solid purple;
+  // border: 1px solid purple;
 }
 .userList {
+  display:flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  overflow: auto;
   position: relative;
-  height: 10%;
+  height: 30%;
   width: 57%;
   top: 17.5%;
   left: 21.2%;
   padding: 5px 0 0 7px;
   box-sizing: border-box;
-  border: 1px solid blue;
-}
-.inviteForm {
-  box-sizing: border-box;
-  border: 5px solid silver;
-  height: 30%;
-}
-.inviteText {
-  position: relative;
-  box-sizing: border-box;
-  border: 1px solid pink;
+  // border: 1px solid blue;
 }
 .inviteUser {
   position: relative;
   box-sizing: border-box;
-  top: 100%;
-  border: 5px solid cyan;
+  top: 18%;
+  left: 28%;
+  width: 42%;
+  // border: 5px solid cyan;
+}
+.inviteForm {
+  position: relative;
+  display:flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  overflow: auto;
+  height: 23.8%;
+  width: 57%;
+  top: 18%;
+  left: 21.3%;
+  padding-left: 5px;
+  box-sizing: border-box;
+  border: 1px solid silver;
+}
+.inviteText {
+  // word-break:break-all;
+  position: relative;
+  box-sizing: border-box;
+  // border: 1px solid pink;
 }
 .acceptUser {
   position: relative;
+  top: -10%;
+    left: -10%;
+
+  height: 13%;
+  width: 30%;
   box-sizing: border-box;
-  border: 5px solid green;
+  // border: 5px solid green;
 }
 .declineUser {
   position: relative;
+  top: -10%;
+  left: -10%;
+  height: 13%;
+  width: 30%;
   box-sizing: border-box;
-  border: 5px solid black;
+  // border: 5px solid black;
 }

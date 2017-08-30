@@ -68,7 +68,7 @@ if(this.props.goToRoom){
                   You were invited to play a game with { this.props.invitesFrom }
                 </p>
                 <button className='acceptUser' onClick={this.onClickAccept} type="button">Accept</button>
-                <button className='declineUser' onClick={this.onClickDecline} type="button">DECLINE</button>
+                <button className='declineUser' onClick={this.onClickDecline} type="button">Decline</button>
               </div>
             : null
           }
