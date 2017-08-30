@@ -388,6 +388,11 @@ body {
   width: 14%;
   background: url(./assets/ian.png) 50% no-repeat; }
 
+.userReyn {
+  position: relative;
+  top: -50%;
+  left: 50%; }
+
 .userChatInput {
   position: relative;
   height: 5%;
@@ -401,3 +406,107 @@ body {
   top: -43%;
   left: 36%;
   width: 25%; }
+
+.userListMainContainer {
+  display: flex;
+  justify-content: center;
+  height: 900px;
+  width: 900px;
+  margin: 0 auto;
+  box-sizing: border-box; }
+
+.userListBorder {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -ms-flex-align: start;
+  align-items: flex-start;
+  padding-left: 8.2%;
+  padding-right: 7.7%;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  width: 57%; }
+
+.userListContainer {
+  position: relative;
+  top: 3%;
+  align-self: center;
+  background: url(./assets/phone.png) 57% 2% no-repeat;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -ms-flex-pack: center;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  height: 73%;
+  width: 100%; }
+
+.currentUser {
+  display: flex;
+  flex-wrap: wrap;
+  overflow: auto;
+  position: relative;
+  height: 10%;
+  width: 57%;
+  top: 17.5%;
+  left: 21.2%;
+  padding: 5px 0 0 7px;
+  box-sizing: border-box; }
+
+.userList {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  overflow: auto;
+  position: relative;
+  height: 30%;
+  width: 57%;
+  top: 17.5%;
+  left: 21.2%;
+  padding: 5px 0 0 7px;
+  box-sizing: border-box; }
+
+.inviteUser {
+  position: relative;
+  box-sizing: border-box;
+  top: 18%;
+  left: 28%;
+  width: 42%; }
+
+.inviteForm {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  overflow: auto;
+  height: 23.8%;
+  width: 57%;
+  top: 18%;
+  left: 21.3%;
+  padding-left: 5px;
+  box-sizing: border-box;
+  border: 1px solid silver; }
+
+.inviteText {
+  position: relative;
+  box-sizing: border-box; }
+
+.acceptUser {
+  position: relative;
+  top: -10%;
+  left: -10%;
+  height: 13%;
+  width: 30%;
+  box-sizing: border-box; }
+
+.declineUser {
+  position: relative;
+  top: -10%;
+  left: -10%;
+  height: 13%;
+  width: 30%;
+  box-sizing: border-box; }
