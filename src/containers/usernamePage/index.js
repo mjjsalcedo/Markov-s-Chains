@@ -35,6 +35,9 @@ class UserLogin extends Component {
         </div>
         <div className='userIan'>
         </div>
+        <div className='userReyn'>
+        Reyn
+        </div>
       </div>
       <input className="userChatInput" placeholder="input your username" value={ this.state.username } onChange={ this.usernameInput.bind(this) }>
       </input>
