@@ -126,7 +126,7 @@ body {
   border-image-slice: 20 22;
   border-image-repeat: stretch;
 }
-.graphicsContainer {
+.graphicsContainerPlayer1 {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -141,7 +141,7 @@ body {
   background: url(./assets/background.png) no-repeat;
   background-size: 515px 280px;
 }
-.mariel {
+.marielPlayer1 {
   position: relative;
   top: 55%;
   left: 30%;
@@ -151,11 +151,11 @@ body {
   background: url(./assets/mariel-medium.png) -50px no-repeat;
   transform: scale(0.9) scaleX(-1);
 }
-.mariel:hover {
+.marielPlayer1:hover {
   transform: scale(1) scaleX(-1);
   transition: all 200ms ease-in;
 }
-.whip {
+.whipPlayer1 {
   position: relative;
   top: 60%;
   left: 8%;
@@ -165,11 +165,11 @@ body {
   background: url(./assets/whip-big.png) -10px no-repeat;
   transform: scale(0.9) scaleX(-1);
 }
-.whip:hover {
+.whipPlayer1:hover {
   transform: scale(1) scaleX(-1);
   transition: all 200ms ease-in;
 }
-.key {
+.keyPlayer1 {
   position: relative;
   top: 48%;
   left: 53%;
@@ -179,11 +179,11 @@ body {
   background: url(./assets/key.png) -5px no-repeat;
   transform: scale(0.9);
 }
-.key:hover {
+.keyPlayer1:hover {
   transform: scale(1);
   transition: all 200ms ease-in;
 }
-.spider {
+.spiderPlayer1 {
   position: relative;
   top: 64%;
   right: 12%;
@@ -193,12 +193,12 @@ body {
   background: url(./assets/spider.png) no-repeat;
   transform: scale(0.9);
 }
-.spider:hover {
+.spiderPlayer1:hover {
   background: url(./assets/spider2.png) no-repeat;
   transform: scale(1);
   transition: all 200ms ease-in;
 }
-.voodoo {
+.voodooPlayer1 {
   position: relative;
   top: 43%;
   left: 50%;
@@ -208,11 +208,11 @@ body {
   background: url(./assets/voodoo-big.png) 5px -3px no-repeat;
   transform: scale(0.9);
 }
-.voodoo:hover {
+.voodooPlayer1:hover {
   transform: scale(1);
   transition: all 200ms ease-in;
 }
-.wand {
+.wandPlayer1 {
   position: relative;
   top: 66%;
   right: 42%;
@@ -222,11 +222,11 @@ body {
   background: url(./assets/wand-big.png) -15px no-repeat;
   transform: scale(0.9);
 }
-.wand:hover {
+.wandPlayer1:hover {
   transform: scale(1);
   transition: all 200ms ease-in;
 }
-.painting {
+.paintingPlayer1 {
   position: relative;
   top: 5%;
   left: -22%;
@@ -236,22 +236,22 @@ body {
   background: url(./assets/painting.png) no-repeat;
   transform: scale(0.9);
 }
-.painting:hover {
+.paintingPlayer1:hover {
   transform: scale(1);
   transition: all 200ms ease-in;
 }
-.ian {
+.ianPlayer1 {
   height: 55%;
   width: 12%;
   // border: 5px solid magenta;
   background: url(./assets/ian.png) -50px no-repeat;
   transform: scale(0.9);
 }
-.ian:hover {
+.ianPlayer1:hover {
   transform: scale(1);
   transition: all 200ms ease-in;
 }
-.torch-slant {
+.torch-slantPlayer1 {
   position: relative;
   top: -30%;
   left: 53%;
@@ -261,11 +261,11 @@ body {
   background: url(./assets/torch-slant.png) -10px -16px no-repeat;
   transform: scale(0.9) scaleX(-1);
 }
-.torch-slant:hover {
+.torch-slantPlayer1:hover {
   transform: scale(1) scaleX(-1);
   transition: all 200ms ease-in;
 }
-.rat {
+.ratPlayer1 {
   position: relative;
   top: 30%;
   height: 17%;
@@ -274,11 +274,11 @@ body {
   background: url(./assets/rat-small.png) no-repeat;
   transform: scale(0.9);
 }
-.rat:hover {
+.ratPlayer1:hover {
   transform: scale(1);
   transition: all 200ms ease-in;
 }
-.torch {
+.torchPlayer1 {
   position: relative;
   top: -25%;
   right: 31%;
@@ -288,12 +288,12 @@ body {
   background: url(./assets/torch.png) -10px -7px no-repeat;
   transform: scale(0.9);
 }
-.torch:hover {
+.torchPlayer1:hover {
   background: url(./assets/torch2.png) -10px -7px no-repeat;
   transform: scale(1);
   transition: all 200ms ease-in;
 }
-.bat {
+.batPlayer1 {
   position: relative;
   top: -20%;
   height: 12%;
@@ -302,11 +302,11 @@ body {
   background: url(./assets/bat.png) no-repeat;
   transform: scale(0.9);
 }
-.bat:hover {
+.batPlayer1:hover {
   transform: scale(1);
   transition: all 200ms ease-in;
 }
-.sword {
+.swordPlayer1 {
   position: relative;
   top: -40%;
   right: -12.5%;
@@ -316,9 +316,24 @@ body {
   background: url(./assets/sword.png) no-repeat;
   transform: scale(0.9);
 }
-.sword:hover {
+.swordPlayer1:hover {
   transform: scale(1);
   transition: all 200ms ease-in;
+}
+.graphicsContainerPlayer2 {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  box-sizing: border-box;
+  padding: 5px;
+  height: 300px;
+  // border: 5px solid pink;
+  border: 10px solid transparent;
+  border-image-source: url(./assets/border.png);
+  border-image-slice: 20 22;
+  border-image-repeat: stretch;
+  background: url(./assets/background.png) no-repeat;
+  background-size: 515px 280px;
 }
 .inventoryContainerBorder {
   max-height: 100%;
@@ -380,7 +395,7 @@ body {
   margin-top: 99.7%;
   height: 403px;
   width: 290%;
-  border: 1px solid red;
+  // border: 1px solid red;
 }
 .message {
   word-wrap: break-word;
@@ -388,14 +403,14 @@ body {
   padding: 2px;
   font-size: 12px;
   white-space: pre-wrap;
-  border: 5px solid red;
+  // border: 5px solid red;
 }
 .cellPhoneform {
   display: block;
   margin-top: 0em;
 }
 .chatInput {
-  border: 1px solid blue;
+  // border: 1px solid blue;
   height: 33px;
   width: 99.7%;
   resize: none;

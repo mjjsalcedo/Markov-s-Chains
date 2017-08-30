@@ -7,32 +7,32 @@ render(){
   <div className="graphicsContainerBorder">
   {
     ( localStorage.getItem("player") === "player1" ) ?
-      <div className="graphicsContainer"> Player 1
-          <div className="key" value="good">
+      <div className="graphicsContainerPlayer1"> Player 1
+          <div className="keyPlayer1" value="good">
           </div>
-          <div className="spider" value="good">
+          <div className="spiderPlayer1" value="good">
           </div>
-          <div className='voodoo' value="bad">
+          <div className='voodooPlayer1' value="bad">
           </div>
-          <div className='wand' value="bad">
+          <div className='wandPlayer1' value="bad">
           </div>
-          <div className='mariel' value="bad">
+          <div className='marielPlayer1' value="bad">
           </div>
-          <div className='whip' value="good">
+          <div className='whipPlayer1' value="good">
           </div>
-          <div className='painting' value="bad">
+          <div className='paintingPlayer1' value="bad">
           </div>
-          <div className='ian' value="bad">
+          <div className='ianPlayer1' value="bad">
           </div>
-          <div className='sword' value="bad">
+          <div className='swordPlayer1' value="bad">
           </div>
-          <div className='torch' value="bad">
+          <div className='torchPlayer1' value="bad">
           </div>
-          <div className='torch-slant' value="bad">
+          <div className='torch-slantPlayer1' value="bad">
           </div>
-          <div className='bat' value="bad">
+          <div className='batPlayer1' value="bad">
           </div>
-          <div className='rat' value="bad">
+          <div className='ratPlayer1' value="bad">
           </div>
         </div>
             : null
@@ -40,31 +40,33 @@ render(){
 
     {
     ( localStorage.getItem("player") === "player2" ) ?
-      <div className="graphicsContainer">Player 2 <div className="key">
+      <div className="graphicsContainerPlayer2">Player 2 <div className="key">
           </div>
-          <div className="spider">
+          <div className="keyPlayer2" value="good">
           </div>
-          <div className='voodoo'>
+          <div className="spiderPlayer2">
           </div>
-          <div className='wand'>
+          <div className='voodooPlayer2'>
           </div>
-          <div className='mariel'>
+          <div className='wandPlayer2'>
           </div>
-          <div className='whip'>
+          <div className='marielPlayer2'>
           </div>
-          <div className='painting'>
+          <div className='whipPlayer2'>
           </div>
-          <div className='ian'>
+          <div className='paintingPlayer2'>
           </div>
-          <div className='sword'>
+          <div className='ianPlayer2'>
           </div>
-          <div className='torch'>
+          <div className='swordPlayer2'>
           </div>
-          <div className='torch-slant'>
+          <div className='torchPlayer2'>
           </div>
-          <div className='bat'>
+          <div className='torch-slantPlayer2'>
           </div>
-          <div className='rat'>
+          <div className='batPlayer2'>
+          </div>
+          <div className='ratPlayer2'>
           </div>
         </div>
             : null
