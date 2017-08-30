@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { gameResults, checkGameStatus } from '../../actions';
-import { Link } from 'react-router-dom';
+import { gameResults, checkGameStatus, anotherInvite, replayGame } from '../../actions';
+import { BrowserRouter as Router, Route, Link} from 'react-router-dom';
 
 
 class GraphicsContainer extends Component {
@@ -9,9 +9,10 @@ class GraphicsContainer extends Component {
 constructor(props) {
     super(props);
 
-
     this.selectedItem = this.selectedItem.bind(this);
     this.sendWinningStatus = this.sendWinningStatus.bind(this);
+    this.displayPlayAgain = this.displayPlayAgain.bind(this);
+    this.onClickAccept = this.onClickAccept.bind(this);
 
   }
 
@@ -20,12 +21,22 @@ constructor(props) {
     }
 
   sendWinningStatus(value){
-    console.log('value', value)
     this.props.checkGameStatus({result: value})
   }
 
+  displayPlayAgain(){
+    console.log('sanity check one')
+    this.props.anotherInvite({username: localStorage.getItem("username"), roomId: localStorage.getItem("roomId")})
+  }
+
+  onClickAccept(){
+    this.props.replayGame(this.props.reinvitesFrom)
+  }
+
+
 render(){
-  console.log('props', this.props)
+  console.log(this.props)
+  if (this.props.score !== undefined) {
   let test = this.props.score.reduce((status, score)=>{
     if(score in status){
       status[score]++;
@@ -35,18 +46,14 @@ render(){
     }
     return status;
   }, {});
-  console.log('graphic props', this.props.score)
-  console.log('graphic props test', test)
-
   if(test.bad >= 3){
-    console.log('you lost')
     this.sendWinningStatus("lose")
   }
   if(test.good >= 3) {
-    console.log('you win!')
     this.sendWinningStatus("win")
-
    }
+  }
+
   return(
   <div className="graphicsContainerBorder">
   {
@@ -119,13 +126,35 @@ render(){
     (  this.props.winningStatus !== undefined  ) ?
       <div className="graphicsContainer">
           {( this.props.winningStatus === "win") ?
-          <div> YOU WIN!!! </div>
+          <div>
+          <h2> YOU WIN!!! </h2>
+          <button onClick={this.displayPlayAgain}> Play Again </button>
+          <Link to="/"> Home </Link>
+          </div>
+
             :null }
+
           {
           ( this.props.winningStatus === "lose") ?
-          <div> YOU SUCK -_- </div>
+          <div>
+          <h2> YOU LOSE </h2>
+          <button onClick={this.displayPlayAgain}> Play Again </button>
+          <Link to="/"> Home </Link>
+          </div>
             :null }
         </div>
+            : null
+          }
+
+      {
+            ( this.props.reinvitesFrom !== undefined ) ?
+              <div>
+                <p>
+                  You were invited to replay a game with { this.props.reinvitesFrom }
+                </p>
+                <button onClick={this.onClickAccept} type="button">Accept</button>
+                <button onClick={this.onClickDecline} type="button">DECLINE</button>
+              </div>
             : null
           }
         </div>
@@ -137,7 +166,8 @@ const mapStateToProps = (state) => {
   console.log('graphicsContainer', state)
   return {
     score: state.gameResults,
-    winningStatus: state.winningStatus
+    winningStatus: state.winningStatus,
+    reinvitesFrom: state.reinvitesFrom
   };
 };
 
@@ -150,6 +180,12 @@ const mapDispatchToProps = dispatch => {
     },
     checkGameStatus: result => {
       dispatch(checkGameStatus(result))
+    },
+    anotherInvite: player => {
+      dispatch(anotherInvite(player))
+    },
+    replayGame: player => {
+      dispatch(replayGame(player))
     }
   };
 };

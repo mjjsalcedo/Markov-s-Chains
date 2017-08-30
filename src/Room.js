@@ -22,6 +22,7 @@ module.exports = class Room{
     [ this.player1, this.player2 ].forEach( player => {
       console.log("OP", OP)
           console.log('THIS IS THE FUCKING GOD DAMN PAYLOAD!!!',payload);
+          console.log('sanity check four')
       player.send(
         JSON.stringify(Object.assign({ OP }, payload))
       )

@@ -25,6 +25,8 @@ export const BROADCAST_SCORE = "BROADCAST_SCORE"
 export const GAME_RESULTS = "GAME_RESULTS"
 export const NEW_GAME = "NEW_GAME"
 export const GAME_STATUS = "GAME_STATUS"
+export const RECEIVE_REPLAY_INVITE = "RECEIVE_REPLAY_INVITE"
+export const REPLAY = "REPLAY"
 
 
 export const userConnect = () => {
@@ -94,7 +96,6 @@ export const declineInvite = (invitesFrom) => dispatch => {
 };
 
 export const gameResults = (results) => dispatch => {
-  console.log('boop', results)
   socket.send(
     JSON.stringify({
       OP: GAME_RESULTS,
@@ -105,7 +106,6 @@ export const gameResults = (results) => dispatch => {
 };
 
 export const checkGameStatus = (results) => dispatch => {
-  console.log('beep', results)
     dispatch({ type: GAME_STATUS, success: true, payload: results });
 };
 
@@ -119,6 +119,13 @@ export const replayGame = (partner) => dispatch => {
 
 };
 
+export const anotherInvite = ( invite ) => {
+  return ( dispatch ) => {
+    socket.send(JSON.stringify({
+      OP: REPLAY,
+      invite}));
+  }
+}
 
 
 

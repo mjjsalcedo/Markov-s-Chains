@@ -72,7 +72,6 @@ if(this.props.goToRoom){
               </div>
             : null
           }
-      <Link to='/playerOne'> PLAYER ONE</Link>
       </div>
       )
   }

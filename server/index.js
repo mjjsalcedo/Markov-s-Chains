@@ -162,40 +162,40 @@ wss.on('connection', function connection(ws, req) {
 
 /*const newState = Object.assign({}, ...state, userData:[..state.userData,{id:action.payload.id, username:action.payload.username, message:action.payload.message}])
 
-    return Object.assign({}, ...state, gameResults:[messagePayload.score]);*/
+return Object.assign({}, ...state, gameResults:[messagePayload.score]);*/
 
-      case 'GAME_RESULTS':
-      console.log(payload);
-        let roomGraphic = rooms.get(parseInt(payload.score.roomId));
-        roomGraphic.broadcast('BROADCAST_SCORE', {score: payload.score.score});
-        break;
+case 'GAME_RESULTS':
+console.log(payload);
+let roomGraphic = rooms.get(parseInt(payload.score.roomId));
+roomGraphic.broadcast('BROADCAST_SCORE', {score: payload.score.score});
+break;
 
-      case 'SEND_INVITE':
-      const invitedUser = users.find( user => user.username === payload.invite.username );
-      if( invitedUser !== undefined ){
-        invitedUser.send(
-          JSON.stringify({
-            OP: 'RECEIVE_INVITE',
-            sender: ws.username
-          })
-          );
-      } else {
-        ws.send(
-          JSON.stringify({
-            OP: 'ERROR',
-            message: 'username is not found or has disconnected'
-          })
-          );
-      }
-      break;
-      case 'ACCEPT_INVITE':
-      const sender = users.find( user => user.username === payload.username );
-      var verifySender = users.filter( user =>
-        { return user.username === payload.username; }).map(user =>{
-          return {username: user.username
-          };});
-        if( verifySender !== null ){
-          usersPlaying.push(verifySender);
+case 'SEND_INVITE':
+const invitedUser = users.find( user => user.username === payload.invite.username );
+if( invitedUser !== undefined ){
+  invitedUser.send(
+    JSON.stringify({
+      OP: 'RECEIVE_INVITE',
+      sender: ws.username
+    })
+    );
+} else {
+  ws.send(
+    JSON.stringify({
+      OP: 'ERROR',
+      message: 'username is not found or has disconnected'
+    })
+    );
+}
+break;
+case 'ACCEPT_INVITE':
+const sender = users.find( user => user.username === payload.username );
+var verifySender = users.filter( user =>
+  { return user.username === payload.username; }).map(user =>{
+    return {username: user.username
+    };});
+  if( verifySender !== null ){
+    let extracted = verifySender[0]
           // create the room,
           //   put both players in it
           //   remove from lobby
@@ -203,6 +203,10 @@ wss.on('connection', function connection(ws, req) {
           const newRoom = new Room(sender, ws);
           // track the room in the map
           rooms.set(newRoom.id, newRoom);
+          ws.roomId = newRoom.id;
+          sender.roomId = newRoom.id
+          usersPlaying.push(sender)
+          usersPlaying.push(ws)
           // remove both players from lobby
           users = users.filter( user => user.username !== ws.username && user.username !== verifySender[0].username);
 
@@ -215,21 +219,42 @@ wss.on('connection', function connection(ws, req) {
             );
         }
         break;
+        case 'REPLAY':
+
+        let foundPartner = usersPlaying.find( user => {
+          return payload.invite.roomId == user.roomId && user.username !== payload.invite.username })
+          if( foundPartner !== undefined ){
+            foundPartner.send(
+              JSON.stringify({
+                OP: 'RECEIVE_REPLAY_INVITE',
+                sender: ws.username
+              })
+              );
+          } else {
+            ws.send(
+              JSON.stringify({
+                OP: 'ERROR',
+                message: 'username is not found or has disconnected'
+              })
+              );
+          }
+        break;
         case 'NEW_GAME':
         const partner = usersPlaying.find( user => user.username === payload.username );
-      var verifyPartner = usersPlaying.filter( user =>
-        { return user.username === payload.username; }).map(user =>{
-          return {username: user.username
-          };});
-        if( verifyPartner !== null ){
-          // create the room,
-          //   put both players in it
-          //   remove from lobby
-          // insert into current users playing
+        var verifyPartner = usersPlaying.filter( user =>
+          { return user.username === payload.username; }).map(user =>{
+            return {username: user.username
+            };});
+          if( verifyPartner !== null ){
+
           const newRoom = new Room(partner, ws);
-          // track the room in the map
           rooms.set(newRoom.id, newRoom);
-          // remove both players from lobby
+          usersPlaying = usersPlaying.filter( user => user.username !== ws.username && user.username !== verifyPartner[0].username);
+          ws.roomId = newRoom.id;
+          partner.roomId = newRoom.id
+          usersPlaying.push(partner)
+          usersPlaying.push(ws)
+
         } else {
           ws.send(
             JSON.stringify({

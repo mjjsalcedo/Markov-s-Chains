@@ -1,4 +1,4 @@
-import { /*GET_TEXT, ADD_TEXT, EDIT_TEXT, DELETE_TEXT,*/ MESSAGE_SEND, USER_CONNECT, MESSAGE_RECEIVED, SUCCESSFUL_CONNECTION, USER_DISCONNECTED, CREATE_USERNAME, DECLINE_INVITE, CHAT, CREATED_USER, RECEIVE_INVITE, ENTER_ROOM, BROADCAST_MESSAGE, BROADCAST_SCORE, GAME_STATUS} from './actions';
+import { /*GET_TEXT, ADD_TEXT, EDIT_TEXT, DELETE_TEXT,*/ MESSAGE_SEND, USER_CONNECT, MESSAGE_RECEIVED, SUCCESSFUL_CONNECTION, USER_DISCONNECTED, CREATE_USERNAME, DECLINE_INVITE, CHAT, CREATED_USER, RECEIVE_INVITE, ENTER_ROOM, BROADCAST_MESSAGE, BROADCAST_SCORE, GAME_STATUS, RECEIVE_REPLAY_INVITE} from './actions';
 
 let initialState = { userData:[], invitesFrom : null, // set when someone invites you to game
   goToRoom : false, // idk about this, need a better way to send users to /room route
@@ -60,10 +60,9 @@ function messageReceived(state, action) {
     return {
       userData: [
       ...state.userData,
-      {
-        message: messagePayload.message
-      }
-      ]
+      { message: messagePayload.message }],
+      gameResults: [ ...state.gameResults],
+      winningStatus: undefined
     }
     case BROADCAST_SCORE:
     return {
@@ -77,6 +76,11 @@ function messageReceived(state, action) {
       userData: [
       ...state.userData
       ],  invitesFrom: messagePayload.sender
+    }
+    case RECEIVE_REPLAY_INVITE:
+    return {
+      ...state
+      ,  reinvitesFrom: messagePayload.sender
     }
     case ENTER_ROOM:
     if(messagePayload.player1 === localStorage.getItem("username")){
