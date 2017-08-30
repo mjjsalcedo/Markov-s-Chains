@@ -1,4 +1,4 @@
-const socket = new WebSocket('ws://10.0.1.149:3001');
+const socket = new WebSocket('ws://10.0.1.52:3001');
 
 /*export const GET_TEXT = 'GET_TEXT'
 export const ADD_TEXT = 'ADD_TEXT'
@@ -21,6 +21,12 @@ export const BROADCAST_USERNAME = "BROADCAST_USERNAME"
 export const RECEIVE_INVITE = "RECEIVE_INVITE"
 export const ENTER_ROOM = "ENTER_ROOM"
 export const BROADCAST_MESSAGE = "BROADCAST_MESSAGE"
+export const BROADCAST_SCORE = "BROADCAST_SCORE"
+export const GAME_RESULTS = "GAME_RESULTS"
+export const NEW_GAME = "NEW_GAME"
+export const GAME_STATUS = "GAME_STATUS"
+export const RECEIVE_REPLAY_INVITE = "RECEIVE_REPLAY_INVITE"
+export const REPLAY = "REPLAY"
 
 
 export const userConnect = () => {
@@ -89,6 +95,37 @@ export const declineInvite = (invitesFrom) => dispatch => {
 
 };
 
+export const gameResults = (results) => dispatch => {
+  socket.send(
+    JSON.stringify({
+      OP: GAME_RESULTS,
+      score : results
+    })
+  );
+
+};
+
+export const checkGameStatus = (results) => dispatch => {
+    dispatch({ type: GAME_STATUS, success: true, payload: results });
+};
+
+export const replayGame = (partner) => dispatch => {
+  socket.send(
+    JSON.stringify({
+      OP: NEW_GAME,
+      username : partner
+    })
+  );
+
+};
+
+export const anotherInvite = ( invite ) => {
+  return ( dispatch ) => {
+    socket.send(JSON.stringify({
+      OP: REPLAY,
+      invite}));
+  }
+}
 
 
 

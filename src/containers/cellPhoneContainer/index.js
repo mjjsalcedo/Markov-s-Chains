@@ -57,8 +57,9 @@ class CellPhoneContainer extends Component {
     );
   }
 }
-const mapStateToProps = state => {
-  console.log("cellmessage", state);
+
+const mapStateToProps = (state) => {
+
   return {
     messages: state.userData
   };

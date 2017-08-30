@@ -16,6 +16,7 @@ const server = http.createServer(app);
 const wss = new WebSocket.Server({ server });
 
 let users = [];
+let usersPlaying = [];
 const rooms = new Map();
 //rooms.set(new_room_id, new Room(new_room_id)) //when you accept an invite set the new room
 
@@ -51,6 +52,7 @@ wss.on('connection', function connection(ws, req) {
 
   ws.on('message', function incoming(message) {
     let payload = JSON.parse(message);
+    console.log('payload', payload)
     switch (payload.OP) {
       case 'CHAT':
       let room = rooms.get(parseInt(payload.message.roomId));
@@ -128,11 +130,13 @@ wss.on('connection', function connection(ws, req) {
           .replace(/\s{2,}/g,"").toLowerCase();
           messageCache = [modifiedMessage];
           triggerCache = [modifiedMessage];
+
           room.broadcast('BROADCAST_MESSAGE', {message: payload.message.message});
         });
       }
       room.broadcast('BROADCAST_MESSAGE', {message: payload.message.message});
       break;
+
       case 'CONNECTED':
       ws.username = payload.message.username;
       users.forEach(user => {
@@ -143,6 +147,7 @@ wss.on('connection', function connection(ws, req) {
           }));
       });
       break;
+
       case 'BROADCAST_USERNAME':
       users.forEach(user => {
         user.send(
@@ -153,37 +158,55 @@ wss.on('connection', function connection(ws, req) {
           }));
       });
       break;
-      case 'SEND_INVITE':
-      const invitedUser = users.find( user => user.username === payload.invite.username );
-      if( invitedUser !== undefined ){
-        invitedUser.send(
-          JSON.stringify({
-            OP: 'RECEIVE_INVITE',
-            sender: ws.username
-          })
-          );
-      } else {
-        ws.send(
-          JSON.stringify({
-            OP: 'ERROR',
-            message: 'username is not found or has disconnected'
-          })
-          );
-      }
-      break;
-      case 'ACCEPT_INVITE':
-      const sender = users.find( user => user.username === payload.username );
-      var verifySender = users.filter( user =>
-        { return user.username === payload.username; }).map(user =>{
-          return {username: user.username
-          };});
-        if( verifySender !== null ){
+
+
+/*const newState = Object.assign({}, ...state, userData:[..state.userData,{id:action.payload.id, username:action.payload.username, message:action.payload.message}])
+
+return Object.assign({}, ...state, gameResults:[messagePayload.score]);*/
+
+case 'GAME_RESULTS':
+console.log(payload);
+let roomGraphic = rooms.get(parseInt(payload.score.roomId));
+roomGraphic.broadcast('BROADCAST_SCORE', {score: payload.score.score});
+break;
+
+case 'SEND_INVITE':
+const invitedUser = users.find( user => user.username === payload.invite.username );
+if( invitedUser !== undefined ){
+  invitedUser.send(
+    JSON.stringify({
+      OP: 'RECEIVE_INVITE',
+      sender: ws.username
+    })
+    );
+} else {
+  ws.send(
+    JSON.stringify({
+      OP: 'ERROR',
+      message: 'username is not found or has disconnected'
+    })
+    );
+}
+break;
+case 'ACCEPT_INVITE':
+const sender = users.find( user => user.username === payload.username );
+var verifySender = users.filter( user =>
+  { return user.username === payload.username; }).map(user =>{
+    return {username: user.username
+    };});
+  if( verifySender !== null ){
+    let extracted = verifySender[0]
           // create the room,
           //   put both players in it
           //   remove from lobby
+          // insert into current users playing
           const newRoom = new Room(sender, ws);
           // track the room in the map
           rooms.set(newRoom.id, newRoom);
+          ws.roomId = newRoom.id;
+          sender.roomId = newRoom.id
+          usersPlaying.push(sender)
+          usersPlaying.push(ws)
           // remove both players from lobby
           users = users.filter( user => user.username !== ws.username && user.username !== verifySender[0].username);
 
@@ -196,6 +219,51 @@ wss.on('connection', function connection(ws, req) {
             );
         }
         break;
+        case 'REPLAY':
+
+        let foundPartner = usersPlaying.find( user => {
+          return payload.invite.roomId == user.roomId && user.username !== payload.invite.username })
+          if( foundPartner !== undefined ){
+            foundPartner.send(
+              JSON.stringify({
+                OP: 'RECEIVE_REPLAY_INVITE',
+                sender: ws.username
+              })
+              );
+          } else {
+            ws.send(
+              JSON.stringify({
+                OP: 'ERROR',
+                message: 'username is not found or has disconnected'
+              })
+              );
+          }
+        break;
+        case 'NEW_GAME':
+        const partner = usersPlaying.find( user => user.username === payload.username );
+        var verifyPartner = usersPlaying.filter( user =>
+          { return user.username === payload.username; }).map(user =>{
+            return {username: user.username
+            };});
+          if( verifyPartner !== null ){
+
+          const newRoom = new Room(partner, ws);
+          rooms.set(newRoom.id, newRoom);
+          usersPlaying = usersPlaying.filter( user => user.username !== ws.username && user.username !== verifyPartner[0].username);
+          ws.roomId = newRoom.id;
+          partner.roomId = newRoom.id
+          usersPlaying.push(partner)
+          usersPlaying.push(ws)
+
+        } else {
+          ws.send(
+            JSON.stringify({
+              OP: 'ERROR',
+              message: 'sender is not found or has disconnected'
+            })
+            );
+        }
+        break
         case 'DECLINE_INVITE':
         const declinedSender = users.find( user => user.username = payload.username );
         if( declinedSender !== null ){
@@ -205,7 +273,6 @@ wss.on('connection', function connection(ws, req) {
               username: ws.username
             })
             );
-
         } else {
           ws.send(
             JSON.stringify({
@@ -235,6 +302,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/api', apiRoutes);*/
 
 server.listen(PORT,'0.0.0.0', ()=> {
-  db.sequelize.sync();
+  /*db.sequelize.sync();*/
   console.log(`listening on ${PORT}`);
 });
