@@ -126,7 +126,7 @@ body {
   border-image-slice: 20 22;
   border-image-repeat: stretch;
 }
-.graphicsContainerPlayer1 {
+.stageOneGraphicsContainerPlayer1 {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -320,7 +320,7 @@ body {
   transform: scale(1);
   transition: all 200ms ease-in;
 }
-.graphicsContainerPlayer2 {
+.stageOneGraphicsContainerPlayer2 {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -334,6 +334,103 @@ body {
   border-image-repeat: stretch;
   background: url(./assets/background.png) no-repeat;
   background-size: 515px 280px;
+}
+.keyPlayer2 {
+  position: relative;
+  top: 50%;
+  left: 53%;
+  height: 11%;
+  width: 5%;
+  // border: 5px solid green;
+  background: url(./assets/key-player2.png) -5px no-repeat;
+  transform: scale(0.9);
+}
+.keyPlayer2:hover {
+  transform: scale(1);
+  transition: all 200ms ease-in;
+}
+.spiderPlayer2 {
+  position: relative;
+  top: 64%;
+  right: 12%;
+  height: 15%;
+  width: 10%;
+  // border: 5px solid yellow;
+  background: url(./assets/spider-player2.png) no-repeat;
+  transform: scale(0.9);
+}
+.spiderPlayer2:hover {
+  background: url(./assets/spider2-player2.png) no-repeat;
+  transform: scale(1);
+  transition: all 200ms ease-in;
+}
+.paintingPlayer2 {
+  position: relative;
+  top: 5%;
+  left: -22%;
+  height: 27%;
+  width: 13%;
+  // border: 5px solid cyan;
+  background: url(./assets/painting-player2.png) no-repeat;
+  transform: scale(0.9);
+}
+.paintingPlayer2:hover {
+  transform: scale(1);
+  transition: all 200ms ease-in;
+}
+.torch-slantPlayer2 {
+  position: relative;
+  top: -30%;
+  left: 53%;
+  height: 18%;
+  width: 7%;
+  // border: 5px solid orange;
+  background: url(./assets/torch-slant-player2.png) -10px -16px no-repeat;
+  transform: scale(0.9) scaleX(-1);
+}
+.torch-slantPlayer2:hover {
+  transform: scale(1) scaleX(-1);
+  transition: all 200ms ease-in;
+}
+.ratPlayer2 {
+  position: relative;
+  top: 30%;
+  height: 17%;
+  width: 7%;
+  // border: 5px solid purple;
+  background: url(./assets/rat-small-player2.png) no-repeat;
+  transform: scale(0.9);
+}
+.ratPlayer2:hover {
+  transform: scale(1);
+  transition: all 200ms ease-in;
+}
+.torchPlayer2 {
+  position: relative;
+  top: -25%;
+  right: 31%;
+  height: 22%;
+  width: 8%;
+  // border: 5px solid gray;
+  background: url(./assets/torch-player2.png) -10px -7px no-repeat;
+  transform: scale(0.9);
+}
+.torchPlayer2:hover {
+  transform: scale(1);
+  transition: all 200ms ease-in;
+}
+.batPlayer2 {
+  position: relative;
+  top: -20%;
+  height: 12%;
+  width: 10%;
+  // border: 5px solid silver;
+  background: url(./assets/bat-player2.png) no-repeat;
+  transform: scale(0.9);
+}
+.batPlayer2:hover {
+  transform: scale(1);
+  transition: all 200ms ease-in;
 }
 .inventoryContainerBorder {
   max-height: 100%;
@@ -478,7 +575,7 @@ body {
 .userIan {
   position: relative;
   top: -37%;
-  left: 30%;
+  left: 27%;
   height: 23%;
   width: 14%;
   background: url(./assets/ian.png) 50% no-repeat;
@@ -486,7 +583,7 @@ body {
 .userReyn {
   position: relative;
   top: -50%;
-  left: 50%;
+  left: 48%;
 }
 .userChatInput {
   position: relative;
@@ -503,7 +600,7 @@ body {
   width: 25%;
 }
 //userlist page
-.userListMainContainer {
+ .userListMainContainer {
   display: flex;
   justify-content: center;
   height: 900px;
@@ -541,6 +638,33 @@ body {
   height: 73%;
   width: 100%;
 }
+.userListTitle {
+  position: relative;
+  top: -6%;
+  align-self: center;
+}
+.userListMariel {
+  position: relative;
+  top: 8.5%;
+  right: 48.3%;
+  height: 20%;
+  width: 13%;
+  transform: scale(0.8);
+  background: url(./assets/mariel-medium.png) 50% no-repeat;
+}
+.userListIan {
+  position: relative;
+  top: 5%;
+  right: 55%;
+  height: 23%;
+  width: 14%;
+  background: url(./assets/ian.png) 50% no-repeat;
+}
+.userListReyn {
+  position: relative;
+  top: 15%;
+  right: 56%;
+}
 .currentUser {
   display:flex;
   flex-wrap: wrap;
@@ -571,7 +695,7 @@ body {
 .inviteUser {
   position: relative;
   box-sizing: border-box;
-  top: 18%;
+  top: 17.5%;
   left: 28%;
   width: 42%;
   // border: 5px solid cyan;
@@ -582,25 +706,25 @@ body {
   justify-content: center;
   flex-wrap: wrap;
   overflow: auto;
-  height: 23.8%;
-  width: 57%;
-  top: 18%;
-  left: 21.3%;
+  height: 24.3%;
+  width: 58.5%;
+  top: 17.5%;
+  left: 20%;
   padding-left: 5px;
   box-sizing: border-box;
-  border: 1px solid silver;
+  // border: 1px solid red;
 }
 .inviteText {
   // word-break:break-all;
   position: relative;
+  padding-left: 5px;
   box-sizing: border-box;
   // border: 1px solid pink;
 }
 .acceptUser {
   position: relative;
   top: -10%;
-    left: -10%;
-
+  left: -10%;
   height: 13%;
   width: 30%;
   box-sizing: border-box;

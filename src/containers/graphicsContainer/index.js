@@ -59,7 +59,7 @@ render(){
   {
 
     ( localStorage.getItem("player") === "player1" && this.props.winningStatus === undefined ) ?
-      <div className="graphicsContainerPlayer1"> Player 1
+      <div className="stageOneGraphicsContainerPlayer1"> Player 1
           <div className="keyPlayer1" value="good">
           </div>
           <div className="spiderPlayer1" value="good">
@@ -92,34 +92,30 @@ render(){
 
     {
     ( localStorage.getItem("player") === "player2" &&this.props.winningStatus === undefined ) ?
-      <div className="graphicsContainerPlayer2">Player 2 <div className="key">
-
-          </div>
+      <div className="stageOneGraphicsContainerPlayer2">Player 2
           <div className="keyPlayer2" value="good">
           </div>
-          <div className="spiderPlayer2">
+          <div className="spiderPlayer1">
           </div>
-          <div className='voodooPlayer2'>
+          <div className='voodooPlayer1'>
           </div>
-          <div className='wandPlayer2'>
+          <div className='wandPlayer1'>
           </div>
-          <div className='marielPlayer2'>
+          <div className='marielPlayer1'>
           </div>
-          <div className='whipPlayer2'>
+          <div className='whipPlayer1'>
           </div>
           <div className='paintingPlayer2'>
           </div>
-          <div className='ianPlayer2'>
+          <div className='ianPlayer1'>
           </div>
-          <div className='swordPlayer2'>
+          <div className='swordPlayer1'>
           </div>
-          <div className='torchPlayer2'>
+          <div className='torch-slantPlayer1'>
           </div>
-          <div className='torch-slantPlayer2'>
+          <div className='batPlayer1'>
           </div>
-          <div className='batPlayer2'>
-          </div>
-          <div className='ratPlayer2'>
+          <div className='ratPlayer1'>
           </div>
         </div>
             : null
