@@ -1,4 +1,4 @@
-import { /*GET_TEXT, ADD_TEXT, EDIT_TEXT, DELETE_TEXT,*/ MESSAGE_SEND, USER_CONNECT, MESSAGE_RECEIVED, SUCCESSFUL_CONNECTION, USER_DISCONNECTED, CREATE_USERNAME, DECLINE_INVITE, CHAT, CREATED_USER, RECEIVE_INVITE, ENTER_ROOM, BROADCAST_MESSAGE, BROADCAST_SCORE} from './actions';
+import { /*GET_TEXT, ADD_TEXT, EDIT_TEXT, DELETE_TEXT,*/ MESSAGE_SEND, USER_CONNECT, MESSAGE_RECEIVED, SUCCESSFUL_CONNECTION, USER_DISCONNECTED, CREATE_USERNAME, DECLINE_INVITE, CHAT, CREATED_USER, RECEIVE_INVITE, ENTER_ROOM, BROADCAST_MESSAGE, BROADCAST_SCORE, GAME_STATUS} from './actions';
 
 let initialState = { userData:[], invitesFrom : null, // set when someone invites you to game
   goToRoom : false, // idk about this, need a better way to send users to /room route
@@ -8,7 +8,10 @@ let initialState = { userData:[], invitesFrom : null, // set when someone invite
   gameResults:[] };
 
   const textReducers = (state = initialState, action) => {
+
+    console.log('action', action)
     switch (action.type) {
+
 /*    case GET_TEXT:
       return getText(state, action);
     case ADD_TEXT:
@@ -33,6 +36,12 @@ let initialState = { userData:[], invitesFrom : null, // set when someone invite
     return state;
     case MESSAGE_RECEIVED:
     return messageReceived(state, action);
+    case GAME_STATUS:
+    console.log('mfadfnds', action)
+    return {
+      ...state,
+      winningStatus: action.payload.result
+    }
     case CREATE_USERNAME:
     return createUsername(state, action);
     default:
@@ -60,7 +69,8 @@ function messageReceived(state, action) {
     return {
       userData: [ ...state.userData ],
       gameResults: [ ...state.gameResults,
-      messagePayload.score ]
+      messagePayload.score ],
+      winningStatus: undefined
     }
     case RECEIVE_INVITE:
     return {
@@ -69,14 +79,12 @@ function messageReceived(state, action) {
       ],  invitesFrom: messagePayload.sender
     }
     case ENTER_ROOM:
-
     if(messagePayload.player1 === localStorage.getItem("username")){
       localStorage.setItem("player", "player1")
     } else {
       localStorage.setItem("player", "player2")
     }
     localStorage.setItem("roomId", messagePayload.roomId)
-
     return {
       userData: [
       ...state.userData

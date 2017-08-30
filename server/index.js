@@ -16,6 +16,7 @@ const server = http.createServer(app);
 const wss = new WebSocket.Server({ server });
 
 let users = [];
+let usersPlaying = [];
 const rooms = new Map();
 //rooms.set(new_room_id, new Room(new_room_id)) //when you accept an invite set the new room
 
@@ -194,9 +195,11 @@ wss.on('connection', function connection(ws, req) {
           return {username: user.username
           };});
         if( verifySender !== null ){
+          usersPlaying.push(verifySender);
           // create the room,
           //   put both players in it
           //   remove from lobby
+          // insert into current users playing
           const newRoom = new Room(sender, ws);
           // track the room in the map
           rooms.set(newRoom.id, newRoom);
@@ -212,6 +215,30 @@ wss.on('connection', function connection(ws, req) {
             );
         }
         break;
+        case 'NEW_GAME':
+        const partner = usersPlaying.find( user => user.username === payload.username );
+      var verifyPartner = usersPlaying.filter( user =>
+        { return user.username === payload.username; }).map(user =>{
+          return {username: user.username
+          };});
+        if( verifyPartner !== null ){
+          // create the room,
+          //   put both players in it
+          //   remove from lobby
+          // insert into current users playing
+          const newRoom = new Room(partner, ws);
+          // track the room in the map
+          rooms.set(newRoom.id, newRoom);
+          // remove both players from lobby
+        } else {
+          ws.send(
+            JSON.stringify({
+              OP: 'ERROR',
+              message: 'sender is not found or has disconnected'
+            })
+            );
+        }
+        break
         case 'DECLINE_INVITE':
         const declinedSender = users.find( user => user.username = payload.username );
         if( declinedSender !== null ){

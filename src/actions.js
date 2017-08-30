@@ -23,6 +23,8 @@ export const ENTER_ROOM = "ENTER_ROOM"
 export const BROADCAST_MESSAGE = "BROADCAST_MESSAGE"
 export const BROADCAST_SCORE = "BROADCAST_SCORE"
 export const GAME_RESULTS = "GAME_RESULTS"
+export const NEW_GAME = "NEW_GAME"
+export const GAME_STATUS = "GAME_STATUS"
 
 
 export const userConnect = () => {
@@ -97,6 +99,21 @@ export const gameResults = (results) => dispatch => {
     JSON.stringify({
       OP: GAME_RESULTS,
       score : results
+    })
+  );
+
+};
+
+export const checkGameStatus = (results) => dispatch => {
+  console.log('beep', results)
+    dispatch({ type: GAME_STATUS, success: true, payload: results });
+};
+
+export const replayGame = (partner) => dispatch => {
+  socket.send(
+    JSON.stringify({
+      OP: NEW_GAME,
+      username : partner
     })
   );
 

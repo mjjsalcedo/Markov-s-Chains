@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { gameResults } from '../../actions';
+import { gameResults, checkGameStatus } from '../../actions';
 import { Link } from 'react-router-dom';
 
 
@@ -11,6 +11,7 @@ constructor(props) {
 
 
     this.selectedItem = this.selectedItem.bind(this);
+    this.sendWinningStatus = this.sendWinningStatus.bind(this);
 
   }
 
@@ -18,7 +19,13 @@ constructor(props) {
     this.props.gameResults( {score: e.target.getAttribute('value'), roomId: localStorage.getItem("roomId")} );
     }
 
+  sendWinningStatus(value){
+    console.log('value', value)
+    this.props.checkGameStatus({result: value})
+  }
+
 render(){
+  console.log('props', this.props)
   let test = this.props.score.reduce((status, score)=>{
     if(score in status){
       status[score]++;
@@ -32,15 +39,18 @@ render(){
   console.log('graphic props test', test)
 
   if(test.bad >= 3){
-    console.log('you lose!')
+    console.log('you lost')
+    this.sendWinningStatus("lose")
   }
   if(test.good >= 3) {
     console.log('you win!')
+    this.sendWinningStatus("win")
+
    }
   return(
   <div className="graphicsContainerBorder">
   {
-    ( localStorage.getItem("player") === "player1" ) ?
+    ( localStorage.getItem("player") === "player1" && this.props.winningStatus === undefined ) ?
       <div className="graphicsContainer"> Player 1
           <div className="key" value="good">
           </div>
@@ -73,7 +83,7 @@ render(){
           }
 
     {
-    ( localStorage.getItem("player") === "player2" ) ?
+    ( localStorage.getItem("player") === "player2" &&this.props.winningStatus === undefined ) ?
       <div className="graphicsContainer">Player 2 <div className="key">
           </div>
           <div className="spider">
@@ -103,7 +113,22 @@ render(){
         </div>
             : null
           }
-    </div>
+
+  {
+
+    (  this.props.winningStatus !== undefined  ) ?
+      <div className="graphicsContainer">
+          {( this.props.winningStatus === "win") ?
+          <div> YOU WIN!!! </div>
+            :null }
+          {
+          ( this.props.winningStatus === "lose") ?
+          <div> YOU SUCK -_- </div>
+            :null }
+        </div>
+            : null
+          }
+        </div>
   )
 }
 }
@@ -111,7 +136,8 @@ render(){
 const mapStateToProps = (state) => {
   console.log('graphicsContainer', state)
   return {
-    score: state.gameResults
+    score: state.gameResults,
+    winningStatus: state.winningStatus
   };
 };
 
@@ -121,6 +147,9 @@ const mapDispatchToProps = dispatch => {
     },
     gameResults: score => {
       dispatch(gameResults(score));
+    },
+    checkGameStatus: result => {
+      dispatch(checkGameStatus(result))
     }
   };
 };
