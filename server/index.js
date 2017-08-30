@@ -88,7 +88,6 @@ wss.on('connection', function connection(ws, req) {
         return Ngrams.findOne({ where: { trigger: joinedTriggers, context: joinedTriggers}}).then(firstRow =>{
           if (firstRow) {
             cache.map(word => {
-              console.log(word);
               return Ngrams.findOne({ where: { context: joinedTriggers, word: word} }).then(row => {
                 if (row) {
                   row.update ( {
@@ -123,6 +122,7 @@ wss.on('connection', function connection(ws, req) {
             });
           }
         }).then(resetValues => {
+
           messageChain.trigger = messageChain.response;
           messageChain.response = [payload.message];
           modifiedMessage = payload.message.message
@@ -132,6 +132,25 @@ wss.on('connection', function connection(ws, req) {
           triggerCache = [modifiedMessage];
 
           room.broadcast('BROADCAST_MESSAGE', {message: payload.message.message});
+
+          let markovArray = [];
+          function recurseThroughDb(word){
+            if (markovArray.indexOf('#') > -1){
+              let markovSentence = markovArray.join(' ');
+              console.log('THIS IS THE SENTENCE!',markovSentence);
+              return room.broadcast('BROADCAST_MESSAGE', { message: markovSentence });
+            }
+            return Ngrams.findOne({ where: { trigger: word, context: modifiedMessage }, attributes: ['word']}).then(nextWord => {
+              if (nextWord){
+                markovArray.push(nextWord.word);
+                recurseThroughDb(nextWord.word);
+              }else{
+                markovArray.push('#');
+              }
+            });
+          }
+          recurseThroughDb(modifiedMessage);
+
         });
       }
       room.broadcast('BROADCAST_MESSAGE', {message: payload.message.message});
