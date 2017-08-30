@@ -122,6 +122,29 @@ wss.on('connection', function connection(ws, req) {
             });
           }
         }).then(resetValues => {
+          room.broadcast('BROADCAST_MESSAGE', {message: payload.message.message});
+
+          let markovArray = [];
+
+          function recurseThroughDb(trig, con){
+
+            if (markovArray.indexOf('#') > -1){
+              let markovSentence = markovArray.join(' ');
+              console.log('THIS IS THE SENTENCE!',markovSentence);
+              return room.broadcast('BROADCAST_MESSAGE', { message: markovSentence });
+            }
+            return Ngrams.findOne({ where: { trigger: trig, context: con }, attributes: ['word']}).then(nextWord => {
+              if (nextWord){
+                console.log(nextWord.word);
+                markovArray.push(nextWord.word);
+                recurseThroughDb(nextWord.word, joinedTriggers);
+              }else{
+                markovArray.push('#');
+              }
+            });
+          }
+          console.log(joinedTriggers);
+          recurseThroughDb(joinedTriggers, joinedTriggers);
 
           messageChain.trigger = messageChain.response;
           messageChain.response = [payload.message];
@@ -130,29 +153,9 @@ wss.on('connection', function connection(ws, req) {
           .replace(/\s{2,}/g,"").toLowerCase();
           messageCache = [modifiedMessage];
           triggerCache = [modifiedMessage];
-
-          room.broadcast('BROADCAST_MESSAGE', {message: payload.message.message});
-
-          let markovArray = [];
-          function recurseThroughDb(word){
-            if (markovArray.indexOf('#') > -1){
-              let markovSentence = markovArray.join(' ');
-              console.log('THIS IS THE SENTENCE!',markovSentence);
-              return room.broadcast('BROADCAST_MESSAGE', { message: markovSentence });
-            }
-            return Ngrams.findOne({ where: { trigger: word, context: modifiedMessage }, attributes: ['word']}).then(nextWord => {
-              if (nextWord){
-                markovArray.push(nextWord.word);
-                recurseThroughDb(nextWord.word);
-              }else{
-                markovArray.push('#');
-              }
-            });
-          }
-          recurseThroughDb(modifiedMessage);
-
         });
       }
+
       room.broadcast('BROADCAST_MESSAGE', {message: payload.message.message});
       break;
 
@@ -242,21 +245,21 @@ var verifySender = users.filter( user =>
 
         let foundPartner = usersPlaying.find( user => {
           return payload.invite.roomId == user.roomId && user.username !== payload.invite.username })
-          if( foundPartner !== undefined ){
-            foundPartner.send(
-              JSON.stringify({
-                OP: 'RECEIVE_REPLAY_INVITE',
-                sender: ws.username
-              })
-              );
-          } else {
-            ws.send(
-              JSON.stringify({
-                OP: 'ERROR',
-                message: 'username is not found or has disconnected'
-              })
-              );
-          }
+        if( foundPartner !== undefined ){
+          foundPartner.send(
+            JSON.stringify({
+              OP: 'RECEIVE_REPLAY_INVITE',
+              sender: ws.username
+            })
+            );
+        } else {
+          ws.send(
+            JSON.stringify({
+              OP: 'ERROR',
+              message: 'username is not found or has disconnected'
+            })
+            );
+        }
         break;
         case 'NEW_GAME':
         const partner = usersPlaying.find( user => user.username === payload.username );
@@ -266,43 +269,43 @@ var verifySender = users.filter( user =>
             };});
           if( verifyPartner !== null ){
 
-          const newRoom = new Room(partner, ws);
-          rooms.set(newRoom.id, newRoom);
-          usersPlaying = usersPlaying.filter( user => user.username !== ws.username && user.username !== verifyPartner[0].username);
-          ws.roomId = newRoom.id;
-          partner.roomId = newRoom.id
-          usersPlaying.push(partner)
-          usersPlaying.push(ws)
+            const newRoom = new Room(partner, ws);
+            rooms.set(newRoom.id, newRoom);
+            usersPlaying = usersPlaying.filter( user => user.username !== ws.username && user.username !== verifyPartner[0].username);
+            ws.roomId = newRoom.id;
+            partner.roomId = newRoom.id
+            usersPlaying.push(partner)
+            usersPlaying.push(ws)
 
-        } else {
-          ws.send(
-            JSON.stringify({
-              OP: 'ERROR',
-              message: 'sender is not found or has disconnected'
-            })
-            );
+          } else {
+            ws.send(
+              JSON.stringify({
+                OP: 'ERROR',
+                message: 'sender is not found or has disconnected'
+              })
+              );
+          }
+          break
+          case 'DECLINE_INVITE':
+          const declinedSender = users.find( user => user.username = payload.username );
+          if( declinedSender !== null ){
+            declinedSender.send(
+              JSON.stringify({
+                OP: 'INVITE_DECLINED',
+                username: ws.username
+              })
+              );
+          } else {
+            ws.send(
+              JSON.stringify({
+                OP: 'ERROR',
+                message: 'sender is not found or has disconnected'
+              })
+              );
+          }
+          break;
         }
-        break
-        case 'DECLINE_INVITE':
-        const declinedSender = users.find( user => user.username = payload.username );
-        if( declinedSender !== null ){
-          declinedSender.send(
-            JSON.stringify({
-              OP: 'INVITE_DECLINED',
-              username: ws.username
-            })
-            );
-        } else {
-          ws.send(
-            JSON.stringify({
-              OP: 'ERROR',
-              message: 'sender is not found or has disconnected'
-            })
-            );
-        }
-        break;
-      }
-    });
+      });
 
 ws.send(
   JSON.stringify({
@@ -321,6 +324,28 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/api', apiRoutes);*/
 
 server.listen(PORT,'0.0.0.0', ()=> {
-  /*db.sequelize.sync();*/
+  /*db.sequelize.sync({force: true});*/
   console.log(`listening on ${PORT}`);
 });
+
+function stringIntoThirds(string){
+  splitString = string.split(' ');
+  switch(splitString.length){
+    case(1):
+    stringArray.push(splitString);
+    return stringArray;
+    case(2):
+    stringArray.push(splitString[0]);
+    stringArray.push(splitString[1]);
+    return stringArray;
+    default:
+    dividend = splitString.length/3;
+    dividendCache = dividend;
+    for (let i = 0; i < splitString.length; i+=dividendCache){
+      let thirds = splitString.slice(i, dividend);
+      stringArray.push(thirds.join(' '));
+      dividend+=dividendCache;
+    }
+    return stringArray;
+  }
+}

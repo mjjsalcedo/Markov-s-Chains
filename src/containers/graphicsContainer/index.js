@@ -92,7 +92,7 @@ render(){
 
     {
     ( localStorage.getItem("player") === "player2" &&this.props.winningStatus === undefined ) ?
-      <div className="graphicsContainer">Player 2 <div className="key">
+      <div className="graphicsContainerPlayer2">Player 2 <div className="key">
 
           </div>
           <div className="keyPlayer2" value="good">
