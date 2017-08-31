@@ -15,10 +15,8 @@ let initialState = {
 
   const textReducers = (state = initialState, action) => {
 
-    console.log('action', action)
     switch (action.type) {
     case MESSAGE_SEND:
-    console.log("SEND reducer", action.payload);
     return {
       ...state,
       userData: [
@@ -30,12 +28,10 @@ let initialState = {
       ]
     }
     case USER_CONNECT:
-    console.log("CONNECT reducer", action);
     return state;
     case MESSAGE_RECEIVED:
     return messageReceived(state, action);
     case GAME_STATUS:
-    console.log('mfadfnds', action)
     return {
       ...state,
       winningStatus: action.payload.result
@@ -49,7 +45,6 @@ let initialState = {
 
 function messageReceived(state, action) {
   let messagePayload = JSON.parse(action.payload);
-  console.log('messagePayload reducer', messagePayload)
   switch (messagePayload.OP) {
 
     case SUCCESSFUL_CONNECTION:

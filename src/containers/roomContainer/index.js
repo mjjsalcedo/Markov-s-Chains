@@ -29,7 +29,6 @@ class RoomContainer extends Component {
 }
 
 const mapStateToProps = state => {
-  console.log(state);
   return {
     player1: state.player1,
     player2: state.player2

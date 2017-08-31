@@ -34,7 +34,6 @@ constructor(props) {
   }
 
   displayPlayAgain(){
-    console.log('sanity check one')
     this.props.anotherInvite({username: localStorage.getItem("username"), roomId: localStorage.getItem("roomId")})
   }
 
@@ -182,7 +181,6 @@ render(){
 }
 
 const mapStateToProps = (state) => {
-  console.log('graphicsContainer', state)
   return {
     score: state.gameResults,
     winningStatus: state.winningStatus,
