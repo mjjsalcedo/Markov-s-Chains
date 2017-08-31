@@ -80,7 +80,6 @@ if(this.props.goToRoom){
 }
 
 const mapStateToProps = (state) => {
-  console.log('testselect', state)
   return {
     username: state.userData,
     invitesFrom : state.invitesFrom,

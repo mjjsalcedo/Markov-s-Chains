@@ -9,7 +9,6 @@ let initialState = { userData:[], invitesFrom : null, // set when someone invite
 
   const textReducers = (state = initialState, action) => {
 
-    console.log('action', action)
     switch (action.type) {
 
 /*    case GET_TEXT:
@@ -21,7 +20,6 @@ let initialState = { userData:[], invitesFrom : null, // set when someone invite
     case DELETE_TEXT:
     return deleteText(state, action);*/
     case MESSAGE_SEND:
-    console.log("SEND reducer", action.payload);
     return {
       userData: [
       ...state.userData,
@@ -32,12 +30,10 @@ let initialState = { userData:[], invitesFrom : null, // set when someone invite
       ]
     }
     case USER_CONNECT:
-    console.log("CONNECT reducer", action);
     return state;
     case MESSAGE_RECEIVED:
     return messageReceived(state, action);
     case GAME_STATUS:
-    console.log('mfadfnds', action)
     return {
       ...state,
       winningStatus: action.payload.result
@@ -51,7 +47,6 @@ let initialState = { userData:[], invitesFrom : null, // set when someone invite
 
 function messageReceived(state, action) {
   let messagePayload = JSON.parse(action.payload);
-  console.log('messagePayload reducer', messagePayload)
   switch (messagePayload.OP) {
 
     case SUCCESSFUL_CONNECTION:

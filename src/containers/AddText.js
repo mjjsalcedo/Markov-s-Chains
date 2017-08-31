@@ -13,7 +13,6 @@ class AddText extends React.Component {
 
   textInput(e) {
     this.setState({ word: e.target.value });
-    console.log('e', e.target.value)
   }
 
   handleSubmit(e) {
