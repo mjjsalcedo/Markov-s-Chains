@@ -49,6 +49,7 @@ if(this.props.goToRoom){
     return (
       <div className='userListMainContainer'>
       <div className='userListBorder'>
+      <h1 className='userListTitle'> MIRKOV </h1>
       <div className="userListContainer">
       {this.props.username.filter(userData => {
         return userData.username === localStorage.getItem("username")}).map(username => {
@@ -74,6 +75,13 @@ if(this.props.goToRoom){
           }
       </div>
       </div>
+      <div className='userListMariel'>
+        </div>
+        <div className='userListIan'>
+        </div>
+        <div className='userListReyn'>
+        Reyn
+        </div>
       </div>
       )
   }
