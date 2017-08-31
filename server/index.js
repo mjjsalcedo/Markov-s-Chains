@@ -38,17 +38,34 @@ wss.on('connection', function connection(ws, req) {
 
   ws.on('close', function (){
     console.log(`${ws.username} has disconnected`);
-    users.splice( users.indexOf(ws), 1 );
-    // also broadcast to all other users
-    users.forEach(user => {
-      user.send(
-        JSON.stringify({
-          OP: 'USER_DISCONNECTED', // all users not in room
-          username: ws.username // could be undefined
-        })
-        );
+
+    let usersWaiting = users.find(user => user.username === ws.username)
+    let usersInGame = usersPlaying.find(user => user.username === ws.username)
+
+    if (usersWaiting !== undefined) {
+      users.splice( users.indexOf(ws), 1 )
+      users.forEach(user => {
+        user.send(
+          JSON.stringify({
+            OP: 'USER_DISCONNECTED', // all users not in room
+            username: ws.username // could be undefined
+          })
+          );
+      });
+    };
+
+    if (usersInGame !== undefined) {
+      let partner = usersPlaying.find(user => {
+        return user.roomId === ws.roomId && user.username !== ws.username });
+      usersPlaying.splice( usersPlaying.indexOf(ws), 1 )
+        partner.send(
+          JSON.stringify({
+            OP: 'USER_DISCONNECTED', // all users not in room
+            username: ws.username // could be undefined
+          })
+          );
+      }
     });
-  });
 
   ws.on('message', function incoming(message) {
     let payload = JSON.parse(message);
@@ -181,43 +198,38 @@ wss.on('connection', function connection(ws, req) {
       });
       break;
 
+      case 'GAME_RESULTS':
+      console.log(payload);
+      let roomGraphic = rooms.get(parseInt(payload.score.roomId));
+      roomGraphic.broadcast('BROADCAST_SCORE', {score: payload.score.score});
+      break;
 
-/*const newState = Object.assign({}, ...state, userData:[..state.userData,{id:action.payload.id, username:action.payload.username, message:action.payload.message}])
-
-return Object.assign({}, ...state, gameResults:[messagePayload.score]);*/
-
-case 'GAME_RESULTS':
-console.log(payload);
-let roomGraphic = rooms.get(parseInt(payload.score.roomId));
-roomGraphic.broadcast('BROADCAST_SCORE', {score: payload.score.score});
-break;
-
-case 'SEND_INVITE':
-const invitedUser = users.find( user => user.username === payload.invite.username );
-if( invitedUser !== undefined ){
-  invitedUser.send(
-    JSON.stringify({
-      OP: 'RECEIVE_INVITE',
-      sender: ws.username
-    })
-    );
-} else {
-  ws.send(
-    JSON.stringify({
-      OP: 'ERROR',
-      message: 'username is not found or has disconnected'
-    })
-    );
-}
-break;
-case 'ACCEPT_INVITE':
-const sender = users.find( user => user.username === payload.username );
-var verifySender = users.filter( user =>
-  { return user.username === payload.username; }).map(user =>{
-    return {username: user.username
-    };});
-  if( verifySender !== null ){
-    let extracted = verifySender[0]
+      case 'SEND_INVITE':
+      const invitedUser = users.find( user => user.username === payload.invite.username );
+      if( invitedUser !== undefined ){
+        invitedUser.send(
+          JSON.stringify({
+            OP: 'RECEIVE_INVITE',
+            sender: ws.username
+          })
+          );
+      } else {
+        ws.send(
+          JSON.stringify({
+            OP: 'ERROR',
+            message: 'username is not found or has disconnected'
+          })
+          );
+      }
+      break;
+      case 'ACCEPT_INVITE':
+      const sender = users.find( user => user.username === payload.username );
+      var verifySender = users.filter( user =>
+        { return user.username === payload.username; }).map(user =>{
+          return {username: user.username
+          };});
+        if( verifySender !== null ){
+          let extracted = verifySender[0]
           // create the room,
           //   put both players in it
           //   remove from lobby
