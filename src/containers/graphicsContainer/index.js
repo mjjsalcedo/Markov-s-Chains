@@ -6,7 +6,7 @@ import { Link} from 'react-router-dom';
 
 class GraphicsContainer extends Component {
 
-constructor(props) {
+  constructor(props) {
     super(props);
 
     this.state = {
@@ -34,7 +34,6 @@ constructor(props) {
   }
 
   displayPlayAgain(){
-    console.log('sanity check one')
     this.props.anotherInvite({username: localStorage.getItem("username"), roomId: localStorage.getItem("roomId")})
   }
 
@@ -43,96 +42,96 @@ constructor(props) {
   }
 
 
-render(){
-  if (this.props.score !== undefined) {
-  let test = this.props.score.reduce((status, score)=>{
-    if(score in status){
-      status[score]++;
+  render(){
+    if (this.props.score !== undefined) {
+      let test = this.props.score.reduce((status, score)=>{
+        if(score in status){
+          status[score]++;
+        }
+        else {
+          status[score] = 1
+        }
+        return status;
+      }, {});
+      if(test.bad >= 3){
+        this.sendWinningStatus("lose")
+      }
+      if(test.good >= 3) {
+        this.sendWinningStatus("win")
+      }
     }
-    else {
-      status[score] = 1
-    }
-    return status;
-  }, {});
-  if(test.bad >= 3){
-    this.sendWinningStatus("lose")
-  }
-  if(test.good >= 3) {
-    this.sendWinningStatus("win")
-   }
-  }
+      console.log('thisprops', this.props)
 
-  return(
-  <div className="graphicsContainerBorder">
-  {
+    return(
+      <div className="graphicsContainerBorder">
+      {
 
-    ( localStorage.getItem("player") === "player1" && this.props.winningStatus === null ) ?
-      <div className="stageOneGraphicsContainerPlayer1"> Player 1
-          <div className="keyPlayer1" value="good" onClick={this.selectedItem}>
-          </div>
-          <div className="spiderPlayer1" value="good" onClick={this.selectedItem}>
-          </div>
-          <div className='voodooPlayer1' value="bad" onClick={this.selectedItem}>
-          </div>
-          <div className='wandPlayer1' value="bad" onClick={this.selectedItem}>
-          </div>
-          <div className='marielPlayer1' value="bad">
-          </div>
-          <div className='whipPlayer1' value="good">
-          </div>
-          <div className='paintingPlayer1' value="bad">
-          </div>
-          <div className='ianPlayer1' value="bad">
-          </div>
-          <div className='swordPlayer1' value="bad">
-          </div>
-          <div className='torchPlayer1' value="bad">
-          </div>
-          <div className='torch-slantPlayer1' value="bad">
-          </div>
-          <div className='batPlayer1' value="bad">
-          </div>
-          <div className='ratPlayer1' value="bad">
-          </div>
+        ( localStorage.getItem("player") === "player1" && this.props.winningStatus === null ) ?
+        <div className="stageOneGraphicsContainerPlayer1"> Player 1
+        <div className='keyPlayer1' value="good" onClick={this.selectedItem}>
         </div>
-            : null
-          }
-
-    {
-
-    ( localStorage.getItem("player") === "player2" &&this.props.winningStatus === null ) ?
-      <div className="stageOneGraphicsContainerPlayer2">Player 2
-
-          <div className="keyPlayer2" value="good">
-          </div>
-          <div className="spiderPlayer1">
-          </div>
-          <div className='voodooPlayer1'>
-          </div>
-          <div className='wandPlayer1'>
-          </div>
-          <div className='marielPlayer1'>
-          </div>
-          <div className='whipPlayer1'>
-          </div>
-          <div className='paintingPlayer2'>
-          </div>
-          <div className='ianPlayer1'>
-          </div>
-          <div className='swordPlayer1'>
-          </div>
-          <div className='torch-slantPlayer1'>
-          </div>
-          <div className='batPlayer1'>
-          </div>
-          <div className='ratPlayer1'>
-          </div>
+        <div className='spiderPlayer1' value="good" onClick={this.selectedItem}>
         </div>
-            : null
-          }
+        <div className='voodooPlayer1' value="bad" onClick={this.selectedItem}>
+        </div>
+        <div className='wandPlayer1' value="bad" onClick={this.selectedItem}>
+        </div>
+        <div className={this.props.isVisible === true ? 'marielPlayer1' : 'hidden'} value="bad" onClick={this.selectedItem}>
+        </div>
+        <div className='whipPlayer1' value="good">
+        </div>
+        <div className='paintingPlayer1' value="bad">
+        </div>
+        <div className={this.props.isVisible === true ? 'ianPlayer1' : 'hidden'} value="bad">
+        </div>
+        <div className='swordPlayer1' value="bad">
+        </div>
+        <div className='torchPlayer1' value="bad">
+        </div>
+        <div className='torch-slantPlayer1' value="bad">
+        </div>
+        <div className='batPlayer1' value="bad">
+        </div>
+        <div className='ratPlayer1' value="bad">
+        </div>
+        </div>
+        : null
+      }
 
-  {
+      {
 
+        ( localStorage.getItem("player") === "player2" && this.props.winningStatus === null ) ?
+        <div className="stageOneGraphicsContainerPlayer2">Player 2
+
+        <div className="keyPlayer2" value="good">
+        </div>
+        <div className="spiderPlayer1">
+        </div>
+        <div className='voodooPlayer1'>
+        </div>
+        <div className='wandPlayer1'>
+        </div>
+        <div className='marielPlayer1'>
+        </div>
+        <div className='whipPlayer1'>
+        </div>
+        <div className='paintingPlayer2'>
+        </div>
+        <div className='ianPlayer1'>
+        </div>
+        <div className='swordPlayer1'>
+        </div>
+        <div className='torch-slantPlayer1'>
+        </div>
+        <div className='batPlayer1'>
+        </div>
+        <div className='ratPlayer1'>
+        </div>
+        </div>
+        : null
+      }
+
+      {
 
     (  this.props.winningStatus !== null  ) ?
       <div className='winLoseContainer'>
@@ -144,10 +143,9 @@ render(){
           <Link to="/"><button className='quit btn'>Home</button></Link>
           </div>
           </div>
+        :null }
 
-            :null }
-
-          {
+        {
 
           ( this.props.winningStatus === "lose") ?
           <div className='endContainer'>
@@ -162,8 +160,7 @@ render(){
             : null
           }
 
-      {
-
+        {
             ( this.props.reinvitesFrom !== null ) ?
                <div className='replayContainer'>
                 <p className='replay'>
@@ -180,7 +177,7 @@ render(){
 }
 
 const mapStateToProps = (state) => {
-  console.log('graphicsContainer', state)
+  console.log('graphics state', state)
   return {
     score: state.gameResults,
     winningStatus: state.winningStatus,
@@ -210,6 +207,6 @@ const mapDispatchToProps = dispatch => {
 
 GraphicsContainer = connect(mapStateToProps, mapDispatchToProps)(
   GraphicsContainer
-);
+  );
 
 export default GraphicsContainer;
