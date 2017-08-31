@@ -135,14 +135,13 @@ render(){
 
 
     (  this.props.winningStatus !== null  ) ?
-      <div className="graphicsContainerBorder">
       <div className='winLoseContainer'>
           {( this.props.winningStatus === "win") ?
           <div className='endContainer'>
           <h2 className='endText'> YOU WIN </h2>
           <div className='playAgainContainer'>
           <button className='playAgain' onClick={this.displayPlayAgain}>Play Again?</button>
-          <Link to="/"><button className='quit'>Quit</button></Link>
+          <Link to="/"><button className='quit'>Home</button></Link>
           </div>
           </div>
 
@@ -155,11 +154,10 @@ render(){
           <h2 className='endText'> YOU LOSE </h2>
           <div className='playAgainContainer'>
           <button className='playAgain' onClick={this.displayPlayAgain}>Play Again?</button>
-          <Link to="/"><button className='quit'>Quit</button></Link>
+          <Link to="/"><button className='quit'>Home</button></Link>
           </div>
           </div>
             :null }
-        </div>
         </div>
             : null
           }
@@ -172,7 +170,7 @@ render(){
                   You were invited to replay a game with { this.props.reinvitesFrom }
                 </p>
                 <button className='replayAccept' onClick={this.onClickAccept} type="button">Accept</button>
-                <button className='replayDecline' onClick={this.onClickDecline} type="button">DECLINE</button>
+                <button className='replayDecline' onClick={this.onClickDecline} type="button">Decline</button>
               </div>
             : null
           }

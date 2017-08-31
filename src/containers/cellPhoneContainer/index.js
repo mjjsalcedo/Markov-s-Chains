@@ -50,7 +50,7 @@ class CellPhoneContainer extends Component {
             onChange={this.messageInput.bind(this)}
           />
           <button type="submit" className="sendButton">
-            Send Message
+            Send
           </button>
         </form>
       </div>

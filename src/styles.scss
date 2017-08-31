@@ -1,16 +1,3 @@
-// mainContainer
-//   cellPhoneContainer
-//     chatMessagesBox
-//     chatKeysBox
-//       chatKeys
-//   graphicsContainer
-//   inventoryContainer
-//   storyContainer
-@font-face {
-  font-family: OregonTrail;
-  src: url('./assets/OregonTrail.ttf') format('truetype');
-  font-weight: bold;
-}
 @keyframes bounce {
   0% {
     top: 0px;
@@ -74,7 +61,7 @@ body {
 }
 button {
   font-family: OregonTrail;
-background-color: #4CAF50; /* Green */
+  background-color: #4CAF50;
     border: none;
     color: white;
     padding: 10px;
@@ -83,10 +70,6 @@ background-color: #4CAF50; /* Green */
     display: inline-block;
     font-size: 12px
 }
-//parents are maincontainer
-//phone container parent of messagebox, chatinput, and sendbutton
-//messagebox is a parent to messages
-//inventory container will be a parent of divs for items
 .mainContainer {
   display: flex;
   height: 600px;
@@ -144,7 +127,6 @@ background-color: #4CAF50; /* Green */
   box-sizing: border-box;
   padding: 5px;
   height: 300px;
-  // border: 5px solid pink;
   border: 10px solid transparent;
   border-image-source: url(./assets/border.png);
   border-image-slice: 20 22;
@@ -158,7 +140,6 @@ background-color: #4CAF50; /* Green */
   left: 30%;
   height: 47%;
   width: 11%;
-  // border: 5px solid red;
   background: url(./assets/mariel-medium.png) -50px no-repeat;
   transform: scale(0.9) scaleX(-1);
 }
@@ -172,7 +153,6 @@ background-color: #4CAF50; /* Green */
   left: 8%;
   height: 31%;
   width: 15%;
-  // border: 5px solid black;
   background: url(./assets/whip-big.png) -10px no-repeat;
   transform: scale(0.9) scaleX(-1);
 }
@@ -186,7 +166,6 @@ background-color: #4CAF50; /* Green */
   left: 53%;
   height: 11%;
   width: 5%;
-  // border: 5px solid green;
   background: url(./assets/key.png) -5px no-repeat;
   transform: scale(0.9);
 }
@@ -200,7 +179,6 @@ background-color: #4CAF50; /* Green */
   right: 12%;
   height: 15%;
   width: 10%;
-  // border: 5px solid yellow;
   background: url(./assets/spider.png) no-repeat;
   transform: scale(0.9);
 }
@@ -215,7 +193,6 @@ background-color: #4CAF50; /* Green */
   left: 50%;
   height: 18%;
   width: 10%;
-  // border: 5px solid pink;
   background: url(./assets/voodoo-big.png) 5px -3px no-repeat;
   transform: scale(0.9);
 }
@@ -229,7 +206,6 @@ background-color: #4CAF50; /* Green */
   right: 41.5%;
   height: 13%;
   width: 7%;
-  // border: 5px solid blue;
   background: url(./assets/wand-big.png) -15px no-repeat;
   transform: scale(0.9);
 }
@@ -243,7 +219,6 @@ background-color: #4CAF50; /* Green */
   left: -22%;
   height: 27%;
   width: 13%;
-  // border: 5px solid cyan;
   background: url(./assets/painting.png) no-repeat;
   transform: scale(0.9);
 }
@@ -254,7 +229,6 @@ background-color: #4CAF50; /* Green */
 .ianPlayer1 {
   height: 55%;
   width: 12%;
-  // border: 5px solid magenta;
   background: url(./assets/ian.png) -50px no-repeat;
   transform: scale(0.9);
 }
@@ -268,7 +242,6 @@ background-color: #4CAF50; /* Green */
   left: 53%;
   height: 18%;
   width: 7%;
-  // border: 5px solid orange;
   background: url(./assets/torch-slant.png) -10px -16px no-repeat;
   transform: scale(0.9) scaleX(-1);
 }
@@ -281,7 +254,6 @@ background-color: #4CAF50; /* Green */
   top: 30%;
   height: 17%;
   width: 7%;
-  // border: 5px solid purple;
   background: url(./assets/rat-small.png) no-repeat;
   transform: scale(0.9);
 }
@@ -295,7 +267,6 @@ background-color: #4CAF50; /* Green */
   right: 31%;
   height: 22%;
   width: 8%;
-  // border: 5px solid gray;
   background: url(./assets/torch.png) -10px -7px no-repeat;
   transform: scale(0.9);
 }
@@ -309,7 +280,6 @@ background-color: #4CAF50; /* Green */
   top: -20%;
   height: 12%;
   width: 10%;
-  // border: 5px solid silver;
   background: url(./assets/bat.png) no-repeat;
   transform: scale(0.9);
 }
@@ -323,7 +293,6 @@ background-color: #4CAF50; /* Green */
   right: -12.5%;
   height: 10%;
   width: 20%;
-  // border: 5px solid gold;
   background: url(./assets/sword.png) no-repeat;
   transform: scale(0.9);
 }
@@ -338,7 +307,6 @@ background-color: #4CAF50; /* Green */
   box-sizing: border-box;
   padding: 5px;
   height: 300px;
-  // border: 5px solid pink;
   border: 10px solid transparent;
   border-image-source: url(./assets/border.png);
   border-image-slice: 20 22;
@@ -352,7 +320,6 @@ background-color: #4CAF50; /* Green */
   left: 53%;
   height: 11%;
   width: 5%;
-  // border: 5px solid green;
   background: url(./assets/key-player2.png) -5px no-repeat;
   transform: scale(0.9);
 }
@@ -366,7 +333,6 @@ background-color: #4CAF50; /* Green */
   right: 12%;
   height: 15%;
   width: 10%;
-  // border: 5px solid yellow;
   background: url(./assets/spider-player2.png) no-repeat;
   transform: scale(0.9);
 }
@@ -381,7 +347,6 @@ background-color: #4CAF50; /* Green */
   left: -22%;
   height: 27%;
   width: 13%;
-  // border: 5px solid cyan;
   background: url(./assets/painting-player2.png) no-repeat;
   transform: scale(0.9);
 }
@@ -395,7 +360,6 @@ background-color: #4CAF50; /* Green */
   left: 53%;
   height: 18%;
   width: 7%;
-  // border: 5px solid orange;
   background: url(./assets/torch-slant-player2.png) -10px -16px no-repeat;
   transform: scale(0.9) scaleX(-1);
 }
@@ -408,7 +372,6 @@ background-color: #4CAF50; /* Green */
   top: 30%;
   height: 17%;
   width: 7%;
-  // border: 5px solid purple;
   background: url(./assets/rat-small-player2.png) no-repeat;
   transform: scale(0.9);
 }
@@ -422,7 +385,6 @@ background-color: #4CAF50; /* Green */
   right: 31%;
   height: 22%;
   width: 8%;
-  // border: 5px solid gray;
   background: url(./assets/torch-player2.png) -10px -7px no-repeat;
   transform: scale(0.9);
 }
@@ -435,7 +397,6 @@ background-color: #4CAF50; /* Green */
   top: -20%;
   height: 12%;
   width: 10%;
-  // border: 5px solid silver;
   background: url(./assets/bat-player2.png) no-repeat;
   transform: scale(0.9);
 }
@@ -488,7 +449,6 @@ background-color: #4CAF50; /* Green */
   border-image-source: url(./assets/border.png);
   border-image-slice: 20 22;
   border-image-repeat: round;
-  // border: 5px solid red;
 }
 .messageBox {
   display: -ms-flexbox;
@@ -500,10 +460,10 @@ background-color: #4CAF50; /* Green */
   -ms-flex-direction: column;
   flex-direction: column;
   overflow: auto;
-  margin-top: 99.7%;
+  position: relative;
+  margin-top: 85%;
   height: 403px;
   width: 290%;
-  // border: 1px solid red;
 }
 .message {
   word-wrap: break-word;
@@ -511,26 +471,23 @@ background-color: #4CAF50; /* Green */
   padding: 2px;
   font-size: 12px;
   white-space: pre-wrap;
-  // border: 5px solid red;
 }
 .cellPhoneform {
   display: block;
   margin-top: 0em;
 }
 .chatInput {
-  // border: 1px solid blue;
-  height: 33px;
+  height: 37px;
   width: 99.7%;
   resize: none;
 }
 .sendButton {
-  height: 3.5%;
+  position: relative;
   width: 60%;
-  margin-left: 20%;
-  margin-top: 12%;
+  left: 21%;
+  top: 15px;
+  height: 32px;
 }
-
-//username page
 .usernameMainContainer {
   display: flex;
   justify-content: center;
@@ -610,7 +567,6 @@ background-color: #4CAF50; /* Green */
   left: 36%;
   width: 25%;
 }
-//userlist page
  .userListMainContainer {
   display: flex;
   justify-content: center;
@@ -687,7 +643,6 @@ background-color: #4CAF50; /* Green */
   left: 21.2%;
   padding: 5px 0 0 7px;
   box-sizing: border-box;
-  // border: 1px solid purple;
 }
 .userList {
   display:flex;
@@ -701,7 +656,6 @@ background-color: #4CAF50; /* Green */
   left: 21.2%;
   padding: 5px 0 0 7px;
   box-sizing: border-box;
-  // border: 1px solid blue;
 }
 .listOfUsers {
   border: 1px solid red;
@@ -713,7 +667,6 @@ background-color: #4CAF50; /* Green */
   top: 17.5%;
   left: 28%;
   width: 42%;
-  // border: 5px solid cyan;
 }
 .inviteForm {
   position: relative;
@@ -727,77 +680,75 @@ background-color: #4CAF50; /* Green */
   left: 20%;
   padding-left: 5px;
   box-sizing: border-box;
-  // border: 1px solid red;
 }
 .inviteText {
-  // word-break:break-all;
   position: relative;
   padding-left: 5px;
   box-sizing: border-box;
-  // border: 1px solid pink;
 }
 .acceptUser {
   position: relative;
   top: -10%;
-  left: -10%;
-  height: 13%;
-  width: 30%;
+  left: -3%;
+  height: 20%;
+  width: 45%;
   box-sizing: border-box;
-  // border: 5px solid green;
 }
 .declineUser {
   position: relative;
   top: -10%;
-  left: -10%;
-  height: 13%;
-  width: 30%;
+  height: 20%;
+  width: 45%;
   box-sizing: border-box;
-  // border: 5px solid black;
-}
-//win/lose screen
-.graphicsContainerBorder {
-  max-height: 100%;
-  max-width: 100%;
-  border: 10px solid transparent;
-  border-image-source: url(./assets/border.png);
-  border-image-slice: 20 22;
-  border-image-repeat: stretch;
 }
 .winLoseContainer {
   display: flex;
   flex-direction: row;
   box-sizing: border-box;
   height: 300px;
-  width: 540px;
-  background-color: black;
+  width: 100%;
+  background-color: yellow;
+  border: 10px solid transparent;
+  border-image-source: url(./assets/border.png);
+  border-image-slice: 20 22;
+  border-image-repeat: stretch;
 }
 .endText {
   position: relative;
   top: -15%;
-  left: -0.2%;
-  height: 185px;
-  width: 529px;
+  left: 20%;
+  height: 40%;
+  width: 100%;
   padding: 10px;
   color: red;
   font-size: 50px;
-  // border: 1px solid green;
 }
 .playAgainContainer {
   position: relative;
   top: -29%;
-  // border: 1px solid red;
   height: 105px;
   width: 100%;
 }
 .quit{
   position: relative;
-  // top: 30%;
   left: 40%;
-  // width: 20%;
+  height: 40%;
 }
 .playAgain {
   position: relative;
-  // top: 60%;
   left: 20%;
-  height: 20%;
+  height: 40%;
+}
+.replay {
+  padding: 5px;
+}
+.replayAccept {
+  position: relative;
+  top: -20px;
+  left: 30%;
+}
+.replayDecline {
+  position: relative;
+  top: -20px;
+  left: 35%;
 }
