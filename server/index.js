@@ -324,7 +324,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/api', apiRoutes);*/
 
 server.listen(PORT,'0.0.0.0', ()=> {
-  /*db.sequelize.sync({force: true});*/
+  db.sequelize.sync({force: true});
   console.log(`listening on ${PORT}`);
 });
 
