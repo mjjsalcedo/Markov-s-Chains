@@ -62,7 +62,7 @@ render(){
       <div className="stageOneGraphicsContainerPlayer1"> Player 1
           <div className="keyPlayer1" value="good">
           </div>
-          <div className="spiderPlayer1" value="good">
+          <div className="spiderPlayer1" value="good" onClick={this.selectedItem}>>
           </div>
           <div className='voodooPlayer1' value="bad">
           </div>
@@ -127,15 +127,18 @@ render(){
       <div className="graphicsContainerBorder">
       <div className='winLoseContainer'>
           {( this.props.winningStatus === "win") ?
-          <div>
-          <h2 classname='endText'> YOU WIN!!! </h2>
+          <div className='endContainer'>
+          <h2 className='endText'> YOU WIN </h2>
+          <div className='playAgainContainer'>
           <button className='playAgain' onClick={this.displayPlayAgain}>Play Again?</button>
-          <Link to="/" className='quit'>Quit</Link>
+          <Link to="/"><button className='quit'>Quit</button></Link>
+          </div>
           </div>
 
             :null }
 
           {
+
           ( this.props.winningStatus === "lose") ?
           <div className='endContainer'>
           <h2 className='endText'> YOU LOSE </h2>
