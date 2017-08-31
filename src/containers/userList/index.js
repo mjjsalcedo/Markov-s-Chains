@@ -60,7 +60,7 @@ if(this.props.goToRoom){
           return <span className='listOfUsers' onClick={this.selectUser(username)}>{username.username}</span> })}
       </div>
 
-      <button className='inviteUser' onClick={this.sendInvite} type="button">Invite to Game</button>
+      <button className='inviteUser btn' onClick={this.sendInvite} type="button">Invite to Game</button>
 
       {
             ( this.props.invitesFrom !== null) ?
@@ -68,8 +68,8 @@ if(this.props.goToRoom){
                 <p className='inviteText'>
                   You were invited to play a game with { this.props.invitesFrom }
                 </p>
-                <button className='acceptUser' onClick={this.onClickAccept} type="button">Accept</button>
-                <button className='declineUser' onClick={this.onClickDecline} type="button">Decline</button>
+                <button className='acceptUser btn' onClick={this.onClickAccept} type="button">Accept</button>
+                <button className='declineUser btn' onClick={this.onClickDecline} type="button">Decline</button>
               </div>
             : null
           }
