@@ -130,6 +130,7 @@ background-color: #4CAF50; /* Green */
   width: 35%;
 }
 .graphicsContainerBorder {
+  position: relative;
   max-height: 100%;
   max-width: 100%;
   border: 10px solid transparent;
@@ -138,6 +139,7 @@ background-color: #4CAF50; /* Green */
   border-image-repeat: stretch;
 }
 .stageOneGraphicsContainerPlayer1 {
+  position: relative;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -153,7 +155,7 @@ background-color: #4CAF50; /* Green */
   background-size: 515px 280px;
 }
 .marielPlayer1 {
-  position: relative;
+  position: absolute;
   top: 55%;
   left: 30%;
   height: 47%;
@@ -162,12 +164,13 @@ background-color: #4CAF50; /* Green */
   background: url(./assets/mariel-medium.png) -50px no-repeat;
   transform: scale(0.9) scaleX(-1);
 }
+
 .marielPlayer1:hover {
   transform: scale(1) scaleX(-1);
   transition: all 200ms ease-in;
 }
 .whipPlayer1 {
-  position: relative;
+  position: absolute;
   top: 60%;
   left: 8%;
   height: 31%;
@@ -181,7 +184,7 @@ background-color: #4CAF50; /* Green */
   transition: all 200ms ease-in;
 }
 .keyPlayer1 {
-  position: relative;
+  position: absolute;
   top: 48%;
   left: 53%;
   height: 11%;
@@ -195,7 +198,7 @@ background-color: #4CAF50; /* Green */
   transition: all 200ms ease-in;
 }
 .spiderPlayer1 {
-  position: relative;
+  position: absolute;
   top: 64%;
   right: 12%;
   height: 15%;
@@ -210,11 +213,22 @@ background-color: #4CAF50; /* Green */
   transition: all 200ms ease-in;
 }
 .voodooPlayer1 {
-  position: relative;
+  position: absolute;
   top: 43%;
   left: 50%;
   height: 18%;
   width: 10%;
+  // border: 5px solid pink;
+  background: url(./assets/voodoo-big.png) 5px -3px no-repeat;
+  transform: scale(0.9);
+}
+.voodooPlayer1Hidden {
+  position: absolute;
+  top: 43%;
+  left: 50%;
+  height: 18%;
+  width: 10%;
+  visibility: hidden;
   // border: 5px solid pink;
   background: url(./assets/voodoo-big.png) 5px -3px no-repeat;
   transform: scale(0.9);
@@ -224,7 +238,7 @@ background-color: #4CAF50; /* Green */
   transition: all 200ms ease-in;
 }
 .wandPlayer1 {
-  position: relative;
+  position: absolute;
   top: 65.7%;
   right: 41.5%;
   height: 13%;
@@ -238,7 +252,7 @@ background-color: #4CAF50; /* Green */
   transition: all 200ms ease-in;
 }
 .paintingPlayer1 {
-  position: relative;
+  position: absolute;
   top: 5%;
   left: -22%;
   height: 27%;
@@ -252,6 +266,7 @@ background-color: #4CAF50; /* Green */
   transition: all 200ms ease-in;
 }
 .ianPlayer1 {
+  position: absolute;
   height: 55%;
   width: 12%;
   // border: 5px solid magenta;
@@ -263,7 +278,7 @@ background-color: #4CAF50; /* Green */
   transition: all 200ms ease-in;
 }
 .torch-slantPlayer1 {
-  position: relative;
+  position: absolute;
   top: -30%;
   left: 53%;
   height: 18%;
@@ -277,7 +292,7 @@ background-color: #4CAF50; /* Green */
   transition: all 200ms ease-in;
 }
 .ratPlayer1 {
-  position: relative;
+  position: absolute;
   top: 30%;
   height: 17%;
   width: 7%;
@@ -290,7 +305,7 @@ background-color: #4CAF50; /* Green */
   transition: all 200ms ease-in;
 }
 .torchPlayer1 {
-  position: relative;
+  position: absolute;
   top: -25%;
   right: 31%;
   height: 22%;
@@ -305,7 +320,7 @@ background-color: #4CAF50; /* Green */
   transition: all 200ms ease-in;
 }
 .batPlayer1 {
-  position: relative;
+  position: absolute;
   top: -20%;
   height: 12%;
   width: 10%;
@@ -318,7 +333,7 @@ background-color: #4CAF50; /* Green */
   transition: all 200ms ease-in;
 }
 .swordPlayer1 {
-  position: relative;
+  position: absolute;
   top: -40%;
   right: -12.5%;
   height: 10%;
@@ -755,14 +770,6 @@ background-color: #4CAF50; /* Green */
   // border: 5px solid black;
 }
 //win/lose screen
-.graphicsContainerBorder {
-  max-height: 100%;
-  max-width: 100%;
-  border: 10px solid transparent;
-  border-image-source: url(./assets/border.png);
-  border-image-slice: 20 22;
-  border-image-repeat: stretch;
-}
 .winLoseContainer {
   display: flex;
   flex-direction: row;
@@ -800,4 +807,8 @@ background-color: #4CAF50; /* Green */
   // top: 60%;
   left: 20%;
   height: 20%;
+}
+
+.hidden {
+  visibility: hidden;
 }

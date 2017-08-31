@@ -79,6 +79,7 @@ button {
   width: 35%; }
 
 .graphicsContainerBorder {
+  position: relative;
   max-height: 100%;
   max-width: 100%;
   border: 10px solid transparent;
@@ -87,6 +88,7 @@ button {
   border-image-repeat: stretch; }
 
 .stageOneGraphicsContainerPlayer1 {
+  position: relative;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -101,7 +103,7 @@ button {
   background-size: 515px 280px; }
 
 .marielPlayer1 {
-  position: relative;
+  position: absolute;
   top: 55%;
   left: 30%;
   height: 47%;
@@ -114,7 +116,7 @@ button {
   transition: all 200ms ease-in; }
 
 .whipPlayer1 {
-  position: relative;
+  position: absolute;
   top: 60%;
   left: 8%;
   height: 31%;
@@ -127,7 +129,7 @@ button {
   transition: all 200ms ease-in; }
 
 .keyPlayer1 {
-  position: relative;
+  position: absolute;
   top: 48%;
   left: 53%;
   height: 11%;
@@ -140,7 +142,7 @@ button {
   transition: all 200ms ease-in; }
 
 .spiderPlayer1 {
-  position: relative;
+  position: absolute;
   top: 64%;
   right: 12%;
   height: 15%;
@@ -154,11 +156,21 @@ button {
   transition: all 200ms ease-in; }
 
 .voodooPlayer1 {
-  position: relative;
+  position: absolute;
   top: 43%;
   left: 50%;
   height: 18%;
   width: 10%;
+  background: url(./assets/voodoo-big.png) 5px -3px no-repeat;
+  transform: scale(0.9); }
+
+.voodooPlayer1Hidden {
+  position: absolute;
+  top: 43%;
+  left: 50%;
+  height: 18%;
+  width: 10%;
+  visibility: hidden;
   background: url(./assets/voodoo-big.png) 5px -3px no-repeat;
   transform: scale(0.9); }
 
@@ -167,7 +179,7 @@ button {
   transition: all 200ms ease-in; }
 
 .wandPlayer1 {
-  position: relative;
+  position: absolute;
   top: 65.7%;
   right: 41.5%;
   height: 13%;
@@ -180,7 +192,7 @@ button {
   transition: all 200ms ease-in; }
 
 .paintingPlayer1 {
-  position: relative;
+  position: absolute;
   top: 5%;
   left: -22%;
   height: 27%;
@@ -193,6 +205,7 @@ button {
   transition: all 200ms ease-in; }
 
 .ianPlayer1 {
+  position: absolute;
   height: 55%;
   width: 12%;
   background: url(./assets/ian.png) -50px no-repeat;
@@ -203,7 +216,7 @@ button {
   transition: all 200ms ease-in; }
 
 .torch-slantPlayer1 {
-  position: relative;
+  position: absolute;
   top: -30%;
   left: 53%;
   height: 18%;
@@ -216,7 +229,7 @@ button {
   transition: all 200ms ease-in; }
 
 .ratPlayer1 {
-  position: relative;
+  position: absolute;
   top: 30%;
   height: 17%;
   width: 7%;
@@ -228,7 +241,7 @@ button {
   transition: all 200ms ease-in; }
 
 .torchPlayer1 {
-  position: relative;
+  position: absolute;
   top: -25%;
   right: 31%;
   height: 22%;
@@ -242,7 +255,7 @@ button {
   transition: all 200ms ease-in; }
 
 .batPlayer1 {
-  position: relative;
+  position: absolute;
   top: -20%;
   height: 12%;
   width: 10%;
@@ -254,7 +267,7 @@ button {
   transition: all 200ms ease-in; }
 
 .swordPlayer1 {
-  position: relative;
+  position: absolute;
   top: -40%;
   right: -12.5%;
   height: 10%;
@@ -655,14 +668,6 @@ button {
   width: 30%;
   box-sizing: border-box; }
 
-.graphicsContainerBorder {
-  max-height: 100%;
-  max-width: 100%;
-  border: 10px solid transparent;
-  border-image-source: url(./assets/border.png);
-  border-image-slice: 20 22;
-  border-image-repeat: stretch; }
-
 .winLoseContainer {
   display: flex;
   flex-direction: row;
@@ -695,3 +700,6 @@ button {
   position: relative;
   left: 20%;
   height: 20%; }
+
+.hidden {
+  visibility: hidden; }

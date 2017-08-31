@@ -59,12 +59,14 @@ function messageReceived(state, action) {
       winningStatus: null
     }
     case BROADCAST_SCORE:
+    console.log('here you go')
     return {
       ...state,
       userData: [ ...state.userData ],
       gameResults: [ ...state.gameResults,
       messagePayload.score ],
-      winningStatus: null
+      winningStatus: null,
+      isVisible: messagePayload.isVisible
     }
     case RECEIVE_INVITE:
     return {
