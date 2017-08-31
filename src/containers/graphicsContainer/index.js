@@ -124,36 +124,40 @@ render(){
   {
 
     (  this.props.winningStatus !== undefined  ) ?
-      <div className="graphicsContainer">
+      <div className="graphicsContainerBorder">
+      <div className='winLoseContainer'>
           {( this.props.winningStatus === "win") ?
           <div>
-          <h2> YOU WIN!!! </h2>
-          <button onClick={this.displayPlayAgain}> Play Again </button>
-          <Link to="/"> Home </Link>
+          <h2 classname='endText'> YOU WIN!!! </h2>
+          <button className='playAgain' onClick={this.displayPlayAgain}>Play Again?</button>
+          <Link to="/" className='quit'>Quit</Link>
           </div>
 
             :null }
 
           {
           ( this.props.winningStatus === "lose") ?
-          <div>
-          <h2> YOU LOSE </h2>
-          <button onClick={this.displayPlayAgain}> Play Again </button>
-          <Link to="/"> Home </Link>
+          <div className='endContainer'>
+          <h2 className='endText'> YOU LOSE </h2>
+          <div className='playAgainContainer'>
+          <button className='playAgain' onClick={this.displayPlayAgain}>Play Again?</button>
+          <Link to="/"><button className='quit'>Quit</button></Link>
+          </div>
           </div>
             :null }
+        </div>
         </div>
             : null
           }
 
       {
             ( this.props.reinvitesFrom !== undefined ) ?
-              <div>
-                <p>
+              <div className='replayContainer'>
+                <p className='replay'>
                   You were invited to replay a game with { this.props.reinvitesFrom }
                 </p>
-                <button onClick={this.onClickAccept} type="button">Accept</button>
-                <button onClick={this.onClickDecline} type="button">DECLINE</button>
+                <button className='replayAccept' onClick={this.onClickAccept} type="button">Accept</button>
+                <button className='replayDecline' onClick={this.onClickDecline} type="button">DECLINE</button>
               </div>
             : null
           }

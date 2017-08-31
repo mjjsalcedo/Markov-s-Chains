@@ -156,8 +156,8 @@ body {
 
 .wandPlayer1 {
   position: relative;
-  top: 66%;
-  right: 42%;
+  top: 65.7%;
+  right: 41.5%;
   height: 13%;
   width: 7%;
   background: url(./assets/wand-big.png) -15px no-repeat;
@@ -598,6 +598,10 @@ body {
   padding: 5px 0 0 7px;
   box-sizing: border-box; }
 
+.listOfUsers {
+  border: 1px solid red;
+  height: 10%; }
+
 .inviteUser {
   position: relative;
   box-sizing: border-box;
@@ -638,3 +642,44 @@ body {
   height: 13%;
   width: 30%;
   box-sizing: border-box; }
+
+.graphicsContainerBorder {
+  max-height: 100%;
+  max-width: 100%;
+  border: 10px solid transparent;
+  border-image-source: url(./assets/border.png);
+  border-image-slice: 20 22;
+  border-image-repeat: stretch; }
+
+.winLoseContainer {
+  display: flex;
+  flex-direction: row;
+  box-sizing: border-box;
+  height: 300px;
+  width: 540px;
+  background-color: black; }
+
+.endText {
+  position: relative;
+  top: -15%;
+  left: -0.2%;
+  height: 185px;
+  width: 529px;
+  padding: 10px;
+  color: red;
+  font-size: 50px; }
+
+.playAgainContainer {
+  position: relative;
+  top: -29%;
+  height: 105px;
+  width: 100%; }
+
+.quit {
+  position: relative;
+  left: 40%; }
+
+.playAgain {
+  position: relative;
+  left: 20%;
+  height: 20%; }
