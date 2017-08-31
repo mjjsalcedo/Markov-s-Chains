@@ -63,6 +63,7 @@ wss.on('connection', function connection(ws, req) {
         .replace(/[.,\/#!$%@\^*\*;:{}=\-_`'~()]/g,"")
         .replace(/\s{2,}/g,"").toLowerCase();
         triggerCache.push(modifiedTrigger);
+        console.log(modifiedMessage);
         recurseThroughDb(modifiedTrigger, modifiedTrigger, room);
         break;
 
@@ -72,6 +73,7 @@ wss.on('connection', function connection(ws, req) {
         .replace(/[.,\/#!$%@\^*\*;:{}=\-_`'~()]/g,"")
         .replace(/\s{2,}/g,"").toLowerCase();
         messageCache.push(modifiedMessage);
+        console.log(modifiedMessage);
         recurseThroughDb(modifiedMessage, modifiedMessage, room);
         break;
 
@@ -81,6 +83,7 @@ wss.on('connection', function connection(ws, req) {
         .replace(/[.,\/#!$%@\^*\*;:{}=\-_`'~()]/g,"")
         .replace(/\s{2,}/g,"").toLowerCase();
         triggerCache.push(modifiedTrigger);
+        console.log(modifiedMessage);
         recurseThroughDb(modifiedTrigger, modifiedTrigger, room);
         break;
 
@@ -88,7 +91,9 @@ wss.on('connection', function connection(ws, req) {
         let recurseMessage = payload.message.message
         .replace(/[.,\/#!$%@\^*\*;:{}=\-_`'~()]/g,"")
         .replace(/\s{2,}/g,"").toLowerCase();
+        console.log(recurseMessage);
         recurseThroughDb(recurseMessage, recurseMessage, room);
+        markovArray = [];
         let joinedTriggers = triggerCache.join(' ');
         let cache = messageCache.join(' # ').split(' ');
         cache.push('#');
@@ -137,7 +142,6 @@ wss.on('connection', function connection(ws, req) {
           .replace(/\s{2,}/g,"").toLowerCase();
           triggerCache = messageCache;
           messageCache = [modifiedMessage];
-          markovArray = [];
         });
       }
 
@@ -330,9 +334,10 @@ function stringIntoThirds(string){
 }
 
 function recurseThroughDb(trig, con, room){
+  debugger;
   if (markovArray.indexOf('#') > -1){
     let markovSentence = markovArray.join(' ');
-    console.log('THIS IS THE SENTENCE', markovSentence);
+    markovArray = [];
     return room.broadcast('BROADCAST_MESSAGE', { message: markovSentence });
   }
   return Ngrams.findOne({ where: { trigger: trig, context: con }, attributes: ['word']}).then(nextWord => {
