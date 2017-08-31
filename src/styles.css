@@ -158,16 +158,6 @@ body {
   background: url(./assets/voodoo-big.png) 5px -3px no-repeat;
   transform: scale(0.9); }
 
-.voodooPlayer1Hidden {
-  position: absolute;
-  top: 43%;
-  left: 50%;
-  height: 18%;
-  width: 10%;
-  visibility: hidden;
-  background: url(./assets/voodoo-big.png) 5px -3px no-repeat;
-  transform: scale(0.9); }
-
 .voodooPlayer1:hover {
   transform: scale(1);
   transition: all 200ms ease-in; }
@@ -286,96 +276,6 @@ body {
   border-image-repeat: stretch;
   background: url(./assets/background.png) no-repeat;
   background-size: 515px 280px; }
-
-.keyPlayer2 {
-  position: relative;
-  top: 50%;
-  left: 53%;
-  height: 11%;
-  width: 5%;
-  background: url(./assets/key-player2.png) -5px no-repeat;
-  transform: scale(0.9); }
-
-.keyPlayer2:hover {
-  transform: scale(1);
-  transition: all 200ms ease-in; }
-
-.spiderPlayer2 {
-  position: relative;
-  top: 64%;
-  right: 12%;
-  height: 15%;
-  width: 10%;
-  background: url(./assets/spider-player2.png) no-repeat;
-  transform: scale(0.9); }
-
-.spiderPlayer2:hover {
-  background: url(./assets/spider2-player2.png) no-repeat;
-  transform: scale(1);
-  transition: all 200ms ease-in; }
-
-.paintingPlayer2 {
-  position: relative;
-  top: 5%;
-  left: -22%;
-  height: 27%;
-  width: 13%;
-  background: url(./assets/painting-player2.png) no-repeat;
-  transform: scale(0.9); }
-
-.paintingPlayer2:hover {
-  transform: scale(1);
-  transition: all 200ms ease-in; }
-
-.torch-slantPlayer2 {
-  position: relative;
-  top: -30%;
-  left: 53%;
-  height: 18%;
-  width: 7%;
-  background: url(./assets/torch-slant-player2.png) -10px -16px no-repeat;
-  transform: scale(0.9) scaleX(-1); }
-
-.torch-slantPlayer2:hover {
-  transform: scale(1) scaleX(-1);
-  transition: all 200ms ease-in; }
-
-.ratPlayer2 {
-  position: relative;
-  top: 30%;
-  height: 17%;
-  width: 7%;
-  background: url(./assets/rat-small-player2.png) no-repeat;
-  transform: scale(0.9); }
-
-.ratPlayer2:hover {
-  transform: scale(1);
-  transition: all 200ms ease-in; }
-
-.torchPlayer2 {
-  position: relative;
-  top: -25%;
-  right: 31%;
-  height: 22%;
-  width: 8%;
-  background: url(./assets/torch-player2.png) -10px -7px no-repeat;
-  transform: scale(0.9); }
-
-.torchPlayer2:hover {
-  transform: scale(1);
-  transition: all 200ms ease-in; }
-
-.batPlayer2 {
-  position: relative;
-  top: -20%;
-  height: 12%;
-  width: 10%;
-  background: url(./assets/bat-player2.png) no-repeat;
-  transform: scale(0.9); }
-
-.batPlayer2:hover {
-  transform: scale(1);
-  transition: all 200ms ease-in; }
 
 .inventoryContainerBorder {
   max-height: 100%;
@@ -719,8 +619,6 @@ body {
   position: relative;
   top: -20px;
   left: 35%; }
-  height: 20%; }
 
 .hidden {
   visibility: hidden; }
-
