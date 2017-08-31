@@ -39,17 +39,34 @@ wss.on('connection', function connection(ws, req) {
 
   ws.on('close', function (){
     console.log(`${ws.username} has disconnected`);
-    users.splice( users.indexOf(ws), 1 );
-    // also broadcast to all other users
-    users.forEach(user => {
-      user.send(
-        JSON.stringify({
-          OP: 'USER_DISCONNECTED', // all users not in room
-          username: ws.username // could be undefined
-        })
-        );
+
+    let usersWaiting = users.find(user => user.username === ws.username)
+    let usersInGame = usersPlaying.find(user => user.username === ws.username)
+
+    if (usersWaiting !== undefined) {
+      users.splice( users.indexOf(ws), 1 )
+      users.forEach(user => {
+        user.send(
+          JSON.stringify({
+            OP: 'USER_DISCONNECTED', // all users not in room
+            username: ws.username // could be undefined
+          })
+          );
+      });
+    };
+
+    if (usersInGame !== undefined) {
+      let partner = usersPlaying.find(user => {
+        return user.roomId === ws.roomId && user.username !== ws.username });
+      usersPlaying.splice( usersPlaying.indexOf(ws), 1 )
+        partner.send(
+          JSON.stringify({
+            OP: 'USER_DISCONNECTED', // all users not in room
+            username: ws.username // could be undefined
+          })
+          );
+      }
     });
-  });
 
   ws.on('message', function incoming(message) {
     let payload = JSON.parse(message);
@@ -200,7 +217,9 @@ wss.on('connection', function connection(ws, req) {
           return {username: user.username
           };});
         if( verifySender !== null ){
+          
           let extracted = verifySender[0];
+
           // create the room,
           //   put both players in it
           //   remove from lobby
@@ -303,11 +322,8 @@ app.use(express.static('public'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-/*
-app.use('/api', apiRoutes);*/
-
 server.listen(PORT,'0.0.0.0', ()=> {
-  db.sequelize.sync(/*{force: true}*/);
+  db.sequelize.sync({force: true});
   console.log(`listening on ${PORT}`);
 });
 
@@ -349,15 +365,3 @@ function recurseThroughDb(trig, con, room){
     }
   });
 }
-
-
-
-/*i hope this works
-#
-ben kwok is way too advanced for me
-#
-i hear you man
-yeah he is super advanced
-#
-i hear that
-*/

@@ -1,13 +1,20 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { gameResults, checkGameStatus, anotherInvite, replayGame } from '../../actions';
-import { BrowserRouter as Router, Route, Link} from 'react-router-dom';
+import { Link} from 'react-router-dom';
 
 
 class GraphicsContainer extends Component {
 
 constructor(props) {
     super(props);
+
+    this.state = {
+      username: localStorage.getItem("username"),
+      roomId: localStorage.getItem("roomId"),
+      score: '',
+      isVisible: true
+    }
 
     this.selectedItem = this.selectedItem.bind(this);
     this.sendWinningStatus = this.sendWinningStatus.bind(this);
@@ -16,9 +23,11 @@ constructor(props) {
 
   }
 
+
   selectedItem(e){
-    this.props.gameResults( {score: e.target.getAttribute('value'), roomId: localStorage.getItem("roomId")} );
-    }
+    console.log('boop');
+    this.props.gameResults( {username: this.state.username, roomId: localStorage.getItem("roomId"), score: e.target.getAttribute('value'), isVisible: false} );
+  }
 
   sendWinningStatus(value){
     this.props.checkGameStatus({result: value})
@@ -56,13 +65,13 @@ render(){
   <div className="graphicsContainerBorder">
   {
 
-    ( localStorage.getItem("player") === "player1" && this.props.winningStatus === undefined ) ?
-      <div className="graphicsContainerPlayer1"> Player 1
-          <div className="keyPlayer1" value="good">
+    ( localStorage.getItem("player") === "player1" && this.props.winningStatus === null ) ?
+      <div className="stageOneGraphicsContainerPlayer1"> Player 1
+          <div className="keyPlayer1" value="good" onClick={this.selectedItem}>
           </div>
-          <div className="spiderPlayer1" value="good">
+          <div className="spiderPlayer1" value="good" onClick={this.selectedItem}>
           </div>
-          <div className='voodooPlayer1' value="bad">
+          <div className='voodooPlayer1' value="bad" onClick={this.selectedItem}>
           </div>
           <div className='wandPlayer1' value="bad" onClick={this.selectedItem}>
           </div>
@@ -89,35 +98,33 @@ render(){
           }
 
     {
-    ( localStorage.getItem("player") === "player2" &&this.props.winningStatus === undefined ) ?
-      <div className="graphicsContainerPlayer2">Player 2 <div className="key">
 
-          </div>
+    ( localStorage.getItem("player") === "player2" &&this.props.winningStatus === null ) ?
+      <div className="stageOneGraphicsContainerPlayer2">Player 2
+
           <div className="keyPlayer2" value="good">
           </div>
-          <div className="spiderPlayer2">
+          <div className="spiderPlayer1">
           </div>
-          <div className='voodooPlayer2'>
+          <div className='voodooPlayer1'>
           </div>
-          <div className='wandPlayer2'>
+          <div className='wandPlayer1'>
           </div>
-          <div className='marielPlayer2'>
+          <div className='marielPlayer1'>
           </div>
-          <div className='whipPlayer2'>
+          <div className='whipPlayer1'>
           </div>
           <div className='paintingPlayer2'>
           </div>
-          <div className='ianPlayer2'>
+          <div className='ianPlayer1'>
           </div>
-          <div className='swordPlayer2'>
+          <div className='swordPlayer1'>
           </div>
-          <div className='torchPlayer2'>
+          <div className='torch-slantPlayer1'>
           </div>
-          <div className='torch-slantPlayer2'>
+          <div className='batPlayer1'>
           </div>
-          <div className='batPlayer2'>
-          </div>
-          <div className='ratPlayer2'>
+          <div className='ratPlayer1'>
           </div>
         </div>
             : null
@@ -125,37 +132,46 @@ render(){
 
   {
 
-    (  this.props.winningStatus !== undefined  ) ?
-      <div className="graphicsContainer">
+
+    (  this.props.winningStatus !== null  ) ?
+      <div className="graphicsContainerBorder">
+      <div className='winLoseContainer'>
           {( this.props.winningStatus === "win") ?
-          <div>
-          <h2> YOU WIN!!! </h2>
-          <button onClick={this.displayPlayAgain}> Play Again </button>
-          <Link to="/"> Home </Link>
+          <div className='endContainer'>
+          <h2 className='endText'> YOU WIN </h2>
+          <div className='playAgainContainer'>
+          <button className='playAgain' onClick={this.displayPlayAgain}>Play Again?</button>
+          <Link to="/"><button className='quit'>Quit</button></Link>
+          </div>
           </div>
 
             :null }
 
           {
+
           ( this.props.winningStatus === "lose") ?
-          <div>
-          <h2> YOU LOSE </h2>
-          <button onClick={this.displayPlayAgain}> Play Again </button>
-          <Link to="/"> Home </Link>
+          <div className='endContainer'>
+          <h2 className='endText'> YOU LOSE </h2>
+          <div className='playAgainContainer'>
+          <button className='playAgain' onClick={this.displayPlayAgain}>Play Again?</button>
+          <Link to="/"><button className='quit'>Quit</button></Link>
+          </div>
           </div>
             :null }
+        </div>
         </div>
             : null
           }
 
       {
-            ( this.props.reinvitesFrom !== undefined ) ?
-              <div>
-                <p>
+
+            ( this.props.reinvitesFrom !== null ) ?
+               <div className='replayContainer'>
+                <p className='replay'>
                   You were invited to replay a game with { this.props.reinvitesFrom }
                 </p>
-                <button onClick={this.onClickAccept} type="button">Accept</button>
-                <button onClick={this.onClickDecline} type="button">DECLINE</button>
+                <button className='replayAccept' onClick={this.onClickAccept} type="button">Accept</button>
+                <button className='replayDecline' onClick={this.onClickDecline} type="button">DECLINE</button>
               </div>
             : null
           }
@@ -168,7 +184,8 @@ const mapStateToProps = (state) => {
   return {
     score: state.gameResults,
     winningStatus: state.winningStatus,
-    reinvitesFrom: state.reinvitesFrom
+    reinvitesFrom: state.reinvitesFrom,
+    isVisible: state.isVisible
   };
 };
 

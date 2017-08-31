@@ -49,6 +49,7 @@ if(this.props.goToRoom){
     return (
       <div className='userListMainContainer'>
       <div className='userListBorder'>
+      <h1 className='userListTitle'> MIRKOV </h1>
       <div className="userListContainer">
       {this.props.username.filter(userData => {
         return userData.username === localStorage.getItem("username")}).map(username => {
@@ -62,7 +63,7 @@ if(this.props.goToRoom){
       <button className='inviteUser' onClick={this.sendInvite} type="button">Invite to Game</button>
 
       {
-            ( this.props.invitesFrom !== undefined ) ?
+            ( this.props.invitesFrom !== null) ?
               <div className='inviteForm'>
                 <p className='inviteText'>
                   You were invited to play a game with { this.props.invitesFrom }
@@ -74,6 +75,13 @@ if(this.props.goToRoom){
           }
       </div>
       </div>
+      <div className='userListMariel'>
+        </div>
+        <div className='userListIan'>
+        </div>
+        <div className='userListReyn'>
+        Reyn
+        </div>
       </div>
       )
   }

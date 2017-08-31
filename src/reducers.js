@@ -1,26 +1,24 @@
 import { /*GET_TEXT, ADD_TEXT, EDIT_TEXT, DELETE_TEXT,*/ MESSAGE_SEND, USER_CONNECT, MESSAGE_RECEIVED, SUCCESSFUL_CONNECTION, USER_DISCONNECTED, CREATE_USERNAME, DECLINE_INVITE, CHAT, CREATED_USER, RECEIVE_INVITE, ENTER_ROOM, BROADCAST_MESSAGE, BROADCAST_SCORE, GAME_STATUS, RECEIVE_REPLAY_INVITE} from './actions';
 
-let initialState = { userData:[], invitesFrom : null, // set when someone invites you to game
+let initialState = {
+  userData:[],
+  invitesFrom : null, // set when someone invites you to game
   goToRoom : false, // idk about this, need a better way to send users to /room route
   player1 : null,
   player2 : null,
   roomId: null,
-  gameResults:[] };
+  isVisible: true,
+  score: '',
+  gameResults:[],
+  winningStatus: null,
+  reinvitesFrom: null};
 
   const textReducers = (state = initialState, action) => {
 
     switch (action.type) {
-
-/*    case GET_TEXT:
-      return getText(state, action);
-    case ADD_TEXT:
-      return addText(state, action);
-    case EDIT_TEXT:
-      return editText(state, action);
-    case DELETE_TEXT:
-    return deleteText(state, action);*/
     case MESSAGE_SEND:
     return {
+      ...state,
       userData: [
       ...state.userData,
       { id: action.payload.id,
@@ -53,21 +51,24 @@ function messageReceived(state, action) {
     return localStorage.setItem("id", messagePayload.userId)
     case BROADCAST_MESSAGE:
     return {
+      ...state,
       userData: [
       ...state.userData,
       { message: messagePayload.message }],
       gameResults: [ ...state.gameResults],
-      winningStatus: undefined
+      winningStatus: null
     }
     case BROADCAST_SCORE:
     return {
+      ...state,
       userData: [ ...state.userData ],
       gameResults: [ ...state.gameResults,
       messagePayload.score ],
-      winningStatus: undefined
+      winningStatus: null
     }
     case RECEIVE_INVITE:
     return {
+      ...state,
       userData: [
       ...state.userData
       ],  invitesFrom: messagePayload.sender
@@ -75,7 +76,7 @@ function messageReceived(state, action) {
     case RECEIVE_REPLAY_INVITE:
     return {
       ...state
-      ,  reinvitesFrom: messagePayload.sender
+      ,reinvitesFrom: messagePayload.sender
     }
     case ENTER_ROOM:
     if(messagePayload.player1 === localStorage.getItem("username")){
@@ -85,17 +86,21 @@ function messageReceived(state, action) {
     }
     localStorage.setItem("roomId", messagePayload.roomId)
     return {
-      userData: [
-      ...state.userData
-      ],
+      userData: [],
       player1 : messagePayload.player1,
       player2 : messagePayload.player2,
       roomId : messagePayload.roomId,
       goToRoom : true,
-      gameResults:[]
+      gameResults:[],
+      isVisible: true,
+      score: '',
+      gameResults:[],
+      winningStatus: null,
+      reinvitesFrom: null
     }
     case CREATED_USER:
     return {
+      ...state,
       userData: [
       ...state.userData,
       { username:messagePayload.username }
@@ -110,49 +115,13 @@ function messageReceived(state, action) {
   }
 }
 
-
-
 function createUsername(state, action) {
   localStorage.setItem("username", action.payload.username)
   return {
+     ...state,
     userData: [
     ...state.userData]
   }
 }
-/*function getText(state, action){
-  var transform = action.payload.map(question=> {
-    return {
-      id: question.id +'gt',
-      text: question.text
-    };
-  })
-  return transform
-}
-function addText(state, action) {
-  return [
-    ...state,
-      ...action.payload
-  ];
-}
-function editText(state, action) {
-  var textEdits = action.text
-  var newState = state.filter(text=> {
-    return text.id !== action.text.id
-  });
-  return [
-  ...newState, {
-      id: textEdits.id,
-      title: textEdits.title,
-      priority: textEdits.priority,
-      score: textEdits.score,
-      createdBy: textEdits.createdBy,
-      assignedTo: textEdits.assignedTo
-    }]
-}
-function deleteText(state, action) {
-  return state.filter(text=> {
-    return text.id !== action.text
-  })
-}*/
 
 export default textReducers
