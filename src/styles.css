@@ -409,16 +409,16 @@ body {
   -ms-flex-direction: column;
   flex-direction: column;
   overflow: auto;
-  position: relative;
   margin-top: 85%;
   height: 403px;
   width: 290%; }
 
 .message {
   word-wrap: break-word;
+  font-family: OregonTrail;
   width: 100px;
   padding: 2px;
-  font-size: 12px;
+  font-size: 14px;
   white-space: pre-wrap; }
 
 .cellPhoneform {
@@ -426,15 +426,18 @@ body {
   margin-top: 0em; }
 
 .chatInput {
-  height: 37px;
+  font-family: OregonTrail;
+  height: 30px;
   width: 99.7%;
-  resize: none; }
+  resize: none;
+  color: black;
+  background-color: #cec9cc; }
 
 .sendButton {
   position: relative;
   width: 60%;
   left: 21%;
-  top: 15px;
+  top: 17px;
   height: 32px; }
 
 .usernameMainContainer {
