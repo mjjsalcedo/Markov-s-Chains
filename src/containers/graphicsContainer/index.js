@@ -1,13 +1,20 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { gameResults, checkGameStatus, anotherInvite, replayGame } from '../../actions';
-import { BrowserRouter as Router, Route, Link} from 'react-router-dom';
+import { Link} from 'react-router-dom';
 
 
 class GraphicsContainer extends Component {
 
 constructor(props) {
     super(props);
+
+    this.state = {
+      username: localStorage.getItem("username"),
+      roomId: localStorage.getItem("roomId"),
+      score: '',
+      isVisible: true
+    }
 
     this.selectedItem = this.selectedItem.bind(this);
     this.sendWinningStatus = this.sendWinningStatus.bind(this);
@@ -16,9 +23,11 @@ constructor(props) {
 
   }
 
+
   selectedItem(e){
-    this.props.gameResults( {score: e.target.getAttribute('value'), roomId: localStorage.getItem("roomId")} );
-    }
+    console.log('boop');
+    this.props.gameResults( {username: this.state.username, roomId: localStorage.getItem("roomId"), score: e.target.getAttribute('value'), isVisible: false} );
+  }
 
   sendWinningStatus(value){
     this.props.checkGameStatus({result: value})
@@ -35,7 +44,6 @@ constructor(props) {
 
 
 render(){
-  console.log(this.props)
   if (this.props.score !== undefined) {
   let test = this.props.score.reduce((status, score)=>{
     if(score in status){
@@ -58,13 +66,13 @@ render(){
   <div className="graphicsContainerBorder">
   {
 
-    ( localStorage.getItem("player") === "player1" && this.props.winningStatus === undefined ) ?
-      <div className="stageOneGraphicsContainerPlayer1"> Player 1
-          <div className="keyPlayer1" value="good">
+    ( localStorage.getItem("player") === "player1" && this.props.winningStatus === null ) ?
+      <div className="graphicsContainerPlayer1"> Player 1
+          <div className="keyPlayer1" value="good" onClick={this.selectedItem}>
           </div>
-          <div className="spiderPlayer1" value="good" onClick={this.selectedItem}>>
+          <div className="spiderPlayer1" value="good" onClick={this.selectedItem}>
           </div>
-          <div className='voodooPlayer1' value="bad">
+          <div className='voodooPlayer1' value="bad" onClick={this.selectedItem}>
           </div>
           <div className='wandPlayer1' value="bad" onClick={this.selectedItem}>
           </div>
@@ -91,8 +99,10 @@ render(){
           }
 
     {
-    ( localStorage.getItem("player") === "player2" &&this.props.winningStatus === undefined ) ?
+
+    ( localStorage.getItem("player") === "player2" &&this.props.winningStatus === null ) ?
       <div className="stageOneGraphicsContainerPlayer2">Player 2
+
           <div className="keyPlayer2" value="good">
           </div>
           <div className="spiderPlayer1">
@@ -123,7 +133,8 @@ render(){
 
   {
 
-    (  this.props.winningStatus !== undefined  ) ?
+
+    (  this.props.winningStatus !== null  ) ?
       <div className="graphicsContainerBorder">
       <div className='winLoseContainer'>
           {( this.props.winningStatus === "win") ?
@@ -154,8 +165,9 @@ render(){
           }
 
       {
-            ( this.props.reinvitesFrom !== undefined ) ?
-              <div className='replayContainer'>
+
+            ( this.props.reinvitesFrom !== null ) ?
+               <div className='replayContainer'>
                 <p className='replay'>
                   You were invited to replay a game with { this.props.reinvitesFrom }
                 </p>
@@ -174,7 +186,8 @@ const mapStateToProps = (state) => {
   return {
     score: state.gameResults,
     winningStatus: state.winningStatus,
-    reinvitesFrom: state.reinvitesFrom
+    reinvitesFrom: state.reinvitesFrom,
+    isVisible: state.isVisible
   };
 };
 
