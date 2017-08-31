@@ -78,9 +78,9 @@ class GraphicsContainer extends Component {
         </div>
         <div className={this.props.isVisible === true ? 'marielPlayer1' : 'hidden'} value="bad" onClick={this.selectedItem}>
         </div>
-        <div className='whipPlayer1' value="good">
+        <div className='whipPlayer1' value="bad">
         </div>
-        <div className='paintingPlayer1' value="bad">
+        <div className='paintingPlayer1' value="good">
         </div>
         <div className={this.props.isVisible === true ? 'ianPlayer1' : 'hidden'} value="bad">
         </div>
@@ -102,14 +102,13 @@ class GraphicsContainer extends Component {
 
         ( localStorage.getItem("player") === "player2" && this.props.winningStatus === null ) ?
         <div className="stageOneGraphicsContainerPlayer2">Player 2
-
-        <div className="keyPlayer2" value="good">
+        <div className="keyPlayer2">
         </div>
-        <div className="spiderPlayer1">
+        <div className="spiderPlayer2">
         </div>
         <div className='voodooPlayer1'>
         </div>
-        <div className='wandPlayer1'>
+        <div className='wandPlayer2'>
         </div>
         <div className='marielPlayer1'>
         </div>
@@ -120,6 +119,8 @@ class GraphicsContainer extends Component {
         <div className='ianPlayer1'>
         </div>
         <div className='swordPlayer1'>
+        </div>
+        <div className='torchPlayer1'>
         </div>
         <div className='torch-slantPlayer1'>
         </div>

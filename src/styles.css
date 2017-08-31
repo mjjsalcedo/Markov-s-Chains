@@ -98,8 +98,8 @@ body {
 
 .marielPlayer1 {
   position: absolute;
-  top: 55%;
-  left: 30%;
+  top: 50%;
+  left: 80%;
   height: 47%;
   width: 11%;
   background: url(./assets/mariel-medium.png) -50px no-repeat;
@@ -111,8 +111,8 @@ body {
 
 .whipPlayer1 {
   position: absolute;
-  top: 60%;
-  left: 8%;
+  top: 55%;
+  left: 69%;
   height: 31%;
   width: 15%;
   background: url(./assets/whip-big.png) -10px no-repeat;
@@ -125,7 +125,7 @@ body {
 .keyPlayer1 {
   position: absolute;
   top: 48%;
-  left: 53%;
+  left: 77%;
   height: 11%;
   width: 5%;
   background: url(./assets/key.png) -5px no-repeat;
@@ -138,7 +138,7 @@ body {
 .spiderPlayer1 {
   position: absolute;
   top: 64%;
-  right: 12%;
+  left: 18%;
   height: 15%;
   width: 10%;
   background: url(./assets/spider.png) no-repeat;
@@ -152,7 +152,7 @@ body {
 .voodooPlayer1 {
   position: absolute;
   top: 43%;
-  left: 50%;
+  right: 2%;
   height: 18%;
   width: 10%;
   background: url(./assets/voodoo-big.png) 5px -3px no-repeat;
@@ -164,8 +164,8 @@ body {
 
 .wandPlayer1 {
   position: absolute;
-  top: 65.7%;
-  right: 41.5%;
+  top: 63.8%;
+  left: 8.8%;
   height: 13%;
   width: 7%;
   background: url(./assets/wand-big.png) -15px no-repeat;
@@ -178,7 +178,7 @@ body {
 .paintingPlayer1 {
   position: absolute;
   top: 5%;
-  left: -22%;
+  right: 27%;
   height: 27%;
   width: 13%;
   background: url(./assets/painting.png) no-repeat;
@@ -190,6 +190,7 @@ body {
 
 .ianPlayer1 {
   position: absolute;
+  top: 45%;
   height: 55%;
   width: 12%;
   background: url(./assets/ian.png) -50px no-repeat;
@@ -201,8 +202,8 @@ body {
 
 .torch-slantPlayer1 {
   position: absolute;
-  top: -30%;
-  left: 53%;
+  top: 10%;
+  right: 4%;
   height: 18%;
   width: 7%;
   background: url(./assets/torch-slant.png) -10px -16px no-repeat;
@@ -214,7 +215,8 @@ body {
 
 .ratPlayer1 {
   position: absolute;
-  top: 30%;
+  top: 75%;
+  left: 50%;
   height: 17%;
   width: 7%;
   background: url(./assets/rat-small.png) no-repeat;
@@ -226,8 +228,8 @@ body {
 
 .torchPlayer1 {
   position: absolute;
-  top: -25%;
-  right: 31%;
+  top: 20%;
+  left: 2%;
   height: 22%;
   width: 8%;
   background: url(./assets/torch.png) -10px -7px no-repeat;
@@ -240,7 +242,8 @@ body {
 
 .batPlayer1 {
   position: absolute;
-  top: -20%;
+  top: 20%;
+  left: 46%;
   height: 12%;
   width: 10%;
   background: url(./assets/bat.png) no-repeat;
@@ -252,15 +255,15 @@ body {
 
 .swordPlayer1 {
   position: absolute;
-  top: -40%;
-  right: -12.5%;
+  top: 55%;
+  left: 30%;
   height: 10%;
   width: 20%;
   background: url(./assets/sword.png) no-repeat;
-  transform: scale(0.9); }
+  transform: scale(0.9) rotate(90deg); }
 
 .swordPlayer1:hover {
-  transform: scale(1);
+  transform: scale(1) rotate(90deg);
   transition: all 200ms ease-in; }
 
 .stageOneGraphicsContainerPlayer2 {
@@ -277,6 +280,175 @@ body {
   background: url(./assets/background.png) no-repeat;
   background-size: 515px 280px; }
 
+.marielPlayer2 {
+  position: absolute;
+  top: 50%;
+  left: 80%;
+  height: 47%;
+  width: 11%;
+  background: url(./assets/mariel-medium.png) -50px no-repeat;
+  transform: scale(0.9) scaleX(-1); }
+
+.marielPlayer2:hover {
+  transform: scale(1) scaleX(-1);
+  transition: all 200ms ease-in; }
+
+.whipPlayer2 {
+  position: absolute;
+  top: 55%;
+  left: 69%;
+  height: 31%;
+  width: 15%;
+  background: url(./assets/whip-big.png) -10px no-repeat;
+  transform: scale(0.9) scaleX(-1); }
+
+.whipPlayer2:hover {
+  transform: scale(1) scaleX(-1);
+  transition: all 200ms ease-in; }
+
+.keyPlayer2 {
+  position: absolute;
+  top: 50%;
+  left: 77%;
+  height: 11%;
+  width: 5%;
+  background: url(./assets/key-player2.png) -5px no-repeat;
+  transform: scale(0.9); }
+
+.keyPlayer2:hover {
+  transform: scale(1);
+  transition: all 200ms ease-in; }
+
+.spiderPlayer2 {
+  position: absolute;
+  top: 64%;
+  left: 18%;
+  height: 15%;
+  width: 10%;
+  background: url(./assets/spider-player2.png) no-repeat;
+  transform: scale(0.9); }
+
+.spiderPlayer2:hover {
+  background: url(./assets/spider2-player2.png) no-repeat;
+  transform: scale(1);
+  transition: all 200ms ease-in; }
+
+.voodooPlayer2 {
+  position: absolute;
+  top: 43%;
+  right: 2%;
+  height: 18%;
+  width: 10%;
+  background: url(./assets/voodoo-big-player2.png) 5px -3px no-repeat;
+  transform: scale(0.9); }
+
+.voodooPlayer2:hover {
+  transform: scale(1);
+  transition: all 200ms ease-in; }
+
+.wandPlayer2 {
+  position: absolute;
+  top: 64.8%;
+  left: 9.9%;
+  height: 13%;
+  width: 7%;
+  background: url(./assets/wand-big.png) -15px no-repeat;
+  transform: scale(0.9); }
+
+.wandPlayer2:hover {
+  transform: scale(1);
+  transition: all 200ms ease-in; }
+
+.paintingPlayer2 {
+  position: absolute;
+  top: 5%;
+  right: 27%;
+  height: 27%;
+  width: 13%;
+  background: url(./assets/painting-player2.png) no-repeat;
+  transform: scale(0.9); }
+
+.paintingPlayer2:hover {
+  transform: scale(1);
+  transition: all 200ms ease-in; }
+
+.ianPlayer2 {
+  position: absolute;
+  top: 45%;
+  height: 55%;
+  width: 12%;
+  background: url(./assets/ian.png) -50px no-repeat;
+  transform: scale(0.9); }
+
+.ianPlayer2:hover {
+  transform: scale(1);
+  transition: all 200ms ease-in; }
+
+.torch-slantPlayer2 {
+  position: absolute;
+  top: 10%;
+  right: 4%;
+  height: 18%;
+  width: 7%;
+  background: url(./assets/torch-slant-player2.png) -10px -16px no-repeat;
+  transform: scale(0.9) scaleX(-1); }
+
+.torch-slantPlayer2:hover {
+  transform: scale(1) scaleX(-1);
+  transition: all 200ms ease-in; }
+
+.ratPlayer2 {
+  position: absolute;
+  top: 75%;
+  left: 50%;
+  height: 17%;
+  width: 7%;
+  background: url(./assets/rat-small-player2.png) no-repeat;
+  transform: scale(0.9); }
+
+.ratPlayer2:hover {
+  transform: scale(1);
+  transition: all 200ms ease-in; }
+
+.torchPlayer2 {
+  position: absolute;
+  top: 20%;
+  left: 2%;
+  height: 22%;
+  width: 8%;
+  background: url(./assets/torch-player2.png) -10px -7px no-repeat;
+  transform: scale(0.9); }
+
+.torchPlayer2:hover {
+  transform: scale(1);
+  transition: all 200ms ease-in; }
+
+.batPlayer2 {
+  position: absolute;
+  top: 20%;
+  left: 46%;
+  height: 12%;
+  width: 10%;
+  background: url(./assets/bat-player2.png) no-repeat;
+  transform: scale(0.9); }
+
+.batPlayer2:hover {
+  transform: scale(1);
+  transition: all 200ms ease-in; }
+
+.swordPlayer2 {
+  position: absolute;
+  top: 6%;
+  left: 25%;
+  height: 10%;
+  width: 20%;
+  background: url(./assets/sword.png) no-repeat;
+  transform: scale(0.9); }
+
+.swordPlayer2:hover {
+  transform: scale(1);
+  transition: all 200ms ease-in; }
+
 .inventoryContainerBorder {
   max-height: 100%;
   max-width: 100%;
@@ -291,8 +463,7 @@ body {
   border-radius: 15px;
   height: 42px;
   position: relative;
-  animation: bounce 0.8s ease-in-out 0.8s infinite alternate;
-  background: url(./assets/key.png) 1% no-repeat, url(./assets/spider.png) 7% no-repeat, url(./assets/voodoo.png) 16% no-repeat, url(./assets/wand.png) 21% no-repeat, url(./assets/whip-small.png) 28% no-repeat, url(./assets/painting-small.png) 35% no-repeat, url(./assets/ian-small.png) 42% 20% no-repeat, url(./assets/sword-small.png) 51% no-repeat, url(./assets/mariel-small.png) 60% no-repeat, url(./assets/torch-small.png) 65% no-repeat, url(./assets/torch-slant-small.png) 72% 100% no-repeat, url(./assets/bat-small.png) 76% no-repeat, url(./assets/rat-small.png) 81% no-repeat; }
+  background: url(./assets/key.png) 100% 15% no-repeat, url(./assets/spider.png) 7% no-repeat, url(./assets/voodoo.png) 16% no-repeat, url(./assets/wand.png) 21% no-repeat, url(./assets/whip-small.png) 28% no-repeat, url(./assets/painting-small.png) 35% no-repeat, url(./assets/ian-small.png) 42% 20% no-repeat, url(./assets/sword-small.png) 51% no-repeat, url(./assets/mariel-small.png) 60% no-repeat, url(./assets/torch-small.png) 65% no-repeat, url(./assets/torch-slant-small.png) 72% 100% no-repeat, url(./assets/bat-small.png) 76% no-repeat, url(./assets/rat-small.png) 81% no-repeat; }
 
 .storyContainerBorder {
   max-height: 100%;
