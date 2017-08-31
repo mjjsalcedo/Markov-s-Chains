@@ -49,7 +49,7 @@ class CellPhoneContainer extends Component {
             value={this.state.message}
             onChange={this.messageInput.bind(this)}
           />
-          <button type="submit" className="sendButton">
+          <button type="submit" className="sendButton btn">
             Send
           </button>
         </form>

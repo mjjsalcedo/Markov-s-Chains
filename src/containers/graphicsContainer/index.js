@@ -140,8 +140,8 @@ render(){
           <div className='endContainer'>
           <h2 className='endText'> YOU WIN </h2>
           <div className='playAgainContainer'>
-          <button className='playAgain' onClick={this.displayPlayAgain}>Play Again?</button>
-          <Link to="/"><button className='quit'>Home</button></Link>
+          <button className='playAgain btn' onClick={this.displayPlayAgain}>Play Again?</button>
+          <Link to="/"><button className='quit btn'>Home</button></Link>
           </div>
           </div>
 
@@ -153,8 +153,8 @@ render(){
           <div className='endContainer'>
           <h2 className='endText'> YOU LOSE </h2>
           <div className='playAgainContainer'>
-          <button className='playAgain' onClick={this.displayPlayAgain}>Play Again?</button>
-          <Link to="/"><button className='quit'>Home</button></Link>
+          <button className='playAgain btn' onClick={this.displayPlayAgain}>Play Again?</button>
+          <Link to="/"><button className='quit btn'>Home</button></Link>
           </div>
           </div>
             :null }
@@ -169,8 +169,8 @@ render(){
                 <p className='replay'>
                   You were invited to replay a game with { this.props.reinvitesFrom }
                 </p>
-                <button className='replayAccept' onClick={this.onClickAccept} type="button">Accept</button>
-                <button className='replayDecline' onClick={this.onClickDecline} type="button">Decline</button>
+                <button className='replayAccept btn' onClick={this.onClickAccept} type="button">Accept</button>
+                <button className='replayDecline btn' onClick={this.onClickDecline} type="button">Decline</button>
               </div>
             : null
           }

@@ -19,7 +19,7 @@
 body {
   font-family: OregonTrail; }
 
-button {
+.btn {
   font-family: OregonTrail;
   background-color: #4CAF50;
   border: none;
