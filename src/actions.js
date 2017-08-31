@@ -1,6 +1,8 @@
-const socket = new WebSocket('ws://10.0.1.144:3001');
-/*const socket = new WebSocket('ws://10.0.1.52:3001');
-const socket = new WebSocket('ws://10.0.1.144:3001');*/
+
+/*const socket = new WebSocket('ws://10.0.1.149:3001');
+*/const socket = new WebSocket('ws://10.0.1.52:3001');
+//const socket = new WebSocket('ws://10.0.1.144:3001');
+
 
 /*export const GET_TEXT = 'GET_TEXT'
 export const ADD_TEXT = 'ADD_TEXT'
@@ -98,6 +100,7 @@ export const declineInvite = (invitesFrom) => dispatch => {
 };
 
 export const gameResults = (results) => dispatch => {
+  console.log('gameResults', results);
   socket.send(
     JSON.stringify({
       OP: GAME_RESULTS,
@@ -108,6 +111,7 @@ export const gameResults = (results) => dispatch => {
 };
 
 export const checkGameStatus = (results) => dispatch => {
+  console.log('checkGameStatus', results);
     dispatch({ type: GAME_STATUS, success: true, payload: results });
 };
 

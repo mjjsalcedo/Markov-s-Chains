@@ -63,7 +63,7 @@ if(this.props.goToRoom){
       <button className='inviteUser' onClick={this.sendInvite} type="button">Invite to Game</button>
 
       {
-            ( this.props.invitesFrom !== undefined ) ?
+            ( this.props.invitesFrom !== null) ?
               <div className='inviteForm'>
                 <p className='inviteText'>
                   You were invited to play a game with { this.props.invitesFrom }
