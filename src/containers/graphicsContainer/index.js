@@ -67,7 +67,7 @@ render(){
   {
 
     ( localStorage.getItem("player") === "player1" && this.props.winningStatus === null ) ?
-      <div className="graphicsContainerPlayer1"> Player 1
+      <div className="stageOneGraphicsContainerPlayer1"> Player 1
           <div className="keyPlayer1" value="good" onClick={this.selectedItem}>
           </div>
           <div className="spiderPlayer1" value="good" onClick={this.selectedItem}>
