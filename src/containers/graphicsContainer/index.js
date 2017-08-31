@@ -133,20 +133,23 @@ render(){
 
   {
 
-      
+
     (  this.props.winningStatus !== null  ) ?
       <div className="graphicsContainerBorder">
       <div className='winLoseContainer'>
           {( this.props.winningStatus === "win") ?
-          <div>
-          <h2 classname='endText'> YOU WIN!!! </h2>
+          <div className='endContainer'>
+          <h2 className='endText'> YOU WIN </h2>
+          <div className='playAgainContainer'>
           <button className='playAgain' onClick={this.displayPlayAgain}>Play Again?</button>
-          <Link to="/" className='quit'>Quit</Link>
+          <Link to="/"><button className='quit'>Quit</button></Link>
+          </div>
           </div>
 
             :null }
 
           {
+
           ( this.props.winningStatus === "lose") ?
           <div className='endContainer'>
           <h2 className='endText'> YOU LOSE </h2>
@@ -162,7 +165,7 @@ render(){
           }
 
       {
-             
+
             ( this.props.reinvitesFrom !== null ) ?
                <div className='replayContainer'>
                 <p className='replay'>

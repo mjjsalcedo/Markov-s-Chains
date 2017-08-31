@@ -72,6 +72,17 @@
 body {
   font-family: OregonTrail;
 }
+button {
+  font-family: OregonTrail;
+background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px
+}
 //parents are maincontainer
 //phone container parent of messagebox, chatinput, and sendbutton
 //messagebox is a parent to messages
