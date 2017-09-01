@@ -15,30 +15,31 @@ render(){
   return(
     <div className="inventoryContainerBorder">
       <div className="inventoryContainer">
-        <div className={this.props.isVisible === true ? 'hidden' : 'ianPlayer1Inv'} ></div>
-        <div className={this.props.isVisible === true ? 'hidden' : 'marielPlayer1Inv'}>
+        <div className={this.props.isVisible.indexOf('keyPlayer1') === -1 ? 'hidden' : 'keyPlayer1Inv'} >
         </div>
-        <div className='keyPlayerInv'>
+        <div className={this.props.isVisible.indexOf('spiderPlayer1') === -1 ? 'hidden' : 'spiderPlayer1Inv' }>
         </div>
-        <div className='spiderPlayer1Inv'>
+        <div className={this.props.isVisible.indexOf('voodooPlayer1') === -1 ? 'hidden' : 'voodooPlayer1Inv' }>
         </div>
-        <div className='voodooPlayer1Inv'>
+        <div className={this.props.isVisible.indexOf('wandPlayer1') === -1 ? 'hidden' : 'wandPlayer1Inv'}>
+        <div className={this.props.isVisible.indexOf('marielPlayer1') === -1 ? 'hidden' : 'marielPlayer1Inv'}>
         </div>
-        <div className='wandPlayer1Inv'>
         </div>
-        <div className='whipPlayer1Inv'>
+        <div className={this.props.isVisible.indexOf('whipPlayer1') === -1 ? 'hidden': 'whipPlayer1Inv'}>
         </div>
-        <div className='paintingPlayer1Inv'>
+        <div className={this.props.isVisible.indexOf('paintingPlayer1') === -1 ? 'hidden' : 'paintingPlayer1Inv'}>
         </div>
-        <div className='swordPlayer1Inv'>
+        <div className={this.props.isVisible.indexOf('ianPlayer1') === -1 ? 'hidden' : 'ianPlayer1Inv'}>
         </div>
-        <div className='torchPlayer1Inv'>
+        <div className={this.props.isVisible.indexOf('swordPlayer1') === -1 ? 'hidden' : 'swordPlayer1Inv'}>
         </div>
-        <div className='torch-slantPlayer1Inv'>
+        <div className={this.props.isVisible.indexOf('torchPlayer1') === -1 ? 'hidden' : 'torchPlayer1Inv' } >
         </div>
-        <div className='batPlayer1Inv'>
+        <div className={this.props.isVisible.indexOf('torch-slantPlayer1') === -1 ? 'hidden' : 'torch-slantPlayer1Inv'}>
         </div>
-        <div className='ratPlayer1Inv'>
+        <div className={this.props.isVisible.indexOf('batPlayer1') === -1 ? 'hidden' : 'batPlayer1Inv'}>
+        </div>
+        <div className={this.props.isVisible.indexOf('ratPlayer1') === -1 ? 'hidden' : 'ratPlayer1Inv'}>
         </div>
     </div>
     </div>

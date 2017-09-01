@@ -71,7 +71,6 @@ function messageReceived(state, action) {
       gameResults: [ ...state.gameResults,
       messagePayload.score ],
       winningStatus: null,
-
       isVisible: [...state.isVisible, messagePayload.isVisible]
     }
     case RECEIVE_INVITE:
