@@ -28,43 +28,15 @@
 
 @keyframes winTextScreen {
   0% {
-    top: -15%;
-    left: 20%;
-    height: 40%;
-    width: 100%;
-    padding: 10px;
-    color: red;
-    font-size: 50px;
     color: blue;
   }
   25% {
-    top: -15%;
-    left: 20%;
-    height: 40%;
-    width: 100%;
-    padding: 10px;
-    color: red;
-    font-size: 50px;
     color: yellow;
   }
   50% {
-    top: -15%;
-    left: 20%;
-    height: 40%;
-    width: 100%;
-    padding: 10px;
-    color: red;
-    font-size: 50px;
     color: green;
   }
   100% {
-    top: -15%;
-    left: 20%;
-    height: 40%;
-    width: 100%;
-    padding: 10px;
-    color: red;
-    font-size: 50px;
     color: red;
   }
 }
@@ -152,7 +124,7 @@ body {
   border-image-source: url(./assets/border.png);
   border-image-slice: 20 22;
   border-image-repeat: stretch;
-  background: url(./assets/background.png) no-repeat;
+  background: url(https://cdn.dribbble.com/users/3729/screenshots/1661851/cave.png) no-repeat;
   background-size: 515px 280px;
 }
 .marielPlayer1 {
@@ -953,11 +925,9 @@ body {
 .winLoseContainer {
   position: relative;
   display: flex;
-  flex-direction: row;
   box-sizing: border-box;
   height: 300px;
   width: 100%;
-  background-color: black;
   border: 10px solid transparent;
   border-image-source: url(./assets/border.png);
   border-image-slice: 20 22;
@@ -970,7 +940,6 @@ body {
   box-sizing: border-box;
   height: 300px;
   width: 100%;
-  background-color: black;
   border: 10px solid transparent;
   border-image-source: url(./assets/border.png);
   border-image-slice: 20 22;
@@ -978,13 +947,14 @@ body {
 }
 .endText {
   position: absolute;
-  top: 40%;
-  left: 90%;
+  align-self: center;
   height: 40%;
-  width: 100%;
+  top: 20%;
+  left: 13%;
+  width: 69%;
   padding: 10px;
   color: red;
-  border: 1px solid red;
+  // border: 1px solid red;
   font-size: 50px;
 }
 .winText {
@@ -1001,31 +971,40 @@ body {
 }
 .quit {
   position: relative;
-  top: 250%;
-  left: 80%;
+  top: 280%;
+  left: 75%;
   height: 40%;
 }
 .playAgain {
   position: relative;
-  top: 250%;
-  left: 60%;
+  top: 280%;
+  left: 55%;
   height: 40%;
 }
+.replayContainer {
+  border: 1px solid green;
+}
 .replay {
+  position: relative;
+  height: 40%;
+  width: 100%;
+  border: 1px solid red;
   padding: 5px;
 }
 
 .replayAccept {
   position: relative;
-  top: -29%;
-  height: 105px;
-  width: 100%;
+  left: -36%;
+  top: 70%;
+  height: 15%;
+  width: 20%;
 }
 .replayDecline {
   position: relative;
-  top: -29%;
-  height: 105px;
-  width: 100%;
+  left: -28%;
+  top: 70%;
+  height: 15%;
+  width: 20%;
 }
 .hidden {
   visibility: hidden;
