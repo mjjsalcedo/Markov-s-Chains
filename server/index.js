@@ -227,8 +227,18 @@ wss.on('connection', function connection(ws, req) {
           usersPlaying.push(sender);
           usersPlaying.push(ws);
           // remove both players from lobby
-          users = users.filter( user => user.username !== ws.username && user.username !== verifySender[0].username);
+          users = users.filter( user => user.username !== ws.username && user.username !== verifySender[0].username)
+          //update existing players in lobby the available people
 
+          let existingUsernames = users.map( user => {return {username: user.username}})
+          console.log('list of usernames', existingUsernames);
+          users.forEach(user => {
+          user.send(
+          JSON.stringify({
+            OP: 'UPDATED_PLAYERS',
+            username: existingUsernames
+          }));
+          });
         } else {
           ws.send(
             JSON.stringify({

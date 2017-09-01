@@ -1,15 +1,8 @@
 
-const socket = new WebSocket('ws://10.0.1.149:3001');
-//const socket = new WebSocket('ws://10.0.1.52:3001');
+//const socket = new WebSocket('ws://10.0.1.149:3001');
+const socket = new WebSocket('ws://10.0.1.52:3001');
 //const socket = new WebSocket('ws://10.0.1.144:3001');
 
-
-
-/*export const GET_TEXT = 'GET_TEXT'
-export const ADD_TEXT = 'ADD_TEXT'
-export const EDIT_TEXT = 'EDIT_TEXT'
-export const DELETE_TEXT = 'DELETE_TEXT'
-export const USER_DISCONNECT = "USER_DISCONNECT"*/
 export const MESSAGE_SEND = 'MESSAGE_SEND'
 export const USER_CONNECT = "USER_CONNECT"
 export const SUCCESSFUL_CONNECTION = "SUCCESSFUL_CONNECTION"
@@ -32,6 +25,7 @@ export const NEW_GAME = "NEW_GAME"
 export const GAME_STATUS = "GAME_STATUS"
 export const RECEIVE_REPLAY_INVITE = "RECEIVE_REPLAY_INVITE"
 export const REPLAY = "REPLAY"
+export const UPDATED_PLAYERS = "UPDATED_PLAYERS"
 
 
 export const userConnect = () => {
@@ -86,7 +80,6 @@ export const acceptInvite = (invitesFrom) => dispatch => {
       username : invitesFrom
     })
   );
-
 };
 
 export const declineInvite = (invitesFrom) => dispatch => {
@@ -96,11 +89,9 @@ export const declineInvite = (invitesFrom) => dispatch => {
       username : invitesFrom
     })
   );
-
 };
 
 export const gameResults = (results) => dispatch => {
-  console.log('gameResults', results);
   socket.send(
     JSON.stringify({
       OP: GAME_RESULTS,
@@ -111,7 +102,6 @@ export const gameResults = (results) => dispatch => {
 };
 
 export const checkGameStatus = (results) => dispatch => {
-  console.log('checkGameStatus', results);
     dispatch({ type: GAME_STATUS, success: true, payload: results });
 };
 
@@ -132,72 +122,3 @@ export const anotherInvite = ( invite ) => {
       invite}));
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*export const getText = () => {
-  return ( dispatch ) => {
-    fetch('/api/texts')
-    .then(texts => texts.json())
-    .then(texts => {
-      dispatch({
-        type: GET_TEXT,
-        payload: texts
-      })
-    })
-  }
-}
-export const addText = (text) => {
-  return ( dispatch ) => {
-    fetch('/api/texts', {
-      method: "POST",
-      headers: {
-        'Accept': 'application/json, text/plain, ',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(text)
-    })
-    .then(words => words.json())
-    .then(words => {
-      dispatch({
-        type: ADD_TEXT,
-        payload: words
-      })
-    })
-  }
-}
-*/
-
-
-
-
-
-/*export function editCard(card) {
-  return { type: EDIT_CARD,
-           card: card
-         }
-}
-export function deleteCard(card) {
-  return { type: DELETE_CARD,
-           card: card
-         }
-}
-*/
