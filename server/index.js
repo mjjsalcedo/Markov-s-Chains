@@ -189,7 +189,7 @@ wss.on('connection', function connection(ws, req) {
 
       case 'GAME_RESULTS':
       let roomGraphic = rooms.get(parseInt(payload.score.roomId));
-      roomGraphic.broadcast('BROADCAST_SCORE', {score: payload.score.score});
+      roomGraphic.broadcast('BROADCAST_SCORE', {score: payload.score.score, isVisible: payload.score.isVisible});
       break;
 
       case 'SEND_INVITE':
@@ -217,7 +217,7 @@ wss.on('connection', function connection(ws, req) {
           return {username: user.username
           };});
         if( verifySender !== null ){
-          
+
           let extracted = verifySender[0];
 
           // create the room,

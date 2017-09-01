@@ -1,3 +1,75 @@
+.keyPlayer1Inv{
+  background: url(./assets/key.png) 1% no-repeat;
+  border: 1px solid blue;
+  height: 10px;
+}
+
+.spiderPlayer1Inv{
+  background: url(./assets/spider.png) 7% no-repeat;
+  border: 1px solid red;
+  height: 10px;
+}
+
+.voodooPlayer1Inv{
+  background:url(./assets/voodoo.png) 16% no-repeat;
+  border: 1px solid green;
+  height: 10px;
+}
+
+.wandPlayer1Inv{
+  background: url(./assets/wand.png) 21% no-repeat;
+
+}
+
+.whipPlayer1Inv{
+  background: url(./assets/whip-small.png) 28% no-repeat;
+
+}
+
+.paintingPlayer1Inv{
+  background: url(./assets/painting-small.png) 35% no-repeat;
+
+}
+
+.ianPlayer1Inv{
+  background: url(./assets/ian-small.png) no-repeat;
+
+}
+
+.swordPlayer1Inv{
+  background: url(./assets/sword-small.png) 51% no-repeat;
+
+}
+
+.marielPlayer1Inv{
+  background: url(./assets/mariel-small.png) 7% no-repeat;
+
+}
+
+.torchPlayer1Inv{
+  background: url(./assets/torch-small.png) 65% no-repeat;
+
+}
+
+
+.torch-slantPlayer1Inv{
+  background: url(./assets/torch-slant-small.png) 72% 100% no-repeat;
+}
+
+
+.batPlayer1Inv{
+  background: url(./assets/bat-small.png) 76% no-repeat;
+}
+
+.ratPlayer1Inv{
+  background: url(./assets/rat-small.png) 81% no-repeat;
+}
+
+
+
+
+
+
 @keyframes bounce {
   0% 100%{
     transform: translateY(0);
@@ -549,7 +621,8 @@ body {
   padding: 10px 0 0 10px;
   height: 42px;
   position: relative;
-  animation: bounce 0.8s ease-in-out 0.8s infinite alternate;
+  border: 1px solid red;
+  /* animation: bounce 0.8s ease-in-out 0.8s infinite alternate;
   background: url(./assets/key.png) 1% no-repeat,
     url(./assets/spider.png) 7% no-repeat,
     url(./assets/voodoo.png) 16% no-repeat, url(./assets/wand.png) 21% no-repeat,
@@ -561,8 +634,9 @@ body {
     url(./assets/torch-small.png) 65% no-repeat,
     url(./assets/torch-slant-small.png) 72% 100% no-repeat,
     url(./assets/bat-small.png) 76% no-repeat,
-    url(./assets/rat-small.png) 81% no-repeat;
+    url(./assets/rat-small.png) 81% no-repeat; */
 }
+
 .storyContainerBorder {
   max-height: 100%;
   max-width: 100%;
