@@ -45,7 +45,7 @@ class CellPhoneContainer extends Component {
         <form className="cellPhoneForm" onSubmit={this.messageSend.bind(this)}>
           <textarea
             className="chatInput"
-            placeholder="message your friends"
+            placeholder="type a message"
             value={this.state.message}
             onChange={this.messageInput.bind(this)}
           />

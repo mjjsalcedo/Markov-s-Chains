@@ -55,7 +55,7 @@ class GraphicsContainer extends Component {
       if(test.bad >= 3){
         this.sendWinningStatus("lose")
       }
-      if(test.good >= 3) {
+      if(test.good >= 10) {
         this.sendWinningStatus("win")
       }
     }
@@ -66,31 +66,31 @@ class GraphicsContainer extends Component {
 
         ( localStorage.getItem("player") === "player1" && this.props.winningStatus === null ) ?
         <div className="stageOneGraphicsContainerPlayer1"> Player 1
-        <div className={this.props.isVisible.indexOf('keyPlayer1') === -1 ? 'keyPlayer1' : 'hidden'} value="good" onClick={this.selectedItem}>
+        <div className={this.props.isVisible.indexOf('keyPlayer1') === -1 ? 'keyPlayer1' : 'hidden'} value="bad" onClick={this.selectedItem}>
         </div>
-        <div className={this.props.isVisible.indexOf('spiderPlayer1') === -1 ? 'spiderPlayer1' : 'hidden'} value="good" onClick={this.selectedItem}>
+        <div className={this.props.isVisible.indexOf('spiderPlayer1') === -1 ? 'spiderPlayer1' : 'hidden'} value="bad" onClick={this.selectedItem}>
         </div>
-        <div className={this.props.isVisible.indexOf('voodooPlayer1') === -1 ? 'voodooPlayer1' : 'hidden'} value="bad" onClick={this.selectedItem}>
+        <div className={this.props.isVisible.indexOf('voodooPlayer1') === -1 ? 'voodooPlayer1' : 'hidden'} value="good" onClick={this.selectedItem}>
         </div>
-        <div className={this.props.isVisible.indexOf('wandPlayer1') === -1 ? 'wandPlayer1' : 'hidden'}value="bad" onClick={this.selectedItem}>
+        <div className={this.props.isVisible.indexOf('wandPlayer1') === -1 ? 'wandPlayer1' : 'hidden'}value="good" onClick={this.selectedItem}>
         </div>
-        <div className={this.props.isVisible.indexOf('marielPlayer1') === -1 ? 'marielPlayer1' : 'hidden'} value="bad" onClick={this.selectedItem}>
+        <div className={this.props.isVisible.indexOf('marielPlayer1') === -1 ? 'marielPlayer1' : 'hidden'} value="good" onClick={this.selectedItem}>
         </div>
         <div className={this.props.isVisible.indexOf('whipPlayer1') === -1 ? 'whipPlayer1' : 'hidden'} value="good" onClick={this.selectedItem}>
         </div>
         <div className={this.props.isVisible.indexOf('paintingPlayer1') === -1 ? 'paintingPlayer1' : 'hidden'} value="bad" onClick={this.selectedItem}>
         </div>
-        <div className={this.props.isVisible.indexOf('ianPlayer1') === -1 ? 'ianPlayer1' : 'hidden'} value="bad" onClick={this.selectedItem}>
+        <div className={this.props.isVisible.indexOf('ianPlayer1') === -1 ? 'ianPlayer1' : 'hidden'} value="good" onClick={this.selectedItem}>
         </div>
-        <div className={this.props.isVisible.indexOf('swordPlayer1') === -1 ? 'swordPlayer1' : 'hidden'} value="bad" onClick={this.selectedItem}>
+        <div className={this.props.isVisible.indexOf('swordPlayer1') === -1 ? 'swordPlayer1' : 'hidden'} value="good" onClick={this.selectedItem}>
         </div>
-        <div className={this.props.isVisible.indexOf('torchPlayer1') === -1 ? 'torchPlayer1' : 'hidden'} value="bad" onClick={this.selectedItem}>
+        <div className={this.props.isVisible.indexOf('torchPlayer1') === -1 ? 'torchPlayer1' : 'hidden'} value="good" onClick={this.selectedItem}>
         </div>
-        <div className={this.props.isVisible.indexOf('torch-slantPlayer1') === -1 ? 'torch-slantPlayer1' : 'hidden'} value="bad" onClick={this.selectedItem}>
+        <div className={this.props.isVisible.indexOf('torch-slantPlayer1') === -1 ? 'torch-slantPlayer1' : 'hidden'} value="good" onClick={this.selectedItem}>
         </div>
-        <div className={this.props.isVisible.indexOf('batPlayer1') === -1 ? 'batPlayer1' : 'hidden'} value="bad" onClick={this.selectedItem}>
+        <div className={this.props.isVisible.indexOf('batPlayer1') === -1 ? 'batPlayer1' : 'hidden'} value="good" onClick={this.selectedItem}>
         </div>
-        <div className={this.props.isVisible.indexOf('ratPlayer1') === -1 ? 'ratPlayer1' : 'hidden'} value="bad" onClick={this.selectedItem}>
+        <div className={this.props.isVisible.indexOf('ratPlayer1') === -1 ? 'ratPlayer1' : 'hidden'} value="good" onClick={this.selectedItem}>
         </div>
         </div>
         : null
