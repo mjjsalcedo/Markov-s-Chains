@@ -75,19 +75,21 @@ wss.on('connection', function connection(ws, req) {
     let payload = JSON.parse(message);
     switch (payload.OP) {
       case 'CHAT':
+
       modifiedMessage = removePunctuation(payload.message.message);
       stringArray = stringIntoThirds(modifiedMessage);
+
       let arrayPosOne = stringArray[0];
       let arrayPosTwo = stringArray[1];
       let arrayPosThree = stringArray[2];
       let room = rooms.get(parseInt(payload.message.roomId));
-
       let activePlayer = usersPlaying.find(user => {
         return user.username === payload.message.username && user.roomId === parseInt(payload.message.roomId);
       });
       let inactivePlayer = usersPlaying.find(user => {
         return user.username !== payload.message.username && user.roomId === parseInt(payload.message.roomId);
       });
+
       switch(true){
         case (messageChain.trigger.length === 0):
         messageChain.trigger.push(payload.message);
@@ -322,7 +324,6 @@ ws.send(
   );
 });
 
-
 app.use(express.static('public'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -358,13 +359,20 @@ function stringIntoThirds(string){
 }
 
 function recurseThroughDb(user, trig, con, room){
-  console.log('this is the recursion');
-  console.log(trig);
   if (markovArray.indexOf('#') > -1){
-    let markovSentence = markovArray.join(' ');
-    markovArray = [];
-    stringArray = [];
-    return sendMarkov(user, markovSentence);
+    if (markovArray.indexOf('#') === 0){
+      console.log('first if',markovArray);
+      return;
+    }else{
+      let min = 2;
+      let max = 4;
+      let random = Math.floor(Math.random() * (max - min + 1) + min);
+      let markovSentence = markovArray.slice(0,-1).join(' ');
+      console.log('second if',markovSentence);
+      markovArray = [];
+      stringArray = [];
+      return setTimeout(function(){sendMarkov(user, markovSentence);}, random * 1000);
+    }
   }
   return Ngrams.find({ where: {trigger: trig, context: con }, attributes: ['word']}).then(nextWord => {//orderby
     if (nextWord){
@@ -376,6 +384,8 @@ function recurseThroughDb(user, trig, con, room){
   });
 }
 
+
+
 function removePunctuation(string){
   return string
   .replace(/[.,\/<>#+!$&@?%[\]^\|*\*/;:{}=\-_`'"~()]/g,"")
@@ -383,14 +393,13 @@ function removePunctuation(string){
 }
 
 function sendMarkov(user, message){
-  console.log(user);
-  console.log(message);
   user.send(
     JSON.stringify({
       OP: 'BROADCAST_MESSAGE',
       message: message
     }));
 }
+
 
 
 /*function recurseThroughDb(user, trig1, trig2, trig3, con, room){
