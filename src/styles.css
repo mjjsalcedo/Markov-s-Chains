@@ -667,15 +667,16 @@ body {
   -ms-flex-direction: column;
   flex-direction: column;
   overflow: auto;
-  margin-top: 85%;
+  margin-top: 70%;
+  margin-left: 8%;
   height: 403px;
-  width: 290%; }
+  width: 277%; }
 
 .message {
   word-wrap: break-word;
   font-family: OregonTrail;
-  width: 100px;
-  padding: 2px;
+  padding: 0 5px 0 5px;
+  width: 100%;
   font-size: 14px;
   white-space: pre-wrap; }
 
@@ -684,9 +685,11 @@ body {
   margin-top: 0em; }
 
 .chatInput {
+  position: relative;
   font-family: OregonTrail;
-  height: 30px;
-  width: 99%;
+  height: 34.98px;
+  width: 93%;
+  left: 3%;
   resize: none;
   padding-left: 4px;
   color: black;
@@ -700,7 +703,7 @@ body {
   position: relative;
   width: 60%;
   left: 21%;
-  top: 17px;
+  top: 17.99px;
   height: 32px; }
 
 .usernameMainContainer {
@@ -779,7 +782,7 @@ body {
   height: 5%;
   top: 45%;
   left: 44.1%;
-  width: 23%;
+  width: 22.9%;
   font-size: 10px;
   text-align: center;
   font-family: OregonTrail; }
@@ -926,6 +929,7 @@ body {
   box-sizing: border-box; }
 
 .winLoseContainer {
+  position: relative;
   display: flex;
   flex-direction: row;
   box-sizing: border-box;
@@ -951,12 +955,13 @@ body {
 
 .endText {
   position: absolute;
-  top: -15%;
-  left: 20%;
+  top: 40%;
+  left: 90%;
   height: 40%;
   width: 100%;
   padding: 10px;
   color: red;
+  border: 1px solid red;
   font-size: 50px; }
 
 .winText {
