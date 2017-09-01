@@ -24,9 +24,12 @@ const rooms = new Map();
 let messageChain = { trigger: [], response: []};
 let messageCache = [];
 let triggerCache = [];
+let markovArray = [];
+let stringArray = [];
 let modifiedTrigger = '';
 let modifiedMessage = '';
-let markovArray = [];
+let dividendCache;
+let dividend;
 
 wss.on('connection', function connection(ws, req) {
   console.log("connected");
@@ -40,11 +43,11 @@ wss.on('connection', function connection(ws, req) {
   ws.on('close', function (){
     console.log(`${ws.username} has disconnected`);
 
-    let usersWaiting = users.find(user => user.username === ws.username)
-    let usersInGame = usersPlaying.find(user => user.username === ws.username)
+    let usersWaiting = users.find(user => user.username === ws.username);
+    let usersInGame = usersPlaying.find(user => user.username === ws.username);
 
     if (usersWaiting !== undefined) {
-      users.splice( users.indexOf(ws), 1 )
+      users.splice( users.indexOf(ws), 1 );
       users.forEach(user => {
         user.send(
           JSON.stringify({
@@ -53,64 +56,59 @@ wss.on('connection', function connection(ws, req) {
           })
           );
       });
-    };
+    }
 
     if (usersInGame !== undefined) {
       let partner = usersPlaying.find(user => {
-        return user.roomId === ws.roomId && user.username !== ws.username });
-      usersPlaying.splice( usersPlaying.indexOf(ws), 1 )
-        partner.send(
-          JSON.stringify({
+        return user.roomId === ws.roomId && user.username !== ws.username; });
+      usersPlaying.splice( usersPlaying.indexOf(ws), 1 );
+      partner.send(
+        JSON.stringify({
             OP: 'USER_DISCONNECTED', // all users not in room
             username: ws.username // could be undefined
           })
-          );
-      }
-    });
+        );
+    }
+  });
 
   ws.on('message', function incoming(message) {
     let payload = JSON.parse(message);
     switch (payload.OP) {
       case 'CHAT':
+      modifiedMessage = removePunctuation(payload.message.message);
+      stringArray = stringIntoThirds(modifiedMessage);
+      let arrayPosOne = stringArray[0];
+      let arrayPosTwo = stringArray[1];
+      let arrayPosThree = stringArray[2];
       let room = rooms.get(parseInt(payload.message.roomId));
+
+      let activePlayer = usersPlaying.find(user => {
+        return user.username === payload.message.username && user.roomId === parseInt(payload.message.roomId);
+      });
+      let inactivePlayer = usersPlaying.find(user => {
+        return user.username !== payload.message.username && user.roomId === parseInt(payload.message.roomId);
+      });
       switch(true){
         case (messageChain.trigger.length === 0):
         messageChain.trigger.push(payload.message);
-        modifiedTrigger = payload.message.message
-        .replace(/[.,\/#!$%@\^*\*;:{}=\-_`'~()]/g,"")
-        .replace(/\s{2,}/g,"").toLowerCase();
-        triggerCache.push(modifiedTrigger);
-        console.log(modifiedMessage);
-        recurseThroughDb(modifiedTrigger, modifiedTrigger, room);
+        triggerCache.push(modifiedMessage);
+        recurseThroughDb(activePlayer, modifiedMessage, modifiedMessage, room);
         break;
 
         case (messageChain.trigger.length > 0 && messageChain.trigger[0].username != payload.message.username):
         messageChain.response.push(payload.message);
-        modifiedMessage = payload.message.message
-        .replace(/[.,\/#!$%@\^*\*;:{}=\-_`'~()]/g,"")
-        .replace(/\s{2,}/g,"").toLowerCase();
         messageCache.push(modifiedMessage);
-        console.log(modifiedMessage);
-        recurseThroughDb(modifiedMessage, modifiedMessage, room);
+        recurseThroughDb(activePlayer,modifiedMessage, modifiedMessage, room);
         break;
 
         case (messageChain.trigger[0].username === payload.message.username && messageChain.response.length  === 0):
         messageChain.trigger.push(payload.message);
-        modifiedTrigger = payload.message.message
-        .replace(/[.,\/#!$%@\^*\*;:{}=\-_`'~()]/g,"")
-        .replace(/\s{2,}/g,"").toLowerCase();
-        triggerCache.push(modifiedTrigger);
-        console.log(modifiedMessage);
-        recurseThroughDb(modifiedTrigger, modifiedTrigger, room);
+        triggerCache.push(modifiedMessage);
+        recurseThroughDb(activePlayer,modifiedMessage, modifiedMessage, room);
         break;
 
         case (messageChain.trigger[0].username === payload.message.username):
-        let recurseMessage = payload.message.message
-        .replace(/[.,\/#!$%@\^*\*;:{}=\-_`'~()]/g,"")
-        .replace(/\s{2,}/g,"").toLowerCase();
-        console.log(recurseMessage);
-        recurseThroughDb(recurseMessage, recurseMessage, room);
-        markovArray = [];
+        recurseThroughDb(activePlayer, modifiedMessage, modifiedMessage, room);
         let joinedTriggers = triggerCache.join(' ');
         let cache = messageCache.join(' # ').split(' ');
         cache.push('#');
@@ -151,18 +149,15 @@ wss.on('connection', function connection(ws, req) {
             });
           }
         }).then(resetValues => {
-          room.broadcast('BROADCAST_MESSAGE', {message: payload.message.message});
+          room.broadcast('BROADCAST_MESSAGE', {message: modifiedMessage});
           messageChain.trigger = messageChain.response;
           messageChain.response = [payload.message];
-          modifiedMessage = payload.message.message
-          .replace(/[.,\/#!$@%\^*\*;:{}=\-_`'~()]/g,"")
-          .replace(/\s{2,}/g,"").toLowerCase();
           triggerCache = messageCache;
           messageCache = [modifiedMessage];
         });
       }
 
-      room.broadcast('BROADCAST_MESSAGE', {message: payload.message.message});
+      room.broadcast('BROADCAST_MESSAGE', {message: modifiedMessage});
       break;
 
       case 'CONNECTED':
@@ -323,7 +318,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 server.listen(PORT,'0.0.0.0', ()=> {
-  db.sequelize.sync({force: true});
+  db.sequelize.sync(/*{force: true}*/);
   console.log(`listening on ${PORT}`);
 });
 
@@ -332,10 +327,13 @@ function stringIntoThirds(string){
   switch(splitString.length){
     case(1):
     stringArray.push(splitString);
+    stringArray.push('#');
+    stringArray.push('#');
     return stringArray;
     case(2):
     stringArray.push(splitString[0]);
     stringArray.push(splitString[1]);
+    stringArray.push('#');
     return stringArray;
     default:
     dividend = splitString.length/3;
@@ -349,19 +347,57 @@ function stringIntoThirds(string){
   }
 }
 
-function recurseThroughDb(trig, con, room){
-  debugger;
+function recurseThroughDb(user, trig, con, room){
+  console.log('this is the recursion');
+  console.log(trig);
   if (markovArray.indexOf('#') > -1){
     let markovSentence = markovArray.join(' ');
     markovArray = [];
-    return room.broadcast('BROADCAST_MESSAGE', { message: markovSentence });
+    stringArray = [];
+    return sendMarkov(user, markovSentence);
   }
-  return Ngrams.findOne({ where: { trigger: trig, context: con }, attributes: ['word']}).then(nextWord => {
+  return Ngrams.find({ where: {trigger: trig, context: con }, attributes: ['word']}).then(nextWord => {//orderby
     if (nextWord){
       markovArray.push(nextWord.word);
-      recurseThroughDb(nextWord.word, con, room);
+      recurseThroughDb(user, nextWord.word, con, room);
     }else{
       markovArray.push('#');
     }
   });
 }
+
+function removePunctuation(string){
+  return string
+  .replace(/[.,\/<>#+!$&@?%[\]^\|*\*/;:{}=\-_`'"~()]/g,"")
+  .replace(/\s{2,}/g," ").toLowerCase();
+}
+
+function sendMarkov(user, message){
+  console.log(user);
+  console.log(message);
+  user.send(
+    JSON.stringify({
+      OP: 'BROADCAST_MESSAGE',
+      message: message
+    }));
+}
+
+
+/*function recurseThroughDb(user, trig1, trig2, trig3, con, room){
+  if (markovArray.indexOf('#') > -1){
+    let markovSentence = markovArray.join(' ');
+    markovArray = [];
+    stringArray = [];
+    return sendMarkov(user, markovSentence);
+  }
+  return Ngrams.findOne({ where: {trigger: {$or: [{$like: `${trig1}`}, {$like: `${trig2}`}, {$like: `${trig3}`}]}, context: con }, attributes: ['word']}).then(nextWord => {
+    if (nextWord){
+      markovArray.push(nextWord.word);
+      recurseThroughDb(nextWord.word, nextWord.word, nextWord.word, con, room);
+    }else{
+      markovArray.push('#');
+    }
+  });
+}*/
+/*
+recurseThroughDb(inactivePlayer, arrayPosOne, arrayPosTwo, arrayPosThree, modifiedMessage, room);*/
