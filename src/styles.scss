@@ -1,9 +1,6 @@
 @keyframes bounce {
-  0% {
-    top: 0px;
-  }
-  25% {
-    top: 1px;
+  0% 100%{
+    transform: translateY(0);
     background: url(./assets/key.png) 1% no-repeat,
       url(./assets/spider.png) 7% no-repeat,
       url(./assets/voodoo.png) 16% no-repeat,
@@ -19,9 +16,9 @@
       url(./assets/rat-small.png) 81% no-repeat;
   }
   50% {
-    top: 5px;
+    transform: translateY(3px);
     background: url(./assets/key.png) 1% no-repeat,
-      url(./assets/spider.png) 7% no-repeat,
+      url(./assets/spider2.png) 7% no-repeat,
       url(./assets/voodoo.png) 16% no-repeat,
       url(./assets/wand.png) 21% no-repeat,
       url(./assets/whip-small.png) 28% no-repeat,
@@ -34,21 +31,67 @@
       url(./assets/bat-small.png) 76% no-repeat,
       url(./assets/rat-small.png) 81% no-repeat;
   }
+}
+@keyframes bounceReyn {
+  0% {
+     top: 8%;
+    color: blue;
+  }
+  25% {
+    top: 9%;
+    color: yellow;
+  }
+  50% {
+    top: 10%;
+    color: green;
+  }
   100% {
-    top: 0px;
-    background: url(./assets/key.png) 1% no-repeat,
-      url(./assets/spider.png) 7% no-repeat,
-      url(./assets/voodoo.png) 16% no-repeat,
-      url(./assets/wand.png) 21% no-repeat,
-      url(./assets/whip-small.png) 28% no-repeat,
-      url(./assets/painting-small.png) 35% no-repeat,
-      url(./assets/ian-small.png) 42% no-repeat,
-      url(./assets/sword-small.png) 51% no-repeat,
-      url(./assets/mariel-small.png) 60% no-repeat,
-      url(./assets/torch-small.png) 65% no-repeat,
-      url(./assets/torch-slant-small.png) 72% 100% no-repeat,
-      url(./assets/bat-small.png) 76% no-repeat,
-      url(./assets/rat-small.png) 81% no-repeat;
+    top: 8%;
+    left: 61%;
+    color: red;
+  }
+}
+
+@keyframes winTextScreen {
+  0% {
+    top: -15%;
+    left: 20%;
+    height: 40%;
+    width: 100%;
+    padding: 10px;
+    color: red;
+    font-size: 50px;
+    color: blue;
+  }
+  25% {
+    top: -15%;
+    left: 20%;
+    height: 40%;
+    width: 100%;
+    padding: 10px;
+    color: red;
+    font-size: 50px;
+    color: yellow;
+  }
+  50% {
+    top: -15%;
+    left: 20%;
+    height: 40%;
+    width: 100%;
+    padding: 10px;
+    color: red;
+    font-size: 50px;
+    color: green;
+  }
+  100% {
+    top: -15%;
+    left: 20%;
+    height: 40%;
+    width: 100%;
+    padding: 10px;
+    color: red;
+    font-size: 50px;
+    color: red;
   }
 }
 @font-face {
@@ -61,14 +104,14 @@ body {
 }
 .btn {
   font-family: OregonTrail;
-  background-color: #4CAF50;
-    border: none;
-    color: white;
-    padding: 10px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 12px
+  background-color: #4caf50;
+  border: none;
+  color: white;
+  padding: 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 12px;
 }
 .mainContainer {
   display: flex;
@@ -504,7 +547,6 @@ body {
 .inventoryContainer {
   box-sizing: border-box;
   padding: 10px 0 0 10px;
-  border-radius: 15px;
   height: 42px;
   position: relative;
   animation: bounce 0.8s ease-in-out 0.8s infinite alternate;
@@ -586,6 +628,7 @@ body {
 .usernameMainContainer {
   display: flex;
   justify-content: center;
+  position: relative;
   height: 900px;
   width: 900px;
   margin: 0 auto;
@@ -607,10 +650,10 @@ body {
   width: 57%;
 }
 .usernameFormContainer {
-  position: relative;
+  position: absolute;
   top: 3%;
   align-self: center;
-  background: url(./assets/phone.png) 57% 2% no-repeat;
+  background: url(./assets/phone.png) 62.5% 57.8% no-repeat;
   display: -ms-flexbox;
   display: flex;
   -ms-flex-direction: column;
@@ -618,53 +661,61 @@ body {
   -ms-flex-pack: center;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
-  height: 73%;
+  height: 100%;
   width: 100%;
 }
 .userTitle {
-  position: relative;
-  top: -6%;
+position: absolute;
+  top: -1.4%;
+  left: 45%;
   align-self: center;
 }
 .userMariel {
-  position: relative;
-  top: -13%;
-  left: 10%;
+  position: absolute;
+  top: 2.7%;
+  left: 40%;
   height: 20%;
-  width: 13%;
+  width: 12.9%;
   transform: scale(0.8);
   background: url(./assets/mariel-medium.png) 50% no-repeat;
 }
 .userIan {
-  position: relative;
-  top: -37%;
-  left: 27%;
+  position: absolute;
+  top: -1%;
+  left: 47%;
   height: 23%;
-  width: 14%;
+  width: 15%;
   background: url(./assets/ian.png) 50% no-repeat;
 }
 .userReyn {
-  position: relative;
-  top: -50%;
-  left: 48%;
+  position: absolute;
+  top: 8%;
+  left: 59%;
+  animation: bounceReyn 0.8s ease-in-out 0.8s infinite alternate;
 }
 .userChatInput {
-  position: relative;
+  display:flex;
+  flex-wrap: wrap;
+  word-wrap: break-word;
+  position: absolute;
   height: 5%;
-  top: -45%;
-  left: 21.5%;
-  width: 55.8%;
+  top: 45%;
+  left: 44.1%;
+  width: 23%;
+  font-size: 10px;
   text-align: center;
+  font-family: OregonTrail;
 }
 .userSendButton {
-  position: relative;
-  top: -43%;
-  left: 36%;
-  width: 25%;
+  position: absolute;
+  top: 55%;
+  left: 45.71%;
+  width: 20%;
 }
- .userListMainContainer {
+.userListMainContainer {
   display: flex;
   justify-content: center;
+  position: relative;
   height: 900px;
   width: 900px;
   margin: 0 auto;
@@ -686,10 +737,10 @@ body {
   width: 57%;
 }
 .userListContainer {
-  position: relative;
+  position: absolute;
   top: 3%;
   align-self: center;
-  background: url(./assets/phone.png) 57% 2% no-repeat;
+  background: url(./assets/phone.png) 62.5% 57.8% no-repeat;
   display: -ms-flexbox;
   display: flex;
   -ms-flex-direction: column;
@@ -697,102 +748,102 @@ body {
   -ms-flex-pack: center;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
-  height: 73%;
+  height: 100%;
   width: 100%;
 }
 .userListTitle {
-  position: relative;
-  top: -6%;
+position: absolute;
+  top: -1.4%;
+  left: 45%;
   align-self: center;
 }
 .userListMariel {
-  position: relative;
-  top: 8.5%;
-  right: 48.3%;
+   position: absolute;
+  top: 2.7%;
+  left: 40%;
   height: 20%;
-  width: 13%;
+  width: 12.9%;
   transform: scale(0.8);
   background: url(./assets/mariel-medium.png) 50% no-repeat;
 }
 .userListIan {
-  position: relative;
-  top: 5%;
-  right: 55%;
+  position: absolute;
+  top: -1%;
+  left: 47%;
   height: 23%;
-  width: 14%;
+  width: 15%;
   background: url(./assets/ian.png) 50% no-repeat;
 }
 .userListReyn {
-  position: relative;
-  top: 15%;
-  right: 56%;
+  position: absolute;
+  top: 10%;
+  left: 59%;
+  animation: bounceReyn 0.8s ease-in-out 0.8s infinite alternate;
 }
 .currentUser {
-  display:flex;
+  display: flex;
   flex-wrap: wrap;
   overflow: auto;
-  position: relative;
-  height: 10%;
-  width: 57%;
-  top: 17.5%;
-  left: 21.2%;
+  position: absolute;
+  height: 8%;
+  width: 23.6%;
+  top: 27.4%;
+  left: 43.8%;
   padding: 5px 0 0 7px;
   box-sizing: border-box;
 }
 .userList {
-  display:flex;
+  display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
   overflow: auto;
-  position: relative;
-  height: 30%;
-  width: 57%;
-  top: 17.5%;
-  left: 21.2%;
+  position: absolute;
+  height: 20%;
+  width: 23.6%;
+  top: 35.4%;
+  left: 43.8%;
   padding: 5px 0 0 7px;
   box-sizing: border-box;
 }
 .listOfUsers {
-  border: 1px solid red;
   height: 10%;
 }
 .inviteUser {
-  position: relative;
+  position: absolute;
   box-sizing: border-box;
-  top: 17.5%;
-  left: 28%;
-  width: 42%;
+  top: 55.4%;
+  left: 50.5%;
+  width: 10%;
 }
 .inviteForm {
-  position: relative;
-  display:flex;
+  position: absolute;
+  overflow: auto;
+  display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  overflow: auto;
-  height: 24.3%;
-  width: 58.5%;
-  top: 17.5%;
-  left: 20%;
+  height: 19.45%;
+  width: 23.6%;
+  top: 59.3%;
+  left: 43.8%;
   padding-left: 5px;
   box-sizing: border-box;
 }
 .inviteText {
-  position: relative;
+  position: absolute;
   padding-left: 5px;
   box-sizing: border-box;
 }
 .acceptUser {
-  position: relative;
-  top: -10%;
-  left: -3%;
-  height: 20%;
+  position: absolute;
+  top: 60%;
+  left: 1%;
   width: 45%;
   box-sizing: border-box;
 }
 .declineUser {
-  position: relative;
-  top: -10%;
-  height: 20%;
+  position: absolute;
+  top: 60%;
+  left: 50%;
   width: 45%;
   box-sizing: border-box;
 }
@@ -802,14 +853,14 @@ body {
   box-sizing: border-box;
   height: 300px;
   width: 100%;
-  background-color: yellow;
+  background-color: black;
   border: 10px solid transparent;
   border-image-source: url(./assets/border.png);
   border-image-slice: 20 22;
   border-image-repeat: stretch;
 }
 .endText {
-  position: relative;
+  position: absolute;
   top: -15%;
   left: 20%;
   height: 40%;
@@ -818,13 +869,19 @@ body {
   color: red;
   font-size: 50px;
 }
+.winText {
+  animation: winTextScreen 0.8s ease-in-out 0.8s infinite alternate;
+}
+.loseText {
+  left :15%;
+}
 .playAgainContainer {
   position: relative;
   top: -29%;
   height: 105px;
   width: 100%;
 }
-.quit{
+.quit {
   position: relative;
   left: 40%;
   height: 40%;

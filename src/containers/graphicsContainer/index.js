@@ -138,7 +138,7 @@ class GraphicsContainer extends Component {
       <div className='winLoseContainer'>
           {( this.props.winningStatus === "win") ?
           <div className='endContainer'>
-          <h2 className='endText'> YOU WIN </h2>
+          <h2 className='winText endText'> YOU WIN </h2>
           <div className='playAgainContainer'>
           <button className='playAgain btn' onClick={this.displayPlayAgain}>Play Again?</button>
           <Link to="/"><button className='quit btn'>Home</button></Link>
@@ -150,7 +150,7 @@ class GraphicsContainer extends Component {
 
           ( this.props.winningStatus === "lose") ?
           <div className='endContainer'>
-          <h2 className='endText'> YOU LOSE </h2>
+          <h2 className='loseText endText'> YOU LOSE </h2>
           <div className='playAgainContainer'>
           <button className='playAgain btn' onClick={this.displayPlayAgain}>Play Again?</button>
           <Link to="/"><button className='quit btn'>Home</button></Link>
