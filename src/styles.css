@@ -1,3 +1,12 @@
+.ianPlayer1Inv {
+  background: url(./assets/ian-small.png) no-repeat;
+  height: 42px; }
+
+.marielPlayer1Inv {
+  background: url(./assets/mariel-small.png) 7% no-repeat;
+  border: 1px solid red;
+  height: 42px; }
+
 @keyframes bounce {
   0% {
     top: 0px; }
@@ -155,16 +164,6 @@ body {
   left: 50%;
   height: 18%;
   width: 10%;
-  background: url(./assets/voodoo-big.png) 5px -3px no-repeat;
-  transform: scale(0.9); }
-
-.voodooPlayer1Hidden {
-  position: absolute;
-  top: 43%;
-  left: 50%;
-  height: 18%;
-  width: 10%;
-  visibility: hidden;
   background: url(./assets/voodoo-big.png) 5px -3px no-repeat;
   transform: scale(0.9); }
 
@@ -391,8 +390,19 @@ body {
   border-radius: 15px;
   height: 42px;
   position: relative;
-  animation: bounce 0.8s ease-in-out 0.8s infinite alternate;
-  background: url(./assets/key.png) 1% no-repeat, url(./assets/spider.png) 7% no-repeat, url(./assets/voodoo.png) 16% no-repeat, url(./assets/wand.png) 21% no-repeat, url(./assets/whip-small.png) 28% no-repeat, url(./assets/painting-small.png) 35% no-repeat, url(./assets/ian-small.png) 42% 20% no-repeat, url(./assets/sword-small.png) 51% no-repeat, url(./assets/mariel-small.png) 60% no-repeat, url(./assets/torch-small.png) 65% no-repeat, url(./assets/torch-slant-small.png) 72% 100% no-repeat, url(./assets/bat-small.png) 76% no-repeat, url(./assets/rat-small.png) 81% no-repeat; }
+  /* animation: bounce 0.8s ease-in-out 0.8s infinite alternate;
+  background: url(./assets/key.png) 1% no-repeat,
+    url(./assets/spider.png) 7% no-repeat,
+    url(./assets/voodoo.png) 16% no-repeat, url(./assets/wand.png) 21% no-repeat,
+    url(./assets/whip-small.png) 28% no-repeat,
+    url(./assets/painting-small.png) 35% no-repeat,
+    url(./assets/ian-small.png) 42% 20% no-repeat,
+    url(./assets/sword-small.png) 51% no-repeat,
+    url(./assets/mariel-small.png) 60% no-repeat,
+    url(./assets/torch-small.png) 65% no-repeat,
+    url(./assets/torch-slant-small.png) 72% 100% no-repeat,
+    url(./assets/bat-small.png) 76% no-repeat,
+    url(./assets/rat-small.png) 81% no-repeat; */ }
 
 .storyContainerBorder {
   max-height: 100%;
@@ -719,8 +729,6 @@ body {
   position: relative;
   top: -20px;
   left: 35%; }
-  height: 20%; }
 
 .hidden {
   visibility: hidden; }
-

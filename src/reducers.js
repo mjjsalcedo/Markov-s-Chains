@@ -7,7 +7,7 @@ let initialState = {
   player1 : null,
   player2 : null,
   roomId: null,
-  isVisible: true,
+  isVisible: [],
   score: '',
   gameResults:[],
   winningStatus: null,
@@ -50,23 +50,29 @@ function messageReceived(state, action) {
     case SUCCESSFUL_CONNECTION:
     return localStorage.setItem("id", messagePayload.userId)
     case BROADCAST_MESSAGE:
+    console.log('broadcast state', state)
     return {
       ...state,
       userData: [
       ...state.userData,
       { message: messagePayload.message }],
       gameResults: [ ...state.gameResults],
-      winningStatus: null
+      winningStatus: null,
+      isVisible: [...state.isVisible]
     }
     case BROADCAST_SCORE:
     console.log('here you go')
+    console.log('state', state)
+    console.log('messagePayload', messagePayload);
+    debugger;
     return {
       ...state,
       userData: [ ...state.userData ],
       gameResults: [ ...state.gameResults,
       messagePayload.score ],
       winningStatus: null,
-      isVisible: messagePayload.isVisible
+
+      isVisible: [...state.isVisible, messagePayload.isVisible]
     }
     case RECEIVE_INVITE:
     return {
@@ -94,7 +100,7 @@ function messageReceived(state, action) {
       roomId : messagePayload.roomId,
       goToRoom : true,
       gameResults:[],
-      isVisible: true,
+      isVisible: [],
       score: '',
       gameResults:[],
       winningStatus: null,

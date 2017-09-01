@@ -6,15 +6,15 @@ import { Link} from 'react-router-dom';
 
 class GraphicsContainer extends Component {
 
+
   constructor(props) {
     super(props);
 
     this.state = {
       username: localStorage.getItem("username"),
-      roomId: localStorage.getItem("roomId"),
-      score: '',
-      isVisible: true
+      roomId: localStorage.getItem("roomId")
     }
+
 
     this.selectedItem = this.selectedItem.bind(this);
     this.sendWinningStatus = this.sendWinningStatus.bind(this);
@@ -23,10 +23,9 @@ class GraphicsContainer extends Component {
 
   }
 
-
   selectedItem(e){
-    console.log('boop');
-    this.props.gameResults( {username: this.state.username, roomId: localStorage.getItem("roomId"), score: e.target.getAttribute('value'), isVisible: false} );
+    console.log(e.target.className)
+    this.props.gameResults( {username: this.state.username, roomId: localStorage.getItem("roomId"), score: e.target.getAttribute('value'), isVisible: e.target.className} );
   }
 
   sendWinningStatus(value){
@@ -60,7 +59,6 @@ class GraphicsContainer extends Component {
         this.sendWinningStatus("win")
       }
     }
-      console.log('thisprops', this.props)
 
     return(
       <div className="graphicsContainerBorder">
@@ -76,13 +74,13 @@ class GraphicsContainer extends Component {
         </div>
         <div className='wandPlayer1' value="bad" onClick={this.selectedItem}>
         </div>
-        <div className={this.props.isVisible === true ? 'marielPlayer1' : 'hidden'} value="bad" onClick={this.selectedItem}>
+        <div className={this.props.isVisible.indexOf('marielPlayer1') === -1 ? 'marielPlayer1' : 'hidden'} value="bad" onClick={this.selectedItem}>
         </div>
         <div className='whipPlayer1' value="good">
         </div>
         <div className='paintingPlayer1' value="bad">
         </div>
-        <div className={this.props.isVisible === true ? 'ianPlayer1' : 'hidden'} value="bad">
+        <div className={this.props.isVisible.indexOf('ianPlayer1') === -1 ? 'ianPlayer1' : 'hidden'} value="bad" onClick={this.selectedItem}>
         </div>
         <div className='swordPlayer1' value="bad">
         </div>
