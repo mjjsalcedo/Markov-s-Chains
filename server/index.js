@@ -348,13 +348,14 @@ function stringIntoThirds(string){
 }
 
 function recurseThroughDb(user, trig, con, room){
-  console.log('this is the recursion');
-  console.log(trig);
   if (markovArray.indexOf('#') > -1){
+    let min = 2;
+    let max = 4;
+    let random = Math.floor(Math.random() * (max - min + 1) + min);
     let markovSentence = markovArray.join(' ');
     markovArray = [];
     stringArray = [];
-    return sendMarkov(user, markovSentence);
+    return setTimeout(function(){sendMarkov(user, markovSentence);}, random * 1000);
   }
   return Ngrams.find({ where: {trigger: trig, context: con }, attributes: ['word']}).then(nextWord => {//orderby
     if (nextWord){
@@ -373,8 +374,6 @@ function removePunctuation(string){
 }
 
 function sendMarkov(user, message){
-  console.log(user);
-  console.log(message);
   user.send(
     JSON.stringify({
       OP: 'BROADCAST_MESSAGE',
