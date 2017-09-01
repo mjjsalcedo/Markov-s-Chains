@@ -41,7 +41,7 @@ class UserLogin extends Component {
       </div>
       <input className="userChatInput" placeholder="input your username" value={ this.state.username } onChange={ this.usernameInput.bind(this) }>
       </input>
-      <button type="submit" className="userSendButton" onClick={ this.handleCreateUsername.bind(this)}>Submit
+      <button type="submit" className="userSendButton btn" onClick={ this.handleCreateUsername.bind(this)}>Submit
       </button>
       </div>
       </div>

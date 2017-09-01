@@ -4,6 +4,7 @@ const socket = new WebSocket('ws://10.0.1.149:3001');
 //const socket = new WebSocket('ws://10.0.1.144:3001');
 
 
+
 /*export const GET_TEXT = 'GET_TEXT'
 export const ADD_TEXT = 'ADD_TEXT'
 export const EDIT_TEXT = 'EDIT_TEXT'
