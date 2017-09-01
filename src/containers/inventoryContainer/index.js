@@ -22,8 +22,8 @@ render(){
         <div className={this.props.isVisible.indexOf('voodooPlayer1') === -1 ? 'hidden' : 'voodooPlayer1Inv' }>
         </div>
         <div className={this.props.isVisible.indexOf('wandPlayer1') === -1 ? 'hidden' : 'wandPlayer1Inv'}>
-        <div className={this.props.isVisible.indexOf('marielPlayer1') === -1 ? 'hidden' : 'marielPlayer1Inv'}>
         </div>
+        <div className={this.props.isVisible.indexOf('marielPlayer1') === -1 ? 'hidden' : 'marielPlayer1Inv'}>
         </div>
         <div className={this.props.isVisible.indexOf('whipPlayer1') === -1 ? 'hidden': 'whipPlayer1Inv'}>
         </div>
