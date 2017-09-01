@@ -43,51 +43,60 @@ class UserList extends Component {
   }
 
   render() {
-if(this.props.goToRoom){
+    if(this.props.goToRoom){
       this.props.history.push('/room');
     }
+    console.log('props', this.props)
     return (
       <div className='userListMainContainer'>
       <div className='userListBorder'>
       <h1 className='userListTitle'> MIRKOV </h1>
       <div className="userListContainer">
       <div className='userListMariel'>
-        </div>
-        <div className='userListIan'>
-        </div>
-        <div className='userListReyn'>
-        Reyn
-        </div>
+      </div>
+      <div className='userListIan'>
+      </div>
+      <div className='userListReyn'>
+      Reyn
+      </div>
       {this.props.username.filter(userData => {
         return userData.username === localStorage.getItem("username")}).map(username => {
           return <span className='currentUser'>Welcome {username.username}</span> })}
-       <div className="userList">Friends:
-      {this.props.username.filter(userData => {
-        return userData.username !== localStorage.getItem("username")}).map(username => {
-          return <span className='listOfUsers' onClick={this.selectUser(username)}>{username.username}</span> })}
-      </div>
-
-      <button className='inviteUser btn' onClick={this.sendInvite} type="button">Invite</button>
-
-      {
-            ( this.props.invitesFrom !== null) ?
-              <div className='inviteForm'>
-                <p className='inviteText'>
-                  You were invited to play a game with { this.props.invitesFrom }
-                </p>
-                <button className='acceptUser btn' onClick={this.onClickAccept} type="button">Accept</button>
-                <button className='declineUser btn' onClick={this.onClickDecline} type="button">Decline</button>
-              </div>
+        {
+          ( this.props.invitesFrom === null) ?
+          <div className="userList">Friends:
+          {this.props.username.filter(userData => {
+            return userData.username !== localStorage.getItem("username")}).map(username => {
+              return <span className='listOfUsers' onClick={this.selectUser(username)}>{username.username}</span> })}
+            </div>
             : null
           }
-      </div>
-      </div>
-      </div>
-      )
+          {
+            ( this.props.invitesFrom === null) ?
+            <button className='inviteUser btn' onClick={this.sendInvite} type="button">Invite</button>
+            : null
+          }
+
+          {
+            ( this.props.invitesFrom !== null) ?
+            <div className='inviteForm'>
+            <p className='inviteText'>
+            Play with { this.props.invitesFrom } ?
+            </p>
+            <button className='acceptUser btn' onClick={this.onClickAccept} type="button">Accept</button>
+            <button className='declineUser btn' onClick={this.onClickDecline} type="button">Decline</button>
+            </div>
+            : null
+          }
+          </div>
+          </div>
+          </div>
+          )
   }
 }
 
 const mapStateToProps = (state) => {
+  console.log('userList', state)
   return {
     username: state.userData,
     invitesFrom : state.invitesFrom,

@@ -1,9 +1,9 @@
-import { /*GET_TEXT, ADD_TEXT, EDIT_TEXT, DELETE_TEXT,*/ MESSAGE_SEND, USER_CONNECT, MESSAGE_RECEIVED, SUCCESSFUL_CONNECTION, USER_DISCONNECTED, CREATE_USERNAME, DECLINE_INVITE, CHAT, CREATED_USER, RECEIVE_INVITE, ENTER_ROOM, BROADCAST_MESSAGE, BROADCAST_SCORE, GAME_STATUS, RECEIVE_REPLAY_INVITE} from './actions';
+import { MESSAGE_SEND, USER_CONNECT, MESSAGE_RECEIVED, SUCCESSFUL_CONNECTION, USER_DISCONNECTED, CREATE_USERNAME, DECLINE_INVITE, CHAT, CREATED_USER, RECEIVE_INVITE, ENTER_ROOM, BROADCAST_MESSAGE, BROADCAST_SCORE, GAME_STATUS, RECEIVE_REPLAY_INVITE, UPDATED_PLAYERS} from './actions';
 
 let initialState = {
   userData:[],
-  invitesFrom : null, // set when someone invites you to game
-  goToRoom : false, // idk about this, need a better way to send users to /room route
+  invitesFrom : null,
+  goToRoom : false,
   player1 : null,
   player2 : null,
   roomId: null,
@@ -28,7 +28,9 @@ let initialState = {
       ]
     }
     case USER_CONNECT:
-    return state;
+    return {
+      ...state
+    }
     case MESSAGE_RECEIVED:
     return messageReceived(state, action);
     case GAME_STATUS:
@@ -45,12 +47,12 @@ let initialState = {
 
 function messageReceived(state, action) {
   let messagePayload = JSON.parse(action.payload);
+  console.log('fnhuadsbfuadgfbiasduiouid', messagePayload);
   switch (messagePayload.OP) {
 
     case SUCCESSFUL_CONNECTION:
     return localStorage.setItem("id", messagePayload.userId)
     case BROADCAST_MESSAGE:
-    console.log('broadcast state', state)
     return {
       ...state,
       userData: [
@@ -61,10 +63,6 @@ function messageReceived(state, action) {
       isVisible: [...state.isVisible]
     }
     case BROADCAST_SCORE:
-    console.log('here you go')
-    console.log('state', state)
-    console.log('messagePayload', messagePayload);
-    debugger;
     return {
       ...state,
       userData: [ ...state.userData ],
@@ -116,6 +114,14 @@ function messageReceived(state, action) {
     case CHAT:
     return {
       ...state
+    }
+    case UPDATED_PLAYERS:
+    console.log('made it to udpated players', messagePayload.username)
+    return {
+      ...state,
+      userData: [
+      ...messagePayload.username
+      ]
     }
     default:
     return state;

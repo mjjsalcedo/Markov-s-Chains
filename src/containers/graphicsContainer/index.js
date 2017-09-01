@@ -15,7 +15,6 @@ class GraphicsContainer extends Component {
       roomId: localStorage.getItem("roomId")
     }
 
-
     this.selectedItem = this.selectedItem.bind(this);
     this.sendWinningStatus = this.sendWinningStatus.bind(this);
     this.displayPlayAgain = this.displayPlayAgain.bind(this);
@@ -24,7 +23,6 @@ class GraphicsContainer extends Component {
   }
 
   selectedItem(e){
-    console.log(e.target.className)
     this.props.gameResults( {username: this.state.username, roomId: localStorage.getItem("roomId"), score: e.target.getAttribute('value'), isVisible: e.target.className} );
   }
 
@@ -132,7 +130,7 @@ class GraphicsContainer extends Component {
 
       {
 
-    (  this.props.winningStatus !== null  ) ?
+    (  this.props.winningStatus !== null && this.props.reinvitesFrom === null) ?
       <div className='winLoseContainer'>
           {( this.props.winningStatus === "win") ?
           <div className='endContainer'>
@@ -146,7 +144,7 @@ class GraphicsContainer extends Component {
 
         {
 
-          ( this.props.winningStatus === "lose") ?
+          ( this.props.winningStatus === "lose" && this.props.reinvitesFrom === null) ?
           <div className='endContainer'>
           <h2 className='loseText endText'> YOU LOSE </h2>
           <div className='playAgainContainer'>
@@ -176,7 +174,6 @@ class GraphicsContainer extends Component {
 }
 
 const mapStateToProps = (state) => {
-  console.log('graphics state', state)
   return {
     score: state.gameResults,
     winningStatus: state.winningStatus,

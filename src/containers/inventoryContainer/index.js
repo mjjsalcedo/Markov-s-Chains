@@ -11,7 +11,6 @@ class InventoryContainer extends Component {
   }
 
 render(){
-  console.log('inv props', this.props)
   return(
     <div className="inventoryContainerBorder">
       <div className="inventoryContainer">
@@ -48,7 +47,6 @@ render(){
 }
 
 const mapStateToProps = (state) => {
-  console.log('inventory state', state)
   return {
     score: state.gameResults,
     winningStatus: state.winningStatus,

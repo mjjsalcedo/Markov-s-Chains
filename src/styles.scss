@@ -966,6 +966,19 @@ body {
   border-image-slice: 20 22;
   border-image-repeat: stretch;
 }
+
+.replayContainer {
+  display: flex;
+  flex-direction: row;
+  box-sizing: border-box;
+  height: 300px;
+  width: 100%;
+  background-color: black;
+  border: 10px solid transparent;
+  border-image-source: url(./assets/border.png);
+  border-image-slice: 20 22;
+  border-image-repeat: stretch;
+}
 .endText {
   position: absolute;
   top: -15%;
@@ -1006,13 +1019,15 @@ body {
 
 .replayAccept {
   position: relative;
-  top: -20px;
-  left: 30%;
+  top: -29%;
+  height: 105px;
+  width: 100%;
 }
 .replayDecline {
   position: relative;
-  top: -20px;
-  left: 35%;
+  top: -29%;
+  height: 105px;
+  width: 100%;
 }
 .hidden {
   visibility: hidden;
