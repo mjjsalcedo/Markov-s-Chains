@@ -29,7 +29,7 @@ class StoryContainer extends Component {
       {
         ( localStorage.getItem("player") === "player2" && this.props.winningStatus !== null) ?
         <div className="storyContainer">
-        <div className="creditText"><p>Mariel Salcedo:<br/>ReactJS, WebSocket, and Debugging.</p><p>Ian Bovard:<br/>Database, Markov Algorithm, Game Design, and Debugging.</p><p>Reyn Leong:<br/>CSS, Deployment, and Debugging.</p></div></div>
+        <div className="creditText"><p>Mariel Salcedo:<br/>ReactJS, WebSocket, and Debugging.</p><p>Ian Bovard:<br/>Database, Markov Algorithm, Game Design, and Debugging.</p><p>Reyn Leong:<br/>Styling & Animation, Deployment, and Debugging.</p></div></div>
         : null
       }
 

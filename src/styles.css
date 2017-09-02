@@ -494,7 +494,7 @@ body {
   padding: 10px 0 0 10px;
   height: 42px;
   position: relative;
-  background: rgba(0, 0, 0, 0.85); }
+  background: rgba(0, 0, 0, 0.8); }
 
 .keyPlayer1Inv {
   position: absolute;
@@ -627,7 +627,7 @@ body {
   padding: 2px;
   border: 10px solid transparent;
   border-image-repeat: round;
-  background: rgba(0, 0, 0, 0.85);
+  background: rgba(0, 0, 0, 0.8);
   color: white; }
 
 .creditText {
@@ -957,7 +957,7 @@ body {
   border-image-source: url(./assets/border.png);
   border-image-slice: 20 22;
   border-image-repeat: stretch;
-  background: rgba(0, 0, 0, 0.85); }
+  background: rgba(0, 0, 0, 0.8); }
 
 .replayContainer {
   display: flex;
@@ -969,7 +969,7 @@ body {
   border-image-source: url(./assets/border.png);
   border-image-slice: 20 22;
   border-image-repeat: stretch;
-  background: rgba(0, 0, 0, 0.85); }
+  background: rgba(0, 0, 0, 0.8); }
 
 .endText {
   position: absolute;
