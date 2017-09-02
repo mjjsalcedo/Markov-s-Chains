@@ -73,6 +73,7 @@ wss.on('connection', function connection(ws, req) {
 
   ws.on('message', function incoming(message) {
     let payload = JSON.parse(message);
+    console.log('server payload', payload)
     switch (payload.OP) {
       case 'CHAT':
 
@@ -251,7 +252,6 @@ wss.on('connection', function connection(ws, req) {
         }
         break;
         case 'REPLAY':
-
         let foundPartner = usersPlaying.find( user => {
           return payload.invite.roomId == user.roomId && user.username !== payload.invite.username; });
         if( foundPartner !== undefined ){
@@ -269,6 +269,18 @@ wss.on('connection', function connection(ws, req) {
             })
             );
         }
+        break;
+        case 'LOBBY_ROOM':
+        console.log('made it to lobby, server');
+        let findUser = usersPlaying.find(user => { return user.username === payload.message.username
+        });
+        usersPlaying.splice(usersPlaying.indexOf(findUser), 1);
+        users.push(findUser);
+        ws.send(
+          JSON.stringify({
+            OP: 'REJOIN_LOBBY',
+            username: payload.message.username
+        }))
         break;
         case 'NEW_GAME':
         const partner = usersPlaying.find( user => user.username === payload.username );
