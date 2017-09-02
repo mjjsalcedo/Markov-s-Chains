@@ -29,6 +29,22 @@
   100% {
     color: red; } }
 
+@keyframes sleep {
+  0% {
+    transform: translate(0, 0) scale(0.3);
+    opacity: 0; }
+  1% {
+    opacity: 0; }
+  3% {
+    opacity: 1; }
+  50% {
+    transform: translate(90%, -50%) scale(0.65); }
+  75% {
+    opacity: 1; }
+  100% {
+    transform: translate(180%, -100%) scale(1);
+    opacity: 0; } }
+
 @font-face {
   font-family: OregonTrail;
   src: url("./assets/OregonTrail.ttf") format("truetype");
@@ -117,14 +133,13 @@ body {
   border-image-source: url(./assets/border.png);
   border-image-slice: 20 22;
   border-image-repeat: stretch;
-
   background: url(./assets/background5.png) no-repeat;
   background-size: 515px 280px; }
 
 .marielPlayer1 {
   position: absolute;
   top: 50%;
-  left: 80%;
+  left: 75%;
   height: 47%;
   width: 11%;
   background: url(./assets/mariel-medium.png) -50px no-repeat;
@@ -137,7 +152,7 @@ body {
 .whipPlayer1 {
   position: absolute;
   top: 55%;
-  left: 69%;
+  left: 64%;
   height: 31%;
   width: 15%;
   background: url(./assets/whip-big.png) -10px no-repeat;
@@ -149,20 +164,20 @@ body {
 
 .keyPlayer1 {
   position: absolute;
-  top: 48%;
-  left: 77%;
+  top: 74%;
+  right: 3.8%;
   height: 11%;
   width: 5%;
   background: url(./assets/key.png) -5px no-repeat;
-  transform: scale(0.9); }
+  transform: scale(0.9) rotate(-30deg); }
 
 .keyPlayer1:hover {
-  transform: scale(1);
+  transform: scale(1) rotate(-30deg);
   transition: all 200ms ease-in; }
 
 .spiderPlayer1 {
   position: absolute;
-  top: 64%;
+  top: 10.5%;
   left: 18%;
   height: 15%;
   width: 10%;
@@ -176,8 +191,8 @@ body {
 
 .voodooPlayer1 {
   position: absolute;
-  top: 43%;
-  right: 2%;
+  top: 61.5%;
+  left: 15%;
   height: 18%;
   width: 10%;
   background: url(./assets/voodoo-big.png) 5px -3px no-repeat;
@@ -189,7 +204,7 @@ body {
 
 .wandPlayer1 {
   position: absolute;
-  top: 63.8%;
+  top: 67%;
   left: 8.8%;
   height: 13%;
   width: 7%;
@@ -202,8 +217,8 @@ body {
 
 .paintingPlayer1 {
   position: absolute;
-  top: 5%;
-  right: 27%;
+  top: 25.5%;
+  right: 21%;
   height: 27%;
   width: 13%;
   background: url(./assets/painting.png) no-repeat;
@@ -215,7 +230,7 @@ body {
 
 .ianPlayer1 {
   position: absolute;
-  top: 45%;
+  top: 48%;
   height: 55%;
   width: 12%;
   background: url(./assets/ian.png) -50px no-repeat;
@@ -227,8 +242,8 @@ body {
 
 .torch-slantPlayer1 {
   position: absolute;
-  top: 10%;
-  right: 4%;
+  top: 9%;
+  right: 1%;
   height: 18%;
   width: 7%;
   background: url(./assets/torch-slant.png) -10px -16px no-repeat;
@@ -240,21 +255,21 @@ body {
 
 .ratPlayer1 {
   position: absolute;
-  top: 75%;
-  left: 50%;
+  top: 47.2%;
+  left: 57%;
   height: 17%;
   width: 7%;
   background: url(./assets/rat-small.png) no-repeat;
-  transform: scale(0.9); }
+  transform: scale(0.9) scaleX(-1); }
 
 .ratPlayer1:hover {
-  transform: scale(1);
+  transform: scale(1) scaleX(-1);
   transition: all 200ms ease-in; }
 
 .torchPlayer1 {
   position: absolute;
   top: 20%;
-  left: 2%;
+  left: 10%;
   height: 22%;
   width: 8%;
   background: url(./assets/torch.png) -10px -7px no-repeat;
@@ -280,18 +295,19 @@ body {
 
 .swordPlayer1 {
   position: absolute;
-  top: 55%;
+  top: 80%;
   left: 30%;
   height: 10%;
   width: 20%;
   background: url(./assets/sword.png) no-repeat;
-  transform: scale(0.9) rotate(90deg); }
+  transform: scale(0.9) rotate(25deg); }
 
 .swordPlayer1:hover {
-  transform: scale(1) rotate(90deg);
+  transform: scale(1) rotate(25deg);
   transition: all 200ms ease-in; }
 
 .stageOneGraphicsContainerPlayer2 {
+  position: relative;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -333,8 +349,8 @@ body {
 
 .keyPlayer2 {
   position: absolute;
-  top: 50%;
-  left: 77%;
+  top: 61%;
+  right: 9%;
   height: 11%;
   width: 5%;
   background: url(./assets/key-player2.png) -5px no-repeat;
@@ -346,7 +362,7 @@ body {
 
 .spiderPlayer2 {
   position: absolute;
-  top: 64%;
+  top: 10.5%;
   left: 18%;
   height: 15%;
   width: 10%;
@@ -373,8 +389,8 @@ body {
 
 .wandPlayer2 {
   position: absolute;
-  top: 64.8%;
-  left: 9.9%;
+  top: 64%;
+  left: 10.3%;
   height: 13%;
   width: 7%;
   background: url(./assets/wand-big.png) -15px no-repeat;
@@ -386,8 +402,8 @@ body {
 
 .paintingPlayer2 {
   position: absolute;
-  top: 5%;
-  right: 27%;
+  top: 25.5%;
+  right: 21%;
   height: 27%;
   width: 13%;
   background: url(./assets/painting-player2.png) no-repeat;
@@ -738,9 +754,50 @@ body {
 
 .userReyn {
   position: absolute;
-  top: 8%;
+  top: 4%;
   left: 59%;
-  animation: bounceReyn 0.8s ease-in-out 0.8s infinite alternate; }
+  height: 23%;
+  width: 15%;
+  background: url(./assets/reyn.png) 50% no-repeat; }
+
+.sleeping {
+  position: absolute;
+  top: 13%;
+  left: 62%;
+  height: 5%;
+  width: 5%;
+  color: black;
+  animation: sleep 6s infinite linear; }
+  .sleeping:nth-child(2n) {
+    animation-delay: 3s; }
+  .sleeping:nth-child(3n) {
+    animation-delay: 6s; }
+
+.sleeping2 {
+  position: absolute;
+  top: 13%;
+  left: 62%;
+  height: 5%;
+  width: 5%;
+  color: black;
+  animation: sleep 6s infinite linear; }
+  .sleeping2:nth-child(2n) {
+    animation-delay: 3s; }
+  .sleeping2:nth-child(3n) {
+    animation-delay: 6s; }
+
+.sleeping3 {
+  position: absolute;
+  top: 13%;
+  left: 62%;
+  height: 5%;
+  width: 5%;
+  color: black;
+  animation: sleep 6s infinite linear; }
+  .sleeping3:nth-child(2n) {
+    animation-delay: 3s; }
+  .sleeping3:nth-child(3n) {
+    animation-delay: 6s; }
 
 .userChatInput {
   display: flex;
@@ -826,9 +883,11 @@ body {
 
 .userListReyn {
   position: absolute;
-  top: 10%;
+  top: 4%;
   left: 59%;
-  animation: bounceReyn 0.8s ease-in-out 0.8s infinite alternate; }
+  height: 23%;
+  width: 15%;
+  background: url(./assets/reyn.png) 50% no-repeat; }
 
 .currentUser {
   display: flex;
