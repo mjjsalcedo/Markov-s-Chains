@@ -8,7 +8,7 @@ import InventoryContainer from '../inventoryContainer'
 class RoomContainer extends Component {
   constructor(props){
     super(props);
-
+    console.log('room props', this.props)
     this.state = {
 
     };
@@ -18,7 +18,7 @@ class RoomContainer extends Component {
     return (
        <div className="mainContainer">
   <div className="visualContainer">
-  <GraphicsContainer/>
+  <GraphicsContainer history={this.props.history}/>
   <InventoryContainer/>
   <StoryContainer/>
   </div>
