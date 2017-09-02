@@ -344,7 +344,7 @@ app.get('/', (req, res) => {
   res.sendfile('index.html', {root: path.join(__dirname, './public')});
 });
 server.listen(PORT,'0.0.0.0', ()=> {
-  db.sequelize.sync({force: true});
+  db.sequelize.sync();
   console.log(`listening on ${PORT}`);
 });
 
