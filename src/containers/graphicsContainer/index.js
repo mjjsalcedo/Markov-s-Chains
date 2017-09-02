@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { gameResults, checkGameStatus, anotherInvite, replayGame } from '../../actions';
+import { gameResults, checkGameStatus, anotherInvite, replayGame, lobby } from '../../actions';
 import { Link} from 'react-router-dom';
 
 
@@ -9,7 +9,6 @@ class GraphicsContainer extends Component {
 
   constructor(props) {
     super(props);
-
     this.state = {
       username: localStorage.getItem("username"),
       roomId: localStorage.getItem("roomId")
@@ -19,7 +18,7 @@ class GraphicsContainer extends Component {
     this.sendWinningStatus = this.sendWinningStatus.bind(this);
     this.displayPlayAgain = this.displayPlayAgain.bind(this);
     this.onClickAccept = this.onClickAccept.bind(this);
-
+    this.goToLobby = this.goToLobby.bind(this);
   }
 
   selectedItem(e){
@@ -38,6 +37,9 @@ class GraphicsContainer extends Component {
     this.props.replayGame(this.props.reinvitesFrom)
   }
 
+  goToLobby(){
+    this.props.lobby({username: localStorage.getItem("username")})
+  }
 
   render(){
     if (this.props.score !== undefined) {
@@ -56,6 +58,10 @@ class GraphicsContainer extends Component {
       if(test.good >= 10) {
         this.sendWinningStatus("win")
       }
+    }
+
+    if(this.props.goToLobby === true){
+      this.props.history.push('/userlist')
     }
 
     return(
@@ -137,7 +143,7 @@ class GraphicsContainer extends Component {
           <h2 className='winText endText'> YOU WIN </h2>
           <div className='playAgainContainer'>
           <button className='playAgain btn' onClick={this.displayPlayAgain}>Play Again?</button>
-          <Link to="/"><button className='quit btn'>Home</button></Link>
+          <button className='quit btn' onClick={this.goToLobby}>Home</button>
           </div>
           </div>
         :null }
@@ -149,7 +155,7 @@ class GraphicsContainer extends Component {
           <h2 className='loseText endText'> YOU LOSE </h2>
           <div className='playAgainContainer'>
           <button className='playAgain btn' onClick={this.displayPlayAgain}>Play Again?</button>
-          <Link to="/"><button className='quit btn'>Home</button></Link>
+          <button className='quit btn' onClick={this.goToLobby}>Home</button>
           </div>
           </div>
             :null }
@@ -174,11 +180,14 @@ class GraphicsContainer extends Component {
 }
 
 const mapStateToProps = (state) => {
+  debugger;
+  console.log('graphics state', state)
   return {
     score: state.gameResults,
     winningStatus: state.winningStatus,
     reinvitesFrom: state.reinvitesFrom,
-    isVisible: state.isVisible
+    isVisible: state.isVisible,
+    goToLobby: state.goToLobby
   };
 };
 
@@ -197,6 +206,9 @@ const mapDispatchToProps = dispatch => {
     },
     replayGame: player => {
       dispatch(replayGame(player))
+    },
+    lobby: player => {
+      dispatch(lobby(player))
     }
   };
 };

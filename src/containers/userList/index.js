@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { sendInvite, acceptInvite, declineInvite, broadcastUsers } from '../../actions';
-import { Link } from 'react-router-dom';
-
 
 class UserList extends Component {
 
