@@ -143,7 +143,7 @@ class GraphicsContainer extends Component {
           <h2 className='winText endText'> YOU WIN </h2>
           <div className='playAgainContainer'>
           <button className='playAgain btn' onClick={this.displayPlayAgain}>Play Again?</button>
-          <button className='quit btn' onClick={this.goToLobby}>Home</button>
+          <button className='quit btn' onClick={this.goToLobby}>Lobby</button>
           </div>
           </div>
         :null }
@@ -155,7 +155,7 @@ class GraphicsContainer extends Component {
           <h2 className='loseText endText'> YOU LOSE </h2>
           <div className='playAgainContainer'>
           <button className='playAgain btn' onClick={this.displayPlayAgain}>Play Again?</button>
-          <button className='quit btn' onClick={this.goToLobby}>Home</button>
+          <button className='quit btn' onClick={this.goToLobby}>Lobby</button>
           </div>
           </div>
             :null }
