@@ -74,21 +74,24 @@ wss.on('connection', function connection(ws, req) {
 
   ws.on('message', function incoming(message) {
     let payload = JSON.parse(message);
+    console.log('server payload', payload)
     switch (payload.OP) {
       case 'CHAT':
+
       modifiedMessage = removePunctuation(payload.message.message);
       stringArray = stringIntoThirds(modifiedMessage);
+
       let arrayPosOne = stringArray[0];
       let arrayPosTwo = stringArray[1];
       let arrayPosThree = stringArray[2];
       let room = rooms.get(parseInt(payload.message.roomId));
-
       let activePlayer = usersPlaying.find(user => {
         return user.username === payload.message.username && user.roomId === parseInt(payload.message.roomId);
       });
       let inactivePlayer = usersPlaying.find(user => {
         return user.username !== payload.message.username && user.roomId === parseInt(payload.message.roomId);
       });
+
       switch(true){
         case (messageChain.trigger.length === 0):
         messageChain.trigger.push(payload.message);
@@ -99,13 +102,13 @@ wss.on('connection', function connection(ws, req) {
         case (messageChain.trigger.length > 0 && messageChain.trigger[0].username != payload.message.username):
         messageChain.response.push(payload.message);
         messageCache.push(modifiedMessage);
-        recurseThroughDb(activePlayer,modifiedMessage, modifiedMessage, room);
+        recurseThroughDb(activePlayer, modifiedMessage, modifiedMessage, room);
         break;
 
         case (messageChain.trigger[0].username === payload.message.username && messageChain.response.length  === 0):
         messageChain.trigger.push(payload.message);
         triggerCache.push(modifiedMessage);
-        recurseThroughDb(activePlayer,modifiedMessage, modifiedMessage, room);
+        recurseThroughDb(activePlayer, modifiedMessage, modifiedMessage, room);
         break;
 
         case (messageChain.trigger[0].username === payload.message.username):
@@ -250,7 +253,6 @@ wss.on('connection', function connection(ws, req) {
         }
         break;
         case 'REPLAY':
-
         let foundPartner = usersPlaying.find( user => {
           return payload.invite.roomId == user.roomId && user.username !== payload.invite.username; });
         if( foundPartner !== undefined ){
@@ -268,6 +270,18 @@ wss.on('connection', function connection(ws, req) {
             })
             );
         }
+        break;
+        case 'LOBBY_ROOM':
+        console.log('made it to lobby, server');
+        let findUser = usersPlaying.find(user => { return user.username === payload.message.username
+        });
+        usersPlaying.splice(usersPlaying.indexOf(findUser), 1);
+        users.push(findUser);
+        ws.send(
+          JSON.stringify({
+            OP: 'REJOIN_LOBBY',
+            username: payload.message.username
+        }))
         break;
         case 'NEW_GAME':
         const partner = usersPlaying.find( user => user.username === payload.username );
@@ -323,7 +337,6 @@ ws.send(
   );
 });
 
-
 app.use(express.static('public'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -331,7 +344,7 @@ app.get('/', (req, res) => {
   res.sendfile('index.html', {root: path.join(__dirname, './public')});
 });
 server.listen(PORT,'0.0.0.0', ()=> {
-  db.sequelize.sync(/*{force: true}*/);
+  db.sequelize.sync({force: true});
   console.log(`listening on ${PORT}`);
 });
 
@@ -361,15 +374,22 @@ function stringIntoThirds(string){
 }
 
 function recurseThroughDb(user, trig, con, room){
-  console.log('this is the recursion');
-  console.log(trig);
   if (markovArray.indexOf('#') > -1){
-    let markovSentence = markovArray.join(' ');
-    markovArray = [];
-    stringArray = [];
-    return sendMarkov(user, markovSentence);
+    if (markovArray.indexOf('#') === 0){
+      console.log('first if',markovArray);
+      return;
+    }else{
+      let min = 2;
+      let max = 4;
+      let random = Math.floor(Math.random() * (max - min + 1) + min);
+      let markovSentence = markovArray.slice(0,-1).join(' ');
+      console.log('second if',markovSentence);
+      markovArray = [];
+      stringArray = [];
+      return setTimeout(function(){sendMarkov(user, markovSentence);}, random * 1000);
+    }
   }
-  return Ngrams.find({ where: {trigger: trig, context: con }, attributes: ['word']}).then(nextWord => {//orderby
+  return Ngrams.findOne({ where: {trigger: trig, context: con }, attributes: ['word']}).then(nextWord => {//orderby
     if (nextWord){
       markovArray.push(nextWord.word);
       recurseThroughDb(user, nextWord.word, con, room);
@@ -379,6 +399,8 @@ function recurseThroughDb(user, trig, con, room){
   });
 }
 
+
+
 function removePunctuation(string){
   return string
   .replace(/[.,\/<>#+!$&@?%[\]^\|*\*/;:{}=\-_`'"~()]/g,"")
@@ -386,14 +408,13 @@ function removePunctuation(string){
 }
 
 function sendMarkov(user, message){
-  console.log(user);
-  console.log(message);
   user.send(
     JSON.stringify({
       OP: 'BROADCAST_MESSAGE',
       message: message
     }));
 }
+
 
 
 /*function recurseThroughDb(user, trig1, trig2, trig3, con, room){

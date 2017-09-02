@@ -1,4 +1,4 @@
-import { MESSAGE_SEND, USER_CONNECT, MESSAGE_RECEIVED, SUCCESSFUL_CONNECTION, USER_DISCONNECTED, CREATE_USERNAME, DECLINE_INVITE, CHAT, CREATED_USER, RECEIVE_INVITE, ENTER_ROOM, BROADCAST_MESSAGE, BROADCAST_SCORE, GAME_STATUS, RECEIVE_REPLAY_INVITE, UPDATED_PLAYERS} from './actions';
+import { MESSAGE_SEND, USER_CONNECT, MESSAGE_RECEIVED, SUCCESSFUL_CONNECTION, USER_DISCONNECTED, CREATE_USERNAME, DECLINE_INVITE, CHAT, CREATED_USER, RECEIVE_INVITE, ENTER_ROOM, BROADCAST_MESSAGE, BROADCAST_SCORE, GAME_STATUS, RECEIVE_REPLAY_INVITE, UPDATED_PLAYERS, REJOIN_LOBBY} from './actions';
 
 let initialState = {
   userData:[],
@@ -47,12 +47,12 @@ let initialState = {
 
 function messageReceived(state, action) {
   let messagePayload = JSON.parse(action.payload);
-  console.log('fnhuadsbfuadgfbiasduiouid', messagePayload);
   switch (messagePayload.OP) {
 
     case SUCCESSFUL_CONNECTION:
     return localStorage.setItem("id", messagePayload.userId)
     case BROADCAST_MESSAGE:
+    if (state.userData.length <= 4){
     return {
       ...state,
       userData: [
@@ -61,6 +61,20 @@ function messageReceived(state, action) {
       gameResults: [ ...state.gameResults],
       winningStatus: null,
       isVisible: [...state.isVisible]
+    }
+    }else{
+      let lastFiveMessages = state.userData.slice(-5);
+      console.log(lastFiveMessages);
+      return {
+        ...state,
+        userData: [
+        ...lastFiveMessages,
+        { message: messagePayload.message }
+        ],
+        gameResults: [...state.gameResults],
+        winningStatus: null,
+        isVisible: [...state.isVisible]
+      }
     }
     case BROADCAST_SCORE:
     return {
@@ -116,12 +130,25 @@ function messageReceived(state, action) {
       ...state
     }
     case UPDATED_PLAYERS:
-    console.log('made it to udpated players', messagePayload.username)
     return {
       ...state,
       userData: [
       ...messagePayload.username
       ]
+    }
+    case REJOIN_LOBBY:
+    console.log('made it to rejoin lobby', messagePayload.username)
+    return {
+      userData: [
+      messagePayload.username
+      ],
+      gameResults:[],
+      isVisible: [],
+      score: '',
+      gameResults:[],
+      winningStatus: null,
+      invitesFrom: null,
+      goToLobby: true
     }
     default:
     return state;

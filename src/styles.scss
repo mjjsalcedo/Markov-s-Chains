@@ -52,7 +52,7 @@ body {
 }
 .btn {
   font-family: OregonTrail;
-  background-color: #4caf50;
+  background-color: #4b86b4;
   border: none;
   color: white;
   padding: 10px;
@@ -60,6 +60,9 @@ body {
   text-decoration: none;
   display: inline-block;
   font-size: 12px;
+}
+.btn:hover{
+  background-color: #2a4d69;
 }
 .mainContainer {
   display: flex;
@@ -90,7 +93,7 @@ body {
   max-width: 100%;
   max-height: 100%;
   width: 40%;
-  background: url(./assets/phone.png) 55% 35% no-repeat;
+  background: url(./assets/phoneGrey.png) 55% 35% no-repeat;
 }
 .cellPhoneContainer {
   display: -ms-flexbox;
@@ -102,6 +105,7 @@ body {
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
   width: 35%;
+  color: white;
 }
 .graphicsContainerBorder {
   position: relative;
@@ -124,6 +128,7 @@ body {
   border-image-source: url(./assets/border.png);
   border-image-slice: 20 22;
   border-image-repeat: stretch;
+
   background: url(./assets/background5.png) no-repeat;
   background-size: 515px 280px;
 }
@@ -491,13 +496,14 @@ body {
   border-image-source: url(./assets/border.png);
   border-image-slice: 20 22;
   border-image-repeat: round;
+
 }
 .inventoryContainer {
   box-sizing: border-box;
   padding: 10px 0 0 10px;
   height: 42px;
   position: relative;
-  background-color: #0AE8CA;
+  background: rgba(0,0,0,0.65);
 }
 .keyPlayer1Inv {
   position: absolute;
@@ -642,13 +648,9 @@ body {
   box-sizing: border-box;
   height: 200px;
   padding: 10px;
-  border-radius: 10px;
   border: 10px solid transparent;
-  border-image-source: url(./assets/border.png);
-  border-image-slice: 20 22;
   border-image-repeat: round;
-  background-color: black;
-  opacity: 0.65;
+  background: rgba(0,0,0,0.65);
   color: white;
 }
 .messageBox {
@@ -664,7 +666,9 @@ body {
   margin-top: 70%;
   margin-left: 8%;
   height: 403px;
-  width: 277%;
+  width: 280%;
+  overflow-x: hidden;
+  overflow-y: hidden;
 }
 .message {
   word-wrap: break-word;
@@ -728,7 +732,7 @@ body {
   position: absolute;
   top: 3%;
   align-self: center;
-  background: url(./assets/phone.png) 62.5% 57.8% no-repeat;
+  background: url(./assets/phoneGrey.png) 62.5% 57.8% no-repeat;
   display: -ms-flexbox;
   display: flex;
   -ms-flex-direction: column;
@@ -783,7 +787,7 @@ body {
 }
 .userSendButton {
   position: absolute;
-  top: 55%;
+  top: 77.5%;
   left: 45.71%;
   width: 20%;
 }
@@ -815,7 +819,7 @@ body {
   position: absolute;
   top: 3%;
   align-self: center;
-  background: url(./assets/phone.png) 62.5% 57.8% no-repeat;
+  background: url(./assets/phoneGrey.png) 62.5% 57.8% no-repeat;
   display: -ms-flexbox;
   display: flex;
   -ms-flex-direction: column;
@@ -825,6 +829,7 @@ body {
   box-sizing: border-box;
   height: 100%;
   width: 100%;
+  color: white;
 }
 .userListTitle {
   position: absolute;
@@ -857,7 +862,7 @@ body {
 }
 .currentUser {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   overflow: auto;
   position: absolute;
   height: 8%;
@@ -869,8 +874,7 @@ body {
 }
 .userList {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-start;
+  flex-direction: column;
   overflow: auto;
   position: absolute;
   height: 20%;
@@ -879,16 +883,22 @@ body {
   left: 43.8%;
   padding: 5px 0 0 7px;
   box-sizing: border-box;
+  overflow-x: hidden;
 }
 .listOfUsers {
+  margin-bottom: -8px;
   height: 10%;
+}
+.listOfUsers:hover{
+  color: #4b86b4;
 }
 .inviteUser {
   position: absolute;
   box-sizing: border-box;
-  top: 55.4%;
-  left: 50.5%;
-  width: 10%;
+  top: 74.50%;
+  left: 45.5%;
+  width: 20%;
+  height: 3.6%;
 }
 .inviteForm {
   position: absolute;
@@ -896,9 +906,9 @@ body {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  height: 19.45%;
+  height: 43.75%;
   width: 23.6%;
-  top: 59.3%;
+  top: 40.3%;
   left: 43.8%;
   padding-left: 5px;
   box-sizing: border-box;
@@ -910,14 +920,14 @@ body {
 }
 .acceptUser {
   position: absolute;
-  top: 60%;
+  top: 77.75%;
   left: 1%;
   width: 45%;
   box-sizing: border-box;
 }
 .declineUser {
   position: absolute;
-  top: 60%;
+  top: 77.75%;
   left: 50%;
   width: 45%;
   box-sizing: border-box;
@@ -932,11 +942,11 @@ body {
   border-image-source: url(./assets/border.png);
   border-image-slice: 20 22;
   border-image-repeat: stretch;
+  background: rgba(0,0,0,0.65);
 }
-
 .replayContainer {
   display: flex;
-  flex-direction: row;
+  justify-content: center;
   box-sizing: border-box;
   height: 300px;
   width: 100%;
@@ -944,24 +954,25 @@ body {
   border-image-source: url(./assets/border.png);
   border-image-slice: 20 22;
   border-image-repeat: stretch;
+  background: rgba(0,0,0,0.65);
 }
 .endText {
   position: absolute;
   align-self: center;
   height: 40%;
   top: 20%;
-  left: 13%;
+  left: 9%;
   width: 69%;
   padding: 10px;
   color: red;
-  // border: 1px solid red;
   font-size: 50px;
 }
 .winText {
   animation: winTextScreen 0.8s ease-in-out 0.8s infinite alternate;
 }
 .loseText {
-  left: 15%;
+  width: 200%;
+  animation: winTextScreen 0.8s ease-in-out 0.8s infinite alternate;
 }
 .playAgainContainer {
   position: relative;
@@ -971,28 +982,31 @@ body {
 }
 .quit {
   position: relative;
+  opacity: 1;
   top: 280%;
   left: 75%;
   height: 40%;
 }
 .playAgain {
   position: relative;
+  opacity: 1;
   top: 280%;
   left: 55%;
   height: 40%;
 }
-.replayContainer {
-  border: 1px solid green;
-}
+
 .replay {
-  position: relative;
-  height: 40%;
-  width: 100%;
-  border: 1px solid red;
-  padding: 5px;
+  width: 500px;
+  text-align: center;
+  padding:50px 70px 50px 70px;
+  margin-left: 15%;
+  margin-right:-25%;
+  color: white;
+  font-size: 25px;
 }
 
 .replayAccept {
+
   position: relative;
   left: -36%;
   top: 70%;

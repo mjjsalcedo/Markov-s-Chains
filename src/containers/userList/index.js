@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { sendInvite, acceptInvite, declineInvite, broadcastUsers } from '../../actions';
-import { Link } from 'react-router-dom';
-
 
 class UserList extends Component {
 
@@ -61,13 +59,13 @@ class UserList extends Component {
       </div>
       {this.props.username.filter(userData => {
         return userData.username === localStorage.getItem("username")}).map(username => {
-          return <span className='currentUser'>Welcome {username.username}</span> })}
+          return <span className='currentUser'>Welcome<br/> <p>{username.username}</p></span> })}
         {
           ( this.props.invitesFrom === null) ?
           <div className="userList">Friends:
           {this.props.username.filter(userData => {
             return userData.username !== localStorage.getItem("username")}).map(username => {
-              return <span className='listOfUsers' onClick={this.selectUser(username)}>{username.username}</span> })}
+              return <p className='listOfUsers' onClick={this.selectUser(username)}>{username.username}</p> })}
             </div>
             : null
           }

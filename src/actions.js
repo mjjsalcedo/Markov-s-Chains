@@ -1,8 +1,11 @@
 
 //const socket = new WebSocket('ws://10.0.1.149:3001');
+//const socket = new WebSocket('ws://10.0.1.144:3001');
 // const socket = new WebSocket('ws://10.0.1.52:3001');
 const host = window.document.location.host;
 const socket = new WebSocket('wss://' + host);
+
+
 
 export const MESSAGE_SEND = 'MESSAGE_SEND'
 export const USER_CONNECT = "USER_CONNECT"
@@ -27,6 +30,8 @@ export const GAME_STATUS = "GAME_STATUS"
 export const RECEIVE_REPLAY_INVITE = "RECEIVE_REPLAY_INVITE"
 export const REPLAY = "REPLAY"
 export const UPDATED_PLAYERS = "UPDATED_PLAYERS"
+export const LOBBY_ROOM = "LOBBY_ROOM"
+export const REJOIN_LOBBY = "REJOIN_LOBBY"
 
 
 export const userConnect = () => {
@@ -121,5 +126,14 @@ export const anotherInvite = ( invite ) => {
     socket.send(JSON.stringify({
       OP: REPLAY,
       invite}));
+  }
+}
+
+export const lobby = ( user ) => {
+  console.log('made it to actions', user)
+  return ( dispatch ) => {
+    socket.send(JSON.stringify({
+      OP: LOBBY_ROOM,
+      message: user}));
   }
 }

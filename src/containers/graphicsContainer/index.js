@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { gameResults, checkGameStatus, anotherInvite, replayGame } from '../../actions';
+import { gameResults, checkGameStatus, anotherInvite, replayGame, lobby } from '../../actions';
 import { Link} from 'react-router-dom';
 
 
@@ -9,7 +9,6 @@ class GraphicsContainer extends Component {
 
   constructor(props) {
     super(props);
-
     this.state = {
       username: localStorage.getItem("username"),
       roomId: localStorage.getItem("roomId")
@@ -19,7 +18,7 @@ class GraphicsContainer extends Component {
     this.sendWinningStatus = this.sendWinningStatus.bind(this);
     this.displayPlayAgain = this.displayPlayAgain.bind(this);
     this.onClickAccept = this.onClickAccept.bind(this);
-
+    this.goToLobby = this.goToLobby.bind(this);
   }
 
   selectedItem(e){
@@ -38,6 +37,9 @@ class GraphicsContainer extends Component {
     this.props.replayGame(this.props.reinvitesFrom)
   }
 
+  goToLobby(){
+    this.props.lobby({username: localStorage.getItem("username")})
+  }
 
   render(){
     if (this.props.score !== undefined) {
@@ -58,12 +60,16 @@ class GraphicsContainer extends Component {
       }
     }
 
+    if(this.props.goToLobby === true){
+      this.props.history.push('/userlist')
+    }
+
     return(
       <div className="graphicsContainerBorder">
       {
 
         ( localStorage.getItem("player") === "player1" && this.props.winningStatus === null ) ?
-        <div className="stageOneGraphicsContainerPlayer1"> Player 1
+        <div className="stageOneGraphicsContainerPlayer1">
         <div className={this.props.isVisible.indexOf('keyPlayer1') === -1 ? 'keyPlayer1' : 'hidden'} value="bad" onClick={this.selectedItem}>
         </div>
         <div className={this.props.isVisible.indexOf('spiderPlayer1') === -1 ? 'spiderPlayer1' : 'hidden'} value="bad" onClick={this.selectedItem}>
@@ -97,7 +103,7 @@ class GraphicsContainer extends Component {
       {
 
         ( localStorage.getItem("player") === "player2" && this.props.winningStatus === null ) ?
-        <div className="stageOneGraphicsContainerPlayer2">Player 2
+        <div className="stageOneGraphicsContainerPlayer2">
         <div className="keyPlayer2">
         </div>
         <div className="spiderPlayer2">
@@ -137,7 +143,7 @@ class GraphicsContainer extends Component {
           <h2 className='winText endText'> YOU WIN </h2>
           <div className='playAgainContainer'>
           <button className='playAgain btn' onClick={this.displayPlayAgain}>Play Again?</button>
-          <Link to="/"><button className='quit btn'>Home</button></Link>
+          <button className='quit btn' onClick={this.goToLobby}>Lobby</button>
           </div>
           </div>
         :null }
@@ -146,10 +152,10 @@ class GraphicsContainer extends Component {
 
           ( this.props.winningStatus === "lose" && this.props.reinvitesFrom === null) ?
           <div className='endContainer'>
-          <h2 className='loseText endText'> YOU LOSE </h2>
+          <h2 className='loseText endText'>YOU LOSE</h2>
           <div className='playAgainContainer'>
           <button className='playAgain btn' onClick={this.displayPlayAgain}>Play Again?</button>
-          <Link to="/"><button className='quit btn'>Home</button></Link>
+          <button className='quit btn' onClick={this.goToLobby}>Lobby</button>
           </div>
           </div>
             :null }
@@ -160,9 +166,9 @@ class GraphicsContainer extends Component {
         {
             ( this.props.reinvitesFrom !== null ) ?
                <div className='replayContainer'>
-                <p className='replay'>
-                  You were invited to replay a game with { this.props.reinvitesFrom }
-                </p>
+                <h2 className='replay'>
+                  Replay with <br/>{ this.props.reinvitesFrom }?
+                </h2>
                 <button className='replayAccept btn' onClick={this.onClickAccept} type="button">Accept</button>
                 <button className='replayDecline btn' onClick={this.onClickDecline} type="button">Decline</button>
               </div>
@@ -178,7 +184,8 @@ const mapStateToProps = (state) => {
     score: state.gameResults,
     winningStatus: state.winningStatus,
     reinvitesFrom: state.reinvitesFrom,
-    isVisible: state.isVisible
+    isVisible: state.isVisible,
+    goToLobby: state.goToLobby
   };
 };
 
@@ -197,6 +204,9 @@ const mapDispatchToProps = dispatch => {
     },
     replayGame: player => {
       dispatch(replayGame(player))
+    },
+    lobby: player => {
+      dispatch(lobby(player))
     }
   };
 };
