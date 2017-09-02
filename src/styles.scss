@@ -6,26 +6,6 @@
     transform: translateY(3px);
   }
 }
-@keyframes bounceReyn {
-  0% {
-    top: 8%;
-    color: blue;
-  }
-  25% {
-    top: 9%;
-    color: yellow;
-  }
-  50% {
-    top: 10%;
-    color: green;
-  }
-  100% {
-    top: 8%;
-    left: 61%;
-    color: red;
-  }
-}
-
 @keyframes winTextScreen {
   0% {
     color: blue;
@@ -40,27 +20,32 @@
     color: red;
   }
 }
-
 @keyframes sleep {
   0% {
     transform: translate(0, 0) scale(0.3);
     opacity: 0;
+    visibility: hidden;
   }
   1% {
     opacity: 0;
+    visibility: visible;
   }
   3% {
     opacity: 1;
+    visibility: visible;
   }
   50% {
     transform: translate(90%, -50%) scale(0.65);
+    visibility: visible;
   }
   75% {
     opacity: 1;
+    visibility: visible;
   }
   100% {
     transform: translate(180%, -100%) scale(1);
     opacity: 0;
+    visibility: visible;
   }
 }
 @font-face {
@@ -805,15 +790,7 @@ body {
   height: 5%;
   width: 5%;
   color: black;
-  animation: sleep 6s infinite linear;
-
-  &:nth-child(2n) {
-    animation-delay: 3s;
-  }
-
-  &:nth-child(3n) {
-    animation-delay: 6s;
-  }
+  animation: sleep 9s infinite linear;
 }
 .sleeping2 {
   position: absolute;
@@ -822,15 +799,9 @@ body {
   height: 5%;
   width: 5%;
   color: black;
-  animation: sleep 6s infinite linear;
-
-  &:nth-child(2n) {
-    animation-delay: 3s;
-  }
-
-  &:nth-child(3n) {
-    animation-delay: 6s;
-  }
+  visibility: hidden;
+  animation: sleep 9s infinite linear;
+  animation-delay: 3s;
 }
 .sleeping3 {
   position: absolute;
@@ -839,15 +810,9 @@ body {
   height: 5%;
   width: 5%;
   color: black;
-  animation: sleep 6s infinite linear;
-
-  &:nth-child(2n) {
-    animation-delay: 3s;
-  }
-
-  &:nth-child(3n) {
-    animation-delay: 6s;
-  }
+  visibility: hidden;
+  animation: sleep 9s infinite linear;
+  animation-delay: 6s;
 }
 .userChatInput {
   display: flex;
