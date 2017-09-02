@@ -52,7 +52,8 @@ function messageReceived(state, action) {
     case SUCCESSFUL_CONNECTION:
     return localStorage.setItem("id", messagePayload.userId)
     case BROADCAST_MESSAGE:
-    if (state.userData.length <= 4){
+    if (state.userData.length <= 5){
+      console.log("FIRST IF IN REDUCER",state.userData);
     return {
       ...state,
       userData: [
@@ -63,7 +64,8 @@ function messageReceived(state, action) {
       isVisible: [...state.isVisible]
     }
     }else{
-      let lastFiveMessages = state.userData.slice(-5);
+      let lastFiveMessages = state.userData.slice(-6);
+      console.log("ELSE IN REDUCER",state.userData)
       console.log(lastFiveMessages);
       return {
         ...state,
