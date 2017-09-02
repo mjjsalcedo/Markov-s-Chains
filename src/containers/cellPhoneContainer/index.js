@@ -56,6 +56,7 @@ class CellPhoneContainer extends Component {
       </div>
     );
   }
+
 }
 
 const mapStateToProps = (state) => {

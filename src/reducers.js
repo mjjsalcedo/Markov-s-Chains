@@ -53,6 +53,7 @@ function messageReceived(state, action) {
     case SUCCESSFUL_CONNECTION:
     return localStorage.setItem("id", messagePayload.userId)
     case BROADCAST_MESSAGE:
+    if (state.userData.length <= 4){
     return {
       ...state,
       userData: [
@@ -61,6 +62,20 @@ function messageReceived(state, action) {
       gameResults: [ ...state.gameResults],
       winningStatus: null,
       isVisible: [...state.isVisible]
+    }
+    }else{
+      let lastFiveMessages = state.userData.slice(-4);
+      console.log(lastFiveMessages);
+      return {
+        ...state,
+        userData: [
+        ...lastFiveMessages,
+        { message: messagePayload.message }
+        ],
+        gameResults: [...state.gameResults],
+        winningStatus: null,
+        isVisible: [...state.isVisible]
+      }
     }
     case BROADCAST_SCORE:
     return {
