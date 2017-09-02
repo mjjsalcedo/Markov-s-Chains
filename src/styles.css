@@ -766,6 +766,7 @@ body {
   left: 62%;
   height: 5%;
   width: 5%;
+  color: black;
   animation: sleep 6s infinite linear; }
   .sleeping:nth-child(2n) {
     animation-delay: 3s; }
@@ -778,6 +779,7 @@ body {
   left: 62%;
   height: 5%;
   width: 5%;
+  color: black;
   animation: sleep 6s infinite linear; }
   .sleeping2:nth-child(2n) {
     animation-delay: 3s; }
@@ -790,6 +792,7 @@ body {
   left: 62%;
   height: 5%;
   width: 5%;
+  color: black;
   animation: sleep 6s infinite linear; }
   .sleeping3:nth-child(2n) {
     animation-delay: 3s; }
