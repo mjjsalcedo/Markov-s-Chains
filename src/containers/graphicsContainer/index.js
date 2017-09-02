@@ -90,7 +90,7 @@ class GraphicsContainer extends Component {
         </div>
         <div className={this.props.isVisible.indexOf('torchPlayer1') === -1 ? 'torchPlayer1' : 'hidden'} value="good" onClick={this.selectedItem}>
         </div>
-        <div className={this.props.isVisible.indexOf('torch-slantPlayer1') === -1 ? 'torch-slantPlayer1' : 'hidden'} value="good" onClick={this.selectedItem}>
+        <div className={this.props.isVisible.indexOf('reynPlayer1') === -1 ? 'reynPlayer1' : 'hidden'} value="good" onClick={this.selectedItem}>
         </div>
         <div className={this.props.isVisible.indexOf('batPlayer1') === -1 ? 'batPlayer1' : 'hidden'} value="good" onClick={this.selectedItem}>
         </div>
@@ -124,7 +124,7 @@ class GraphicsContainer extends Component {
         </div>
         <div className='torchPlayer1'>
         </div>
-        <div className='torch-slantPlayer1'>
+        <div className='reynPlayer1'>
         </div>
         <div className='batPlayer1'>
         </div>

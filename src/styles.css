@@ -231,17 +231,17 @@ body {
   transform: scale(1);
   transition: all 200ms ease-in; }
 
-.torch-slantPlayer1 {
+.reynPlayer1 {
   position: absolute;
-  top: 9%;
-  right: 1%;
-  height: 18%;
-  width: 7%;
-  background: url(./assets/torch-slant.png) -10px -16px no-repeat;
-  transform: scale(0.9) scaleX(-1); }
+  top: 78%;
+  right: -3%;
+  height: 20%;
+  width: 17%;
+  background: url(./assets/reyn-medium.png) 10px 10px no-repeat;
+  transform: scale(0.9); }
 
-.torch-slantPlayer1:hover {
-  transform: scale(1) scaleX(-1);
+.reynPlayer1:hover {
+  transform: scale(1);
   transition: all 200ms ease-in; }
 
 .ratPlayer1 {
@@ -416,16 +416,16 @@ body {
   transform: scale(1);
   transition: all 200ms ease-in; }
 
-.torch-slantPlayer2 {
+.reynPlayer2 {
   position: absolute;
   top: 10%;
   right: 4%;
   height: 18%;
   width: 7%;
-  background: url(./assets/torch-slant-player2.png) -10px -16px no-repeat;
+  background: url(./assets/reyn-medium.png) -10px -16px no-repeat;
   transform: scale(0.9) scaleX(-1); }
 
-.torch-slantPlayer2:hover {
+.reynPlayer2:hover {
   transform: scale(1) scaleX(-1);
   transition: all 200ms ease-in; }
 
@@ -586,13 +586,13 @@ body {
   width: 10%;
   animation: bounce 0.8s ease-in-out 0.8s infinite alternate; }
 
-.torch-slantPlayer1Inv {
+.reynPlayer1Inv {
   position: absolute;
-  background: url(./assets/torch-slant-small.png) 0 -15px no-repeat;
+  background: url(./assets/reyn-small.png) 0 6px no-repeat;
   top: 0;
   left: 66%;
   height: 100%;
-  width: 10%;
+  width: 12%;
   animation: bounce 0.8s ease-in-out 0.8s infinite alternate; }
 
 .batPlayer1Inv {
@@ -976,7 +976,7 @@ body {
   align-self: center;
   height: 40%;
   top: 20%;
-  left: 9%;
+  left: 15%;
   width: 69%;
   padding: 10px;
   color: red;
@@ -986,7 +986,9 @@ body {
   animation: winTextScreen 0.8s ease-in-out 0.8s infinite alternate; }
 
 .loseText {
+  position: absolute;
   width: 200%;
+  left: 10%;
   animation: winTextScreen 0.8s ease-in-out 0.8s infinite alternate; }
 
 .playAgainContainer {
@@ -998,15 +1000,15 @@ body {
 .quit {
   position: relative;
   opacity: 1;
-  top: 280%;
-  left: 75%;
+  top: 260%;
+  left: 65%;
   height: 40%; }
 
 .playAgain {
   position: relative;
   opacity: 1;
-  top: 280%;
-  left: 55%;
+  top: 260%;
+  left: 50%;
   height: 40%; }
 
 .replay {

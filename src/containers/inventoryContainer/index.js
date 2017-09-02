@@ -34,7 +34,7 @@ render(){
         </div>
         <div className={this.props.isVisible.indexOf('torchPlayer1') === -1 ? 'hidden' : 'torchPlayer1Inv' } >
         </div>
-        <div className={this.props.isVisible.indexOf('torch-slantPlayer1') === -1 ? 'hidden' : 'torch-slantPlayer1Inv'}>
+        <div className={this.props.isVisible.indexOf('reynPlayer1') === -1 ? 'hidden' : 'reynPlayer1Inv'}>
         </div>
         <div className={this.props.isVisible.indexOf('batPlayer1') === -1 ? 'hidden' : 'batPlayer1Inv'}>
         </div>
