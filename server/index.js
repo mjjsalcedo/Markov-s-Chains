@@ -344,7 +344,7 @@ app.get('/', (req, res) => {
   res.sendfile('index.html', {root: path.join(__dirname, './public')});
 });
 server.listen(PORT,'0.0.0.0', ()=> {
-  db.sequelize.sync();
+  db.sequelize.sync({force: true});
   console.log(`listening on ${PORT}`);
 });
 
@@ -408,6 +408,7 @@ function removePunctuation(string){
 }
 
 function sendMarkov(user, message){
+  console.log("MESSAGE IN MARKOV SEND", message);
   user.send(
     JSON.stringify({
       OP: 'BROADCAST_MESSAGE',
@@ -435,3 +436,4 @@ function sendMarkov(user, message){
 }*/
 /*
 recurseThroughDb(inactivePlayer, arrayPosOne, arrayPosTwo, arrayPosThree, modifiedMessage, room);*/
+
