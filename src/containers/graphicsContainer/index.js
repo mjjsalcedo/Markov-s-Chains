@@ -110,7 +110,7 @@ class GraphicsContainer extends Component {
         </div>
         <div className='voodooPlayer1'>
         </div>
-        <div className='wandPlayer2'>
+        <div className='wandPlayer1'>
         </div>
         <div className='marielPlayer1'>
         </div>

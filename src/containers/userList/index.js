@@ -55,7 +55,6 @@ class UserList extends Component {
       <div className='userListIan'>
       </div>
       <div className='userListReyn'>
-      Reyn
       </div>
       {this.props.username.filter(userData => {
         return userData.username === localStorage.getItem("username")}).map(username => {
