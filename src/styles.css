@@ -503,7 +503,7 @@ body {
   padding: 10px 0 0 10px;
   height: 42px;
   position: relative;
-  background: rgba(0, 0, 0, 0.65); }
+  background: rgba(0, 0, 0, 0.85); }
 
 .keyPlayer1Inv {
   position: absolute;
@@ -633,11 +633,14 @@ body {
 .storyContainer {
   box-sizing: border-box;
   height: 200px;
-  padding: 10px;
+  padding: 2px;
   border: 10px solid transparent;
   border-image-repeat: round;
-  background: rgba(0, 0, 0, 0.65);
+  background: rgba(0, 0, 0, 0.85);
   color: white; }
+
+.creditText {
+  margin-top: -15px; }
 
 .messageBox {
   display: -ms-flexbox;
@@ -971,7 +974,7 @@ body {
   border-image-source: url(./assets/border.png);
   border-image-slice: 20 22;
   border-image-repeat: stretch;
-  background: rgba(0, 0, 0, 0.65); }
+  background: rgba(0, 0, 0, 0.85); }
 
 .replayContainer {
   display: flex;
@@ -983,7 +986,7 @@ body {
   border-image-source: url(./assets/border.png);
   border-image-slice: 20 22;
   border-image-repeat: stretch;
-  background: rgba(0, 0, 0, 0.65); }
+  background: rgba(0, 0, 0, 0.85); }
 
 .endText {
   position: absolute;
