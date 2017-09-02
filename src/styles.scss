@@ -502,8 +502,7 @@ body {
   padding: 10px 0 0 10px;
   height: 42px;
   position: relative;
-  background-color: black;
-  opacity: 0.65;
+  background: rgba(0,0,0,0.65);
 }
 .keyPlayer1Inv {
   position: absolute;
@@ -650,8 +649,7 @@ body {
   padding: 10px;
   border: 10px solid transparent;
   border-image-repeat: round;
-  background-color: black;
-  opacity: 0.65;
+  background: rgba(0,0,0,0.65);
   color: white;
 }
 .messageBox {
@@ -943,11 +941,11 @@ body {
   border-image-source: url(./assets/border.png);
   border-image-slice: 20 22;
   border-image-repeat: stretch;
+  background: rgba(0,0,0,0.65);
 }
-
 .replayContainer {
   display: flex;
-  flex-direction: row;
+  justify-content: center;
   box-sizing: border-box;
   height: 300px;
   width: 100%;
@@ -955,24 +953,25 @@ body {
   border-image-source: url(./assets/border.png);
   border-image-slice: 20 22;
   border-image-repeat: stretch;
+  background: rgba(0,0,0,0.65);
 }
 .endText {
   position: absolute;
   align-self: center;
   height: 40%;
   top: 20%;
-  left: 13%;
+  left: 9%;
   width: 69%;
   padding: 10px;
   color: red;
-  // border: 1px solid red;
   font-size: 50px;
 }
 .winText {
   animation: winTextScreen 0.8s ease-in-out 0.8s infinite alternate;
 }
 .loseText {
-  left: 15%;
+  width: 200%;
+  animation: winTextScreen 0.8s ease-in-out 0.8s infinite alternate;
 }
 .playAgainContainer {
   position: relative;
@@ -982,28 +981,31 @@ body {
 }
 .quit {
   position: relative;
+  opacity: 1;
   top: 280%;
   left: 75%;
   height: 40%;
 }
 .playAgain {
   position: relative;
+  opacity: 1;
   top: 280%;
   left: 55%;
   height: 40%;
 }
-.replayContainer {
-  border: 1px solid green;
-}
+
 .replay {
-  position: relative;
-  height: 40%;
-  width: 100%;
-  border: 1px solid red;
-  padding: 5px;
+  width: 500px;
+  text-align: center;
+  padding:50px 70px 50px 70px;
+  margin-left: 15%;
+  margin-right:-25%;
+  color: white;
+  font-size: 25px;
 }
 
 .replayAccept {
+
   position: relative;
   left: -36%;
   top: 70%;

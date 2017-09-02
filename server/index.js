@@ -101,13 +101,13 @@ wss.on('connection', function connection(ws, req) {
         case (messageChain.trigger.length > 0 && messageChain.trigger[0].username != payload.message.username):
         messageChain.response.push(payload.message);
         messageCache.push(modifiedMessage);
-        recurseThroughDb(activePlayer,modifiedMessage, modifiedMessage, room);
+        recurseThroughDb(activePlayer, modifiedMessage, modifiedMessage, room);
         break;
 
         case (messageChain.trigger[0].username === payload.message.username && messageChain.response.length  === 0):
         messageChain.trigger.push(payload.message);
         triggerCache.push(modifiedMessage);
-        recurseThroughDb(activePlayer,modifiedMessage, modifiedMessage, room);
+        recurseThroughDb(activePlayer, modifiedMessage, modifiedMessage, room);
         break;
 
         case (messageChain.trigger[0].username === payload.message.username):
@@ -341,7 +341,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 server.listen(PORT,'0.0.0.0', ()=> {
-  db.sequelize.sync(/*{force: true}*/);
+  db.sequelize.sync({force: true});
   console.log(`listening on ${PORT}`);
 });
 
@@ -386,7 +386,7 @@ function recurseThroughDb(user, trig, con, room){
       return setTimeout(function(){sendMarkov(user, markovSentence);}, random * 1000);
     }
   }
-  return Ngrams.find({ where: {trigger: trig, context: con }, attributes: ['word']}).then(nextWord => {//orderby
+  return Ngrams.findOne({ where: {trigger: trig, context: con }, attributes: ['word']}).then(nextWord => {//orderby
     if (nextWord){
       markovArray.push(nextWord.word);
       recurseThroughDb(user, nextWord.word, con, room);

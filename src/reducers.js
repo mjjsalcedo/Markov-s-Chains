@@ -47,7 +47,6 @@ let initialState = {
 
 function messageReceived(state, action) {
   let messagePayload = JSON.parse(action.payload);
-  console.log('fnhuadsbfuadgfbiasduiouid', messagePayload);
   switch (messagePayload.OP) {
 
     case SUCCESSFUL_CONNECTION:
@@ -64,7 +63,7 @@ function messageReceived(state, action) {
       isVisible: [...state.isVisible]
     }
     }else{
-      let lastFiveMessages = state.userData.slice(-4);
+      let lastFiveMessages = state.userData.slice(-5);
       console.log(lastFiveMessages);
       return {
         ...state,

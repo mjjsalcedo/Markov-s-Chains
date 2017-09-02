@@ -69,7 +69,7 @@ class GraphicsContainer extends Component {
       {
 
         ( localStorage.getItem("player") === "player1" && this.props.winningStatus === null ) ?
-        <div className="stageOneGraphicsContainerPlayer1"> Player 1
+        <div className="stageOneGraphicsContainerPlayer1">
         <div className={this.props.isVisible.indexOf('keyPlayer1') === -1 ? 'keyPlayer1' : 'hidden'} value="bad" onClick={this.selectedItem}>
         </div>
         <div className={this.props.isVisible.indexOf('spiderPlayer1') === -1 ? 'spiderPlayer1' : 'hidden'} value="bad" onClick={this.selectedItem}>
@@ -103,7 +103,7 @@ class GraphicsContainer extends Component {
       {
 
         ( localStorage.getItem("player") === "player2" && this.props.winningStatus === null ) ?
-        <div className="stageOneGraphicsContainerPlayer2">Player 2
+        <div className="stageOneGraphicsContainerPlayer2">
         <div className="keyPlayer2">
         </div>
         <div className="spiderPlayer2">
@@ -152,7 +152,7 @@ class GraphicsContainer extends Component {
 
           ( this.props.winningStatus === "lose" && this.props.reinvitesFrom === null) ?
           <div className='endContainer'>
-          <h2 className='loseText endText'> YOU LOSE </h2>
+          <h2 className='loseText endText'>YOU LOSE</h2>
           <div className='playAgainContainer'>
           <button className='playAgain btn' onClick={this.displayPlayAgain}>Play Again?</button>
           <button className='quit btn' onClick={this.goToLobby}>Lobby</button>
@@ -166,9 +166,9 @@ class GraphicsContainer extends Component {
         {
             ( this.props.reinvitesFrom !== null ) ?
                <div className='replayContainer'>
-                <p className='replay'>
-                  You were invited to replay a game with { this.props.reinvitesFrom }
-                </p>
+                <h2 className='replay'>
+                  Replay with <br/>{ this.props.reinvitesFrom }?
+                </h2>
                 <button className='replayAccept btn' onClick={this.onClickAccept} type="button">Accept</button>
                 <button className='replayDecline btn' onClick={this.onClickDecline} type="button">Decline</button>
               </div>
@@ -180,8 +180,6 @@ class GraphicsContainer extends Component {
 }
 
 const mapStateToProps = (state) => {
-  debugger;
-  console.log('graphics state', state)
   return {
     score: state.gameResults,
     winningStatus: state.winningStatus,
