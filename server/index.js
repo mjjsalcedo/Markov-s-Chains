@@ -4,6 +4,7 @@ const app = express();
 const PORT = process.env.PORT || 3001;
 const bodyParser = require('body-parser');
 const Room = require('../src/Room');
+const path = require('path');
 let db = require('../models');
 let Ngrams = db.ngrams;
 /*const apiRoutes = require('./api');*/
@@ -326,7 +327,9 @@ ws.send(
 app.use(express.static('public'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-
+app.get('/', (req, res) => {
+  res.sendfile('index.html', {root: path.join(__dirname, './public')});
+});
 server.listen(PORT,'0.0.0.0', ()=> {
   db.sequelize.sync(/*{force: true}*/);
   console.log(`listening on ${PORT}`);

@@ -113,7 +113,7 @@ body {
   border-image-source: url(./assets/border.png);
   border-image-slice: 20 22;
   border-image-repeat: stretch;
-  background: url(https://cdn.dribbble.com/users/3729/screenshots/1661851/cave.png) no-repeat;
+  background: url(./assets/background5.png) no-repeat;
   background-size: 515px 280px; }
 
 .marielPlayer1 {
@@ -297,7 +297,7 @@ body {
   border-image-source: url(./assets/border.png);
   border-image-slice: 20 22;
   border-image-repeat: stretch;
-  background: url(./assets/background.png) no-repeat;
+  background: url(./assets/background5.png) no-repeat;
   background-size: 515px 280px; }
 
 .marielPlayer2 {
