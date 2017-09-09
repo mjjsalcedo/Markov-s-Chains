@@ -2,7 +2,7 @@
 // const socket = new WebSocket('ws://10.0.1.149:3001');
  // const socket = new WebSocket('ws://10.0.1.144:3001');
 // const socket = new WebSocket('ws://10.0.1.52:3001');
-const host = dow.document.location.host;
+const host = window.document.location.host;
 const socket = new WebSocket('wss://' + host);
 
 
