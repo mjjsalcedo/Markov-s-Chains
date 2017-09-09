@@ -53,12 +53,26 @@
   src: url('./assets/OregonTrail.ttf') format('truetype');
   font-weight: bold;
 }
+
+@media screen and (max-width: 736px) {
+    body {
+  font-family: OregonTrail;
+  background: url(https://cdn-images-1.medium.com/max/2000/1*3Krwr7ytlVoAFPSYWQTqsw.gif) no-repeat;
+  // background-size: 910px 1700px;
+  background-size: cover;
+  }
+}
+
+@media screen and (min-width: 737px) {
 body {
   font-family: OregonTrail;
   background: url(https://cdn-images-1.medium.com/max/2000/1*3Krwr7ytlVoAFPSYWQTqsw.gif)
     no-repeat;
-  background-size: 1923px 980px;
+  // background-size: 1923px 980px;
+  background-size: cover;
 }
+}
+
 .btn {
   font-family: OregonTrail;
   background-color: #4b86b4;
@@ -716,7 +730,131 @@ body {
   top: 17.99px;
   height: 32px;
 }
+@media screen and (max-width: 736px) {
 .usernameMainContainer {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  height: 900px;
+  width: 500px;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+.usernameFormBorder {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -ms-flex-align: start;
+  align-items: flex-start;
+  padding-left: 8.2%;
+  padding-right: 7.7%;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  width: 57%;
+}
+.usernameFormContainer {
+  position: absolute;
+  top: 3%;
+  align-self: center;
+  background: url(./assets/phoneGrey.png) 62.5% 57.8% no-repeat;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -ms-flex-pack: center;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  height: 100%;
+  width: 100%;
+}
+.userTitle {
+  position: absolute;
+  top: -1.4%;
+  left: 33%;
+  align-self: center;
+}
+.userMariel {
+  position: absolute;
+  top: 2.7%;
+  left: 30%;
+  height: 20%;
+  width: 12.9%;
+  transform: scale(0.8);
+  background: url(./assets/mariel-medium.png) 50% no-repeat;
+}
+.userIan {
+  position: absolute;
+  top: -1%;
+  left: 40%;
+  height: 23%;
+  width: 15%;
+  background: url(./assets/ian.png) 50% no-repeat;
+}
+.userReyn {
+  position: absolute;
+  top: 4%;
+  left: 59%;
+  height: 23%;
+  width: 15%;
+  background: url(./assets/reyn.png) 50% no-repeat;
+}
+.sleeping {
+  position: absolute;
+  top: 13%;
+  left: 62%;
+  height: 5%;
+  width: 5%;
+  color: black;
+  animation: sleep 9s infinite linear;
+}
+.sleeping2 {
+  position: absolute;
+  top: 13%;
+  left: 62%;
+  height: 5%;
+  width: 5%;
+  color: black;
+  visibility: hidden;
+  animation: sleep 9s infinite linear;
+  animation-delay: 3s;
+}
+.sleeping3 {
+  position: absolute;
+  top: 13%;
+  left: 62%;
+  height: 5%;
+  width: 5%;
+  color: black;
+  visibility: hidden;
+  animation: sleep 9s infinite linear;
+  animation-delay: 6s;
+}
+.userChatInput {
+  display: flex;
+  flex-wrap: wrap;
+  word-wrap: break-word;
+  position: absolute;
+  height: 5%;
+  top: 45%;
+  left: 27%;
+  width: 45%;
+  font-size: 10px;
+  text-align: center;
+  font-family: OregonTrail;
+}
+.userSendButton {
+  position: absolute;
+  top: 77.5%;
+  left: 40%;
+  width: 20%;
+}
+
+}
+@media screen and (min-width: 737px) {
+  .usernameMainContainer {
   display: flex;
   justify-content: center;
   position: relative;
@@ -836,6 +974,8 @@ body {
   left: 45.71%;
   width: 20%;
 }
+}
+@media screen and (min-width: 737px) {
 .userListMainContainer {
   display: flex;
   justify-content: center;
@@ -978,6 +1118,160 @@ body {
   left: 50%;
   width: 45%;
   box-sizing: border-box;
+}
+}
+@media screen and (max-width: 736px) {
+.userListMainContainer {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  height: 900px;
+  width: 500px;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+.userListBorder {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -ms-flex-align: start;
+  align-items: flex-start;
+  padding-left: 8.2%;
+  padding-right: 7.7%;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  width: 57%;
+}
+.userListContainer {
+  position: absolute;
+  top: 3%;
+  align-self: center;
+  background: url(./assets/phoneGrey.png) 62.5% 57.8% no-repeat;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -ms-flex-pack: center;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  height: 100%;
+  width: 100%;
+  color: white;
+}
+.userListTitle {
+  position: absolute;
+  top: -1.4%;
+  left: 33%;
+  align-self: center;
+}
+.userListMariel {
+  position: absolute;
+  top: 2.7%;
+  left: 30%;
+  height: 20%;
+  width: 12.9%;
+  transform: scale(0.8);
+  background: url(./assets/mariel-medium.png) 50% no-repeat;
+}
+.userListIan {
+  position: absolute;
+  top: -1%;
+  left: 40%;
+  height: 23%;
+  width: 15%;
+  background: url(./assets/ian.png) 50% no-repeat;
+}
+.userListReyn {
+  position: absolute;
+  top: 4%;
+  left: 59%;
+  height: 23%;
+  width: 15%;
+  background: url(./assets/reyn.png) 50% no-repeat;
+}
+.currentUser {
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+  position: absolute;
+  height: 8%;
+  width: 40%;
+  top: 27.4%;
+  left: 30%;
+  padding: 5px 0 0 7px;
+  box-sizing: border-box;
+}
+.userList {
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+  position: absolute;
+  height: 20%;
+  width: 40%;
+  top: 35.4%;
+  left: 30%;
+  padding: 5px 0 0 7px;
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+.listOfUsers {
+  margin-bottom: -8px;
+  height: 10%;
+}
+.listOfUsers:hover {
+  color: #4b86b4;
+}
+.inviteUser {
+  position: absolute;
+  box-sizing: border-box;
+  top: 74.50%;
+  left: 45.5%;
+  width: 20%;
+  height: 3.6%;
+}
+.inviteForm {
+  position: absolute;
+  overflow: auto;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  height: 43.75%;
+  width: 50%;
+  top: 35%;
+  left: 25%;
+  padding-left: 5px;
+  box-sizing: border-box;
+}
+.inviteText {
+  position: absolute;
+  padding-left: 5px;
+  left: 0%;
+  height: 80%;
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid red;
+}
+.acceptUser {
+  position: absolute;
+  top: 90%;
+  left: 8%;
+  height: 8%;
+  width: 40%;
+  padding: 5px;
+  box-sizing: border-box;
+}
+.declineUser {
+  position: absolute;
+  top: 90%;
+  left: 52%;
+  height: 8%;
+  width: 40%;
+  padding: 5px;
+  box-sizing: border-box;
+}
 }
 .winLoseContainer {
   position: relative;
